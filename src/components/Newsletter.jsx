@@ -1,0 +1,79 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
+
+export default function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail("");
+    }
+  };
+
+  return (
+    <section className="bg-black py-16 sm:py-24 text-white overflow-hidden border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          
+          {/* Left Column: Black and White Portrait matching Screenshot 2 */}
+          <div className="lg:col-span-6 flex justify-center">
+            <div className="relative w-full max-w-md aspect-[3/4] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
+              <Image
+                src="/images/stay_in_touch_bw.jpg"
+                alt="Minister Lilian Nneji"
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-cover grayscale contrast-110"
+              />
+            </div>
+          </div>
+
+          {/* Right Column: STAY IN TOUCH Form matching Screenshot 2 */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="space-y-3">
+              <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] font-bold tracking-tight uppercase">
+                STAY IN TOUCH
+              </h3>
+              <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
+                Be the first to listen to our new sounds and find out where we're coming to next...
+              </p>
+            </div>
+
+            {subscribed ? (
+              <div className="p-4 bg-zinc-900 border border-[#f3c242]/40 rounded-none max-w-md flex items-center gap-3 text-[#f3c242] animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                <span className="text-sm font-semibold text-white">
+                  Thank you for subscribing! You'll be notified of new sounds & tour dates.
+                </span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-0 max-w-lg">
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-grow px-4 py-3.5 bg-white text-black placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md"
+                />
+                <button
+                  type="submit"
+                  className="border border-[#f3c242] bg-black hover:bg-[#f3c242] text-[#f3c242] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0"
+                >
+                  SUBSCRIBE
+                </button>
+              </form>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
