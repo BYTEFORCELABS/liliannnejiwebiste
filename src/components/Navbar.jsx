@@ -31,8 +31,8 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || pathname === "/reverb"
-          ? "bg-black border-b border-white/10 py-3.5 shadow-2xl"
+        isScrolled
+          ? "bg-black/40 backdrop-blur-md py-4"
           : "bg-transparent py-5"
       }`}
     >
@@ -52,21 +52,19 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Navigation links sitting in their rightful position on the right */}
+        {/* Navigation links: Home, About, Music, Events, Booking are coloured and Reverb is white */}
         <nav className="hidden md:flex items-center gap-7 lg:gap-9">
           {navLinks.map((link) => {
-            const isActive =
-              (pathname === "/reverb" && link.name === "Reverb") ||
-              (pathname === "/" && link.name === "Home");
+            const isReverb = link.name === "Reverb";
 
             return (
               <Link
                 key={link.name}
                 href={link.href}
                 className={`text-[15px] lg:text-[16px] font-medium tracking-normal transition-colors duration-200 ${
-                  isActive
-                    ? "text-[#f3c242] font-semibold"
-                    : "text-zinc-200 hover:text-[#f3c242]"
+                  isReverb
+                    ? "text-white hover:text-[#f3c242]"
+                    : "text-[#f3c242] hover:text-white"
                 }`}
               >
                 {link.name}
@@ -91,9 +89,7 @@ export default function Navbar() {
         <div className="md:hidden bg-[#070709]/98 backdrop-blur-2xl border-b border-[#f3c242]/20 px-6 py-6 space-y-3 animate-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => {
-              const isReverb = link.name === "Reverb" && pathname === "/reverb";
-              const isHome = link.name === "Home" && pathname === "/";
-              const isActive = isReverb || isHome;
+              const isReverb = link.name === "Reverb";
 
               return (
                 <Link
@@ -101,9 +97,9 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-base font-medium py-2 border-b border-white/5 transition-colors ${
-                    isActive
-                      ? "text-[#f3c242] font-bold"
-                      : "text-zinc-200 hover:text-[#f3c242]"
+                    isReverb
+                      ? "text-white hover:text-[#f3c242]"
+                      : "text-[#f3c242] hover:text-white"
                   }`}
                 >
                   {link.name}
