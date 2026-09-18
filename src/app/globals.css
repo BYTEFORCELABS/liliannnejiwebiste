@@ -282,3 +282,20 @@ code, kbd, samp, pre, .font-mono {
   animation: pulseGoldGlow 4s ease-in-out infinite;
 }
 
+/* Mobile Navigation Drawer Animation */
+@keyframes mobileDrawerOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-mobile-drawer {
+  animation: mobileDrawerOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
