@@ -65,7 +65,7 @@ export default function Footer() {
           {/* Phone */}
           <a
             href="tel:+2348023131871"
-            className="flex items-center gap-2 hover:text-[#f3c242] transition-colors"
+            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
           >
             <Phone className="w-3.5 h-3.5 text-zinc-300" />
             <span>08023131871</span>
@@ -74,7 +74,7 @@ export default function Footer() {
           {/* Email 1 */}
           <a
             href="mailto:bookings@liliannneji.com"
-            className="flex items-center gap-2 hover:text-[#f3c242] transition-colors"
+            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
             <span>bookings@liliannneji.com</span>
@@ -83,7 +83,7 @@ export default function Footer() {
           {/* Email 2 */}
           <a
             href="mailto:liliannnejiministries@gmail.com"
-            className="flex items-center gap-2 hover:text-[#f3c242] transition-colors"
+            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
             <span>liliannnejiministries@gmail.com</span>
@@ -91,7 +91,7 @@ export default function Footer() {
         </div>
 
         {/* Yellow Social Icons Row matching Screenshot 3 */}
-        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#f3c242] pt-2">
+        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#F88E14] pt-2">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             return (

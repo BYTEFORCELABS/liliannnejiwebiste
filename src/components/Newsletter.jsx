@@ -61,7 +61,7 @@ export default function Newsletter() {
           {/* Right Column: STAY IN TOUCH Form matching Screenshot 2 */}
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-3">
-              <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] font-bold tracking-tight uppercase">
+              <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
                 STAY IN TOUCH
               </h3>
               <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
@@ -70,8 +70,8 @@ export default function Newsletter() {
             </div>
 
             {subscribed ? (
-              <div className="p-4 bg-zinc-900 border border-[#f3c242]/40 rounded-none max-w-lg flex items-center gap-3 text-[#f3c242] animate-in fade-in">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-[#f3c242]" />
+              <div className="p-4 bg-zinc-900 border border-[#F88E14]/40 rounded-none max-w-lg flex items-center gap-3 text-[#F88E14] animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-[#F88E14]" />
                 <span className="text-sm font-semibold text-white">
                   {feedbackMsg || "Thank you for subscribing! You'll be notified of new sounds & tour dates."}
                 </span>
@@ -91,7 +91,7 @@ export default function Newsletter() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="border border-[#f3c242] bg-black hover:bg-[#f3c242] text-[#f3c242] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
+                    className="border border-[#F88E14] bg-black hover:bg-[#F88E14] text-[#F88E14] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
                   >
                     {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
                   </button>

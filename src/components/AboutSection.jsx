@@ -13,18 +13,18 @@ function GoldCamoPattern({ className = "w-full h-full" }) {
           <rect width="100" height="100" fill="#0a0a0c" />
           
           {/* Organic Gold Camo Blobs & Ripples */}
-          <path d="M10 25 Q 35 15 45 30 Q 55 45 35 55 Q 20 60 10 40 Z" fill="#f3c242" opacity="0.95" />
-          <path d="M60 70 Q 80 60 85 75 Q 90 85 75 90 Q 65 90 60 75 Z" fill="#eab308" opacity="0.85" />
-          <path d="M70 15 Q 85 20 80 35 Q 70 40 65 25 Z" fill="#f59e0b" opacity="0.9" />
-          <path d="M30 8 Q 45 3 50 12 Q 40 18 30 8 Z" fill="#fbbf24" opacity="0.9" />
-          <circle cx="25" cy="80" r="6" fill="#fde047" opacity="0.8" />
-          <circle cx="85" cy="50" r="5" fill="#f3c242" opacity="0.75" />
-          <circle cx="50" cy="50" r="3.5" fill="#fef08a" opacity="0.9" />
+          <path d="M10 25 Q 35 15 45 30 Q 55 45 35 55 Q 20 60 10 40 Z" fill="#F88E14" opacity="0.95" />
+          <path d="M60 70 Q 80 60 85 75 Q 90 85 75 90 Q 65 90 60 75 Z" fill="#F9650B" opacity="0.85" />
+          <path d="M70 15 Q 85 20 80 35 Q 70 40 65 25 Z" fill="#F88E14" opacity="0.9" />
+          <path d="M30 8 Q 45 3 50 12 Q 40 18 30 8 Z" fill="#FABA1E" opacity="0.9" />
+          <circle cx="25" cy="80" r="6" fill="#FABA1E" opacity="0.8" />
+          <circle cx="85" cy="50" r="5" fill="#F88E14" opacity="0.75" />
+          <circle cx="50" cy="50" r="3.5" fill="#FABA1E" opacity="0.9" />
           
           {/* Camo stroke bars */}
-          <rect x="0" y="45" width="16" height="7" rx="3.5" fill="#f3c242" opacity="0.8" />
-          <rect x="42" y="78" width="18" height="6" rx="3" fill="#eab308" opacity="0.85" />
-          <rect x="68" y="0" width="14" height="6" rx="3" fill="#f59e0b" opacity="0.8" />
+          <rect x="0" y="45" width="16" height="7" rx="3.5" fill="#F88E14" opacity="0.8" />
+          <rect x="42" y="78" width="18" height="6" rx="3" fill="#F9650B" opacity="0.85" />
+          <rect x="68" y="0" width="14" height="6" rx="3" fill="#FABA1E" opacity="0.8" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#gold-camo-tile)" />
@@ -36,12 +36,12 @@ function GoldCamoPattern({ className = "w-full h-full" }) {
 function GMABadge() {
   return (
     <div className="flex items-center gap-2">
-      <div className="w-8 h-8 rounded-full border-2 border-[#f3c242] flex items-center justify-center text-[#f3c242] bg-black/80 shadow-md">
-        <Trophy className="w-4 h-4 text-[#f3c242]" />
+      <div className="w-8 h-8 rounded-full border-2 border-[#F88E14] flex items-center justify-center text-[#F88E14] bg-black/80 shadow-md">
+        <Trophy className="w-4 h-4 text-[#F88E14]" />
       </div>
       <div className="flex flex-col leading-none">
-        <span className="font-fjalla text-base text-[#f3c242] font-bold tracking-wider">
-          GMA <sup className="text-[10px] text-[#f3c242] font-semibold">'6</sup>
+        <span className="font-fjalla text-base text-[#F88E14] font-bold tracking-wider">
+          GMA <sup className="text-[10px] text-[#F88E14] font-semibold">'6</sup>
         </span>
       </div>
     </div>
@@ -53,7 +53,7 @@ function MetallicPin() {
   return (
     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-200 via-zinc-400 to-zinc-700 p-0.5 shadow-xl flex items-center justify-center border border-white/60">
       <div className="w-full h-full rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center text-zinc-100">
-        <Award className="w-4 h-4 text-amber-300 drop-shadow" />
+        <Award className="w-4 h-4 text-[#FABA1E] drop-shadow" />
       </div>
     </div>
   );
@@ -73,7 +73,7 @@ export default function AboutSection() {
         {/* ============================================================ */}
         <div className="text-center space-y-5">
           <div className="space-y-1.5">
-            <h2 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-[#f3c242] uppercase tracking-wide font-bold">
+            <h2 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
               GALAXY MUSIC AWARDS
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base font-medium tracking-wide">
@@ -83,7 +83,7 @@ export default function AboutSection() {
 
           {/* Golden Trophy Graphic */}
           <div className="flex justify-center pt-2">
-            <div className="relative w-28 sm:w-36 aspect-square hover:scale-110 transition-transform duration-500 drop-shadow-[0_10px_35px_rgba(243,194,66,0.35)]">
+            <div className="relative w-28 sm:w-36 aspect-square hover:scale-110 transition-transform duration-500 drop-shadow-[0_10px_35px_rgba(248,142,20,0.35)]">
               <Image
                 src="/images/award_trophy.jpg"
                 alt="Galaxy Music Award Trophy - Gospel Artist of the Year"
@@ -102,7 +102,7 @@ export default function AboutSection() {
           
           {/* Left Column: Winner Poster Card with Camo Border (Screenshots 1 & 2) */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-xl overflow-hidden p-5 sm:p-6 shadow-2xl border border-[#f3c242]/20">
+            <div className="relative w-full max-w-md aspect-[4/5] rounded-xl overflow-hidden p-5 sm:p-6 shadow-2xl border border-[#F88E14]/20">
               
               {/* Camo Background Border Fill */}
               <div className="absolute inset-0 z-0">
@@ -144,7 +144,7 @@ export default function AboutSection() {
                 {/* Bottom Row with Metallic Insignia Pin */}
                 <div className="pt-2 flex items-center justify-between">
                   <MetallicPin />
-                  <span className="text-[10px] text-[#f3c242] uppercase font-bold tracking-widest">
+                  <span className="text-[10px] text-[#F88E14] uppercase font-bold tracking-widest">
                     HONOR & EXCELLENCE
                   </span>
                 </div>
@@ -156,7 +156,7 @@ export default function AboutSection() {
 
           {/* Right Column: "I AM LILIAN" Bio (Screenshot 2) */}
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] font-bold tracking-tight uppercase">
+            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
               I AM LILIAN
             </h3>
 
@@ -181,11 +181,11 @@ export default function AboutSection() {
           <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
             
             {/* Top Camo Ribbon matching Screenshot 3 */}
-            <div className="w-full max-w-xs h-7 rounded-sm overflow-hidden border border-[#f3c242]/30 shadow-md">
+            <div className="w-full max-w-xs h-7 rounded-sm overflow-hidden border border-[#F88E14]/30 shadow-md">
               <GoldCamoPattern />
             </div>
 
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] font-bold tracking-tight uppercase">
+            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
               QUEEN OF PRAISE
             </h3>
 
@@ -201,7 +201,7 @@ export default function AboutSection() {
 
           {/* Right Column: Stage Ministration Photo (Screenshot 3) */}
           <div className="lg:col-span-6 relative flex justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-md aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#f3c242]/30 group bg-zinc-950">
+            <div className="relative w-full max-w-md aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#F88E14]/30 group bg-zinc-950">
               <Image
                 src="/images/about_yellow_studio_v2.jpg"
                 alt="Minister Lilian Nneji Live Praise Ministration"

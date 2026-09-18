@@ -15,7 +15,7 @@ export function generateTicketEmailHtml(attendee) {
     .wrapper { width: 100%; max-width: 600px; margin: 0 auto; padding: 30px 15px; }
     .card { background: linear-gradient(180deg, #0d1633 0%, #080c1b 100%); border: 1px solid #28448a; border-radius: 20px; padding: 32px 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
     .header { text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
-    .brand { color: #f3c242; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
+    .brand { color: #F88E14; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
     .title { color: #ffffff; font-size: 28px; font-weight: 900; letter-spacing: 1px; margin: 0 0 6px 0; text-transform: uppercase; }
     .theme { color: #93c5fd; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
     .ticket-badge { background: #1e3a8a; border: 1px dashed #60a5fa; border-radius: 12px; padding: 18px; margin: 24px 0; text-align: center; }
@@ -28,7 +28,7 @@ export function generateTicketEmailHtml(attendee) {
     .detail-value { color: #ffffff; font-weight: 600; text-align: right; }
     .instructions { font-size: 12px; color: #a1a1aa; line-height: 1.6; text-align: center; margin: 20px 0; }
     .footer { text-align: center; font-size: 11px; color: #71717a; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .gold-text { color: #f3c242; font-weight: bold; }
+    .gold-text { color: #F88E14; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -58,7 +58,7 @@ export function generateTicketEmailHtml(attendee) {
           </tr>
           <tr>
             <td style="color: #a1a1aa;">Date:</td>
-            <td style="color: #f3c242; font-weight: bold; text-align: right;">Sunday, 1st November 2026</td>
+            <td style="color: #F88E14; font-weight: bold; text-align: right;">Sunday, 1st November 2026</td>
           </tr>
           <tr>
             <td style="color: #a1a1aa;">Time:</td>

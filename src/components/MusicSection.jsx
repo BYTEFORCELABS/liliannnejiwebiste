@@ -181,7 +181,7 @@ export default function MusicSection() {
         {/* 1. LATEST RELEASE (Screenshot 1 & 2)                         */}
         {/* ============================================================ */}
         <div className="text-center space-y-2 mb-10">
-          <h2 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] uppercase tracking-wide font-bold">
+          <h2 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
             LATEST RELEASE
           </h2>
           <p className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
@@ -213,9 +213,9 @@ export default function MusicSection() {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-[#f3c242] transition-colors group"
+                  className="flex items-center gap-2 hover:text-[#F88E14] transition-colors group"
                 >
-                  <Icon className="w-4 h-4 text-zinc-300 group-hover:text-[#f3c242] transition-colors flex-shrink-0" />
+                  <Icon className="w-4 h-4 text-zinc-300 group-hover:text-[#F88E14] transition-colors flex-shrink-0" />
                   <span className="font-medium">{platform.name}</span>
                 </a>
               );
@@ -228,7 +228,7 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div className="mb-20 sm:mb-24">
           <div className="text-center mb-10">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] uppercase tracking-wide font-bold">
+            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
               MUSIC VIDEOS
             </h3>
           </div>
@@ -238,7 +238,7 @@ export default function MusicSection() {
               <div
                 key={idx}
                 onClick={() => handleSelectVideo(video)}
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#f3c242]/50 transition-all duration-300"
+                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -256,10 +256,10 @@ export default function MusicSection() {
                 <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center gap-2 z-10">
                   <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/40 flex-shrink-0 bg-zinc-800">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/logo_white_text.png"
                       alt="Minister Lilian Nneji"
                       fill
-                      className="object-contain filter brightness-0 invert"
+                      className="object-contain"
                     />
                   </div>
                   <span className="text-[11px] sm:text-xs text-white font-medium truncate drop-shadow">
@@ -281,7 +281,7 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div>
           <div className="text-center mb-10">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] uppercase tracking-wide font-bold">
+            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
               LIVE PERFORMANCES
             </h3>
           </div>
@@ -291,7 +291,7 @@ export default function MusicSection() {
               <div
                 key={idx}
                 onClick={() => handleSelectVideo(video)}
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#f3c242]/50 transition-all duration-300"
+                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -309,10 +309,10 @@ export default function MusicSection() {
                 <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center gap-2 z-10">
                   <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/40 flex-shrink-0 bg-zinc-800">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/logo_white_text.png"
                       alt="Minister Lilian Nneji"
                       fill
-                      className="object-contain filter brightness-0 invert"
+                      className="object-contain"
                     />
                   </div>
                   <span className="text-[11px] sm:text-xs text-white font-medium truncate drop-shadow">

@@ -67,7 +67,7 @@ export default function Hero() {
 
           {/* Yellow Subtitle Label */}
           <div className="space-y-2">
-            <h6 className="font-fjalla text-[#f3c242] uppercase tracking-wider text-base sm:text-xl font-bold">
+            <h6 className="font-fjalla text-[#F88E14] uppercase tracking-wider text-base sm:text-xl font-bold">
               Recording Artist & Worship Minister
             </h6>
 
@@ -82,7 +82,7 @@ export default function Hero() {
           <div className="pt-2">
             <Link
               href="#music"
-              className="inline-block border-2 border-[#f3c242] text-[#f3c242] hover:bg-[#f3c242] hover:text-black font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-all duration-200"
+              className="inline-block border-2 border-[#F88E14] text-[#F88E14] hover:bg-[#F88E14] hover:text-black font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-all duration-200"
             >
               Eze Mu O (King of Praise) Album
             </Link>
@@ -99,7 +99,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full bg-[#f3c242] text-black flex items-center justify-center hover:scale-110 hover:bg-[#ffd56b] transition-transform shadow-md"
+                  className="w-10 h-10 rounded-full bg-[#F88E14] text-black flex items-center justify-center hover:scale-110 hover:bg-[#FABA1E] transition-transform shadow-md"
                 >
                   <Icon className="w-4 h-4" />
                 </a>

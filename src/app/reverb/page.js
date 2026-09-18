@@ -207,7 +207,7 @@ export default function ReverbPage() {
                         <span className="block text-[10px] uppercase font-bold tracking-widest text-blue-300">
                           Official Ticket Pass Ref:
                         </span>
-                        <span className="text-2xl font-mono font-black text-[#f3c242] tracking-wider">
+                        <span className="text-2xl font-mono font-black text-[#F88E14] tracking-wider">
                           {ticketCode}
                         </span>
                       </div>
@@ -487,7 +487,7 @@ export default function ReverbPage() {
       {/* Section 5: Footer matching Screenshot 5 */}
       <footer className="bg-black py-12 text-center space-y-7">
         {/* Yellow Social Icons Row */}
-        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#f3c242]">
+        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#F88E14]">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             return (
@@ -510,7 +510,7 @@ export default function ReverbPage() {
 
         {/* Yellow Copyright Banner matching Screenshot 5 */}
         <div className="pt-1 flex justify-center">
-          <div className="bg-[#f3c242] text-black font-bold text-xs sm:text-sm px-6 py-2 rounded-none shadow-md">
+          <div className="bg-[#F88E14] text-black font-bold text-xs sm:text-sm px-6 py-2 rounded-none shadow-md">
             Copyright © {new Date().getFullYear()} Minister Lilian Nneji | Designed by Engee Titus
           </div>
         </div>

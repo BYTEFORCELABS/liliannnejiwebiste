@@ -1,17 +1,4 @@
-import { Plus_Jakarta_Sans, Fjalla_One } from "next/font/google";
 import "./globals.css";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const fjallaOne = Fjalla_One({
-  variable: "--font-fjalla",
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 export const metadata = {
   metadataBase: new URL("https://liliannneji.com"),
@@ -58,11 +45,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${fjallaOne.variable} scroll-smooth dark`}
-    >
-      <body className="bg-[#070709] text-white min-h-screen flex flex-col font-sans selection:bg-[#e5b842] selection:text-black antialiased">
+    <html lang="en" className="scroll-smooth dark">
+      <body className="bg-[#070709] text-white min-h-screen flex flex-col font-sans selection:bg-[#F88E14] selection:text-black antialiased">
         {children}
       </body>
     </html>

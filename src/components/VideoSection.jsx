@@ -56,7 +56,7 @@ export default function VideoSection() {
   return (
     <section id="videos" className="relative py-24 bg-[#070709] overflow-hidden">
       {/* Glow background */}
-      <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-[#e5b842]/8 blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-[#F88E14]/8 blur-[160px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -65,7 +65,7 @@ export default function VideoSection() {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel-gold">
               <YouTubeIcon className="w-3.5 h-3.5 text-[#ff4b4b]" />
-              <span className="text-xs uppercase font-bold tracking-widest text-[#ffd56b]">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#FABA1E]">
                 Visual Ministrations
               </span>
             </div>
@@ -101,14 +101,14 @@ export default function VideoSection() {
           </div>
           <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-2">
             <div>
-              <span className="text-xs font-bold uppercase text-[#ffd56b] tracking-wider">Featured Ministration</span>
+              <span className="text-xs font-bold uppercase text-[#FABA1E] tracking-wider">Featured Ministration</span>
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Eze Mu O (Official Video) - Minister Lilian Nneji</h3>
             </div>
             <a
               href="https://www.youtube.com/watch?v=DzjflH8peQY"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-zinc-300 hover:text-[#ffd56b] transition-colors flex items-center gap-1.5"
+              className="text-xs text-zinc-300 hover:text-[#FABA1E] transition-colors flex items-center gap-1.5"
             >
               <span>Watch on YouTube App</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -122,7 +122,7 @@ export default function VideoSection() {
             <div
               key={idx}
               onClick={() => handleOpenVideo(vid.id)}
-              className="glass-panel rounded-2xl p-4 space-y-3 cursor-pointer group hover:border-[rgba(229,184,66,0.45)] transition-all duration-300 hover:-translate-y-1"
+              className="glass-panel rounded-2xl p-4 space-y-3 cursor-pointer group hover:border-[rgba(248,142,20,0.45)] transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-zinc-900 border border-white/10">
                 <Image
@@ -132,7 +132,7 @@ export default function VideoSection() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-[#e5b842]/90 backdrop-blur-md flex items-center justify-center text-black group-hover:scale-110 shadow-lg transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-[#F88E14]/90 backdrop-blur-md flex items-center justify-center text-black group-hover:scale-110 shadow-lg transition-transform">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </div>
                 </div>
@@ -143,10 +143,10 @@ export default function VideoSection() {
 
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-[10px] font-semibold text-zinc-400">
-                  <span className="uppercase text-[#ffd56b]">{vid.category}</span>
+                  <span className="uppercase text-[#FABA1E]">{vid.category}</span>
                   <span>{vid.views}</span>
                 </div>
-                <h4 className="text-sm font-bold text-white line-clamp-2 group-hover:text-[#ffd56b] transition-colors tracking-wide">
+                <h4 className="text-sm font-bold text-white line-clamp-2 group-hover:text-[#FABA1E] transition-colors tracking-wide">
                   {vid.title}
                 </h4>
                 <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed font-normal">
@@ -162,10 +162,10 @@ export default function VideoSection() {
       {/* Video Modal Popup */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
-          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-3xl overflow-hidden border border-[#e5b842]/40 shadow-2xl">
+          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-3xl overflow-hidden border border-[#F88E14]/40 shadow-2xl">
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 text-white hover:text-[#ffd56b] transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 text-white hover:text-[#FABA1E] transition-colors"
               aria-label="Close video modal"
             >
               <X className="w-6 h-6" />

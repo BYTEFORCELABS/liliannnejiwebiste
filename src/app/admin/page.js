@@ -221,15 +221,15 @@ export default function AdminDashboardPage() {
           <div className="text-center space-y-3">
             <div className="relative w-44 h-12 mx-auto flex items-center justify-center">
               <Image
-                src="/images/logo.png"
+                src="/images/logo_white_text.png"
                 alt="Minister Lilian Nneji"
                 width={190}
                 height={50}
                 priority
-                className="object-contain filter brightness-0 invert"
+                className="object-contain"
               />
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3c242]/10 border border-[#f3c242]/30 text-[#f3c242] text-xs uppercase font-bold tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14] text-xs uppercase font-bold tracking-wider">
               <Lock className="w-3.5 h-3.5" />
               <span>Admin Portal Access</span>
             </div>
@@ -249,7 +249,7 @@ export default function AdminDashboardPage() {
                 placeholder="Enter master passcode"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#f3c242]"
+                className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#F88E14]"
               />
             </div>
 
@@ -262,7 +262,7 @@ export default function AdminDashboardPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg bg-[#f3c242] hover:bg-[#d8a832] text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-lg active:scale-95"
+              className="w-full py-3 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-lg active:scale-95"
             >
               {loading ? "Verifying..." : "Unlock Dashboard"}
             </button>
@@ -290,13 +290,13 @@ export default function AdminDashboardPage() {
         <div className="flex items-center gap-4">
           <Link href="/" className="relative w-36 sm:w-44 h-9 block">
             <Image
-              src="/images/logo.png"
+              src="/images/logo_white_text.png"
               alt="Minister Lilian Nneji"
               fill
-              className="object-contain filter brightness-0 invert"
+              className="object-contain"
             />
           </Link>
-          <span className="hidden sm:inline-block text-xs uppercase tracking-widest font-bold px-2.5 py-1 rounded bg-[#f3c242]/10 border border-[#f3c242]/30 text-[#f3c242]">
+          <span className="hidden sm:inline-block text-xs uppercase tracking-widest font-bold px-2.5 py-1 rounded bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14]">
             Portal Active
           </span>
         </div>
@@ -313,7 +313,7 @@ export default function AdminDashboardPage() {
           <Link
             href="/reverb"
             target="_blank"
-            className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400 hover:text-[#f3c242] transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800"
+            className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400 hover:text-[#F88E14] transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800"
           >
             <span>View /reverb Page</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -350,7 +350,7 @@ export default function AdminDashboardPage() {
             <div className="bg-zinc-950 p-4 sm:p-5 rounded-xl border border-zinc-800/80 shadow-md">
               <div className="flex items-center justify-between text-zinc-400">
                 <span className="text-xs font-semibold uppercase tracking-wider">Total Attendees</span>
-                <Users className="w-4 h-4 text-[#f3c242]" />
+                <Users className="w-4 h-4 text-[#F88E14]" />
               </div>
               <div className="mt-2 flex items-baseline gap-2">
                 <span className="text-2xl sm:text-4xl font-fjalla font-bold text-white">
@@ -407,7 +407,7 @@ export default function AdminDashboardPage() {
             onClick={() => setActiveTab("attendees")}
             className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 ${
               activeTab === "attendees"
-                ? "bg-[#f3c242] text-black shadow-md"
+                ? "bg-[#F88E14] text-black shadow-md"
                 : "text-zinc-400 hover:text-white bg-zinc-900"
             }`}
           >
@@ -419,7 +419,7 @@ export default function AdminDashboardPage() {
             onClick={() => setActiveTab("subscribers")}
             className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 ${
               activeTab === "subscribers"
-                ? "bg-[#f3c242] text-black shadow-md"
+                ? "bg-[#F88E14] text-black shadow-md"
                 : "text-zinc-400 hover:text-white bg-zinc-900"
             }`}
           >
@@ -445,7 +445,7 @@ export default function AdminDashboardPage() {
                   placeholder="Search attendee by name, email, phone, ticket ref..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#f3c242]"
+                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14]"
                 />
               </div>
 
@@ -507,7 +507,7 @@ export default function AdminDashboardPage() {
 
                         return (
                           <tr key={attendee.id} className="hover:bg-zinc-900/50 transition-colors">
-                            <td className="py-3.5 px-4 font-mono font-bold text-[#f3c242]">
+                            <td className="py-3.5 px-4 font-mono font-bold text-[#F88E14]">
                               {attendee.ticketCode}
                             </td>
                             <td className="py-3.5 px-4 font-medium text-white">

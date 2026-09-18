@@ -7,7 +7,7 @@ export default function AwardBanner() {
         
         {/* Block 1: Award-Winning Tagline & Description Quote */}
         <div className="space-y-4 max-w-4xl mx-auto">
-          <h2 className="font-fjalla text-2xl sm:text-4xl lg:text-5xl text-[#f3c242] uppercase tracking-wide font-bold">
+          <h2 className="font-fjalla text-2xl sm:text-4xl lg:text-5xl text-[#F88E14] uppercase tracking-wide font-bold">
             Award-Winning Gospel Praise Artist
           </h2>
           <p className="text-white text-base sm:text-lg lg:text-xl font-normal leading-relaxed italic text-zinc-200">
@@ -18,7 +18,7 @@ export default function AwardBanner() {
         {/* Block 2: Awards / Accolades Showcase */}
         <div className="space-y-6 pt-4">
           <div className="space-y-2">
-            <h3 className="font-fjalla text-2xl sm:text-4xl lg:text-5xl text-[#f3c242] uppercase tracking-wide font-bold">
+            <h3 className="font-fjalla text-2xl sm:text-4xl lg:text-5xl text-[#F88E14] uppercase tracking-wide font-bold">
               Global Music Awards & Honors
             </h3>
             <p className="text-zinc-300 text-sm sm:text-base uppercase tracking-wider font-medium">
@@ -28,7 +28,7 @@ export default function AwardBanner() {
 
           {/* Golden Trophy Graphic */}
           <div className="flex justify-center pt-2">
-            <div className="relative w-44 sm:w-56 aspect-square hover:scale-105 transition-transform duration-300 drop-shadow-[0_10px_30px_rgba(243,194,66,0.25)]">
+            <div className="relative w-44 sm:w-56 aspect-square hover:scale-105 transition-transform duration-300 drop-shadow-[0_10px_30px_rgba(248,142,20,0.25)]">
               <Image
                 src="/images/award_trophy.jpg"
                 alt="Gospel Music Award Trophy"

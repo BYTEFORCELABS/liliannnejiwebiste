@@ -42,12 +42,12 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-40 sm:w-52 h-12 flex items-center">
             <Image
-              src="/images/logo.png"
+              src="/images/logo_white_text.png"
               alt="Minister Lilian Nneji"
               width={210}
               height={55}
               priority
-              className="object-contain filter brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
+              className="object-contain opacity-95 group-hover:opacity-100 transition-opacity"
             />
           </div>
         </Link>
@@ -63,8 +63,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-[15px] lg:text-[16px] font-medium tracking-normal transition-colors duration-200 ${
                   isReverb
-                    ? "text-white hover:text-[#f3c242]"
-                    : "text-[#f3c242] hover:text-white"
+                    ? "text-white hover:text-[#F88E14]"
+                    : "text-[#F88E14] hover:text-white"
                 }`}
               >
                 {link.name}
@@ -76,7 +76,7 @@ export default function Navbar() {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-[#f3c242] hover:text-white transition-colors"
+          className="md:hidden p-2 text-[#F88E14] hover:text-white transition-colors"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -86,7 +86,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#070709]/98 backdrop-blur-2xl border-b border-[#f3c242]/20 px-6 py-6 space-y-3 animate-in slide-in-from-top-4 duration-300">
+        <div className="md:hidden bg-[#070709]/98 backdrop-blur-2xl border-b border-[#F88E14]/20 px-6 py-6 space-y-3 animate-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => {
               const isReverb = link.name === "Reverb";
@@ -98,8 +98,8 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-base font-medium py-2 border-b border-white/5 transition-colors ${
                     isReverb
-                      ? "text-white hover:text-[#f3c242]"
-                      : "text-[#f3c242] hover:text-white"
+                      ? "text-white hover:text-[#F88E14]"
+                      : "text-[#F88E14] hover:text-white"
                   }`}
                 >
                   {link.name}

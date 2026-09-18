@@ -9,7 +9,7 @@ export default function EventsSection() {
         
         {/* Section Header matching Screenshot 1 */}
         <div className="text-center space-y-2 mb-12">
-          <h2 className="font-fjalla text-4xl sm:text-6xl text-[#f3c242] uppercase tracking-wide font-bold">
+          <h2 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
             UPCOMING EVENTS
           </h2>
           <p className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
@@ -23,7 +23,7 @@ export default function EventsSection() {
             
             {/* Left: Date */}
             <div className="flex-shrink-0">
-              <span className="font-fjalla text-3xl sm:text-4xl text-[#f3c242] font-bold tracking-tight">
+              <span className="font-fjalla text-3xl sm:text-4xl text-[#F88E14] font-bold tracking-tight">
                 1ST NOV.
               </span>
             </div>
@@ -46,7 +46,7 @@ export default function EventsSection() {
             <div className="flex-shrink-0">
               <Link
                 href="/reverb"
-                className="inline-block border border-[#f3c242] text-[#f3c242] hover:bg-[#f3c242] hover:text-black font-semibold text-xs tracking-widest px-8 py-2.5 rounded-none uppercase transition-all duration-200 active:scale-95 shadow-md"
+                className="inline-block border border-[#F88E14] text-[#F88E14] hover:bg-[#F88E14] hover:text-black font-semibold text-xs tracking-widest px-8 py-2.5 rounded-none uppercase transition-all duration-200 active:scale-95 shadow-md"
               >
                 REGISTER
               </Link>
