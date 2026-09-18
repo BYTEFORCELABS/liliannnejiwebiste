@@ -102,6 +102,7 @@ export async function sendReverbTicketEmail(attendee) {
   const textContent = `Hello ${attendee.fullName},\n\nYour seat is reserved for REVERB 5.0 with Minister Lilian Nneji!\nTicket Code: ${attendee.ticketCode}\nDate: Sunday, 1st Nov 2026 at 4:00 PM\nVenue: EUI Event Center, Plot F11 Sani Abacha Road, GRA Phase 3, Port Harcourt.\n\nSee you there!`;
 
   // 1. Check for Resend API Key
+  let resendError = null;
   if (process.env.RESEND_API_KEY) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
@@ -115,11 +116,16 @@ export async function sendReverbTicketEmail(attendee) {
         text: textContent,
       });
 
-      console.log("[Resend] Email sent successfully:", response);
-      return { success: true, provider: "resend", id: response.id };
+      if (response.error) {
+        throw new Error(response.error.message || JSON.stringify(response.error));
+      }
+
+      console.log("[Resend] Email sent successfully:", response.data?.id || response.id);
+      return { success: true, provider: "resend", id: response.data?.id || response.id };
     } catch (err) {
-      console.error("[Resend] Failed to send email:", err);
-      // Fall through to fallback
+      console.error("[Resend] Failed to send email:", err.message);
+      resendError = err.message;
+      // Fall through to other providers or mock fallback
     }
   }
 
@@ -165,7 +171,10 @@ export async function sendReverbTicketEmail(attendee) {
   return {
     success: true,
     provider: "mock",
-    note: "Email simulated in dev mode. Set RESEND_API_KEY or SMTP credentials in .env.local to send live emails.",
+    note: resendError
+      ? `Resend attempted but failed (${resendError}). Fallback simulation used.`
+      : "Email simulated in dev mode. Set RESEND_API_KEY or SMTP credentials in .env.local to send live emails.",
+    error: resendError || null,
   };
 }
 
