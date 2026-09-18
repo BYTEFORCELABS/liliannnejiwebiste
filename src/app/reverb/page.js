@@ -114,7 +114,7 @@ export default function ReverbPage() {
     { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/liliannneji/" },
     { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
     { name: "Threads", icon: ThreadsIcon, url: "https://threads.net/@liliannneji" },
-    { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/liliannneji" },
+    { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
     { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/artist/lilian-nneji" },
     { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/lilian-nneji" },
   ];
@@ -138,7 +138,7 @@ export default function ReverbPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-            
+
             {/* Left: Concert Flyer Poster Card matching Screenshot 1 */}
             <div className="lg:col-span-6 flex justify-center">
               <div className="relative w-full max-w-md sm:max-w-lg aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-blue-400/30 bg-blue-950/50 group">
@@ -172,7 +172,7 @@ export default function ReverbPage() {
             {/* Right: Registration Form matching Screenshot 1 & 2 */}
             <div className="lg:col-span-6">
               <div className="p-2 sm:p-6">
-                
+
                 {isRegistered ? (
                   <div className="p-8 sm:p-10 rounded-2xl bg-blue-950/80 border border-blue-400/40 text-center space-y-4 animate-in fade-in shadow-2xl">
                     <div className="w-16 h-16 mx-auto rounded-full bg-blue-500/20 border border-blue-400 flex items-center justify-center text-blue-400">
@@ -202,7 +202,7 @@ export default function ReverbPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleRegister} className="space-y-5">
-                    
+
                     {/* Full Name */}
                     <div className="space-y-1.5">
                       <label className="text-sm font-semibold text-white">
@@ -316,7 +316,7 @@ export default function ReverbPage() {
       <section className="bg-black py-20 sm:py-28 border-t border-white/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
+
             {/* Left Column: Incoming Info matching Screenshot 2 & 3 */}
             <div className="lg:col-span-5 space-y-6">
               <div className="space-y-2">
@@ -341,7 +341,7 @@ export default function ReverbPage() {
             {/* Right Column: Overlapping Polaroid Collage matching Screenshot 3 */}
             <div className="lg:col-span-7 relative flex justify-center py-6 min-h-[420px] sm:min-h-[480px]">
               <div className="relative w-full max-w-lg h-full">
-                
+
                 {/* Polaroid 1: Large Concert Crowd (Back Left - tilted) */}
                 <div className="absolute top-2 left-0 sm:left-4 w-60 sm:w-80 aspect-[4/3] bg-white p-3 pb-8 shadow-2xl rounded-sm -rotate-6 z-10 hover:z-30 hover:rotate-0 transition-transform duration-300">
                   <div className="relative w-full h-full bg-zinc-900 overflow-hidden">
@@ -402,7 +402,7 @@ export default function ReverbPage() {
 
       {/* Section 4: Venue & Google Map Embed matching Screenshot 4 & 5 */}
       <section className="relative w-full h-[450px] sm:h-[520px] bg-zinc-900 overflow-hidden border-b border-white/10">
-        
+
         {/* Google Map Embed of EUI Centre, Port Harcourt */}
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.6983794348577!2d6.994326175024477!3d4.821816395153684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1069ce00572e4003%3A0xe5a3c9b74070a7b5!2sEUI%20Centre!5e0!3m2!1sen!2sng!4v1710000000000!5m2!1sen!2sng"

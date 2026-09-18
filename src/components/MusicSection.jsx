@@ -81,7 +81,7 @@ export default function MusicSection() {
     {
       name: "Spotify",
       icon: SpotifyIcon,
-      url: "https://open.spotify.com/artist/liliannneji",
+      url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa",
     },
     {
       name: "YouTube Music",
@@ -176,7 +176,7 @@ export default function MusicSection() {
   return (
     <section id="music" className="bg-black py-20 text-white overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* ============================================================ */}
         {/* 1. LATEST RELEASE (Screenshot 1 & 2)                         */}
         {/* ============================================================ */}

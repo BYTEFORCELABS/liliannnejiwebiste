@@ -37,13 +37,13 @@ export default function Hero() {
     {
       name: "Spotify",
       icon: SpotifyIcon,
-      url: "https://open.spotify.com/artist/liliannneji",
+      url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa",
     },
   ];
 
   return (
     <section id="home" className="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden">
-      
+
       {/* Full-Bleed Background Image (Matches Prinx Emmanuel layout) */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -54,7 +54,7 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-[70%_center] sm:object-center"
         />
-        
+
         {/* Subtle Dark Vignette / Left Gradient Overlay for Crystal-Clear Text Readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#070709] via-[#070709]/75 to-transparent sm:w-3/4" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070709] via-transparent to-[#070709]/40" />
@@ -63,7 +63,7 @@ export default function Hero() {
       {/* Hero Content aligned to the left */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-16">
         <div className="max-w-3xl space-y-6 sm:space-y-8">
-          
+
           {/* Yellow Subtitle Label */}
           <div className="space-y-2">
             <h6 className="font-fjalla text-[#f3c242] uppercase tracking-wider text-base sm:text-xl font-bold">

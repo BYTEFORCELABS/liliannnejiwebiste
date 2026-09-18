@@ -47,7 +47,7 @@ export default function Footer() {
     { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/liliannneji/" },
     { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
     { name: "Threads", icon: ThreadsIcon, url: "https://threads.net/@liliannneji" },
-    { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/liliannneji" },
+    { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
     { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/artist/lilian-nneji" },
     { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/lilian-nneji" },
   ];
@@ -55,7 +55,7 @@ export default function Footer() {
   return (
     <footer id="booking" className="bg-black text-white pt-14 pb-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
-        
+
         {/* For Bookings Row matching Screenshot 3 */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs sm:text-sm text-zinc-300">
           <span className="font-semibold text-white tracking-wide">
