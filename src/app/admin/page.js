@@ -16,7 +16,6 @@ import {
   MessageSquare,
   Lock,
   LogOut,
-  Send,
   RefreshCw,
   Sparkles,
   MapPin,
@@ -42,16 +41,9 @@ export default function AdminDashboardPage() {
     totalSubscribers: 0,
     checkedInCount: 0,
   });
-  const [emailStatus, setEmailStatus] = useState(null);
-
   // Filters & Search
   const [searchQuery, setSearchQuery] = useState("");
   const [genderFilter, setGenderFilter] = useState("all");
-
-  // Email Test State
-  const [testRecipient, setTestRecipient] = useState("");
-  const [testSending, setTestSending] = useState(false);
-  const [testResult, setTestResult] = useState(null);
 
   // Check existing session on load
   useEffect(() => {
@@ -75,12 +67,6 @@ export default function AdminDashboardPage() {
       if (resSubs.ok) {
         const dataSubs = await resSubs.json();
         setSubscribers(dataSubs.subscribers || []);
-      }
-
-      const resEmail = await fetch("/api/admin/email-status");
-      if (resEmail.ok) {
-        const dataEmail = await resEmail.json();
-        setEmailStatus(dataEmail.status || null);
       }
     } catch (err) {
       console.error("Dashboard fetch error:", err);
@@ -209,28 +195,6 @@ export default function AdminDashboardPage() {
     document.body.removeChild(link);
   };
 
-  // Send Test Email
-  const handleSendTestEmail = async (e) => {
-    e.preventDefault();
-    if (!testRecipient) return;
-    setTestSending(true);
-    setTestResult(null);
-
-    try {
-      const res = await fetch("/api/admin/email-status", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ testEmail: testRecipient }),
-      });
-      const data = await res.json();
-      setTestResult(data);
-    } catch (err) {
-      setTestResult({ error: "Failed to dispatch test email." });
-    } finally {
-      setTestSending(false);
-    }
-  };
-
   // Filtered Attendees list
   const filteredAttendees = attendees.filter((a) => {
     const matchesSearch =
@@ -282,7 +246,7 @@ export default function AdminDashboardPage() {
               <input
                 type="password"
                 required
-                placeholder="Enter passcode (default: lilian2026)"
+                placeholder="Enter master passcode"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#f3c242]"
@@ -461,18 +425,6 @@ export default function AdminDashboardPage() {
           >
             <Mail className="w-4 h-4" />
             <span>Newsletter Subscribers ({subscribers.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("email")}
-            className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 ${
-              activeTab === "email"
-                ? "bg-[#f3c242] text-black shadow-md"
-                : "text-zinc-400 hover:text-white bg-zinc-900"
-            }`}
-          >
-            <Send className="w-4 h-4" />
-            <span>Email Engine Diagnostics</span>
           </button>
         </div>
 
@@ -704,116 +656,6 @@ export default function AdminDashboardPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        )}
-
-        {/* ============================================================ */}
-        {/* TAB 3: EMAIL ENGINE DIAGNOSTICS & TEST SENDER               */}
-        {/* ============================================================ */}
-        {activeTab === "email" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            {/* Status Card */}
-            <div className="bg-zinc-950 p-6 rounded-xl border border-zinc-800 space-y-4">
-              <h3 className="font-fjalla text-xl uppercase font-bold text-white tracking-wide">
-                Email Dispatch Configuration
-              </h3>
-              
-              <div className="p-4 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-2 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">Current Mode:</span>
-                  <span className="font-bold text-[#f3c242]">
-                    {emailStatus?.provider || "Detecting..."}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">Live Delivery:</span>
-                  <span
-                    className={`font-semibold ${
-                      emailStatus?.configured ? "text-emerald-400" : "text-amber-400"
-                    }`}
-                  >
-                    {emailStatus?.configured ? "Enabled (Live)" : "Dev Simulation (Console Log)"}
-                  </span>
-                </div>
-                {emailStatus?.note && (
-                  <p className="text-xs text-zinc-400 pt-2 border-t border-zinc-800 leading-relaxed">
-                    {emailStatus.note}
-                  </p>
-                )}
-              </div>
-
-              <div className="space-y-3 pt-2 text-xs text-zinc-400 leading-relaxed">
-                <h4 className="font-bold uppercase tracking-wider text-zinc-300">
-                  How to Enable Live Sending:
-                </h4>
-                <div className="p-3 bg-black/60 rounded border border-zinc-800 font-mono text-[11px] text-zinc-300">
-                  # Open .env.local and add your key:<br />
-                  <span className="text-emerald-400">RESEND_API_KEY</span>=re_your_api_key<br />
-                  <span className="text-emerald-400">RESEND_FROM_EMAIL</span>="Minister Lilian Nneji &lt;onboarding@resend.dev&gt;"
-                </div>
-                <p>Or configure standard SMTP (Gmail/Brevo) via <code className="text-zinc-300">SMTP_HOST</code>, <code className="text-zinc-300">SMTP_USER</code>, <code className="text-zinc-300">SMTP_PASS</code>.</p>
-              </div>
-            </div>
-
-            {/* Test Email Dispatch Form */}
-            <div className="bg-zinc-950 p-6 rounded-xl border border-zinc-800 space-y-4">
-              <h3 className="font-fjalla text-xl uppercase font-bold text-white tracking-wide">
-                Send Test Admission Pass
-              </h3>
-              <p className="text-xs text-zinc-400">
-                Trigger a sample REVERB 5.0 admission ticket email to test inbox rendering.
-              </p>
-
-              <form onSubmit={handleSendTestEmail} className="space-y-4 pt-2">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
-                    Recipient Email Address
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter recipient email (e.g. you@gmail.com)"
-                    value={testRecipient}
-                    onChange={(e) => setTestRecipient(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#f3c242]"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={testSending}
-                  className="px-6 py-2.5 rounded-lg bg-[#f3c242] hover:bg-[#d8a832] text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-md"
-                >
-                  {testSending ? "Sending Test Pass..." : "Send Test Ticket"}
-                </button>
-              </form>
-
-              {testResult && (
-                <div
-                  className={`p-3 rounded-lg text-xs mt-3 ${
-                    testResult.success
-                      ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-300"
-                      : "bg-red-950/60 border border-red-500/40 text-red-300"
-                  }`}
-                >
-                  {testResult.success ? (
-                    <div>
-                      <strong>Success!</strong> Test email handled via{" "}
-                      <strong>{testResult.result?.provider}</strong>.
-                      {testResult.result?.note && (
-                        <p className="mt-1 text-zinc-300">{testResult.result.note}</p>
-                      )}
-                    </div>
-                  ) : (
-                    <div>
-                      <strong>Error:</strong> {testResult.error}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
           </div>
         )}
 
