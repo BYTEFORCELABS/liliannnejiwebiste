@@ -6,13 +6,37 @@ import { CheckCircle2 } from "lucide-react";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const [feedbackMsg, setFeedbackMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to subscribe. Please try again.");
+      }
+
+      setFeedbackMsg(data.message || "Thank you for subscribing! Welcome to the praise tribe.");
       setSubscribed(true);
       setEmail("");
+    } catch (err) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,29 +70,36 @@ export default function Newsletter() {
             </div>
 
             {subscribed ? (
-              <div className="p-4 bg-zinc-900 border border-[#f3c242]/40 rounded-none max-w-md flex items-center gap-3 text-[#f3c242] animate-in fade-in">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+              <div className="p-4 bg-zinc-900 border border-[#f3c242]/40 rounded-none max-w-lg flex items-center gap-3 text-[#f3c242] animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-[#f3c242]" />
                 <span className="text-sm font-semibold text-white">
-                  Thank you for subscribing! You'll be notified of new sounds & tour dates.
+                  {feedbackMsg || "Thank you for subscribing! You'll be notified of new sounds & tour dates."}
                 </span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-0 max-w-lg">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-grow px-4 py-3.5 bg-white text-black placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md"
-                />
-                <button
-                  type="submit"
-                  className="border border-[#f3c242] bg-black hover:bg-[#f3c242] text-[#f3c242] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0"
-                >
-                  SUBSCRIBE
-                </button>
-              </form>
+              <div className="space-y-2 max-w-lg">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-0">
+                  <input
+                    type="email"
+                    required
+                    disabled={loading}
+                    placeholder="Enter email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="flex-grow px-4 py-3.5 bg-white text-black placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md disabled:opacity-60"
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="border border-[#f3c242] bg-black hover:bg-[#f3c242] text-[#f3c242] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
+                  >
+                    {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
+                  </button>
+                </form>
+                {errorMsg && (
+                  <p className="text-xs text-red-400 font-medium">{errorMsg}</p>
+                )}
+              </div>
             )}
           </div>
 

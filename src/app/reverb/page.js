@@ -97,15 +97,34 @@ export default function ReverbPage() {
   });
 
   const [isRegistered, setIsRegistered] = useState(false);
+  const [ticketCode, setTicketCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/register-reverb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setTicketCode(data.attendee.ticketCode);
+        setIsRegistered(true);
+      } else {
+        setErrorMessage(data.error || "Registration failed. Please check your inputs.");
+      }
+    } catch (err) {
+      setErrorMessage("Connection error. Please try again.");
+    } finally {
       setLoading(false);
-      setIsRegistered(true);
-    }, 1200);
+    }
   };
 
   const socialLinks = [
@@ -181,12 +200,26 @@ export default function ReverbPage() {
                     <h3 className="text-2xl sm:text-3xl font-fjalla font-bold text-white uppercase tracking-wide">
                       Seat Reserved for Reverb 5.0!
                     </h3>
+
+                    {/* Ticket Code Display Badge */}
+                    {ticketCode && (
+                      <div className="inline-block px-5 py-2.5 rounded-lg bg-blue-900/60 border border-blue-400/50 my-2">
+                        <span className="block text-[10px] uppercase font-bold tracking-widest text-blue-300">
+                          Official Ticket Pass Ref:
+                        </span>
+                        <span className="text-2xl font-mono font-black text-[#f3c242] tracking-wider">
+                          {ticketCode}
+                        </span>
+                      </div>
+                    )}
+
                     <p className="text-sm text-zinc-300 leading-relaxed max-w-md mx-auto">
                       Hallelujah, <strong className="text-blue-300">{formData.fullName}</strong>! Your registration is confirmed for <strong>REVERB 5.0</strong> at EUI Event Center, Port Harcourt on <strong>1st Nov 2026</strong>. An admission pass with seating details has been sent to your email.
                     </p>
                     <button
                       onClick={() => {
                         setIsRegistered(false);
+                        setTicketCode("");
                         setFormData({
                           fullName: "",
                           gender: "Male",
@@ -202,6 +235,11 @@ export default function ReverbPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleRegister} className="space-y-5">
+                    {errorMessage && (
+                      <div className="p-3.5 rounded-lg bg-red-950/70 border border-red-500/50 text-red-200 text-xs font-medium">
+                        {errorMessage}
+                      </div>
+                    )}
 
                     {/* Full Name */}
                     <div className="space-y-1.5">
