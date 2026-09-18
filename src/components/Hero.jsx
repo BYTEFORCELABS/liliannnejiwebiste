@@ -44,20 +44,21 @@ export default function Hero() {
   return (
     <section id="home" className="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden">
 
-      {/* Full-Bleed Background Image (Matches Prinx Emmanuel layout) */}
+      {/* Full-Bleed Background Image (Live Ministration to Congregation) */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero_bg.jpg"
-          alt="Minister Lilian Nneji Concert Stage"
+          src="/images/hero_bg_live.jpg"
+          alt="Minister Lilian Nneji Live Concert Ministration"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[70%_center] sm:object-center"
+          className="object-cover object-[78%_center] sm:object-[80%_top] md:object-right"
         />
 
-        {/* Subtle Dark Vignette / Left Gradient Overlay for Crystal-Clear Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070709] via-[#070709]/75 to-transparent sm:w-3/4" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070709] via-transparent to-[#070709]/40" />
+        {/* Ambient Dark Overlays: Solid & Legible on Left, Revealing Minister Lilian on Right */}
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#070709] via-[#070709]/85 to-transparent sm:w-3/4 md:w-3/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#070709] via-transparent to-[#070709]/70" />
       </div>
 
       {/* Hero Content aligned to the left */}

@@ -159,31 +159,31 @@ export default function ReverbPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
             {/* Left: Concert Flyer Poster Card matching Screenshot 1 */}
-            <div className="lg:col-span-6 flex justify-center">
+            <div className="lg:col-span-6 flex flex-col items-center">
               <div className="relative w-full max-w-md sm:max-w-lg aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-blue-400/30 bg-blue-950/50 group">
                 <Image
-                  src="/images/reverb_poster.jpg"
-                  alt="The Reverb 5.0 with Minister Lilian Nneji"
+                  src="/images/reverb_poster_v3.jpg"
+                  alt="Supernatural Turnaround with Min. Lilian Nneji"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 550px"
                   className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
+              </div>
 
-                {/* Bottom Sponsorship Strip matching Screenshot 1 & 2 */}
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-blue-950/95 to-transparent p-4 sm:p-5 pt-10 text-[11px] sm:text-xs text-zinc-300">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-t border-blue-400/20 pt-2.5">
-                    <span className="font-bold text-white tracking-wider">
-                      FOR SPONSORSHIP & ENQUIRIES:
-                    </span>
-                    <span className="text-blue-300 font-semibold">
-                      +234 802 313 1871
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] text-zinc-400 mt-1">
-                    <span>bookings@liliannneji.com</span>
-                    <span>www.liliannneji.com/reverb</span>
-                  </div>
+              {/* Bottom Sponsorship & Enquiry strip cleanly positioned beneath poster */}
+              <div className="w-full max-w-md sm:max-w-lg mt-3.5 p-3.5 rounded-xl bg-blue-950/60 border border-blue-400/25 text-[11px] sm:text-xs text-zinc-300 shadow-lg">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="font-bold text-white tracking-wider">
+                    FOR ENQUIRIES:
+                  </span>
+                  <span className="text-blue-300 font-semibold">
+                    0806 368 3670, 0703 075 7082
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-zinc-400 mt-1 pt-1 border-t border-blue-400/15">
+                  <span>bookings@liliannneji.com</span>
+                  <span>www.liliannneji.com/reverb</span>
                 </div>
               </div>
             </div>
@@ -380,15 +380,15 @@ export default function ReverbPage() {
             <div className="lg:col-span-7 relative flex justify-center py-6 min-h-[420px] sm:min-h-[480px]">
               <div className="relative w-full max-w-lg h-full">
 
-                {/* Polaroid 1: Large Concert Crowd (Back Left - tilted) */}
+                {/* Polaroid 1: Choir Worship Ministration (Back Left - tilted) */}
                 <div className="absolute top-2 left-0 sm:left-4 w-60 sm:w-80 aspect-[4/3] bg-white p-3 pb-8 shadow-2xl rounded-sm -rotate-6 z-10 hover:z-30 hover:rotate-0 transition-transform duration-300">
                   <div className="relative w-full h-full bg-zinc-900 overflow-hidden">
                     <Image
-                      src="/images/reverb_polaroid_1.jpg"
-                      alt="Reverb live audience praise"
+                      src="/images/reverb_polaroid_1_v2.jpg"
+                      alt="Worship choir live on stage"
                       fill
                       sizes="350px"
-                      className="object-cover"
+                      className="object-cover object-[center_top]"
                     />
                   </div>
                 </div>
@@ -397,11 +397,11 @@ export default function ReverbPage() {
                 <div className="absolute top-10 right-4 sm:right-16 w-52 sm:w-64 aspect-square bg-white p-3 pb-8 shadow-2xl rounded-sm rotate-6 z-20 hover:z-30 hover:rotate-0 transition-transform duration-300">
                   <div className="relative w-full h-full bg-zinc-900 overflow-hidden">
                     <Image
-                      src="/images/reverb_polaroid_2.jpg"
-                      alt="Minister Lilian Nneji ministering live on stage"
+                      src="/images/reverb_polaroid_2_v2.jpg"
+                      alt="High praise choir ministration on stage"
                       fill
                       sizes="300px"
-                      className="object-cover"
+                      className="object-cover object-[center_top]"
                     />
                   </div>
                 </div>
@@ -410,11 +410,11 @@ export default function ReverbPage() {
                 <div className="absolute bottom-2 right-0 sm:right-6 w-56 sm:w-72 aspect-[4/3] bg-white p-3 pb-8 shadow-2xl rounded-sm -rotate-2 z-25 hover:z-30 hover:rotate-0 transition-transform duration-300">
                   <div className="relative w-full h-full bg-zinc-900 overflow-hidden">
                     <Image
-                      src="/images/reverb_polaroid_3.jpg"
-                      alt="Reverb concert joy"
+                      src="/images/reverb_polaroid_3_v2.jpg"
+                      alt="Minister Lilian Nneji and praise singer in live ministration"
                       fill
                       sizes="320px"
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>

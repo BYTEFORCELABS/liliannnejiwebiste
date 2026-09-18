@@ -123,11 +123,11 @@ export default function AboutSection() {
                 {/* Framed Center Portrait */}
                 <div className="relative flex-1 w-full rounded-lg overflow-hidden bg-zinc-900 border border-black shadow-inner my-2">
                   <Image
-                    src="/images/about_award_portrait.jpg"
+                    src="/images/about_award_portrait_v2.jpg"
                     alt="Minister Lilian Nneji - Winner Gospel Artist of the Year"
                     fill
                     sizes="(max-width: 768px) 100vw, 450px"
-                    className="object-cover"
+                    className="object-cover object-[center_top]"
                   />
 
                   {/* Black Banner at bottom of Photo */}
@@ -199,17 +199,17 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Column: Yellow Studio Photo (Screenshot 3) */}
+          {/* Right Column: Stage Ministration Photo (Screenshot 3) */}
           <div className="lg:col-span-6 relative flex justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-[#f3c242]/30 group bg-zinc-950">
+            <div className="relative w-full max-w-md aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#f3c242]/30 group bg-zinc-950">
               <Image
-                src="/images/about_yellow_studio.jpg"
-                alt="Minister Lilian Nneji in vibrant yellow studio portrait"
+                src="/images/about_yellow_studio_v2.jpg"
+                alt="Minister Lilian Nneji Live Praise Ministration"
                 fill
-                sizes="(max-width: 768px) 100vw, 550px"
-                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
 

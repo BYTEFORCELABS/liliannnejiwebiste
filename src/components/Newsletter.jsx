@@ -47,13 +47,13 @@ export default function Newsletter() {
           
           {/* Left Column: Black and White Portrait matching Screenshot 2 */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-md aspect-[3/4] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
+            <div className="relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
               <Image
-                src="/images/stay_in_touch_bw.jpg"
-                alt="Minister Lilian Nneji"
+                src="/images/stay_in_touch_bw_v2.jpg"
+                alt="Minister Lilian Nneji in Worship Reflection"
                 fill
-                sizes="(max-width: 768px) 100vw, 500px"
-                className="object-cover grayscale contrast-110"
+                sizes="(max-width: 768px) 100vw, 550px"
+                className="object-cover object-[center_20%]"
               />
             </div>
           </div>

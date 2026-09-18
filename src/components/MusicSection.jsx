@@ -119,47 +119,47 @@ export default function MusicSection() {
   const musicVideos = [
     {
       id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji - Eze Mu O (Official Video)",
-      thumbnail: "/images/album_eze_mu_o.jpg",
+      title: "LILIAN || EZE MU O || Official Video",
+      thumbnail: "/images/yt_DzjflH8peQY.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji - Miracles Everywhere (Official Video)",
-      thumbnail: "/images/video_thumb_miracles.jpg",
+      id: "nLITWXwcUNQ",
+      title: "Elohim - Lilian Nneji (Official Video)",
+      thumbnail: "/images/yt_nLITWXwcUNQ.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji - Praise Vibes Medley (Official Video)",
-      thumbnail: "/images/album_praise_vibes.jpg",
+      id: "J_02EibFwd0",
+      title: "LILIAN NNEJI: Jesus nke Nazareth (OFFICIAL VIDEO)",
+      thumbnail: "/images/yt_J_02EibFwd0.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji - Onwere Ihe Omere Mù (Official Video)",
-      thumbnail: "/images/hero_portrait.jpg",
+      id: "XM6WId4nVAc",
+      title: "Lilian Nneji - Mercy (Official Video)",
+      thumbnail: "/images/yt_XM6WId4nVAc.jpg",
     },
   ];
 
   // Live Performances Grid (4 Cards) matching Screenshot 3
   const livePerformances = [
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji at COZA 7 Days of Glory",
-      thumbnail: "/images/video_thumb_coza.jpg",
+      id: "otD1sbxmPy0",
+      title: "Lilian Nneji - Praise Session at The New Church",
+      thumbnail: "/images/yt_otD1sbxmPy0.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji at RCCG Breakthrough Encounter",
-      thumbnail: "/images/stage_worship.jpg",
+      id: "t8e-A6wr9c8",
+      title: "Chioma Jesus X Lilian Nneji - Powerful Praise Collaboration",
+      thumbnail: "/images/yt_t8e-A6wr9c8.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji, Energy and Fire at Dunamis Glory Dome",
-      thumbnail: "/images/reverb_polaroid_1.jpg",
+      id: "kDhzekV8JKA",
+      title: "Lilian Nneji - Energetic Praise Session at Debbysax Live",
+      thumbnail: "/images/yt_kDhzekV8JKA.jpg",
     },
     {
-      id: "DzjflH8peQY",
-      title: "Minister Lilian Nneji - Nonstop High Praise Explosion Live",
-      thumbnail: "/images/reverb_polaroid_2.jpg",
+      id: "BOzft-lf2jM",
+      title: "Lilian Nneji - Powerful Ministration at PSF RCCG Convention",
+      thumbnail: "/images/yt_BOzft-lf2jM.jpg",
     },
   ];
 
