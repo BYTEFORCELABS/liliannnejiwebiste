@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gal_1",
+    "title": "Galaxy Music Awards Celebration",
+    "category": "Award Moments",
+    "imageUrl": "/images/about_award_portrait_v2.jpg",
+    "caption": "Honored with the Gospel Artist of the Year award at the prestigious Galaxy Music Awards.",
+    "date": "2026-08-15",
+    "featured": true,
+    "createdAt": "2026-08-15T12:00:00.000Z"
+  },
+  {
+    "id": "gal_2",
+    "title": "The Reverb 5.0 Official Banner",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_poster_v3.jpg",
+    "caption": "Official concert visual for REVERB 5.0 live at EUI Event Center, Port Harcourt.",
+    "date": "2026-09-01",
+    "featured": true,
+    "createdAt": "2026-09-01T10:00:00.000Z"
+  },
+  {
+    "id": "gal_3",
+    "title": "Prophetic Worship in Studio",
+    "category": "Studio & Portraits",
+    "imageUrl": "/images/about_yellow_studio_v2.jpg",
+    "caption": "Studio session recording prophetic praise anthems in joy and power.",
+    "date": "2026-07-22",
+    "featured": true,
+    "createdAt": "2026-07-22T14:30:00.000Z"
+  },
+  {
+    "id": "gal_4",
+    "title": "Live Altar Ministration",
+    "category": "Live Concerts",
+    "imageUrl": "/images/hero_bg_live.jpg",
+    "caption": "Electrifying praise encounter lifting up the name of Jesus with thousands in worship.",
+    "date": "2026-06-18",
+    "featured": true,
+    "createdAt": "2026-06-18T20:00:00.000Z"
+  },
+  {
+    "id": "gal_5",
+    "title": "Joyful Worship Polaroid",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_polaroid_1_v2.jpg",
+    "caption": "Unstoppable kingdom dance and laughter during the praise session.",
+    "date": "2025-11-02",
+    "featured": false,
+    "createdAt": "2025-11-02T19:30:00.000Z"
+  },
+  {
+    "id": "gal_6",
+    "title": "Heartfelt Adoration Polaroid",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_polaroid_2_v2.jpg",
+    "caption": "Deep intimacy and adoration during the slow worship ministration.",
+    "date": "2025-11-02",
+    "featured": false,
+    "createdAt": "2025-11-02T20:15:00.000Z"
+  },
+  {
+    "id": "gal_7",
+    "title": "Atmosphere of Miracles Polaroid",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_polaroid_3_v2.jpg",
+    "caption": "The glory of God filling the room at the annual Reverb gathering.",
+    "date": "2025-11-02",
+    "featured": false,
+    "createdAt": "2025-11-02T21:00:00.000Z"
+  },
+  {
+    "id": "gal_8",
+    "title": "Stage Worship Encounter",
+    "category": "Live Concerts",
+    "imageUrl": "/images/stage_worship.jpg",
+    "caption": "Leading thousands in adoration at the regional gospel crusade.",
+    "date": "2026-05-14",
+    "featured": true,
+    "createdAt": "2026-05-14T18:00:00.000Z"
+  },
+  {
+    "id": "gal_9",
+    "title": "Studio Reverence",
+    "category": "Studio & Portraits",
+    "imageUrl": "/images/stay_in_touch_bw_v2.jpg",
+    "caption": "Black and white studio portrait capturing serenity, faith, and devotion.",
+    "date": "2026-04-10",
+    "featured": false,
+    "createdAt": "2026-04-10T11:00:00.000Z"
+  },
+  {
+    "id": "gal_10",
+    "title": "COZA Praise Night Explosion",
+    "category": "Live Concerts",
+    "imageUrl": "/images/video_thumb_coza.jpg",
+    "caption": "High-octane praise explosion with the global choir and congregation.",
+    "date": "2026-03-28",
+    "featured": true,
+    "createdAt": "2026-03-28T19:00:00.000Z"
+  },
+  {
+    "id": "gal_11",
+    "title": "Atmosphere of Miracles",
+    "category": "Live Concerts",
+    "imageUrl": "/images/video_thumb_miracles.jpg",
+    "caption": "Prophetic songs of deliverance and joy overflowing in testimony.",
+    "date": "2026-02-14",
+    "featured": false,
+    "createdAt": "2026-02-14T17:30:00.000Z"
+  },
+  {
+    "id": "gal_12",
+    "title": "Official Portrait - Jesus Dance Queen",
+    "category": "Studio & Portraits",
+    "imageUrl": "/images/hero_portrait.jpg",
+    "caption": "Official portrait of Minister Lilian Nneji, celebrating the Joy of the Lord.",
+    "date": "2026-01-05",
+    "featured": true,
+    "createdAt": "2026-01-05T09:00:00.000Z"
+  }
+]

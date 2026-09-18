@@ -21,11 +21,13 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Reverb", href: "/reverb" },
     { name: "About", href: "/#about" },
     { name: "Music", href: "/#music" },
+    { name: "Lyrics", href: "/lyrics" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Events", href: "/#events" },
     { name: "Booking", href: "/#booking" },
+    { name: "Reverb", href: "/reverb" },
   ];
 
   return (

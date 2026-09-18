@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -107,6 +108,17 @@ export default function Footer() {
               </a>
             );
           })}
+        </div>
+
+        {/* Quick Links Row */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-widest font-semibold text-zinc-400 pt-1">
+          <Link href="/" className="hover:text-[#F88E14] transition-colors">Home</Link>
+          <Link href="/#about" className="hover:text-[#F88E14] transition-colors">About</Link>
+          <Link href="/#music" className="hover:text-[#F88E14] transition-colors">Music</Link>
+          <Link href="/lyrics" className="hover:text-[#F88E14] transition-colors">Lyrics</Link>
+          <Link href="/gallery" className="hover:text-[#F88E14] transition-colors">Gallery</Link>
+          <Link href="/#events" className="hover:text-[#F88E14] transition-colors">Events</Link>
+          <Link href="/reverb" className="hover:text-[#F88E14] transition-colors text-white font-bold">The Reverb</Link>
         </div>
 
         {/* Thin Divider Line matching Screenshot 3 */}
