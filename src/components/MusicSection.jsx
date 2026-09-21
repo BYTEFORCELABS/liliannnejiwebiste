@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Play, ExternalLink } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 // Platform Icon Components matching Screenshot 2
 function SpotifyIcon({ className = "w-4 h-4" }) {
@@ -181,16 +181,16 @@ export default function MusicSection() {
         {/* 1. LATEST RELEASE (Screenshot 1 & 2)                         */}
         {/* ============================================================ */}
         <div className="text-center space-y-2 mb-10">
-          <h2 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+          <Reveal as="h2" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
             LATEST RELEASE
-          </h2>
-          <p className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
+          </Reveal>
+          <Reveal as="p" variant="up" delay={120} className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
             Enjoy the latest groove from Minister Lilian Nneji
-          </p>
+          </Reveal>
         </div>
 
         {/* Big YouTube Video Player Container matching Screenshot 1 */}
-        <div id="latest-release-player" className="max-w-5xl mx-auto mb-8">
+        <Reveal id="latest-release-player" variant="scale" className="max-w-5xl mx-auto mb-8">
           <div className="relative w-full aspect-video rounded-none sm:rounded-lg overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl">
             <iframe
               src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`}
@@ -200,24 +200,27 @@ export default function MusicSection() {
               className="absolute inset-0 w-full h-full"
             />
           </div>
-        </div>
+        </Reveal>
 
         {/* Streaming Platforms Bar matching Screenshot 2 */}
         <div className="max-w-5xl mx-auto mb-20">
           <div className="flex items-center justify-center flex-wrap gap-x-7 sm:gap-x-9 gap-y-3.5 py-4 px-4 text-xs sm:text-sm text-zinc-200">
-            {streamingPlatforms.map((platform) => {
+            {streamingPlatforms.map((platform, idx) => {
               const Icon = platform.icon;
               return (
-                <a
+                <Reveal
                   key={platform.name}
+                  as="a"
+                  variant="up"
+                  delay={idx * 70}
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-[#F88E14] transition-colors group"
+                  className="flex items-center gap-2 hover:text-[#F88E14] hover:-translate-y-0.5 transition-all duration-300 group"
                 >
                   <Icon className="w-4 h-4 text-zinc-300 group-hover:text-[#F88E14] transition-colors flex-shrink-0" />
                   <span className="font-medium">{platform.name}</span>
-                </a>
+                </Reveal>
               );
             })}
           </div>
@@ -228,17 +231,19 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div className="mb-20 sm:mb-24">
           <div className="text-center mb-10">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
               MUSIC VIDEOS
-            </h3>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {musicVideos.map((video, idx) => (
-              <div
+              <Reveal
                 key={idx}
+                variant="up"
+                delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 transition-all duration-300"
+                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -271,7 +276,7 @@ export default function MusicSection() {
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <YouTubePlayBadge />
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -281,17 +286,19 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div>
           <div className="text-center mb-10">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
               LIVE PERFORMANCES
-            </h3>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {livePerformances.map((video, idx) => (
-              <div
+              <Reveal
                 key={idx}
+                variant="up"
+                delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 transition-all duration-300"
+                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -324,7 +331,7 @@ export default function MusicSection() {
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <YouTubePlayBadge />
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

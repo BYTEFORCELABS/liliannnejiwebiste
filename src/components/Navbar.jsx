@@ -28,7 +28,7 @@ export default function Navbar() {
     { name: "Music", href: "/#music" },
     { name: "Lyrics", href: "/lyrics" },
     { name: "Gallery", href: "/gallery" },
-    { name: "Events", href: "/#events" },
+    // { name: "Events", href: "/#events" },
     { name: "Booking", href: "/#booking" },
     { name: "Reverb", href: "/reverb" },
   ];

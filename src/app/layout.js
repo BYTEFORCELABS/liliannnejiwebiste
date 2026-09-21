@@ -4,17 +4,18 @@ export const metadata = {
   metadataBase: new URL("https://liliannneji.com"),
   title: "Minister Lilian Nneji | Official Website • Gospel Music Minister & Worship Leader",
   description:
-    "Official website of Nigerian gospel music minister, songwriter, and worship leader Lilian Nneji (Jesus Dance Queen). Stream hit songs like Eze Mu O, Onwere Ihe Omere Mù, Praise Vibes, view ministration dates, and book for events.",
+    "Official website of Nigerian gospel music minister, songwriter, and worship leader Lilian Nneji — Africa Praise Artiste of the Year 2024. Stream hit songs like Onwere Ihe Omere Mu, E Get Why, Mercy and Eze Mu O, view ministration dates, and book for events.",
   keywords: [
     "Lilian Nneji",
     "Minister Lilian Nneji",
     "Nigerian Gospel Music",
-    "Eze Mu O",
     "Onwere Ihe Omere Mu",
-    "Praise Vibes",
-    "Jesus Dance Queen",
+    "E Get Why",
+    "Odogwu N'agha",
+    "Ntughari",
+    "Eze Mu O",
+    "Africa Praise Artiste of the Year",
     "Gospel Artist Bookings Nigeria",
-    "RCCG Praise Minister",
   ],
   authors: [{ name: "Minister Lilian Nneji" }],
   openGraph: {
@@ -25,10 +26,10 @@ export const metadata = {
     siteName: "Lilian Nneji Ministry",
     images: [
       {
-        url: "/images/hero_portrait.jpg",
-        width: 1200,
+        url: "/images/live_praise_fire.jpg",
+        width: 2400,
         height: 1600,
-        alt: "Minister Lilian Nneji",
+        alt: "Minister Lilian Nneji leading high praise",
       },
     ],
     locale: "en_US",
@@ -39,7 +40,7 @@ export const metadata = {
     title: "Minister Lilian Nneji | Official Website",
     description:
       "Stream hit gospel releases, watch live ministrations, and book Minister Lilian Nneji for your events.",
-    images: ["/images/hero_portrait.jpg"],
+    images: ["/images/live_praise_fire.jpg"],
   },
 };
 

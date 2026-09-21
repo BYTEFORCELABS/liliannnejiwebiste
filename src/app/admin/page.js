@@ -29,14 +29,33 @@ import {
   X,
   FileText,
   Check,
-  Tag
+  Tag,
+  LayoutDashboard,
+  Menu,
+  ArrowUpRight,
+  PanelLeftClose
 } from "lucide-react";
+
+const NAV_ITEMS = [
+  { id: "overview", label: "Overview", icon: LayoutDashboard },
+  { id: "attendees", label: "Reverb Attendees", icon: Users },
+  { id: "subscribers", label: "Subscribers", icon: Mail },
+  { id: "gallery", label: "Gallery Manager", icon: Camera },
+  { id: "lyrics", label: "Lyrics Manager", icon: Music },
+];
+
+const PUBLIC_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/lyrics", label: "Lyrics" },
+  { href: "/reverb", label: "Reverb" },
+];
 
 const GALLERY_CATEGORIES = [
   "Live Concerts",
   "The Reverb",
-  "Studio & Portraits",
-  "Award Moments"
+  "Praise Team & Band",
+  "Portraits"
 ];
 
 const LYRICS_CATEGORIES = [
@@ -47,18 +66,31 @@ const LYRICS_CATEGORIES = [
 ];
 
 const PRESET_IMAGES = [
-  { label: "Award Portrait", path: "/images/about_award_portrait_v2.jpg" },
-  { label: "Studio Yellow", path: "/images/about_yellow_studio_v2.jpg" },
+  { label: "Fire on the Altar", path: "/images/live_praise_fire.jpg" },
+  { label: "Lifted Voice", path: "/images/live_worship_portrait.jpg" },
+  { label: "Every Hand Lifted", path: "/images/live_crowd_bw.jpg" },
+  { label: "Face to Face", path: "/images/live_congregation.jpg" },
+  { label: "Praise in Motion", path: "/images/live_dancers_stage.jpg" },
+  { label: "The Full Stage", path: "/images/live_choir_wide.jpg" },
+  { label: "Call and Response", path: "/images/live_duet_stage.jpg" },
+  { label: "Live Altar", path: "/images/hero_bg_live.jpg" },
+  { label: "Pure Joy", path: "/images/reverb_joy_denim.jpg" },
+  { label: "A Word Before", path: "/images/reverb_ministering.jpg" },
+  { label: "All the Way Back", path: "/images/reverb_praise_lean.jpg" },
+  { label: "Now Ministering", path: "/images/reverb_banner_stage.jpg" },
+  { label: "The Praise Team", path: "/images/reverb_praise_team.jpg" },
+  { label: "Packed House", path: "/images/reverb_wide_stage.jpg" },
+  { label: "Voices in Blue", path: "/images/reverb_polaroid_1_v2.jpg" },
+  { label: "Bowed in Worship", path: "/images/reverb_polaroid_2_v2.jpg" },
+  { label: "Two Voices", path: "/images/reverb_polaroid_3_v2.jpg" },
+  { label: "Talking Drums", path: "/images/band_drummers.jpg" },
+  { label: "The Drummer", path: "/images/band_talking_drum_bw.jpg" },
+  { label: "Keys and Bass", path: "/images/band_keys_bass.jpg" },
+  { label: "Strings", path: "/images/band_guitars_bw.jpg" },
+  { label: "Stage Portrait", path: "/images/about_award_portrait_v2.jpg" },
+  { label: "In Full Voice", path: "/images/about_yellow_studio_v2.jpg" },
+  { label: "Between Sets", path: "/images/stay_in_touch_bw_v2.jpg" },
   { label: "Reverb Poster", path: "/images/reverb_poster_v3.jpg" },
-  { label: "Live Concert 1", path: "/images/hero_bg_live.jpg" },
-  { label: "Reverb Polaroid 1", path: "/images/reverb_polaroid_1_v2.jpg" },
-  { label: "Reverb Polaroid 2", path: "/images/reverb_polaroid_2_v2.jpg" },
-  { label: "Reverb Polaroid 3", path: "/images/reverb_polaroid_3_v2.jpg" },
-  { label: "Stage Worship", path: "/images/stage_worship.jpg" },
-  { label: "Studio B&W", path: "/images/stay_in_touch_bw_v2.jpg" },
-  { label: "COZA Thumb", path: "/images/video_thumb_coza.jpg" },
-  { label: "Miracles Thumb", path: "/images/video_thumb_miracles.jpg" },
-  { label: "Hero Portrait", path: "/images/hero_portrait.jpg" },
 ];
 
 export default function AdminDashboardPage() {
@@ -68,7 +100,9 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(false);
 
   // Dashboard Data State
-  const [activeTab, setActiveTab] = useState("attendees");
+  const [activeTab, setActiveTab] = useState("overview");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [rail, setRail] = useState(false);
   const [attendees, setAttendees] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
   const [gallery, setGallery] = useState([]);
@@ -537,201 +571,239 @@ export default function AdminDashboardPage() {
   // ============================================================
   // AUTHENTICATED DASHBOARD VIEW
   // ============================================================
+  const counts = {
+    overview: null,
+    attendees: metrics.totalAttendees || attendees.length,
+    subscribers: metrics.totalSubscribers || subscribers.length,
+    gallery: gallery.length,
+    lyrics: lyrics.length,
+  };
+
+  const STAT_CARDS = [
+    { tab: "attendees", label: "Attendees", value: counts.attendees, icon: Users },
+    { tab: "subscribers", label: "Subscribers", value: counts.subscribers, icon: Mail },
+    { tab: "gallery", label: "Photos", value: counts.gallery, icon: Camera },
+    { tab: "lyrics", label: "Songs", value: counts.lyrics, icon: Music },
+  ];
+
+  const activeNav = NAV_ITEMS.find((item) => item.id === activeTab) || NAV_ITEMS[0];
+
+  const goToTab = (id) => {
+    setActiveTab(id);
+    setSidebarOpen(false);
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F88E14] selection:text-black">
-      
-      {/* Top Admin Header */}
-      <header className="bg-zinc-950 border-b border-zinc-800/80 px-4 sm:px-8 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="relative w-36 sm:w-44 h-9 block">
+    <div className="min-h-screen bg-black text-white selection:bg-[#F88E14] selection:text-black">
+
+      {/* Mobile drawer backdrop */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+        />
+      )}
+
+      {/* ============================================================ */}
+      {/* SIDEBAR NAVIGATION                                           */}
+      {/* ============================================================ */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 bg-zinc-950 border-r border-zinc-800/60 flex flex-col transition-all duration-200 ease-out lg:translate-x-0 ${
+          rail ? "lg:w-16" : "lg:w-60"
+        } w-60 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        {/* Brand */}
+        <div className={`h-16 flex items-center border-b border-zinc-800/60 ${rail ? "lg:justify-center lg:px-0" : ""} px-4 justify-between gap-2`}>
+          <Link href="/" className={`relative h-8 block ${rail ? "lg:w-8" : "w-32"} w-32`}>
             <Image
-              src="/images/logo_white_text.png"
+              src={rail ? "/icon.png" : "/images/logo_white_text.png"}
               alt="Minister Lilian Nneji"
               fill
-              className="object-contain"
+              sizes="128px"
+              className="object-contain object-left"
             />
           </Link>
-          <span className="hidden sm:inline-block text-xs uppercase tracking-widest font-bold px-2.5 py-1 rounded bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14]">
-            Portal Active
-          </span>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close menu"
+            className="lg:hidden p-1.5 text-zinc-500 hover:text-white cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Sections */}
+        <nav className="flex-grow overflow-y-auto py-3 px-2 space-y-0.5">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            const count = counts[item.id];
+            return (
+              <button
+                key={item.id}
+                onClick={() => goToTab(item.id)}
+                aria-current={isActive ? "page" : undefined}
+                title={rail ? item.label : undefined}
+                className={`relative w-full flex items-center gap-3 rounded-md py-2 text-sm transition-colors cursor-pointer text-left ${
+                  rail ? "lg:justify-center lg:px-0 px-3" : "px-3"
+                } ${
+                  isActive
+                    ? "bg-zinc-900 text-white font-medium"
+                    : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
+                }`}
+              >
+                {isActive && (
+                  <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-[#F88E14]" />
+                )}
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-[#F88E14]" : ""}`} />
+                <span className={`flex-grow truncate ${rail ? "lg:hidden" : ""}`}>{item.label}</span>
+                {count !== null && (
+                  <span className={`text-xs tabular-nums text-zinc-500 ${rail ? "lg:hidden" : ""}`}>
+                    {count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Sidebar footer */}
+        <div className="p-2 border-t border-zinc-800/60 space-y-0.5">
           <button
-            onClick={fetchDashboardData}
-            title="Refresh Data"
-            className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 transition-colors cursor-pointer"
+            onClick={() => setRail((v) => !v)}
+            title={rail ? "Expand sidebar" : "Collapse sidebar"}
+            className={`hidden lg:flex w-full items-center gap-3 rounded-md py-2 text-sm text-zinc-500 hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors cursor-pointer ${
+              rail ? "justify-center px-0" : "px-3"
+            }`}
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+            <PanelLeftClose className={`w-4 h-4 flex-shrink-0 transition-transform ${rail ? "rotate-180" : ""}`} />
+            <span className={rail ? "hidden" : "flex-grow text-left"}>Collapse</span>
           </button>
-          
-          <Link
-            href="/reverb"
-            target="_blank"
-            className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400 hover:text-[#F88E14] transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800"
-          >
-            <span>View /reverb</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
-
-          <Link
-            href="/gallery"
-            target="_blank"
-            className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400 hover:text-[#F88E14] transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800"
-          >
-            <span>View /gallery</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
-
-          <Link
-            href="/lyrics"
-            target="_blank"
-            className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400 hover:text-[#F88E14] transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800"
-          >
-            <span>View /lyrics</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
 
           <button
             onClick={() => setIsAuthenticated(false)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-red-950/60 hover:text-red-400 border border-zinc-800 cursor-pointer"
+            title={rail ? "Lock dashboard" : undefined}
+            className={`w-full flex items-center gap-3 rounded-md py-2 text-sm text-zinc-500 hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors cursor-pointer ${
+              rail ? "lg:justify-center lg:px-0 px-3" : "px-3"
+            }`}
           >
-            <LogOut className="w-3.5 h-3.5" />
-            <span>Lock</span>
+            <LogOut className="w-4 h-4 flex-shrink-0" />
+            <span className={rail ? "lg:hidden" : ""}>Lock</span>
           </button>
         </div>
-      </header>
+      </aside>
 
-      {/* Main Container */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        
-        {/* Title & Live Metrics Row */}
-        <div className="space-y-5">
-          <div>
-            <h1 className="font-fjalla text-3xl sm:text-4xl uppercase text-white font-bold tracking-tight">
-              Ministry Management & Content Portal
-            </h1>
-            <p className="text-zinc-400 text-xs sm:text-sm mt-1">
-              Live registrations for <strong>THE REVERB 5.0</strong>, subscribers, photo gallery catalog, and song lyrics CMS.
-            </p>
+      {/* ============================================================ */}
+      {/* CONTENT COLUMN                                               */}
+      {/* ============================================================ */}
+      <div className={`flex flex-col min-h-screen transition-all duration-200 ${rail ? "lg:pl-16" : "lg:pl-60"}`}>
+
+        {/* Topbar */}
+        <header className="sticky top-0 z-30 h-16 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/60 px-4 sm:px-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open menu"
+              className="lg:hidden p-2 -ml-2 rounded-md text-zinc-400 hover:text-white cursor-pointer"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <h1 className="text-base font-medium text-zinc-100 truncate">{activeNav.label}</h1>
           </div>
 
-          {/* 4 Metrics Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            {/* Card 1: Total Attendees */}
-            <div className="bg-zinc-950 p-4 sm:p-5 rounded-xl border border-zinc-800/80 shadow-md">
-              <div className="flex items-center justify-between text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Total Attendees</span>
-                <Users className="w-4 h-4 text-[#F88E14]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl sm:text-4xl font-fjalla font-bold text-white">
-                  {metrics.totalAttendees || attendees.length}
-                </span>
-                <span className="text-xs text-emerald-400 font-medium">Reverb 5.0</span>
-              </div>
+          <button
+            onClick={fetchDashboardData}
+            title="Refresh data"
+            className="p-2 rounded-md text-zinc-500 hover:text-zinc-100 hover:bg-zinc-900 transition-colors cursor-pointer flex-shrink-0"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+          </button>
+        </header>
+
+        {/* Main Container */}
+        <main className="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+        {/* ============================================================ */}
+        {/* OVERVIEW                                                     */}
+        {/* ============================================================ */}
+        {activeTab === "overview" && (
+          <div className="space-y-10">
+
+            {/* Stat cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {STAT_CARDS.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <button
+                    key={card.tab}
+                    onClick={() => goToTab(card.tab)}
+                    className="group text-left bg-zinc-950 p-4 rounded-lg border border-zinc-800/60 hover:border-zinc-700 hover:bg-zinc-900/40 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 text-zinc-500">
+                      <Icon className="w-3.5 h-3.5" />
+                      <span className="text-xs">{card.label}</span>
+                    </div>
+                    <div className="mt-2 flex items-end justify-between">
+                      <span className="text-3xl font-medium text-zinc-100 tabular-nums leading-none">
+                        {card.value}
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-[#F88E14] transition-colors" />
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Card 2: Subscribers */}
-            <div className="bg-zinc-950 p-4 sm:p-5 rounded-xl border border-zinc-800/80 shadow-md">
-              <div className="flex items-center justify-between text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Subscribers</span>
-                <Mail className="w-4 h-4 text-[#F88E14]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl sm:text-4xl font-fjalla font-bold text-white">
-                  {metrics.totalSubscribers || subscribers.length}
-                </span>
-                <span className="text-xs text-blue-400 font-medium">Audience</span>
-              </div>
-            </div>
+            {/* Quick actions */}
+            <section className="space-y-3">
+              <h2 className="text-xs uppercase tracking-wider text-zinc-500">Quick actions</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  onClick={() => { setActiveTab("gallery"); handleOpenAddPhoto(); }}
+                  className="flex items-center gap-3 p-4 rounded-lg border border-zinc-800/60 bg-zinc-950 hover:bg-zinc-900/40 hover:border-zinc-700 transition-colors cursor-pointer text-left"
+                >
+                  <Plus className="w-4 h-4 text-[#F88E14] flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-zinc-200">Add a gallery photo</p>
+                    <p className="text-xs text-zinc-500 mt-0.5">Publish to the public gallery</p>
+                  </div>
+                </button>
 
-            {/* Card 3: Gallery Photos */}
-            <div className="bg-zinc-950 p-4 sm:p-5 rounded-xl border border-zinc-800/80 shadow-md">
-              <div className="flex items-center justify-between text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Photo Gallery</span>
-                <Camera className="w-4 h-4 text-[#F88E14]" />
+                <button
+                  onClick={() => { setActiveTab("lyrics"); handleOpenAddLyrics(); }}
+                  className="flex items-center gap-3 p-4 rounded-lg border border-zinc-800/60 bg-zinc-950 hover:bg-zinc-900/40 hover:border-zinc-700 transition-colors cursor-pointer text-left"
+                >
+                  <Plus className="w-4 h-4 text-[#F88E14] flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-zinc-200">Add a song</p>
+                    <p className="text-xs text-zinc-500 mt-0.5">Add lyrics or a new release</p>
+                  </div>
+                </button>
               </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl sm:text-4xl font-fjalla font-bold text-white">
-                  {gallery.length}
-                </span>
-                <span className="text-xs text-amber-400 font-medium">Photos</span>
-              </div>
-            </div>
+            </section>
 
-            {/* Card 4: Song Lyrics */}
-            <div className="bg-zinc-950 p-4 sm:p-5 rounded-xl border border-zinc-800/80 shadow-md">
-              <div className="flex items-center justify-between text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Song Lyrics</span>
-                <Music className="w-4 h-4 text-[#F88E14]" />
+            {/* Live site links */}
+            <section className="space-y-3">
+              <h2 className="text-xs uppercase tracking-wider text-zinc-500">View live site</h2>
+              <div className="rounded-lg border border-zinc-800/60 bg-zinc-950 divide-y divide-zinc-800/60">
+                {PUBLIC_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    className="flex items-center justify-between px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-900/40 hover:text-white transition-colors group first:rounded-t-lg last:rounded-b-lg"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span>{link.label}</span>
+                      <span className="text-xs text-zinc-600">{link.href}</span>
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5 text-zinc-600 group-hover:text-[#F88E14] transition-colors" />
+                  </Link>
+                ))}
               </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl sm:text-4xl font-fjalla font-bold text-white">
-                  {lyrics.length}
-                </span>
-                <span className="text-xs text-purple-400 font-medium">Catalog</span>
-              </div>
-            </div>
-
+            </section>
           </div>
-        </div>
-
-        {/* 4 Navigation Tabs */}
-        <div className="flex items-center gap-2 sm:gap-3 border-b border-zinc-800 pb-3 overflow-x-auto">
-          {/* Tab 1: Attendees */}
-          <button
-            onClick={() => setActiveTab("attendees")}
-            className={`px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-              activeTab === "attendees"
-                ? "bg-[#F88E14] text-black shadow-md"
-                : "text-zinc-400 hover:text-white bg-zinc-900"
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            <span>Reverb Attendees ({attendees.length})</span>
-          </button>
-
-          {/* Tab 2: Subscribers */}
-          <button
-            onClick={() => setActiveTab("subscribers")}
-            className={`px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-              activeTab === "subscribers"
-                ? "bg-[#F88E14] text-black shadow-md"
-                : "text-zinc-400 hover:text-white bg-zinc-900"
-            }`}
-          >
-            <Mail className="w-4 h-4" />
-            <span>Subscribers ({subscribers.length})</span>
-          </button>
-
-          {/* Tab 3: Gallery */}
-          <button
-            onClick={() => setActiveTab("gallery")}
-            className={`px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-              activeTab === "gallery"
-                ? "bg-[#F88E14] text-black shadow-md"
-                : "text-zinc-400 hover:text-white bg-zinc-900"
-            }`}
-          >
-            <Camera className="w-4 h-4" />
-            <span>Gallery Manager ({gallery.length})</span>
-          </button>
-
-          {/* Tab 4: Lyrics */}
-          <button
-            onClick={() => setActiveTab("lyrics")}
-            className={`px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-2 flex-shrink-0 cursor-pointer ${
-              activeTab === "lyrics"
-                ? "bg-[#F88E14] text-black shadow-md"
-                : "text-zinc-400 hover:text-white bg-zinc-900"
-            }`}
-          >
-            <Music className="w-4 h-4" />
-            <span>Lyrics Manager ({lyrics.length})</span>
-          </button>
-        </div>
+        )}
 
         {/* ============================================================ */}
         {/* TAB 1: REVERB ATTENDEES TABLE                                */}
@@ -769,7 +841,7 @@ export default function AdminDashboardPage() {
                 {/* Export CSV Button */}
                 <button
                   onClick={exportAttendeesCSV}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md flex-shrink-0 cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-900 text-sm rounded-md transition-colors flex-shrink-0 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Export CSV</span>
@@ -821,8 +893,8 @@ export default function AdminDashboardPage() {
                               <span
                                 className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                                   attendee.gender?.toLowerCase() === "female"
-                                    ? "bg-pink-500/15 text-pink-400 border border-pink-500/30"
-                                    : "bg-blue-500/15 text-blue-400 border border-blue-500/30"
+                                    ? "text-zinc-400"
+                                    : "text-zinc-400"
                                 }`}
                               >
                                 {attendee.gender}
@@ -846,7 +918,7 @@ export default function AdminDashboardPage() {
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       title="Chat on WhatsApp"
-                                      className="p-1 rounded bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-colors"
+                                      className="p-1 rounded text-emerald-500/80 hover:text-emerald-400 transition-colors"
                                     >
                                       <MessageSquare className="w-3 h-3" />
                                     </a>
@@ -868,7 +940,7 @@ export default function AdminDashboardPage() {
                                 title="Click to toggle check-in"
                                 className={`px-2.5 py-1 rounded text-xs font-bold inline-flex items-center gap-1 transition-colors cursor-pointer ${
                                   attendee.checkedIn
-                                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                                    ? "text-emerald-400/90"
                                     : "bg-zinc-800 text-zinc-500 hover:text-zinc-300"
                                 }`}
                               >
@@ -910,11 +982,11 @@ export default function AdminDashboardPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm text-zinc-400">
-                Audience signed up through the <strong>"STAY IN TOUCH"</strong> community form.
+                Audience signed up through the <strong>Stay in Touch</strong> form.
               </p>
               <button
                 onClick={exportSubscribersCSV}
-                className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md cursor-pointer"
+                className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-900 text-sm rounded-md transition-colors cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Export Subscribers CSV</span>
@@ -970,7 +1042,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <div>
-                <h3 className="font-fjalla text-xl uppercase font-bold text-white tracking-wide">
+                <h3 className="text-lg font-medium text-zinc-100">
                   Photo Gallery Catalog ({gallery.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
@@ -994,7 +1066,7 @@ export default function AdminDashboardPage() {
                 {/* Add Photo Button */}
                 <button
                   onClick={handleOpenAddPhoto}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-sm font-medium rounded-md transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Photo</span>
@@ -1017,13 +1089,13 @@ export default function AdminDashboardPage() {
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-black/80 text-[#F88E14] border border-[#F88E14]/30">
+                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-xs bg-black/75 text-zinc-300 backdrop-blur-sm">
                         {photo.category}
                       </span>
                     </div>
 
                     <div className="p-4 space-y-1.5">
-                      <h4 className="font-fjalla text-base font-bold text-white uppercase tracking-wide line-clamp-1">
+                      <h4 className="text-sm font-medium text-zinc-100 line-clamp-1">
                         {photo.title}
                       </h4>
                       {photo.caption && (
@@ -1045,7 +1117,7 @@ export default function AdminDashboardPage() {
                       onClick={() => handleOpenEditPhoto(photo)}
                       className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
                     >
-                      <Edit className="w-3.5 h-3.5 text-[#F88E14]" />
+                      <Edit className="w-3.5 h-3.5" />
                       <span>Edit</span>
                     </button>
 
@@ -1070,7 +1142,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <div>
-                <h3 className="font-fjalla text-xl uppercase font-bold text-white tracking-wide">
+                <h3 className="text-lg font-medium text-zinc-100">
                   Song Lyrics Catalog ({lyrics.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
@@ -1094,7 +1166,7 @@ export default function AdminDashboardPage() {
                 {/* Add Song Button */}
                 <button
                   onClick={handleOpenAddLyrics}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-sm font-medium rounded-md transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Song Lyrics</span>
@@ -1118,11 +1190,11 @@ export default function AdminDashboardPage() {
                 <tbody className="divide-y divide-zinc-900 text-zinc-300">
                   {filteredLyrics.map((song) => (
                     <tr key={song.id} className="hover:bg-zinc-900/50 transition-colors">
-                      <td className="py-3.5 px-4 font-fjalla text-base font-bold text-white uppercase tracking-wide">
+                      <td className="py-3.5 px-4 text-sm font-medium text-zinc-100">
                         {song.title}
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#F88E14]/15 text-[#F88E14] border border-[#F88E14]/30">
+                        <span className="px-2 py-0.5 rounded text-xs text-zinc-400 bg-zinc-800/70">
                           {song.category}
                         </span>
                       </td>
@@ -1138,7 +1210,7 @@ export default function AdminDashboardPage() {
                             href={song.youtubeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#F88E14] hover:underline flex items-center gap-1"
+                            className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
                           >
                             <span>Watch</span>
                             <ExternalLink className="w-3 h-3" />
@@ -1154,7 +1226,7 @@ export default function AdminDashboardPage() {
                             className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer"
                             title="Preview lyrics"
                           >
-                            <Eye className="w-3.5 h-3.5 text-blue-400" />
+                            <Eye className="w-3.5 h-3.5" />
                             <span>Preview</span>
                           </button>
 
@@ -1163,7 +1235,7 @@ export default function AdminDashboardPage() {
                             className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer"
                             title="Edit lyrics"
                           >
-                            <Edit className="w-3.5 h-3.5 text-[#F88E14]" />
+                            <Edit className="w-3.5 h-3.5" />
                             <span>Edit</span>
                           </button>
 
@@ -1184,7 +1256,8 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-      </main>
+        </main>
+      </div>
 
       {/* ============================================================ */}
       {/* MODAL: ADD / EDIT PHOTO                                      */}
@@ -1193,7 +1266,7 @@ export default function AdminDashboardPage() {
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl animate-in fade-in">
             <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-              <h3 className="font-fjalla text-xl font-bold uppercase text-white tracking-wide">
+              <h3 className="text-lg font-medium text-zinc-100">
                 {editingPhoto ? "Edit Photo Details" : "Add New Gallery Photo"}
               </h3>
               <button
@@ -1306,7 +1379,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-md text-sm font-medium cursor-pointer"
                 >
                   {editingPhoto ? "Save Changes" : "Add to Gallery"}
                 </button>
@@ -1323,7 +1396,7 @@ export default function AdminDashboardPage() {
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-5 shadow-2xl animate-in fade-in my-8">
             <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-              <h3 className="font-fjalla text-xl font-bold uppercase text-white tracking-wide">
+              <h3 className="text-lg font-medium text-zinc-100">
                 {editingLyrics ? "Edit Song Lyrics" : "Add New Song Lyrics"}
               </h3>
               <button
@@ -1431,7 +1504,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-md text-sm font-medium cursor-pointer"
                 >
                   {editingLyrics ? "Save Changes" : "Publish Song Lyrics"}
                 </button>
@@ -1452,7 +1525,7 @@ export default function AdminDashboardPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#F88E14]">
                   {previewingLyrics.category} • {previewingLyrics.releaseYear}
                 </span>
-                <h3 className="font-fjalla text-2xl font-bold uppercase text-white tracking-wide">
+                <h3 className="text-lg font-medium text-zinc-100">
                   {previewingLyrics.title}
                 </h3>
               </div>

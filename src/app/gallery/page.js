@@ -1,36 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 import {
-  Sparkles,
   Camera,
   X,
   ChevronLeft,
   ChevronRight,
-  Calendar,
-  Tag,
   Maximize2,
-  ExternalLink,
-  Award
+  Play,
+  Pause,
 } from "lucide-react";
 
 const CATEGORIES = [
   "All",
   "Live Concerts",
   "The Reverb",
-  "Studio & Portraits",
-  "Award Moments"
+  "Praise Team & Band",
+  "Portraits",
 ];
+
+const SPAN_RATIO = {
+  wide: "aspect-[3/2]",
+  tall: "aspect-[3/4]",
+  normal: "aspect-[4/3]",
+};
+
+const LIGHTBOX_AUTOPLAY_MS = 4200;
 
 export default function GalleryPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const thumbRailRef = useRef(null);
 
   useEffect(() => {
     async function loadGallery() {
@@ -50,75 +57,93 @@ export default function GalleryPage() {
     loadGallery();
   }, []);
 
-  // Filtered items based on selected category
   const filteredItems = items.filter((item) => {
     if (activeCategory === "All") return true;
     return item.category?.toLowerCase() === activeCategory.toLowerCase();
   });
 
-  // Lightbox keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (lightboxIndex === null) return;
-      if (e.key === "Escape") setLightboxIndex(null);
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  });
-
-  const handleOpenLightbox = (index) => {
-    setLightboxIndex(index);
-  };
-
-  const handleCloseLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxIndex(null);
-  };
+    setPlaying(false);
+  }, []);
 
-  const handleNext = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => (prev + 1) % filteredItems.length);
-  };
+  const step = useCallback(
+    (direction) => {
+      setLightboxIndex((prev) => {
+        if (prev === null || filteredItems.length === 0) return prev;
+        return (prev + direction + filteredItems.length) % filteredItems.length;
+      });
+    },
+    [filteredItems.length]
+  );
 
-  const handlePrev = () => {
+  // Keyboard navigation
+  useEffect(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
-  };
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === " ") {
+        e.preventDefault();
+        setPlaying((p) => !p);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [lightboxIndex, closeLightbox, step]);
+
+  // Lock body scroll while the lightbox is open
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [lightboxIndex]);
+
+  // Slideshow autoplay
+  useEffect(() => {
+    if (!playing || lightboxIndex === null) return;
+    const id = setInterval(() => step(1), LIGHTBOX_AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [playing, lightboxIndex, step]);
+
+  // Keep the active thumbnail in view
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const rail = thumbRailRef.current;
+    const active = rail?.querySelector('[data-active="true"]');
+    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [lightboxIndex]);
 
   const currentItem = lightboxIndex !== null ? filteredItems[lightboxIndex] : null;
 
   return (
     <div className="min-h-screen bg-[#070709] text-white flex flex-col selection:bg-[#F88E14] selection:text-black">
-      {/* Global Navbar */}
       <Navbar />
 
-      {/* Main Content Area */}
       <main className="flex-grow pt-28 pb-20">
-        
+
         {/* ============================================================ */}
-        {/* HERO HEADER SECTION                                         */}
+        {/* HEADER                                                       */}
         {/* ============================================================ */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto text-center space-y-5 overflow-hidden">
-          {/* Ambient Gold Lighting Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
+          <div className="animate-breathe absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14] text-xs uppercase font-bold tracking-widest">
-            <Camera className="w-3.5 h-3.5 text-[#F88E14]" />
-            <span>Visual Archive & Ministry Moments</span>
-          </div>
+          <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-white font-bold tracking-tight">
+            MOMENTS OF <span className="text-gold-gradient">GLORY &amp; PRAISE</span>
+          </Reveal>
 
-          <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-white font-bold tracking-tight">
-            MOMENTS OF <span className="text-gold-gradient">GLORY & PRAISE</span>
-          </h1>
+          <Reveal as="p" variant="up" delay={140} className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
+            Step into the visual journey of Minister Lilian Nneji. Live praise nights, the annual Reverb
+            gathering, the praise team and band, and the moments in between.
+          </Reveal>
 
-          <p className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
-            Step into the visual journey of Minister Lilian Nneji. From electrifying praise concerts and intimate worship encounters to award celebrations and the annual Reverb gathering.
-          </p>
-
-          {/* Category Filter Tabs */}
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <Reveal variant="up" delay={240} className="pt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -126,171 +151,181 @@ export default function GalleryPage() {
                   key={cat}
                   onClick={() => {
                     setActiveCategory(cat);
-                    setLightboxIndex(null);
+                    closeLightbox();
                   }}
-                  className={`px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none transition-all duration-200 cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "bg-[#F88E14] text-black shadow-lg scale-105 font-bold"
-                      : "bg-zinc-900/90 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800"
+                      : "bg-zinc-900/90 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800 hover:-translate-y-0.5"
                   }`}
                 >
                   {cat}
                 </button>
               );
             })}
-          </div>
+          </Reveal>
         </section>
 
         {/* ============================================================ */}
-        {/* GALLERY GRID SECTION                                         */}
+        {/* MASONRY GRID                                                 */}
         {/* ============================================================ */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="aspect-[4/3] bg-zinc-900 rounded-lg" />
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+              {["aspect-[3/2]", "aspect-[4/3]", "aspect-[3/4]", "aspect-[4/3]", "aspect-[3/2]", "aspect-[3/4]"].map((ratio, i) => (
+                <div key={i} className={`${ratio} bg-zinc-900 animate-pulse mb-6 break-inside-avoid`} />
               ))}
             </div>
           ) : filteredItems.length === 0 ? (
-            <div className="text-center py-20 bg-zinc-950 rounded-2xl border border-zinc-900 p-8 space-y-4">
+            <div className="text-center py-20 bg-zinc-950 border border-zinc-900 p-8 space-y-4">
               <Camera className="w-12 h-12 text-zinc-600 mx-auto" />
               <h3 className="text-xl font-bold font-fjalla uppercase text-zinc-300">
                 No Photos Found in this Category
               </h3>
               <p className="text-sm text-zinc-500">
-                Switch back to "All" or check back shortly for new uploads.
+                Switch back to &ldquo;All&rdquo; or check back shortly for new uploads.
               </p>
               <button
                 onClick={() => setActiveCategory("All")}
-                className="gold-button px-6 py-2.5 rounded-none text-xs uppercase tracking-wider"
+                className="gold-button px-6 py-2.5 rounded-none text-xs uppercase tracking-wider cursor-pointer"
               >
                 View All Photos
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 sm:gap-6">
               {filteredItems.map((item, idx) => (
-                <div
+                <Reveal
                   key={item.id || idx}
-                  onClick={() => handleOpenLightbox(idx)}
-                  className="group relative aspect-[4/3] sm:aspect-[16/11] rounded-none overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#F88E14]/60 transition-all duration-500 cursor-pointer shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                  variant="up"
+                  delay={(idx % 3) * 90}
+                  onClick={() => setLightboxIndex(idx)}
+                  className="group relative block w-full mb-5 sm:mb-6 break-inside-avoid overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#F88E14]/60 transition-colors duration-500 cursor-pointer shadow-xl"
                 >
-                  {/* Photo */}
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
+                  <div className={`relative w-full ${SPAN_RATIO[item.span] || SPAN_RATIO.normal}`}>
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-[1.07] transition-transform duration-[1100ms] ease-out"
+                    />
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent opacity-85 group-hover:opacity-96 transition-opacity duration-500" />
 
-                  {/* Category Pill Tag (Top-left) */}
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
-                      {item.category}
-                    </span>
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
+                        {item.category}
+                      </span>
+                    </div>
+
+                    <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                      <Maximize2 className="w-4 h-4 text-[#F88E14]" />
+                    </div>
+
+                    <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 space-y-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="font-fjalla text-lg sm:text-xl font-bold text-white uppercase tracking-wide line-clamp-1 group-hover:text-[#F88E14] transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      {item.caption && (
+                        <p className="text-xs text-zinc-300 line-clamp-2 leading-relaxed max-h-0 opacity-0 group-hover:max-h-16 group-hover:opacity-100 transition-all duration-500">
+                          {item.caption}
+                        </p>
+                      )}
+                    </div>
                   </div>
-
-                  {/* Expand Zoom Icon (Top-right) */}
-                  <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-4 h-4 text-[#F88E14]" />
-                  </div>
-
-                  {/* Caption & Title (Bottom) */}
-                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 space-y-1 transform translate-y-1 group-hover:translate-y-0 transition-transform">
-                    <h3 className="font-fjalla text-lg sm:text-xl font-bold text-white uppercase tracking-wide line-clamp-1 group-hover:text-[#F88E14] transition-colors">
-                      {item.title}
-                    </h3>
-                    {item.caption && (
-                      <p className="text-xs text-zinc-300 line-clamp-2 font-normal leading-relaxed">
-                        {item.caption}
-                      </p>
-                    )}
-                    {item.date && (
-                      <div className="flex items-center gap-1.5 pt-1 text-[11px] text-zinc-400">
-                        <Calendar className="w-3 h-3 text-zinc-500" />
-                        <span>{new Date(item.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           )}
         </section>
-
       </main>
 
       {/* ============================================================ */}
-      {/* FULLSCREEN LIGHTBOX MODAL                                    */}
+      {/* LIGHTBOX SLIDESHOW                                           */}
       {/* ============================================================ */}
       {lightboxIndex !== null && currentItem && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-6 animate-in fade-in duration-200"
-          onClick={handleCloseLightbox}
+          className="fixed inset-0 z-50 bg-black/96 backdrop-blur-2xl flex flex-col p-4 sm:p-6"
+          onClick={closeLightbox}
         >
-          {/* Top Bar: Counter & Close */}
+          {/* Top bar */}
           <div
             className="flex items-center justify-between max-w-7xl w-full mx-auto pb-4 z-20"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3">
-              <span className="text-xs sm:text-sm font-mono font-bold text-zinc-400 bg-zinc-900 px-3 py-1 rounded">
-                {lightboxIndex + 1} / {filteredItems.length}
+              <span className="text-xs sm:text-sm font-mono font-bold text-zinc-400 bg-zinc-900 px-3 py-1">
+                {String(lightboxIndex + 1).padStart(2, "0")} / {String(filteredItems.length).padStart(2, "0")}
               </span>
-              <span className="px-2.5 py-1 bg-[#F88E14]/15 border border-[#F88E14]/30 text-[#F88E14] text-[11px] uppercase font-bold tracking-wider rounded">
+              <span className="px-2.5 py-1 bg-[#F88E14]/15 border border-[#F88E14]/30 text-[#F88E14] text-[11px] uppercase font-bold tracking-wider">
                 {currentItem.category}
               </span>
             </div>
 
-            <button
-              onClick={handleCloseLightbox}
-              className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
-              aria-label="Close Lightbox"
-            >
-              <X className="w-6 h-6" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setPlaying((p) => !p)}
+                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-black hover:bg-[#F88E14] transition-colors cursor-pointer"
+                aria-label={playing ? "Pause slideshow" : "Play slideshow"}
+              >
+                {playing ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+              </button>
+              <button
+                onClick={closeLightbox}
+                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
-          {/* Middle Stage: Image & Previous / Next Controls */}
+          {/* Autoplay progress */}
+          {playing && (
+            <div className="max-w-7xl w-full mx-auto h-0.5 bg-white/10 mb-3 overflow-hidden">
+              <div
+                key={lightboxIndex}
+                className="slide-progress h-full bg-[#F88E14]"
+                style={{ "--slide-duration": `${LIGHTBOX_AUTOPLAY_MS}ms` }}
+              />
+            </div>
+          )}
+
+          {/* Stage */}
           <div
-            className="relative flex-grow flex items-center justify-center max-w-6xl w-full mx-auto overflow-hidden my-auto"
+            className="relative flex-grow flex items-center justify-center max-w-6xl w-full mx-auto min-h-0"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Previous Button */}
             <button
-              onClick={handlePrev}
-              className="absolute left-2 sm:left-4 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-all cursor-pointer shadow-2xl"
-              aria-label="Previous Image"
+              onClick={() => step(-1)}
+              className="absolute left-0 sm:left-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              aria-label="Previous image"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            {/* Displayed Image */}
-            <div className="relative w-full h-[60vh] sm:h-[70vh] max-w-5xl">
+            <div key={currentItem.id} data-reveal="scale" data-revealed="true" className="relative w-full h-full">
               <Image
                 src={currentItem.imageUrl}
                 alt={currentItem.title}
                 fill
-                priority
+                sizes="90vw"
+                quality={82}
                 className="object-contain"
               />
             </div>
 
-            {/* Next Button */}
             <button
-              onClick={handleNext}
-              className="absolute right-2 sm:right-4 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-all cursor-pointer shadow-2xl"
-              aria-label="Next Image"
+              onClick={() => step(1)}
+              className="absolute right-0 sm:right-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              aria-label="Next image"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Bottom Bar: Title & Caption */}
+          {/* Caption */}
           <div
             className="max-w-4xl w-full mx-auto text-center pt-4 z-20 space-y-1"
             onClick={(e) => e.stopPropagation()}
@@ -299,20 +334,38 @@ export default function GalleryPage() {
               {currentItem.title}
             </h2>
             {currentItem.caption && (
-              <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl mx-auto font-normal">
-                {currentItem.caption}
-              </p>
+              <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl mx-auto">{currentItem.caption}</p>
             )}
-            {currentItem.date && (
-              <p className="text-[11px] text-zinc-500 pt-1">
-                Captured on {new Date(currentItem.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-              </p>
-            )}
+          </div>
+
+          {/* Thumbnail rail */}
+          <div
+            ref={thumbRailRef}
+            className="max-w-5xl w-full mx-auto mt-4 flex gap-2 overflow-x-auto pb-1 z-20 [scrollbar-width:thin]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {filteredItems.map((item, idx) => {
+              const isActive = idx === lightboxIndex;
+              return (
+                <button
+                  key={item.id || idx}
+                  data-active={isActive ? "true" : "false"}
+                  onClick={() => setLightboxIndex(idx)}
+                  aria-label={`Show ${item.title}`}
+                  className={`relative flex-shrink-0 w-16 sm:w-20 aspect-[4/3] overflow-hidden border transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? "border-[#F88E14] opacity-100"
+                      : "border-transparent opacity-40 hover:opacity-80"
+                  }`}
+                >
+                  <Image src={item.imageUrl} alt={item.title} fill sizes="90px" className="object-cover" />
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Global Footer */}
       <Footer />
     </div>
   );

@@ -298,4 +298,219 @@ code, kbd, samp, pre, .font-mono {
   animation: mobileDrawerOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ============================================================ */
+/* SCROLL REVEAL SYSTEM                                         */
+/* Driven by <Reveal>, which flips data-revealed once the       */
+/* element intersects the viewport.                             */
+/* ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="up"] { transform: translate3d(0, 34px, 0); }
+[data-reveal="down"] { transform: translate3d(0, -28px, 0); }
+[data-reveal="left"] { transform: translate3d(-44px, 0, 0); }
+[data-reveal="right"] { transform: translate3d(44px, 0, 0); }
+[data-reveal="scale"] { transform: scale(0.93); }
+[data-reveal="zoom"] { transform: scale(1.08); }
+[data-reveal="blur"] { transform: translate3d(0, 22px, 0); filter: blur(14px); }
+[data-reveal="none"] { transform: none; }
+
+[data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Curtain wipe used on section headings.
+   The clip lives on an inner span — clipping the observed element itself
+   zeroes its intersection ratio and the observer never fires. */
+[data-reveal="wipe"] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="wipe"] > .reveal-wipe {
+  display: block;
+  clip-path: inset(-12% 100% -12% 0);
+  transition: clip-path 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="wipe"][data-revealed="true"] > .reveal-wipe {
+  clip-path: inset(-12% -6% -12% 0);
+}
+
+/* ============================================================ */
+/* HERO SLIDESHOW                                               */
+/* ============================================================ */
+@keyframes kenBurns {
+  0% { transform: scale(1.04) translate3d(0, 0, 0); }
+  100% { transform: scale(1.16) translate3d(0, -1.2%, 0); }
+}
+
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+}
+
+.hero-slide[data-active="true"] {
+  opacity: 1;
+}
+
+.hero-slide[data-active="true"] .hero-slide-img {
+  animation: kenBurns 9s ease-out forwards;
+}
+
+/* Progress bar on the active slide indicator */
+@keyframes slideProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.slide-progress {
+  transform-origin: left center;
+  animation: slideProgress var(--slide-duration, 6000ms) linear forwards;
+}
+
+/* ============================================================ */
+/* AMBIENT MOTION                                               */
+/* ============================================================ */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-130%) skewX(-18deg); }
+  100% { transform: translateX(330%) skewX(-18deg); }
+}
+
+.shimmer-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+  pointer-events: none;
+}
+
+.shimmer-sweep:hover::after {
+  animation: shimmerSweep 0.9s ease-out;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll var(--marquee-duration, 38s) linear infinite;
+}
+
+.marquee-host:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-16px, 14px, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.toast-enter {
+  animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scrollCue {
+  0%, 100% { transform: translateY(0); opacity: 0.35; }
+  50% { transform: translateY(9px); opacity: 1; }
+}
+
+.animate-scroll-cue {
+  animation: scrollCue 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.12); opacity: 0.85; }
+}
+
+.animate-breathe {
+  animation: breathe 7s ease-in-out infinite;
+}
+
+/* Animated underline for links / tabs */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: var(--gold-gradient);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after,
+.link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ============================================================ */
+/* ACCESSIBILITY: honour reduced-motion                         */
+/* ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal],
+  [data-reveal="wipe"] > .reveal-wipe {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .hero-slide {
+    transition: opacity 0.3s linear;
+  }
+
+  .hero-slide[data-active="true"] .hero-slide-img,
+  .marquee-track,
+  .slide-progress,
+  .toast-enter,
+  .animate-scroll-cue,
+  .animate-breathe,
+  .animate-float,
+  .animate-gold-pulse,
+  .audio-bar-1,
+  .audio-bar-2,
+  .audio-bar-3,
+  .audio-bar-4,
+  .audio-bar-5 {
+    animation: none !important;
+  }
+
+  .shimmer-sweep:hover::after {
+    animation: none !important;
+  }
+}
+
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -93,19 +94,22 @@ export default function Footer() {
 
         {/* Yellow Social Icons Row matching Screenshot 3 */}
         <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#F88E14] pt-2">
-          {socialLinks.map((social) => {
+          {socialLinks.map((social, idx) => {
             const Icon = social.icon;
             return (
-              <a
+              <Reveal
                 key={social.name}
+                as="a"
+                variant="up"
+                delay={idx * 60}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="hover:text-white transition-colors hover:scale-125 duration-200"
+                className="hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-300"
               >
                 <Icon className="w-5 h-5" />
-              </a>
+              </Reveal>
             );
           })}
         </div>
@@ -117,7 +121,6 @@ export default function Footer() {
           <Link href="/#music" className="hover:text-[#F88E14] transition-colors">Music</Link>
           <Link href="/lyrics" className="hover:text-[#F88E14] transition-colors">Lyrics</Link>
           <Link href="/gallery" className="hover:text-[#F88E14] transition-colors">Gallery</Link>
-          <Link href="/#events" className="hover:text-[#F88E14] transition-colors">Events</Link>
           <Link href="/reverb" className="hover:text-[#F88E14] transition-colors text-white font-bold">The Reverb</Link>
         </div>
 

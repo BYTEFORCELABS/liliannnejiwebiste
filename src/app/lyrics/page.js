@@ -1,21 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import {
-  Music,
-  Search,
-  Copy,
-  Check,
-  Play,
-  ExternalLink,
-  Sparkles,
-  Disc,
-  Radio,
-  Share2
-} from "lucide-react";
+import Toast from "@/components/Toast";
+import { Music, Search, Copy, Play, X, ExternalLink } from "lucide-react";
 
 const CATEGORIES = [
   "All",
@@ -25,13 +14,27 @@ const CATEGORIES = [
   "Thanksgiving"
 ];
 
+function youTubeId(url) {
+  if (!url) return null;
+  const match = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
 export default function LyricsPage() {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedSongId, setSelectedSongId] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [nowPlayingId, setNowPlayingId] = useState(null);
+
+  const closeToast = useCallback(() => setToast(null), []);
+
+  const selectSong = (id) => {
+    setSelectedSongId(id);
+    setNowPlayingId(null);
+  };
 
   useEffect(() => {
     async function loadLyrics() {
@@ -71,17 +74,20 @@ export default function LyricsPage() {
   });
 
   const selectedSong = songs.find((s) => s.id === selectedSongId) || filteredSongs[0] || null;
+  const videoId = youTubeId(selectedSong?.youtubeUrl);
+  const isPlaying = Boolean(selectedSong) && nowPlayingId === selectedSong.id;
+  const hasLyrics = Boolean(selectedSong?.lyrics?.trim());
 
   // Copy lyrics to clipboard
   const handleCopyLyrics = async () => {
     if (!selectedSong) return;
+    const fullText = `${selectedSong.title} - Minister Lilian Nneji\nAlbum: ${selectedSong.album} (${selectedSong.releaseYear})\n\n${selectedSong.lyrics}`;
     try {
-      const fullText = `${selectedSong.title} - Minister Lilian Nneji\nAlbum: ${selectedSong.album} (${selectedSong.releaseYear})\n\n${selectedSong.lyrics}`;
       await navigator.clipboard.writeText(fullText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setToast({ message: `"${selectedSong.title}" lyrics copied to your clipboard.` });
     } catch (err) {
       console.error("Copy failed:", err);
+      setToast({ message: "Couldn't copy the lyrics. Please select and copy manually." });
     }
   };
 
@@ -100,18 +106,12 @@ export default function LyricsPage() {
           {/* Ambient Lighting */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14] text-xs uppercase font-bold tracking-widest">
-            <Music className="w-3.5 h-3.5 text-[#F88E14]" />
-            <span>Spiritual Anthems & Song Catalog</span>
-          </div>
-
           <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-white font-bold tracking-tight">
             WORSHIP & PRAISE <span className="text-gold-gradient">LYRICS</span>
           </h1>
 
           <p className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
-            Sing along, memorize prophetic worship chants, and lift your praise with official lyrics to Minister Lilian Nneji's spirit-filled songs and kingdom anthems.
+            Browse Minister Lilian Nneji&rsquo;s official song catalogue. Play any release right here on the page, and sing along with the lyrics as they are published.
           </p>
 
           {/* Search & Category Filter Controls */}
@@ -121,7 +121,7 @@ export default function LyricsPage() {
               <Search className="w-5 h-5 text-zinc-500 absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search song title, album, or words inside lyrics..."
+                placeholder="Search by song title, release, or words inside the lyrics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3.5 bg-zinc-950/90 border border-zinc-800 rounded-none text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14] shadow-xl"
@@ -200,7 +200,7 @@ export default function LyricsPage() {
                     return (
                       <div
                         key={song.id}
-                        onClick={() => setSelectedSongId(song.id)}
+                        onClick={() => selectSong(song.id)}
                         className={`p-4 rounded-none cursor-pointer transition-all duration-200 border text-left ${
                           isSelected
                             ? "bg-zinc-900 border-[#F88E14] shadow-lg translate-x-1"
@@ -240,7 +240,7 @@ export default function LyricsPage() {
               </div>
 
               {/* Right Column: Interactive Lyrics Display */}
-              <div className="lg:col-span-8 bg-zinc-950 border border-zinc-800/90 rounded-none p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+              <div className="lg:col-span-8 bg-zinc-950 border border-zinc-800/90 rounded-none p-6 sm:p-10 shadow-2xl relative">
                 {selectedSong ? (
                   <div className="space-y-8 relative z-10">
                     
@@ -259,49 +259,103 @@ export default function LyricsPage() {
                           {selectedSong.title}
                         </h2>
                         <p className="text-xs sm:text-sm text-zinc-400 font-medium">
-                          Written & Performed by <strong className="text-white">Minister Lilian Nneji</strong> • Album: <strong className="text-zinc-300">{selectedSong.album}</strong>
+                          Written & Performed by <strong className="text-white">Minister Lilian Nneji</strong> • Release: <strong className="text-zinc-300">{selectedSong.album}</strong>
                         </p>
                       </div>
 
                       {/* Action Buttons */}
                       <div className="flex items-center gap-3 flex-shrink-0">
                         {/* Copy Lyrics Button */}
-                        <button
-                          onClick={handleCopyLyrics}
-                          className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs uppercase font-bold tracking-wider rounded-none text-zinc-200 transition-colors shadow cursor-pointer"
-                        >
-                          {copied ? (
-                            <>
-                              <Check className="w-4 h-4 text-emerald-400" />
-                              <span className="text-emerald-400">Copied!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4 text-[#F88E14]" />
-                              <span>Copy Lyrics</span>
-                            </>
-                          )}
-                        </button>
-
-                        {/* Watch on YouTube link */}
-                        {selectedSong.youtubeUrl && (
-                          <a
-                            href={selectedSong.youtubeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-black text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow"
+                        {hasLyrics && (
+                          <button
+                            onClick={handleCopyLyrics}
+                            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs uppercase font-bold tracking-wider rounded-none text-zinc-200 transition-colors shadow cursor-pointer"
                           >
-                            <Play className="w-3.5 h-3.5 fill-black" />
-                            <span className="hidden sm:inline">Watch Video</span>
-                          </a>
+                            <Copy className="w-4 h-4 text-[#F88E14]" />
+                            <span>Copy Lyrics</span>
+                          </button>
+                        )}
+
+                        {/* Play the song right here, alongside the lyrics */}
+                        {videoId && (
+                          <button
+                            onClick={() => setNowPlayingId(isPlaying ? null : selectedSong.id)}
+                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-black text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer"
+                          >
+                            {isPlaying ? (
+                              <>
+                                <X className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Close Player</span>
+                              </>
+                            ) : (
+                              <>
+                                <Play className="w-3.5 h-3.5 fill-black" />
+                                <span className="hidden sm:inline">Play Song</span>
+                              </>
+                            )}
+                          </button>
                         )}
                       </div>
                     </div>
 
+                    {/* Inline player: sticks to the top so the song keeps
+                        playing while the lyrics are scrolled. */}
+                    {isPlaying && videoId && (
+                      <div className="sticky top-24 z-20 -mx-6 sm:-mx-10 px-6 sm:px-10 pb-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80">
+                        <div className="relative w-full aspect-video bg-black border border-zinc-800 shadow-2xl">
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+                            title={`${selectedSong.title} by Minister Lilian Nneji`}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            className="absolute inset-0 w-full h-full"
+                          />
+                        </div>
+                        <div className="flex items-center justify-between gap-3 pt-2.5">
+                          <p className="text-[11px] uppercase tracking-widest font-bold text-[#F88E14]">
+                            Now Playing
+                          </p>
+                          <a
+                            href={selectedSong.youtubeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-white transition-colors"
+                          >
+                            Open on YouTube
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Formatted Lyrics Body */}
-                    <div className="space-y-6 text-zinc-200 font-normal leading-relaxed text-sm sm:text-base whitespace-pre-line select-text">
-                      {selectedSong.lyrics}
-                    </div>
+                    {hasLyrics ? (
+                      <div className="space-y-6 text-zinc-200 font-normal leading-relaxed text-sm sm:text-base whitespace-pre-line select-text">
+                        {selectedSong.lyrics}
+                      </div>
+                    ) : (
+                      <div className="py-12 px-6 text-center space-y-4 border border-dashed border-zinc-800 bg-zinc-900/30">
+                        <Music className="w-9 h-9 text-zinc-600 mx-auto" />
+                        <div className="space-y-1.5">
+                          <h3 className="font-fjalla text-lg uppercase tracking-wide text-zinc-300 font-bold">
+                            Lyrics Coming Soon
+                          </h3>
+                          <p className="text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">
+                            The written lyrics for this song have not been published yet. Play the official
+                            recording below and worship along in the meantime.
+                          </p>
+                        </div>
+                        {videoId && !isPlaying && (
+                          <button
+                            onClick={() => setNowPlayingId(selectedSong.id)}
+                            className="gold-button inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase tracking-wider cursor-pointer"
+                          >
+                            <Play className="w-3.5 h-3.5 fill-current" />
+                            Play Song
+                          </button>
+                        )}
+                      </div>
+                    )}
 
                     {/* Ministry Copyright Banner */}
                     <div className="pt-8 border-t border-zinc-900 text-xs text-zinc-500 text-center">
@@ -321,6 +375,8 @@ export default function LyricsPage() {
         </section>
 
       </main>
+
+      <Toast open={Boolean(toast)} message={toast?.message} onClose={closeToast} />
 
       {/* Global Footer */}
       <Footer />

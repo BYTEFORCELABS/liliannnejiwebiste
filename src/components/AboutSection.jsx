@@ -1,219 +1,209 @@
 "use client";
 
 import Image from "next/image";
-import { Sparkles, Trophy, Award } from "lucide-react";
+import Reveal from "@/components/Reveal";
+import { Award } from "lucide-react";
 
-// Seamless gold/black organic camo pattern matching Screenshots 1, 2 & 3
-function GoldCamoPattern({ className = "w-full h-full" }) {
-  return (
-    <svg className={className} viewBox="0 0 200 200" preserveAspectRatio="none" fill="none">
-      <defs>
-        <pattern id="gold-camo-tile" width="100" height="100" patternUnits="userSpaceOnUse">
-          {/* Deep Dark Base */}
-          <rect width="100" height="100" fill="#0a0a0c" />
-          
-          {/* Organic Gold Camo Blobs & Ripples */}
-          <path d="M10 25 Q 35 15 45 30 Q 55 45 35 55 Q 20 60 10 40 Z" fill="#F88E14" opacity="0.95" />
-          <path d="M60 70 Q 80 60 85 75 Q 90 85 75 90 Q 65 90 60 75 Z" fill="#F9650B" opacity="0.85" />
-          <path d="M70 15 Q 85 20 80 35 Q 70 40 65 25 Z" fill="#F88E14" opacity="0.9" />
-          <path d="M30 8 Q 45 3 50 12 Q 40 18 30 8 Z" fill="#FABA1E" opacity="0.9" />
-          <circle cx="25" cy="80" r="6" fill="#FABA1E" opacity="0.8" />
-          <circle cx="85" cy="50" r="5" fill="#F88E14" opacity="0.75" />
-          <circle cx="50" cy="50" r="3.5" fill="#FABA1E" opacity="0.9" />
-          
-          {/* Camo stroke bars */}
-          <rect x="0" y="45" width="16" height="7" rx="3.5" fill="#F88E14" opacity="0.8" />
-          <rect x="42" y="78" width="18" height="6" rx="3" fill="#F9650B" opacity="0.85" />
-          <rect x="68" y="0" width="14" height="6" rx="3" fill="#FABA1E" opacity="0.8" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#gold-camo-tile)" />
-    </svg>
-  );
-}
-
-// GMA Award Logo matching Screenshot 1
-function GMABadge() {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="w-8 h-8 rounded-full border-2 border-[#F88E14] flex items-center justify-center text-[#F88E14] bg-black/80 shadow-md">
-        <Trophy className="w-4 h-4 text-[#F88E14]" />
-      </div>
-      <div className="flex flex-col leading-none">
-        <span className="font-fjalla text-base text-[#F88E14] font-bold tracking-wider">
-          GMA <sup className="text-[10px] text-[#F88E14] font-semibold">'6</sup>
-        </span>
-      </div>
-    </div>
-  );
-}
-
-// Metallic Insignia Pin matching Screenshot 2
-function MetallicPin() {
-  return (
-    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-200 via-zinc-400 to-zinc-700 p-0.5 shadow-xl flex items-center justify-center border border-white/60">
-      <div className="w-full h-full rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center text-zinc-100">
-        <Award className="w-4 h-4 text-[#FABA1E] drop-shadow" />
-      </div>
-    </div>
-  );
-}
+const HIT_SINGLES = [
+  "Onwere Ihe Omere Mu",
+  "E Get Why",
+  "Mercy",
+  "Odogwu N'agha",
+  "Ko Joo",
+  "Ntughari",
+];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative bg-black py-24 border-t border-white/5 overflow-hidden text-white">
-      
-      {/* Background Subtle Watermark Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#14141a_0%,#000000_100%)] pointer-events-none" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
-        
-        {/* ============================================================ */}
-        {/* TOP ACCREDITATION & TROPHY (Screenshot 1)                    */}
-        {/* ============================================================ */}
-        <div className="text-center space-y-5">
-          <div className="space-y-1.5">
-            <h2 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
-              GALAXY MUSIC AWARDS
-            </h2>
-            <p className="text-zinc-300 text-sm sm:text-base font-medium tracking-wide">
-              Gospel Artist of the Year
-            </p>
-          </div>
+    <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-white/5 overflow-hidden text-white">
 
-          {/* Golden Trophy Graphic */}
-          <div className="flex justify-center pt-2">
-            <div className="relative w-28 sm:w-36 aspect-square hover:scale-110 transition-transform duration-500 drop-shadow-[0_10px_35px_rgba(248,142,20,0.35)]">
-              <Image
-                src="/images/award_trophy.jpg"
-                alt="Galaxy Music Award Trophy - Gospel Artist of the Year"
-                fill
-                sizes="150px"
-                className="object-contain"
-              />
-            </div>
-          </div>
+      {/* Ambient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,#16130d_0%,#000000_60%)] pointer-events-none" />
+      <div className="animate-breathe absolute -top-24 left-1/4 w-[460px] h-[460px] rounded-full bg-[#F88E14]/[0.07] blur-[130px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
+
+        {/* ============================================================ */}
+        {/* HEADING                                                      */}
+        {/* ============================================================ */}
+        <div className="space-y-4 max-w-3xl">
+          <Reveal as="h2" variant="wipe" className="font-fjalla text-5xl sm:text-7xl lg:text-8xl text-[#F88E14] font-bold uppercase tracking-tight leading-[0.95]">
+            I Am Lilian
+          </Reveal>
+
+          <Reveal as="p" variant="up" delay={140} className="text-zinc-400 text-base sm:text-lg font-medium">
+            Anointed and award-winning music minister, songwriter and worship leader.
+          </Reveal>
         </div>
 
         {/* ============================================================ */}
-        {/* ROW 1: WINNER CARD (Left) & "I AM LILIAN" (Right) (Screenshots 1 & 2) */}
+        {/* ROW 1: PORTRAIT + BIOGRAPHY                                  */}
         {/* ============================================================ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Column: Winner Poster Card with Camo Border (Screenshots 1 & 2) */}
-          <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-xl overflow-hidden p-5 sm:p-6 shadow-2xl border border-[#F88E14]/20">
-              
-              {/* Camo Background Border Fill */}
-              <div className="absolute inset-0 z-0">
-                <GoldCamoPattern />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+
+          {/* Portrait */}
+          <Reveal variant="left" className="lg:col-span-5">
+            <div className="relative group max-w-md mx-auto lg:mx-0">
+              {/* Offset gold frame */}
+              <div className="absolute -inset-x-4 -inset-y-4 border border-[#F88E14]/30 translate-x-3 translate-y-3 group-hover:translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-700 ease-out pointer-events-none" />
+
+              <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 shadow-2xl">
+                <Image
+                  src="/images/live_worship_portrait.jpg"
+                  alt="Minister Lilian Nneji leading worship"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 420px"
+                  className="object-cover object-[52%_22%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               </div>
 
-              {/* Inner Card Container */}
-              <div className="relative z-10 w-full h-full flex flex-col justify-between">
-                
-                {/* Header: GMA Logo & WINNER */}
-                <div className="flex items-center justify-between pb-3">
-                  <GMABadge />
-                  <span className="font-fjalla text-2xl sm:text-3xl text-white font-bold tracking-widest uppercase">
-                    WINNER
-                  </span>
-                </div>
-
-                {/* Framed Center Portrait */}
-                <div className="relative flex-1 w-full rounded-lg overflow-hidden bg-zinc-900 border border-black shadow-inner my-2">
-                  <Image
-                    src="/images/about_award_portrait_v2.jpg"
-                    alt="Minister Lilian Nneji - Winner Gospel Artist of the Year"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 450px"
-                    className="object-cover object-[center_top]"
-                  />
-
-                  {/* Black Banner at bottom of Photo */}
-                  <div className="absolute bottom-0 inset-x-0 bg-black/95 px-4 py-3 border-t border-white/10">
-                    <h4 className="font-fjalla text-lg sm:text-xl font-bold text-white tracking-wide uppercase leading-tight">
-                      Minister Lilian Nneji
-                    </h4>
-                    <p className="text-xs text-zinc-300 font-medium">
-                      Gospel Artist of the year
+              {/* Floating award badge */}
+              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-[#0c0c10] border border-[#F88E14]/40 px-5 py-4 shadow-2xl max-w-[230px] animate-float">
+                <div className="flex items-start gap-3">
+                  <Award className="w-6 h-6 text-[#F88E14] flex-shrink-0 mt-0.5" />
+                  <div className="leading-tight">
+                    <p className="font-fjalla text-sm font-bold text-white uppercase tracking-wide">
+                      Africa Praise Artiste
+                    </p>
+                    <p className="text-[11px] text-[#F88E14] font-semibold uppercase tracking-wider">
+                      Of the Year &middot; 2024
                     </p>
                   </div>
                 </div>
-
-                {/* Bottom Row with Metallic Insignia Pin */}
-                <div className="pt-2 flex items-center justify-between">
-                  <MetallicPin />
-                  <span className="text-[10px] text-[#F88E14] uppercase font-bold tracking-widest">
-                    HONOR & EXCELLENCE
-                  </span>
-                </div>
-
               </div>
+            </div>
+          </Reveal>
 
+          {/* Biography */}
+          <div className="lg:col-span-7 space-y-8">
+
+            <div className="space-y-5 text-zinc-300 text-[15px] sm:text-[17px] leading-[1.75] font-normal">
+              <Reveal as="p" variant="up">
+                Minister <strong className="text-white font-semibold">Lilian Nneka Nneji</strong>, known
+                to the world simply as <strong className="text-white font-semibold">Lilian Nneji</strong>, is
+                a Nigerian gospel singer, songwriter, worship leader and recording artiste. An ordained assistant
+                pastor and one of Africa&rsquo;s most energetic praise leaders, she carries a sound that moves a
+                room from celebration straight into the presence of God.
+              </Reveal>
+
+              <Reveal as="p" variant="up" delay={100}>
+                Born on the 18th of July, she is the fifth child in a family of six from{" "}
+                <strong className="text-white font-semibold">Imo State, Nigeria</strong>. She graduated from the
+                University of Ado-Ekiti with a B.Sc in Accounting and worked professionally for ten years,
+                carrying the work of ministry alongside her career, until the Lord called her into full-time
+                ministry.
+              </Reveal>
+
+              <Reveal as="p" variant="up" delay={200}>
+                Since that call she has travelled around the world preaching through her music, singing and dancing
+                energetically to God. In 2024 she was named{" "}
+                <strong className="text-white font-semibold">Africa Praise Artiste of the Year</strong> at the
+                prestigious Clima Africa Awards, and she continues to write songs that carry congregations from
+                praise into deep worship.
+              </Reveal>
             </div>
           </div>
-
-          {/* Right Column: "I AM LILIAN" Bio (Screenshot 2) */}
-          <div className="lg:col-span-6 space-y-6">
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
-              I AM LILIAN
-            </h3>
-
-            <div className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed font-normal">
-              <p>
-                Hailing from Lagos, Nigeria, Minister Lilian Nneji discovered her calling and passion for music and prophetic worship at a young age, honing her anointed craft in the church choir and regional gospel gatherings before rising to national and international prominence.
-              </p>
-              <p>
-                With powerhouse hit songs like <strong className="text-white">“Eze Mu O,”</strong> <strong className="text-white">“Praise Vibes,”</strong> <strong className="text-white">“My Helper,”</strong> and the infectious praise anthem <strong className="text-white">“Jesus Dance,”</strong> she has captivated audiences with her dynamic sound, uplifting lyrics, and unwavering message of faith and joy. Her ability to blend deep spiritual devotion with vibrant, high-tempo African praise makes her a standout voice in the modern gospel music space.
-              </p>
-            </div>
-          </div>
-
         </div>
 
         {/* ============================================================ */}
-        {/* ROW 2: "QUEEN OF PRAISE" (Left) & STUDIO PHOTO (Right) (Screenshot 3) */}
+        {/* KNOWN FOR: scrolling song marquee                            */}
         {/* ============================================================ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Column: "QUEEN OF PRAISE" (Screenshot 3) */}
+        <Reveal variant="up">
+          <div className="marquee-host relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+            <div className="marquee-track gap-5" style={{ "--marquee-duration": "34s" }}>
+              {[...HIT_SINGLES, ...HIT_SINGLES].map((song, idx) => (
+                <span
+                  key={`${song}-${idx}`}
+                  className="flex-shrink-0 flex items-center gap-4 font-fjalla text-2xl sm:text-4xl uppercase font-bold tracking-tight text-zinc-600 hover:text-[#F88E14] transition-colors duration-300"
+                >
+                  {song}
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F88E14]/50" />
+                </span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* ============================================================ */}
+        {/* ROW 2: QUEEN OF PRAISE                                       */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+
           <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-            
-            {/* Top Camo Ribbon matching Screenshot 3 */}
-            <div className="w-full max-w-xs h-7 rounded-sm overflow-hidden border border-[#F88E14]/30 shadow-md">
-              <GoldCamoPattern />
+            <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase leading-[0.95]">
+              Queen of Praise
+            </Reveal>
+
+            <div className="space-y-5 text-zinc-300 text-[15px] sm:text-[17px] leading-[1.75]">
+              <Reveal as="p" variant="up" delay={140}>
+                From church auditoriums in Nigeria to praise nights across the continent and beyond, Minister Lilian
+                Nneji has built a ministry on one thing: an unrelenting, danceable, joyful gratitude to God. Her
+                sets are physical. She sings, she dances, she pulls a congregation to its feet.
+              </Reveal>
+
+              <Reveal as="p" variant="up" delay={300}>
+                Ten years in professional accounting taught her discipline; the call taught her surrender. Today
+                she gives both to the altar, leading praise with the same energy at a packed arena as at a midweek
+                service.
+              </Reveal>
             </div>
 
-            <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
-              QUEEN OF PRAISE
-            </h3>
-
-            <div className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed font-normal">
-              <p>
-                Minister Lilian Nneji has graced major stages and mega-altars across Africa, North America, and Europe, including renowned international praise conventions, church stadium arenas, and national worship nights—and has received multiple accolades, including Gospel Artiste of the Year.
-              </p>
-              <p>
-                Beyond music, she is a spiritual powerhouse known for her infectious joy, heartfelt storytelling, and extraordinary ability to connect deeply with her audience. Whether through her uplifting anthems or electrifying stage ministrations, Minister Lilian Nneji is on a divine mission to spread faith, joy, and the unstoppable fire of praise to the world through music!
-              </p>
-            </div>
+            <Reveal variant="up" delay={400} className="flex flex-wrap gap-2.5 pt-2">
+              {["Praise Leader", "Songwriter", "Recording Artiste", "Worship Leader"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3.5 py-1.5 border border-[#F88E14]/25 text-[11px] uppercase tracking-wider font-semibold text-zinc-300 hover:border-[#F88E14] hover:text-[#F88E14] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </Reveal>
           </div>
 
-          {/* Right Column: Stage Ministration Photo (Screenshot 3) */}
-          <div className="lg:col-span-6 relative flex justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-md aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-[#F88E14]/30 group bg-zinc-950">
-              <Image
-                src="/images/about_yellow_studio_v2.jpg"
-                alt="Minister Lilian Nneji Live Praise Ministration"
-                fill
-                sizes="(max-width: 768px) 100vw, 500px"
-                className="object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+          <Reveal variant="right" className="lg:col-span-6 order-1 lg:order-2">
+            <div className="relative group max-w-lg mx-auto lg:ml-auto">
+              <div className="relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden bg-zinc-950 shadow-2xl">
+                <Image
+                  src="/images/reverb_ministering.jpg"
+                  alt="Minister Lilian Nneji ministering live at The Reverb"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 480px"
+                  className="object-cover object-[58%_28%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -inset-x-4 -inset-y-4 border border-[#F88E14]/25 -translate-x-3 translate-y-3 group-hover:-translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-700 ease-out pointer-events-none" />
             </div>
-          </div>
-
+          </Reveal>
         </div>
+
+        {/* ============================================================ */}
+        {/* AWARD CALLOUT                                                */}
+        {/* ============================================================ */}
+        <Reveal variant="scale">
+          <div className="relative border border-[#F88E14]/25 bg-gradient-to-br from-[#12100a] to-[#08080a] px-6 sm:px-12 py-12 sm:py-14 text-center overflow-hidden group">
+            <div className="animate-breathe absolute -top-20 left-1/2 -translate-x-1/2 w-[420px] h-[220px] bg-[#F88E14]/10 blur-[110px] pointer-events-none" />
+
+            <div className="relative space-y-4">
+              <Award className="w-10 h-10 text-[#F88E14] mx-auto group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" />
+
+              <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 font-bold">
+                Clima Africa Awards &middot; 2024
+              </p>
+
+              <h3 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-white font-bold uppercase tracking-tight">
+                Africa Praise Artiste
+                <span className="block text-gold-gradient">Of the Year</span>
+              </h3>
+
+              <p className="text-sm sm:text-base text-zinc-400 max-w-xl mx-auto pt-1">
+                Awarded for a body of work and a decade of ministry spent lifting congregations across Africa
+                in energetic, unashamed praise.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
       </div>
     </section>

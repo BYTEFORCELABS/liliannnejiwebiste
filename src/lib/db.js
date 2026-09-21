@@ -10,393 +10,425 @@ const LYRICS_FILE = path.join(DATA_DIR, "lyrics.json");
 // Default initial gallery seed items
 const DEFAULT_GALLERY = [
   {
-    id: "gal_1",
-    title: "Galaxy Music Awards Celebration",
-    category: "Award Moments",
-    imageUrl: "/images/about_award_portrait_v2.jpg",
-    caption: "Honored with the Gospel Artist of the Year award at the prestigious Galaxy Music Awards.",
-    date: "2026-08-15",
-    featured: true,
-    createdAt: "2026-08-15T12:00:00.000Z"
+    "id": "gal_live_praise_fire",
+    "title": "Fire on the Altar",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_praise_fire.jpg",
+    "caption": "Hands lifted mid-praise as the whole auditorium breaks into worship.",
+    "featured": true,
+    "span": "wide",
+    "createdAt": "2026-09-01T12:00:00.000Z"
   },
   {
-    id: "gal_2",
-    title: "The Reverb 5.0 Official Banner",
-    category: "The Reverb",
-    imageUrl: "/images/reverb_poster_v3.jpg",
-    caption: "Official concert visual for REVERB 5.0 live at EUI Event Center, Port Harcourt.",
-    date: "2026-09-01",
-    featured: true,
-    createdAt: "2026-09-01T10:00:00.000Z"
+    "id": "gal_reverb_joy_denim",
+    "title": "Pure Joy",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_joy_denim.jpg",
+    "caption": "Caught mid-laugh during a praise break with the band in full flight.",
+    "featured": true,
+    "span": "normal",
+    "createdAt": "2026-09-01T11:00:00.000Z"
   },
   {
-    id: "gal_3",
-    title: "Prophetic Worship in Studio",
-    category: "Studio & Portraits",
-    imageUrl: "/images/about_yellow_studio_v2.jpg",
-    caption: "Studio session recording prophetic praise anthems in joy and power.",
-    date: "2026-07-22",
-    featured: true,
-    createdAt: "2026-07-22T14:30:00.000Z"
+    "id": "gal_live_crowd_bw",
+    "title": "Every Hand Lifted",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_crowd_bw.jpg",
+    "caption": "Turning the room over to the congregation, with not a single seat still.",
+    "featured": true,
+    "span": "tall",
+    "createdAt": "2026-09-01T10:00:00.000Z"
   },
   {
-    id: "gal_4",
-    title: "Live Altar Ministration",
-    category: "Live Concerts",
-    imageUrl: "/images/hero_bg_live.jpg",
-    caption: "Electrifying praise encounter lifting up the name of Jesus with thousands in worship.",
-    date: "2026-06-18",
-    featured: true,
-    createdAt: "2026-06-18T20:00:00.000Z"
+    "id": "gal_live_worship_portrait",
+    "title": "Lifted Voice",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_worship_portrait.jpg",
+    "caption": "Deep in the song, hand open, leading the house into adoration.",
+    "featured": true,
+    "span": "normal",
+    "createdAt": "2026-09-01T09:00:00.000Z"
   },
   {
-    id: "gal_5",
-    title: "Joyful Worship Polaroid",
-    category: "The Reverb",
-    imageUrl: "/images/reverb_polaroid_1_v2.jpg",
-    caption: "Unstoppable kingdom dance and laughter during the praise session.",
-    date: "2025-11-02",
-    featured: false,
-    createdAt: "2025-11-02T19:30:00.000Z"
+    "id": "gal_reverb_praise_lean",
+    "title": "All the Way Back",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_praise_lean.jpg",
+    "caption": "The praise team leaning into the last chorus of the night.",
+    "featured": true,
+    "span": "wide",
+    "createdAt": "2026-09-01T08:00:00.000Z"
   },
   {
-    id: "gal_6",
-    title: "Heartfelt Adoration Polaroid",
-    category: "The Reverb",
-    imageUrl: "/images/reverb_polaroid_2_v2.jpg",
-    caption: "Deep intimacy and adoration during the slow worship ministration.",
-    date: "2025-11-02",
-    featured: false,
-    createdAt: "2025-11-02T20:15:00.000Z"
+    "id": "gal_live_congregation",
+    "title": "Face to Face",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_congregation.jpg",
+    "caption": "Stepping to the edge of the stage to sing straight into the crowd.",
+    "featured": true,
+    "span": "normal",
+    "createdAt": "2026-09-01T07:00:00.000Z"
   },
   {
-    id: "gal_7",
-    title: "Atmosphere of Miracles Polaroid",
-    category: "The Reverb",
-    imageUrl: "/images/reverb_polaroid_3_v2.jpg",
-    caption: "The glory of God filling the room at the annual Reverb gathering.",
-    date: "2025-11-02",
-    featured: false,
-    createdAt: "2025-11-02T21:00:00.000Z"
+    "id": "gal_reverb_ministering",
+    "title": "A Word Before the Song",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_ministering.jpg",
+    "caption": "A moment of exhortation between ministrations.",
+    "featured": true,
+    "span": "normal",
+    "createdAt": "2026-09-01T06:00:00.000Z"
   },
   {
-    id: "gal_8",
-    title: "Stage Worship Encounter",
-    category: "Live Concerts",
-    imageUrl: "/images/stage_worship.jpg",
-    caption: "Leading thousands in adoration at the regional gospel crusade.",
-    date: "2026-05-14",
-    featured: true,
-    createdAt: "2026-05-14T18:00:00.000Z"
+    "id": "gal_about_award_portrait_v2",
+    "title": "Minister Lilian Nneji",
+    "category": "Portraits",
+    "imageUrl": "/images/about_award_portrait_v2.jpg",
+    "caption": "On stage, mid-ministration, in her signature white cap.",
+    "featured": true,
+    "span": "normal",
+    "createdAt": "2026-09-01T05:00:00.000Z"
   },
   {
-    id: "gal_9",
-    title: "Studio Reverence",
-    category: "Studio & Portraits",
-    imageUrl: "/images/stay_in_touch_bw_v2.jpg",
-    caption: "Black and white studio portrait capturing serenity, faith, and devotion.",
-    date: "2026-04-10",
-    featured: false,
-    createdAt: "2026-04-10T11:00:00.000Z"
+    "id": "gal_live_dancers_stage",
+    "title": "Praise in Motion",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_dancers_stage.jpg",
+    "caption": "The full company of dancers and singers moving as one.",
+    "featured": false,
+    "span": "wide",
+    "createdAt": "2026-09-01T04:00:00.000Z"
   },
   {
-    id: "gal_10",
-    title: "COZA Praise Night Explosion",
-    category: "Live Concerts",
-    imageUrl: "/images/video_thumb_coza.jpg",
-    caption: "High-octane praise explosion with the global choir and congregation.",
-    date: "2026-03-28",
-    featured: true,
-    createdAt: "2026-03-28T19:00:00.000Z"
+    "id": "gal_reverb_banner_stage",
+    "title": "Now Ministering",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_banner_stage.jpg",
+    "caption": "Taking the stage as the house rises to its feet.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-09-01T03:00:00.000Z"
   },
   {
-    id: "gal_11",
-    title: "Atmosphere of Miracles",
-    category: "Live Concerts",
-    imageUrl: "/images/video_thumb_miracles.jpg",
-    caption: "Prophetic songs of deliverance and joy overflowing in testimony.",
-    date: "2026-02-14",
-    featured: false,
-    createdAt: "2026-02-14T17:30:00.000Z"
+    "id": "gal_live_choir_wide",
+    "title": "The Full Stage",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_choir_wide.jpg",
+    "caption": "Backing vocalists and dancers in formation under the crest.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-09-01T02:00:00.000Z"
   },
   {
-    id: "gal_12",
-    title: "Official Portrait - Jesus Dance Queen",
-    category: "Studio & Portraits",
-    imageUrl: "/images/hero_portrait.jpg",
-    caption: "Official portrait of Minister Lilian Nneji, celebrating the Joy of the Lord.",
-    date: "2026-01-05",
-    featured: true,
-    createdAt: "2026-01-05T09:00:00.000Z"
+    "id": "gal_reverb_praise_team",
+    "title": "The Praise Team",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_praise_team.jpg",
+    "caption": "Voices in blue, carrying the harmony behind the lead.",
+    "featured": false,
+    "span": "wide",
+    "createdAt": "2026-09-01T01:00:00.000Z"
+  },
+  {
+    "id": "gal_about_yellow_studio_v2",
+    "title": "In Full Voice",
+    "category": "Portraits",
+    "imageUrl": "/images/about_yellow_studio_v2.jpg",
+    "caption": "Holding a long note with the band driving behind her.",
+    "featured": false,
+    "span": "tall",
+    "createdAt": "2026-09-01T00:00:00.000Z"
+  },
+  {
+    "id": "gal_live_duet_stage",
+    "title": "Call and Response",
+    "category": "Live Concerts",
+    "imageUrl": "/images/live_duet_stage.jpg",
+    "caption": "Trading lines with a backing vocalist mid-song.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T23:00:00.000Z"
+  },
+  {
+    "id": "gal_band_drummers",
+    "title": "Talking Drums",
+    "category": "Praise Team & Band",
+    "imageUrl": "/images/band_drummers.jpg",
+    "caption": "The percussion section driving the tempo of the praise.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T22:00:00.000Z"
+  },
+  {
+    "id": "gal_reverb_polaroid_3_v2",
+    "title": "Two Voices, One Song",
+    "category": "Live Concerts",
+    "imageUrl": "/images/reverb_polaroid_3_v2.jpg",
+    "caption": "Leading a call-and-response with one of the vocalists.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T21:00:00.000Z"
+  },
+  {
+    "id": "gal_stay_in_touch_bw_v2",
+    "title": "Between Sets",
+    "category": "Portraits",
+    "imageUrl": "/images/stay_in_touch_bw_v2.jpg",
+    "caption": "A quiet moment off-stage before the next ministration.",
+    "featured": false,
+    "span": "wide",
+    "createdAt": "2026-08-31T20:00:00.000Z"
+  },
+  {
+    "id": "gal_band_talking_drum_bw",
+    "title": "The Drummer",
+    "category": "Praise Team & Band",
+    "imageUrl": "/images/band_talking_drum_bw.jpg",
+    "caption": "Talking drum in hand, holding the groove together.",
+    "featured": false,
+    "span": "tall",
+    "createdAt": "2026-08-31T19:00:00.000Z"
+  },
+  {
+    "id": "gal_reverb_wide_stage",
+    "title": "Packed House",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_wide_stage.jpg",
+    "caption": "A full room from the back of the hall.",
+    "featured": false,
+    "span": "wide",
+    "createdAt": "2026-08-31T18:00:00.000Z"
+  },
+  {
+    "id": "gal_band_keys_bass",
+    "title": "Keys and Bass",
+    "category": "Praise Team & Band",
+    "imageUrl": "/images/band_keys_bass.jpg",
+    "caption": "The rhythm section laying the foundation for the praise.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T17:00:00.000Z"
+  },
+  {
+    "id": "gal_reverb_polaroid_2_v2",
+    "title": "Bowed in Worship",
+    "category": "Live Concerts",
+    "imageUrl": "/images/reverb_polaroid_2_v2.jpg",
+    "caption": "The dancers bowed low as the room shifts into worship.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T16:00:00.000Z"
+  },
+  {
+    "id": "gal_reverb_polaroid_1_v2",
+    "title": "Voices in Blue",
+    "category": "The Reverb",
+    "imageUrl": "/images/reverb_polaroid_1_v2.jpg",
+    "caption": "The praise team mid-song under the stage lights.",
+    "featured": false,
+    "span": "normal",
+    "createdAt": "2026-08-31T15:00:00.000Z"
+  },
+  {
+    "id": "gal_band_guitars_bw",
+    "title": "Strings",
+    "category": "Praise Team & Band",
+    "imageUrl": "/images/band_guitars_bw.jpg",
+    "caption": "Lead and bass guitar locked in behind the vocals.",
+    "featured": false,
+    "span": "tall",
+    "createdAt": "2026-08-31T14:00:00.000Z"
   }
 ];
 
 // Default initial lyrics seed items
 const DEFAULT_LYRICS = [
   {
-    id: "lyr_1",
-    title: "Eze Mu O (My King)",
-    category: "Prophetic Worship",
-    album: "Eze Mu O (Single)",
-    releaseYear: "2024",
-    youtubeUrl: "https://www.youtube.com/watch?v=DzjflH8peQY",
-    featured: true,
-    createdAt: "2024-01-10T00:00:00.000Z",
-    lyrics: `[Verse 1]
-You are the breath inside my lungs
-The King of kings upon the throne
-No other name can heal and save
-No other power broke the grave
-Eze ndi eze, Onyekeruwa
-I lift my hands to honor You alone
-
-[Chorus]
-Eze mu o, Eze mu o!
-Onye nmeri, Nara ekele
-Eze mu o, Eze mu o!
-Chi di nso, Your name is great
-There is no one else like You
-Ancient of Days, my Lord and King
-
-[Verse 2]
-When valleys deep stood in my way
-You parted waters, paved the way
-My strength, my song, my hiding place
-Surrounded by Your love and grace
-From generation unto generation
-Your kingdom reigns forevermore
-
-[Chorus]
-Eze mu o, Eze mu o!
-Onye nmeri, Nara ekele
-Eze mu o, Eze mu o!
-Chi di nso, Your name is great
-There is no one else like You
-Ancient of Days, my Lord and King
-
-[Bridge]
-Agu n'eche mba!
-Odogwu akataka!
-Who can battle with the Lord?
-No one, no one!
-Who can question Your great power?
-No one, no one!
-
-[Outro]
-Eze mu o, You are worthy
-Eze mu o, You are exalted
-Forever and ever, Amen.`
+    "id": "lyr_eze_mu_o",
+    "title": "Eze Mu O",
+    "category": "Prophetic Worship",
+    "album": "Single",
+    "releaseYear": "2026",
+    "youtubeUrl": "https://www.youtube.com/watch?v=DzjflH8peQY",
+    "featured": true,
+    "createdAt": "2026-09-01T12:00:00.000Z",
+    "lyrics": ""
   },
   {
-    id: "lyr_2",
-    title: "Jesus Dance",
-    category: "High Praise",
-    album: "Kingdom Groove Vol. 1",
-    releaseYear: "2024",
-    youtubeUrl: "https://www.youtube.com/watch?v=nLITWXwcUNQ",
-    featured: true,
-    createdAt: "2024-03-15T00:00:00.000Z",
-    lyrics: `[Intro]
-Are you ready to give Jesus a high praise?
-Put on your dancing shoes!
-Let the redeemed of the Lord say so!
-Get ready, let's go!
-
-[Verse 1]
-Look at what the Lord has done for me
-He took away my shame and set me free
-Gave me a new song in my mouth
-Turned my mourning into joy and shout!
-Every burden rolled away
-Today na my thanksgiving day!
-
-[Chorus]
-Oya do the Jesus dance! (Dance, dance!)
-Celebrate Your victory!
-Do the Jesus dance! (Dance, dance!)
-Shout Hallelujah to the King!
-Left to the right, forward and back
-When Jesus enters, sorrow pack!
-
-[Verse 2]
-Dem think say my story don finish
-Jehovah show up, my blessing replenish
-Double portion, favor overflow
-Everywhere I go, His glory dey show
-If you know say God has been faithful
-Jump up and make His praise joyful!
-
-[Chorus]
-Oya do the Jesus dance! (Dance, dance!)
-Celebrate Your victory!
-Do the Jesus dance! (Dance, dance!)
-Shout Hallelujah to the King!
-Left to the right, forward and back
-When Jesus enters, sorrow pack!
-
-[Vamp]
-Dance for Jesus!
-Praise the Lord!
-Leap for joy!
-Give Him praise!
-Hallelujah! Amen!`
+    "id": "lyr_jesus_nke_nazareth",
+    "title": "Jesus Nke Nazareth",
+    "category": "Prophetic Worship",
+    "album": "Single",
+    "releaseYear": "2026",
+    "youtubeUrl": "https://www.youtube.com/watch?v=J_02EibFwd0",
+    "featured": true,
+    "createdAt": "2026-09-01T11:00:00.000Z",
+    "lyrics": ""
   },
   {
-    id: "lyr_3",
-    title: "Praise Vibes",
-    category: "High Praise",
-    album: "Praise Vibes EP",
-    releaseYear: "2023",
-    youtubeUrl: "https://www.youtube.com/watch?v=J_02EibFwd0",
-    featured: true,
-    createdAt: "2023-08-20T00:00:00.000Z",
-    lyrics: `[Verse 1]
-Early in the morning will I rise and praise
-Throughout the evening will I give Him glory
-His mercies are new every single day
-He watches over my coming and my going
-Come let us magnify the Lord together
-His praise shall continually be in my mouth
-
-[Chorus]
-This is my praise vibe, holy vibe!
-Joy in the Holy Ghost, deep inside!
-Lift your hands and praise the Lord
-Magnify His holy name
-From the rising of the sun to the going down
-The Lord is worthy to be praised!
-
-[Verse 2]
-He turned my water into wine
-Gave me peace of mind divine
-No weapon formed shall prosper
-Jesus is my shield and master
-Let everything that has breath
-Praise the Lord of hosts!
-
-[Chorus]
-This is my praise vibe, holy vibe!
-Joy in the Holy Ghost, deep inside!
-Lift your hands and praise the Lord
-Magnify His holy name
-From the rising of the sun to the going down
-The Lord is worthy to be praised!
-
-[Outro]
-Glory, honor, power and majesty
-Belong unto our God forever!
-Praise Vibes!`
+    "id": "lyr_miracles_everywhere_live",
+    "title": "Miracles Everywhere (Live)",
+    "category": "High Praise",
+    "album": "Single",
+    "releaseYear": "2026",
+    "youtubeUrl": "https://www.youtube.com/watch?v=LTGjfXEFjKQ",
+    "featured": true,
+    "createdAt": "2026-09-01T10:00:00.000Z",
+    "lyrics": ""
   },
   {
-    id: "lyr_4",
-    title: "My Helper",
-    category: "Prophetic Worship",
-    album: "Divine Encounter",
-    releaseYear: "2023",
-    youtubeUrl: "https://www.youtube.com/watch?v=XM6WId4nVAc",
-    featured: true,
-    createdAt: "2023-11-05T00:00:00.000Z",
-    lyrics: `[Verse 1]
-I will lift up my eyes unto the hills
-From whence cometh my help?
-My help comes from the Lord
-The Maker of heaven and earth
-He will not let my foot be moved
-He who keeps Israel never slumbers nor sleeps
-
-[Chorus]
-You are my Helper, my Present Help
-In the time of trouble You never fail
-Ebube Dike, my Solid Rock
-On You I stand, I shall not fall
-My Helper, my Shield, my All in all
-
-[Verse 2]
-Though a thousand fall at my side
-And ten thousand at my right hand
-It shall not come near my dwelling
-Under the shadow of Your wings I abide
-Because I have set my love upon You
-You deliver me and set me on high
-
-[Chorus]
-You are my Helper, my Present Help
-In the time of trouble You never fail
-Ebube Dike, my Solid Rock
-On You I stand, I shall not fall
-My Helper, my Shield, my All in all
-
-[Outro]
-Thank You Jesus, my faithful Helper
-Yesterday, today and forever
-Amen.`
+    "id": "lyr_lng_praise_medley",
+    "title": "LNG Praise Medley",
+    "category": "High Praise",
+    "album": "LNG Praise Medley (EP)",
+    "releaseYear": "2026",
+    "youtubeUrl": "https://www.youtube.com/watch?v=a9hKkxfWWdk",
+    "featured": true,
+    "createdAt": "2026-09-01T09:00:00.000Z",
+    "lyrics": ""
   },
   {
-    id: "lyr_5",
-    title: "Joy Overflow (Thanksgiving Medley)",
-    category: "Thanksgiving",
-    album: "Live in Concert",
-    releaseYear: "2024",
-    youtubeUrl: "https://www.youtube.com/watch?v=otD1sbxmPy0",
-    featured: false,
-    createdAt: "2024-05-12T00:00:00.000Z",
-    lyrics: `[Verse 1]
-What shall I render unto the Lord
-For all His benefits toward me?
-I will take the cup of salvation
-And call upon the name of the Lord
-He has done great things for me
-Whereof I am glad!
-
-[Chorus]
-Joy overflow in my heart today!
-Blessings overflow everywhere I go!
-Thank You Jesus, Nara ekele
-Thank You Father, imela o!
-
-[Medley Section]
-Onye di nso, onye di nso
-Chi bu ike m, Chi bu olileanya m
-We give You all the glory
-We give You all the praise!
-
-[Outro]
-Hallelujah, joy overflow!
-Amen and Amen!`
+    "id": "lyr_if_e_reach_your_turn",
+    "title": "If E Reach Your Turn",
+    "category": "Afro-Gospel",
+    "album": "Single",
+    "releaseYear": "2025",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Vd4W1wxs0hQ",
+    "featured": false,
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "lyrics": ""
   },
   {
-    id: "lyr_6",
-    title: "Onye Nmeri (The Conqueror)",
-    category: "Afro-Gospel",
-    album: "Victorious Praise",
-    releaseYear: "2025",
-    youtubeUrl: "https://www.youtube.com/watch?v=t8e-A6wr9c8",
-    featured: false,
-    createdAt: "2025-01-18T00:00:00.000Z",
-    lyrics: `[Verse 1]
-He has conquered principalities and powers
-Made an open show of them in triumph
-No sickness can withstand Your name
-No mountain can stand before our God
-Onye nmeri bu aha Ya!
-
-[Chorus]
-Onye nmeri, The Conqueror!
-Mighty Man in battle, Lion of Judah!
-You have won the victory for me
-I am more than a conqueror in Christ!
-
-[Verse 2]
-Now we walk in liberty
-Now we reign in royalty
-By the blood of the Lamb
-And the word of our testimony!
-
-[Chorus]
-Onye nmeri, The Conqueror!
-Mighty Man in battle, Lion of Judah!
-You have won the victory for me
-I am more than a conqueror in Christ!`
+    "id": "lyr_elohim",
+    "title": "Elohim",
+    "category": "Prophetic Worship",
+    "album": "Single",
+    "releaseYear": "2025",
+    "youtubeUrl": "https://www.youtube.com/watch?v=nLITWXwcUNQ",
+    "featured": false,
+    "createdAt": "2026-09-01T07:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_omeriwo_omeriwo_reprise",
+    "title": "Omeriwo Omeriwo (Reprise)",
+    "category": "Prophetic Worship",
+    "album": "Single (Live)",
+    "releaseYear": "2025",
+    "youtubeUrl": "https://www.youtube.com/watch?v=A68T0Az-LUA",
+    "featured": false,
+    "createdAt": "2026-09-01T06:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_daalu",
+    "title": "Daalu",
+    "category": "Thanksgiving",
+    "album": "Single",
+    "releaseYear": "2024",
+    "youtubeUrl": "https://www.youtube.com/watch?v=GUkdF3GIbVc",
+    "featured": false,
+    "createdAt": "2026-09-01T05:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_grateful",
+    "title": "Grateful",
+    "category": "Thanksgiving",
+    "album": "Single",
+    "releaseYear": "2024",
+    "youtubeUrl": "https://www.youtube.com/watch?v=twamtRz-gDQ",
+    "featured": false,
+    "createdAt": "2026-09-01T04:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_this_kind_god_praise_vibes",
+    "title": "This Kind God (Praise Vibes)",
+    "category": "High Praise",
+    "album": "Single, feat. Anointed Praise Band",
+    "releaseYear": "2024",
+    "youtubeUrl": "https://www.youtube.com/watch?v=lwSU9-EzuLo",
+    "featured": false,
+    "createdAt": "2026-09-01T03:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_praise_overload_live",
+    "title": "Praise Overload (Live)",
+    "category": "High Praise",
+    "album": "Single (Live)",
+    "releaseYear": "2023",
+    "youtubeUrl": "https://www.youtube.com/watch?v=gfz0-Sb8Zi4",
+    "featured": false,
+    "createdAt": "2026-09-01T02:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_onwere_ihe_omere_m",
+    "title": "Onwere Ihe Omere Mù",
+    "category": "Thanksgiving",
+    "album": "Single (Live)",
+    "releaseYear": "2023",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xycVqgocXTI",
+    "featured": false,
+    "createdAt": "2026-09-01T01:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_e_get_why",
+    "title": "E Get Why",
+    "category": "Afro-Gospel",
+    "album": "Single",
+    "releaseYear": "2022",
+    "youtubeUrl": "https://www.youtube.com/watch?v=r7_1GGfz0L8",
+    "featured": false,
+    "createdAt": "2026-09-01T00:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_ntughari_turn_around",
+    "title": "Ntughari (Turn Around)",
+    "category": "Afro-Gospel",
+    "album": "Single",
+    "releaseYear": "2021",
+    "youtubeUrl": "",
+    "featured": false,
+    "createdAt": "2026-08-31T23:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_mercy",
+    "title": "Mercy",
+    "category": "Thanksgiving",
+    "album": "Single",
+    "releaseYear": "2020",
+    "youtubeUrl": "https://www.youtube.com/watch?v=XM6WId4nVAc",
+    "featured": false,
+    "createdAt": "2026-08-31T22:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_ko_joo_never",
+    "title": "Ko Joo (Never)",
+    "category": "Afro-Gospel",
+    "album": "Single",
+    "releaseYear": "2019",
+    "youtubeUrl": "https://www.youtube.com/watch?v=o6YwOAx2bJc",
+    "featured": false,
+    "createdAt": "2026-08-31T21:00:00.000Z",
+    "lyrics": ""
+  },
+  {
+    "id": "lyr_odogwu_n_agha",
+    "title": "Odogwu N'agha",
+    "category": "High Praise",
+    "album": "Single",
+    "releaseYear": "2018",
+    "youtubeUrl": "https://www.youtube.com/watch?v=u9a4yCTN-wA",
+    "featured": false,
+    "createdAt": "2026-08-31T20:00:00.000Z",
+    "lyrics": ""
   }
 ];
 

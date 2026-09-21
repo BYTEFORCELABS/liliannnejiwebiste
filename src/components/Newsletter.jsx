@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Reveal from "@/components/Reveal";
 import { CheckCircle2 } from "lucide-react";
 
 export default function Newsletter() {
@@ -46,27 +47,27 @@ export default function Newsletter() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* Left Column: Black and White Portrait matching Screenshot 2 */}
-          <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
+          <Reveal variant="left" className="lg:col-span-6 flex justify-center">
+            <div className="group relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
               <Image
                 src="/images/stay_in_touch_bw_v2.jpg"
                 alt="Minister Lilian Nneji in Worship Reflection"
                 fill
                 sizes="(max-width: 768px) 100vw, 550px"
-                className="object-cover object-[center_20%]"
+                className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
               />
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Column: STAY IN TOUCH Form matching Screenshot 2 */}
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-3">
-              <h3 className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
+              <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
                 STAY IN TOUCH
-              </h3>
-              <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
+              </Reveal>
+              <Reveal as="p" variant="up" delay={140} className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
                 Be the first to listen to our new sounds and find out where we're coming to next...
-              </p>
+              </Reveal>
             </div>
 
             {subscribed ? (
@@ -77,7 +78,7 @@ export default function Newsletter() {
                 </span>
               </div>
             ) : (
-              <div className="space-y-2 max-w-lg">
+              <Reveal variant="up" delay={240} className="space-y-2 max-w-lg">
                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-0">
                   <input
                     type="email"
@@ -99,7 +100,7 @@ export default function Newsletter() {
                 {errorMsg && (
                   <p className="text-xs text-red-400 font-medium">{errorMsg}</p>
                 )}
-              </div>
+              </Reveal>
             )}
           </div>
 
