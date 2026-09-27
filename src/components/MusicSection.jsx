@@ -174,14 +174,14 @@ export default function MusicSection() {
   };
 
   return (
-    <section id="music" className="bg-black py-20 text-white overflow-hidden border-t border-white/5">
+    <section id="music" className="bg-black py-20 text-ink overflow-hidden border-t border-hairline">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ============================================================ */}
         {/* 1. LATEST RELEASE (Screenshot 1 & 2)                         */}
         {/* ============================================================ */}
         <div className="text-center space-y-2 mb-10">
-          <Reveal as="h2" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+          <Reveal as="h2" variant="up" className="font-fjalla text-4xl sm:text-6xl text-gold uppercase tracking-wide font-bold">
             LATEST RELEASE
           </Reveal>
           <Reveal as="p" variant="up" delay={120} className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
@@ -216,9 +216,9 @@ export default function MusicSection() {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-[#F88E14] hover:-translate-y-0.5 transition-all duration-300 group"
+                  className="flex items-center gap-2 hover:text-gold hover:-translate-y-0.5 transition-all duration-300 group"
                 >
-                  <Icon className="w-4 h-4 text-zinc-300 group-hover:text-[#F88E14] transition-colors flex-shrink-0" />
+                  <Icon className="w-4 h-4 text-zinc-300 group-hover:text-gold transition-colors flex-shrink-0" />
                   <span className="font-medium">{platform.name}</span>
                 </Reveal>
               );
@@ -231,7 +231,7 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div className="mb-20 sm:mb-24">
           <div className="text-center mb-10">
-            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-gold uppercase tracking-wide font-bold">
               MUSIC VIDEOS
             </Reveal>
           </div>
@@ -243,6 +243,7 @@ export default function MusicSection() {
                 variant="up"
                 delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
+                data-theme="dark"
                 className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
@@ -267,7 +268,7 @@ export default function MusicSection() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[11px] sm:text-xs text-white font-medium truncate drop-shadow">
+                  <span className="text-[11px] sm:text-xs text-ink font-medium truncate drop-shadow">
                     {video.title}
                   </span>
                 </div>
@@ -286,7 +287,7 @@ export default function MusicSection() {
         {/* ============================================================ */}
         <div>
           <div className="text-center mb-10">
-            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+            <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-gold uppercase tracking-wide font-bold">
               LIVE PERFORMANCES
             </Reveal>
           </div>
@@ -298,6 +299,7 @@ export default function MusicSection() {
                 variant="up"
                 delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
+                data-theme="dark"
                 className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
               >
                 {/* Thumbnail Image */}
@@ -322,7 +324,7 @@ export default function MusicSection() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-[11px] sm:text-xs text-white font-medium truncate drop-shadow">
+                  <span className="text-[11px] sm:text-xs text-ink font-medium truncate drop-shadow">
                     {video.title}
                   </span>
                 </div>

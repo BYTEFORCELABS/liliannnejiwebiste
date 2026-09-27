@@ -15,10 +15,10 @@ const HIT_SINGLES = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-white/5 overflow-hidden text-white">
+    <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-hidden text-ink">
 
       {/* Ambient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,#16130d_0%,#000000_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,var(--color-zinc-900)_0%,var(--color-black)_60%)] pointer-events-none" />
       <div className="animate-breathe absolute -top-24 left-1/4 w-[460px] h-[460px] rounded-full bg-[#F88E14]/[0.07] blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
@@ -27,7 +27,7 @@ export default function AboutSection() {
         {/* HEADING                                                      */}
         {/* ============================================================ */}
         <div className="space-y-4 max-w-3xl">
-          <Reveal as="h2" variant="wipe" className="font-fjalla text-5xl sm:text-7xl lg:text-8xl text-[#F88E14] font-bold uppercase tracking-tight leading-[0.95]">
+          <Reveal as="h2" variant="wipe" className="font-fjalla text-5xl sm:text-7xl lg:text-8xl text-gold font-bold uppercase tracking-tight leading-[0.95]">
             I Am Lilian
           </Reveal>
 
@@ -59,14 +59,14 @@ export default function AboutSection() {
               </div>
 
               {/* Floating award badge */}
-              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-[#0c0c10] border border-[#F88E14]/40 px-5 py-4 shadow-2xl max-w-[230px] animate-float">
+              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-zinc-950 border border-[#F88E14]/40 px-5 py-4 shadow-2xl max-w-[230px] animate-float">
                 <div className="flex items-start gap-3">
-                  <Award className="w-6 h-6 text-[#F88E14] flex-shrink-0 mt-0.5" />
+                  <Award className="w-6 h-6 text-gold flex-shrink-0 mt-0.5" />
                   <div className="leading-tight">
-                    <p className="font-fjalla text-sm font-bold text-white uppercase tracking-wide">
+                    <p className="font-fjalla text-sm font-bold text-ink uppercase tracking-wide">
                       Africa Praise Artiste
                     </p>
-                    <p className="text-[11px] text-[#F88E14] font-semibold uppercase tracking-wider">
+                    <p className="text-[11px] text-gold font-semibold uppercase tracking-wider">
                       Of the Year &middot; 2024
                     </p>
                   </div>
@@ -80,8 +80,8 @@ export default function AboutSection() {
 
             <div className="space-y-5 text-zinc-300 text-[15px] sm:text-[17px] leading-[1.75] font-normal">
               <Reveal as="p" variant="up">
-                Minister <strong className="text-white font-semibold">Lilian Nneka Nneji</strong>, known
-                to the world simply as <strong className="text-white font-semibold">Lilian Nneji</strong>, is
+                Minister <strong className="text-ink font-semibold">Lilian Nneka Nneji</strong>, known
+                to the world simply as <strong className="text-ink font-semibold">Lilian Nneji</strong>, is
                 a Nigerian gospel singer, songwriter, worship leader and recording artiste. An ordained assistant
                 pastor and one of Africa&rsquo;s most energetic praise leaders, she carries a sound that moves a
                 room from celebration straight into the presence of God.
@@ -89,7 +89,7 @@ export default function AboutSection() {
 
               <Reveal as="p" variant="up" delay={100}>
                 Born on the 18th of July, she is the fifth child in a family of six from{" "}
-                <strong className="text-white font-semibold">Imo State, Nigeria</strong>. She graduated from the
+                <strong className="text-ink font-semibold">Imo State, Nigeria</strong>. She graduated from the
                 University of Ado-Ekiti with a B.Sc in Accounting and worked professionally for ten years,
                 carrying the work of ministry alongside her career, until the Lord called her into full-time
                 ministry.
@@ -98,7 +98,7 @@ export default function AboutSection() {
               <Reveal as="p" variant="up" delay={200}>
                 Since that call she has travelled around the world preaching through her music, singing and dancing
                 energetically to God. In 2024 she was named{" "}
-                <strong className="text-white font-semibold">Africa Praise Artiste of the Year</strong> at the
+                <strong className="text-ink font-semibold">Africa Praise Artiste of the Year</strong> at the
                 prestigious Clima Africa Awards, and she continues to write songs that carry congregations from
                 praise into deep worship.
               </Reveal>
@@ -115,7 +115,7 @@ export default function AboutSection() {
               {[...HIT_SINGLES, ...HIT_SINGLES].map((song, idx) => (
                 <span
                   key={`${song}-${idx}`}
-                  className="flex-shrink-0 flex items-center gap-4 font-fjalla text-2xl sm:text-4xl uppercase font-bold tracking-tight text-zinc-600 hover:text-[#F88E14] transition-colors duration-300"
+                  className="flex-shrink-0 flex items-center gap-4 font-fjalla text-2xl sm:text-4xl uppercase font-bold tracking-tight text-zinc-600 hover:text-gold transition-colors duration-300"
                 >
                   {song}
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F88E14]/50" />
@@ -131,7 +131,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
 
           <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
-            <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase leading-[0.95]">
+            <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-gold font-bold tracking-tight uppercase leading-[0.95]">
               Queen of Praise
             </Reveal>
 
@@ -153,7 +153,7 @@ export default function AboutSection() {
               {["Praise Leader", "Songwriter", "Recording Artiste", "Worship Leader"].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3.5 py-1.5 border border-[#F88E14]/25 text-[11px] uppercase tracking-wider font-semibold text-zinc-300 hover:border-[#F88E14] hover:text-[#F88E14] hover:-translate-y-0.5 transition-all duration-300"
+                  className="px-3.5 py-1.5 border border-[#F88E14]/25 text-[11px] uppercase tracking-wider font-semibold text-zinc-300 hover:border-[#F88E14] hover:text-gold hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {tag}
                 </span>
@@ -182,17 +182,17 @@ export default function AboutSection() {
         {/* AWARD CALLOUT                                                */}
         {/* ============================================================ */}
         <Reveal variant="scale">
-          <div className="relative border border-[#F88E14]/25 bg-gradient-to-br from-[#12100a] to-[#08080a] px-6 sm:px-12 py-12 sm:py-14 text-center overflow-hidden group">
+          <div className="relative border border-[#F88E14]/25 bg-gradient-to-br from-zinc-900 to-black px-6 sm:px-12 py-12 sm:py-14 text-center overflow-hidden group">
             <div className="animate-breathe absolute -top-20 left-1/2 -translate-x-1/2 w-[420px] h-[220px] bg-[#F88E14]/10 blur-[110px] pointer-events-none" />
 
             <div className="relative space-y-4">
-              <Award className="w-10 h-10 text-[#F88E14] mx-auto group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" />
+              <Award className="w-10 h-10 text-gold mx-auto group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" />
 
               <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 font-bold">
                 Clima Africa Awards &middot; 2024
               </p>
 
-              <h3 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-white font-bold uppercase tracking-tight">
+              <h3 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-ink font-bold uppercase tracking-tight">
                 Africa Praise Artiste
                 <span className="block text-gold-gradient">Of the Year</span>
               </h3>

@@ -16,7 +16,7 @@ export default function Home() {
   const featured = getGalleryItems().filter((item) => item.featured).slice(0, 8);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070709] text-white">
+    <div className="flex flex-col min-h-screen bg-black text-ink">
       <Navbar />
       <main className="flex-grow">
         <Hero />

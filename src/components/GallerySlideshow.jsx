@@ -52,7 +52,7 @@ export default function GallerySlideshow({ items = [] }) {
   const current = items[active];
 
   return (
-    <section id="gallery" className="relative bg-black py-24 sm:py-28 border-t border-white/5 overflow-hidden">
+    <section id="gallery" className="relative bg-black py-24 sm:py-28 border-t border-hairline overflow-hidden">
       <div className="absolute top-1/3 -right-20 w-[420px] h-[420px] rounded-full bg-[#F88E14]/[0.06] blur-[130px] pointer-events-none animate-breathe" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -60,7 +60,7 @@ export default function GallerySlideshow({ items = [] }) {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10">
           <div className="space-y-3">
-            <Reveal as="h2" variant="wipe" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl text-[#F88E14] font-bold uppercase tracking-tight leading-[0.95]">
+            <Reveal as="h2" variant="wipe" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl text-gold font-bold uppercase tracking-tight leading-[0.95]">
               Moments of Glory
             </Reveal>
           </div>
@@ -68,7 +68,7 @@ export default function GallerySlideshow({ items = [] }) {
           <Reveal variant="up" delay={140}>
             <Link
               href="/gallery"
-              className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-300 hover:text-[#F88E14] transition-colors link-underline"
+              className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-300 hover:text-gold transition-colors link-underline"
             >
               View Full Gallery
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
@@ -86,6 +86,7 @@ export default function GallerySlideshow({ items = [] }) {
 
             {/* Main stage */}
             <div
+              data-theme="dark"
               className="lg:col-span-9 relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] overflow-hidden bg-zinc-950 border border-zinc-800/80 group"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
@@ -113,10 +114,10 @@ export default function GallerySlideshow({ items = [] }) {
               {/* Caption */}
               <div key={active} className="absolute bottom-0 inset-x-0 p-5 sm:p-8 z-10">
                 <div data-reveal="up" data-revealed="true" className="space-y-2 max-w-2xl">
-                  <span className="inline-block px-2.5 py-1 bg-[#F88E14] text-black text-[10px] font-bold uppercase tracking-widest">
+                  <span className="inline-block px-2.5 py-1 bg-[#F88E14] text-on-gold text-[10px] font-bold uppercase tracking-widest">
                     {current.category}
                   </span>
-                  <h3 className="font-fjalla text-2xl sm:text-4xl font-bold text-white uppercase tracking-wide">
+                  <h3 className="font-fjalla text-2xl sm:text-4xl font-bold text-ink uppercase tracking-wide">
                     {current.title}
                   </h3>
                   {current.caption && (
@@ -130,7 +131,7 @@ export default function GallerySlideshow({ items = [] }) {
                 type="button"
                 onClick={prev}
                 aria-label="Previous photo"
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-white hover:text-black backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 -translate-x-2 group-hover:translate-x-0 cursor-pointer"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-ink hover:text-on-gold backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 -translate-x-2 group-hover:translate-x-0 cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -138,7 +139,7 @@ export default function GallerySlideshow({ items = [] }) {
                 type="button"
                 onClick={next}
                 aria-label="Next photo"
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-white hover:text-black backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 translate-x-2 group-hover:translate-x-0 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-ink hover:text-on-gold backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 translate-x-2 group-hover:translate-x-0 cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

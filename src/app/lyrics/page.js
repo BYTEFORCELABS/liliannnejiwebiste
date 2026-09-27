@@ -92,7 +92,7 @@ export default function LyricsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white flex flex-col selection:bg-[#F88E14] selection:text-black">
+    <div className="min-h-screen bg-black text-ink flex flex-col selection:bg-[#F88E14] selection:text-on-gold">
       {/* Global Navbar */}
       <Navbar />
 
@@ -106,7 +106,7 @@ export default function LyricsPage() {
           {/* Ambient Lighting */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
-          <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-white font-bold tracking-tight">
+          <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
             WORSHIP & PRAISE <span className="text-gold-gradient">LYRICS</span>
           </h1>
 
@@ -124,7 +124,7 @@ export default function LyricsPage() {
                 placeholder="Search by song title, release, or words inside the lyrics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 bg-zinc-950/90 border border-zinc-800 rounded-none text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14] shadow-xl"
+                className="w-full pl-12 pr-4 py-3.5 bg-zinc-950/90 border border-zinc-800 rounded-none text-sm text-ink placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14] shadow-xl"
               />
             </div>
 
@@ -138,8 +138,8 @@ export default function LyricsPage() {
                     onClick={() => setActiveCategory(cat)}
                     className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? "bg-[#F88E14] text-black shadow-md scale-105 font-bold"
-                        : "bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/80"
+                        ? "bg-[#F88E14] text-on-gold shadow-md scale-105 font-bold"
+                        : "bg-zinc-900 text-zinc-400 hover:text-ink hover:bg-zinc-800 border border-zinc-800/80"
                     }`}
                   >
                     {cat}
@@ -211,7 +211,7 @@ export default function LyricsPage() {
                           <div className="space-y-1">
                             <h4
                               className={`font-fjalla text-base sm:text-lg uppercase tracking-wide font-bold transition-colors ${
-                                isSelected ? "text-[#F88E14]" : "text-white"
+                                isSelected ? "text-gold" : "text-ink"
                               }`}
                             >
                               {song.title}
@@ -226,7 +226,7 @@ export default function LyricsPage() {
                           <span
                             className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider flex-shrink-0 ${
                               isSelected
-                                ? "bg-[#F88E14] text-black"
+                                ? "bg-[#F88E14] text-on-gold"
                                 : "bg-zinc-800 text-zinc-300"
                             }`}
                           >
@@ -248,18 +248,18 @@ export default function LyricsPage() {
                     <div className="border-b border-zinc-800/80 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-0.5 bg-[#F88E14]/15 border border-[#F88E14]/30 text-[#F88E14] text-xs font-bold uppercase tracking-wider">
+                          <span className="px-2.5 py-0.5 bg-[#F88E14]/15 border border-[#F88E14]/30 text-gold text-xs font-bold uppercase tracking-wider">
                             {selectedSong.category}
                           </span>
                           <span className="text-xs text-zinc-400 font-medium">
                             Released: {selectedSong.releaseYear}
                           </span>
                         </div>
-                        <h2 className="font-fjalla text-3xl sm:text-5xl font-bold text-white uppercase tracking-tight">
+                        <h2 className="font-fjalla text-3xl sm:text-5xl font-bold text-ink uppercase tracking-tight">
                           {selectedSong.title}
                         </h2>
                         <p className="text-xs sm:text-sm text-zinc-400 font-medium">
-                          Written & Performed by <strong className="text-white">Minister Lilian Nneji</strong> • Release: <strong className="text-zinc-300">{selectedSong.album}</strong>
+                          Written & Performed by <strong className="text-ink">Minister Lilian Nneji</strong> • Release: <strong className="text-zinc-300">{selectedSong.album}</strong>
                         </p>
                       </div>
 
@@ -271,7 +271,7 @@ export default function LyricsPage() {
                             onClick={handleCopyLyrics}
                             className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs uppercase font-bold tracking-wider rounded-none text-zinc-200 transition-colors shadow cursor-pointer"
                           >
-                            <Copy className="w-4 h-4 text-[#F88E14]" />
+                            <Copy className="w-4 h-4 text-gold" />
                             <span>Copy Lyrics</span>
                           </button>
                         )}
@@ -280,7 +280,7 @@ export default function LyricsPage() {
                         {videoId && (
                           <button
                             onClick={() => setNowPlayingId(isPlaying ? null : selectedSong.id)}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-black text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer"
                           >
                             {isPlaying ? (
                               <>
@@ -312,14 +312,14 @@ export default function LyricsPage() {
                           />
                         </div>
                         <div className="flex items-center justify-between gap-3 pt-2.5">
-                          <p className="text-[11px] uppercase tracking-widest font-bold text-[#F88E14]">
+                          <p className="text-[11px] uppercase tracking-widest font-bold text-gold">
                             Now Playing
                           </p>
                           <a
                             href={selectedSong.youtubeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-white transition-colors"
+                            className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-ink transition-colors"
                           >
                             Open on YouTube
                             <ExternalLink className="w-3 h-3" />
@@ -359,7 +359,7 @@ export default function LyricsPage() {
 
                     {/* Ministry Copyright Banner */}
                     <div className="pt-8 border-t border-zinc-900 text-xs text-zinc-500 text-center">
-                      &copy; {selectedSong.releaseYear} Minister Lilian Nneji Ministries. All rights reserved. For live performance licenses and sheet music enquiries, contact <a href="mailto:bookings@liliannneji.com" className="text-[#F88E14] hover:underline">bookings@liliannneji.com</a>.
+                      &copy; {selectedSong.releaseYear} Minister Lilian Nneji Ministries. All rights reserved. For live performance licenses and sheet music enquiries, contact <a href="mailto:bookings@liliannneji.com" className="text-gold hover:underline">bookings@liliannneji.com</a>.
                     </div>
 
                   </div>
