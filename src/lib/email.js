@@ -11,7 +11,7 @@ export function generateTicketEmailHtml(attendee) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your REVERB 5.0 Admission Pass</title>
   <style>
-    body { margin: 0; padding: 0; background-color: #070709; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #ffffff; }
+    body { margin: 0; padding: 0; background-color: #0A1326; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #ffffff; }
     .wrapper { width: 100%; max-width: 600px; margin: 0 auto; padding: 30px 15px; }
     .card { background: linear-gradient(180deg, #0d1633 0%, #080c1b 100%); border: 1px solid #28448a; border-radius: 20px; padding: 32px 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
     .header { text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
@@ -24,9 +24,9 @@ export function generateTicketEmailHtml(attendee) {
     .details { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; }
     .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; }
     .detail-row:last-child { border-bottom: none; }
-    .detail-label { color: #a1a1aa; }
+    .detail-label { color: #9BAAC6; }
     .detail-value { color: #ffffff; font-weight: 600; text-align: right; }
-    .instructions { font-size: 12px; color: #a1a1aa; line-height: 1.6; text-align: center; margin: 20px 0; }
+    .instructions { font-size: 12px; color: #9BAAC6; line-height: 1.6; text-align: center; margin: 20px 0; }
     .footer { text-align: center; font-size: 11px; color: #71717a; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); }
     .gold-text { color: #F88E14; font-weight: bold; }
   </style>
@@ -49,31 +49,31 @@ export function generateTicketEmailHtml(attendee) {
       <div class="details">
         <table width="100%" cellpadding="6" cellspacing="0" style="font-size: 14px;">
           <tr>
-            <td style="color: #a1a1aa;">Attendee:</td>
+            <td style="color: #9BAAC6;">Attendee:</td>
             <td style="color: #ffffff; font-weight: bold; text-align: right;">${attendee.fullName}</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">Gender:</td>
+            <td style="color: #9BAAC6;">Gender:</td>
             <td style="color: #ffffff; text-align: right;">${attendee.gender}</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">Date:</td>
+            <td style="color: #9BAAC6;">Date:</td>
             <td style="color: #F88E14; font-weight: bold; text-align: right;">Sunday, 1st November 2026</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">Time:</td>
+            <td style="color: #9BAAC6;">Time:</td>
             <td style="color: #ffffff; text-align: right;">4:00 PM (Doors Open 3:00 PM)</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">Venue:</td>
+            <td style="color: #9BAAC6;">Venue:</td>
             <td style="color: #ffffff; text-align: right;">EUI Event Center, Port Harcourt</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">Address:</td>
+            <td style="color: #9BAAC6;">Address:</td>
             <td style="color: #cbd5e1; text-align: right; font-size: 12px;">Plot F11 Sani Abacha Road, GRA Phase 3, Port Harcourt</td>
           </tr>
           <tr>
-            <td style="color: #a1a1aa;">City of Residence:</td>
+            <td style="color: #9BAAC6;">City of Residence:</td>
             <td style="color: #ffffff; text-align: right;">${attendee.city || "Port Harcourt"}</td>
           </tr>
         </table>

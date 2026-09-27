@@ -55,19 +55,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer id="booking" className="bg-black text-white pt-14 pb-12 border-t border-white/5">
+    <footer id="booking" className="bg-black text-ink pt-14 pb-12 border-t border-hairline">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
 
         {/* For Bookings Row matching Screenshot 3 */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs sm:text-sm text-zinc-300">
-          <span className="font-semibold text-white tracking-wide">
+          <span className="font-semibold text-ink tracking-wide">
             For Bookings |
           </span>
 
           {/* Phone */}
           <a
             href="tel:+2348023131871"
-            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Phone className="w-3.5 h-3.5 text-zinc-300" />
             <span>08023131871</span>
@@ -76,7 +76,7 @@ export default function Footer() {
           {/* Email 1 */}
           <a
             href="mailto:bookings@liliannneji.com"
-            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
             <span>bookings@liliannneji.com</span>
@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Email 2 */}
           <a
             href="mailto:liliannnejiministries@gmail.com"
-            className="flex items-center gap-2 hover:text-[#F88E14] transition-colors"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
             <span>liliannnejiministries@gmail.com</span>
@@ -93,7 +93,7 @@ export default function Footer() {
         </div>
 
         {/* Yellow Social Icons Row matching Screenshot 3 */}
-        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#F88E14] pt-2">
+        <div className="flex items-center justify-center gap-6 sm:gap-7 text-gold pt-2">
           {socialLinks.map((social, idx) => {
             const Icon = social.icon;
             return (
@@ -106,7 +106,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-300"
+                className="hover:text-ink hover:scale-125 hover:-translate-y-1 transition-all duration-300"
               >
                 <Icon className="w-5 h-5" />
               </Reveal>
@@ -116,12 +116,12 @@ export default function Footer() {
 
         {/* Quick Links Row */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-widest font-semibold text-zinc-400 pt-1">
-          <Link href="/" className="hover:text-[#F88E14] transition-colors">Home</Link>
-          <Link href="/#about" className="hover:text-[#F88E14] transition-colors">About</Link>
-          <Link href="/#music" className="hover:text-[#F88E14] transition-colors">Music</Link>
-          <Link href="/lyrics" className="hover:text-[#F88E14] transition-colors">Lyrics</Link>
-          <Link href="/gallery" className="hover:text-[#F88E14] transition-colors">Gallery</Link>
-          <Link href="/reverb" className="hover:text-[#F88E14] transition-colors text-white font-bold">The Reverb</Link>
+          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/#about" className="hover:text-gold transition-colors">About</Link>
+          <Link href="/#music" className="hover:text-gold transition-colors">Music</Link>
+          <Link href="/lyrics" className="hover:text-gold transition-colors">Lyrics</Link>
+          <Link href="/gallery" className="hover:text-gold transition-colors">Gallery</Link>
+          <Link href="/reverb" className="hover:text-gold transition-colors text-ink font-bold">The Reverb</Link>
         </div>
 
         {/* Thin Divider Line matching Screenshot 3 */}

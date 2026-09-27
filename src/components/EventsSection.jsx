@@ -5,12 +5,12 @@ import Reveal from "@/components/Reveal";
 
 export default function EventsSection() {
   return (
-    <section id="events" className="bg-black py-20 text-white border-t border-white/5 overflow-hidden">
+    <section id="events" className="bg-black py-20 text-ink border-t border-hairline overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header matching Screenshot 1 */}
         <div className="text-center space-y-2 mb-12">
-          <Reveal as="h2" variant="up" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] uppercase tracking-wide font-bold">
+          <Reveal as="h2" variant="up" className="font-fjalla text-4xl sm:text-6xl text-gold uppercase tracking-wide font-bold">
             UPCOMING EVENTS
           </Reveal>
           <Reveal as="p" variant="up" delay={120} className="text-zinc-300 text-sm sm:text-base font-normal tracking-wide">
@@ -19,26 +19,26 @@ export default function EventsSection() {
         </div>
 
         {/* Event Banner Strip matching Screenshot 1 */}
-        <Reveal variant="up" delay={180} className="group w-full bg-[#0d0d12] hover:bg-[#12121a] border-y border-zinc-800/80 hover:border-[#F88E14]/30 py-6 px-6 sm:px-10 my-6 shadow-xl transition-colors duration-500">
+        <Reveal variant="up" delay={180} className="group w-full bg-zinc-950 hover:bg-zinc-900 border-y border-zinc-800/80 hover:border-[#F88E14]/30 py-6 px-6 sm:px-10 my-6 shadow-xl transition-colors duration-500">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
 
             {/* Left: Date */}
             <div className="flex-shrink-0">
-              <span className="font-fjalla text-3xl sm:text-4xl text-[#F88E14] font-bold tracking-tight">
+              <span className="font-fjalla text-3xl sm:text-4xl text-gold font-bold tracking-tight">
                 1ST NOV.
               </span>
             </div>
 
             {/* Location Tag */}
             <div className="flex-shrink-0">
-              <span className="font-fjalla text-xl sm:text-2xl text-white font-bold tracking-wider">
+              <span className="font-fjalla text-xl sm:text-2xl text-ink font-bold tracking-wider">
                 PH, NG
               </span>
             </div>
 
             {/* Event Name & Venue */}
             <div className="flex-grow text-center md:text-left md:px-6">
-              <span className="font-fjalla text-lg sm:text-xl text-white tracking-wide uppercase font-medium">
+              <span className="font-fjalla text-lg sm:text-xl text-ink tracking-wide uppercase font-medium">
                 REVERB | EUI EVENT CENTER | 4:00 PM
               </span>
             </div>
@@ -47,7 +47,7 @@ export default function EventsSection() {
             <div className="flex-shrink-0">
               <Link
                 href="/reverb"
-                className="shimmer-sweep relative overflow-hidden inline-block border border-[#F88E14] text-[#F88E14] hover:bg-[#F88E14] hover:text-black font-semibold text-xs tracking-widest px-8 py-2.5 rounded-none uppercase transition-all duration-200 active:scale-95 shadow-md"
+                className="shimmer-sweep relative overflow-hidden inline-block border border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-semibold text-xs tracking-widest px-8 py-2.5 rounded-none uppercase transition-all duration-200 active:scale-95 shadow-md"
               >
                 REGISTER
               </Link>

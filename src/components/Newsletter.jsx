@@ -42,7 +42,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-black py-16 sm:py-24 text-white overflow-hidden border-t border-white/5">
+    <section className="bg-black py-16 sm:py-24 text-ink overflow-hidden border-t border-hairline">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
@@ -62,7 +62,7 @@ export default function Newsletter() {
           {/* Right Column: STAY IN TOUCH Form matching Screenshot 2 */}
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-3">
-              <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-[#F88E14] font-bold tracking-tight uppercase">
+              <Reveal as="h3" variant="wipe" className="font-fjalla text-4xl sm:text-6xl text-gold font-bold tracking-tight uppercase">
                 STAY IN TOUCH
               </Reveal>
               <Reveal as="p" variant="up" delay={140} className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg font-normal">
@@ -71,9 +71,9 @@ export default function Newsletter() {
             </div>
 
             {subscribed ? (
-              <div className="p-4 bg-zinc-900 border border-[#F88E14]/40 rounded-none max-w-lg flex items-center gap-3 text-[#F88E14] animate-in fade-in">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-[#F88E14]" />
-                <span className="text-sm font-semibold text-white">
+              <div className="p-4 bg-zinc-900 border border-[#F88E14]/40 rounded-none max-w-lg flex items-center gap-3 text-gold animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-gold" />
+                <span className="text-sm font-semibold text-ink">
                   {feedbackMsg || "Thank you for subscribing! You'll be notified of new sounds & tour dates."}
                 </span>
               </div>
@@ -87,12 +87,12 @@ export default function Newsletter() {
                     placeholder="Enter email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-grow px-4 py-3.5 bg-white text-black placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md disabled:opacity-60"
+                    className="flex-grow px-4 py-3.5 bg-white text-on-gold placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md disabled:opacity-60"
                   />
                   <button
                     type="submit"
                     disabled={loading}
-                    className="border border-[#F88E14] bg-black hover:bg-[#F88E14] text-[#F88E14] hover:text-black font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
+                    className="border border-[#F88E14] bg-black hover:bg-[#F88E14] text-gold hover:text-on-gold font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
                   >
                     {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
                   </button>

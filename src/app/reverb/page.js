@@ -139,11 +139,11 @@ export default function ReverbPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-black text-ink flex flex-col font-sans">
       <Navbar />
 
       {/* Hero Registration Section (Screenshot 1 & 2) */}
-      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 overflow-hidden bg-[#0a1128]">
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-24 overflow-hidden bg-zinc-950">
         {/* Giant Watermark Text matching Screenshot 1 & 2 */}
         <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden pr-4 sm:pr-12">
           <span className="font-fjalla text-[22vw] font-black text-blue-950/40 uppercase tracking-tighter leading-none">
@@ -174,7 +174,7 @@ export default function ReverbPage() {
               {/* Bottom Sponsorship & Enquiry strip cleanly positioned beneath poster */}
               <div className="w-full max-w-md sm:max-w-lg mt-3.5 p-3.5 rounded-xl bg-blue-950/60 border border-blue-400/25 text-[11px] sm:text-xs text-zinc-300 shadow-lg">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-bold text-white tracking-wider">
+                  <span className="font-bold text-ink tracking-wider">
                     FOR ENQUIRIES:
                   </span>
                   <span className="text-blue-300 font-semibold">
@@ -197,7 +197,7 @@ export default function ReverbPage() {
                     <div className="w-16 h-16 mx-auto rounded-full bg-blue-500/20 border border-blue-400 flex items-center justify-center text-blue-400">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-fjalla font-bold text-white uppercase tracking-wide">
+                    <h3 className="text-2xl sm:text-3xl font-fjalla font-bold text-ink uppercase tracking-wide">
                       Seat Reserved for Reverb 5.0!
                     </h3>
 
@@ -207,7 +207,7 @@ export default function ReverbPage() {
                         <span className="block text-[10px] uppercase font-bold tracking-widest text-blue-300">
                           Official Ticket Pass Ref:
                         </span>
-                        <span className="text-2xl font-mono font-black text-[#F88E14] tracking-wider">
+                        <span className="text-2xl font-mono font-black text-gold tracking-wider">
                           {ticketCode}
                         </span>
                       </div>
@@ -228,7 +228,7 @@ export default function ReverbPage() {
                           city: "",
                         });
                       }}
-                      className="mt-4 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-lg shadow-blue-600/30"
+                      className="mt-4 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-ink font-bold text-xs uppercase tracking-wider transition-colors shadow-lg shadow-blue-600/30"
                     >
                       Register Another Attendee
                     </button>
@@ -243,7 +243,7 @@ export default function ReverbPage() {
 
                     {/* Full Name */}
                     <div className="space-y-1.5">
-                      <label className="text-sm font-semibold text-white">
+                      <label className="text-sm font-semibold text-ink">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -257,7 +257,7 @@ export default function ReverbPage() {
 
                     {/* Gender Radio matching Screenshot 1 */}
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-white block">
+                      <label className="text-sm font-semibold text-ink block">
                         Gender <span className="text-red-500">*</span>
                       </label>
                       <div className="space-y-2 text-sm text-zinc-100 font-normal">
@@ -288,7 +288,7 @@ export default function ReverbPage() {
 
                     {/* Email */}
                     <div className="space-y-1.5">
-                      <label className="text-sm font-semibold text-white">
+                      <label className="text-sm font-semibold text-ink">
                         Email <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -303,7 +303,7 @@ export default function ReverbPage() {
 
                     {/* Phone Number */}
                     <div className="space-y-1.5">
-                      <label className="text-sm font-semibold text-white">
+                      <label className="text-sm font-semibold text-ink">
                         Phone Number (WhatsApp Preferably)
                       </label>
                       <input
@@ -317,7 +317,7 @@ export default function ReverbPage() {
 
                     {/* City of Residence */}
                     <div className="space-y-1.5">
-                      <label className="text-sm font-semibold text-white">
+                      <label className="text-sm font-semibold text-ink">
                         City of Residence <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -334,7 +334,7 @@ export default function ReverbPage() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="bg-[#2f55d4] hover:bg-[#2546b8] text-white font-bold uppercase tracking-widest text-sm px-9 py-3 rounded-md transition-all shadow-xl hover:shadow-blue-600/40 active:scale-95"
+                        className="bg-[#2f55d4] hover:bg-[#2546b8] text-ink font-bold uppercase tracking-widest text-sm px-9 py-3 rounded-md transition-all shadow-xl hover:shadow-blue-600/40 active:scale-95"
                       >
                         {loading ? "REGISTERING..." : "REGISTER"}
                       </button>
@@ -351,7 +351,7 @@ export default function ReverbPage() {
       </section>
 
       {/* Section 2: INCOMING... REVERB 5.0 + Polaroid Collage (Screenshot 2 & 3) */}
-      <section className="bg-black py-20 sm:py-28 border-t border-white/5 relative overflow-hidden">
+      <section className="bg-black py-20 sm:py-28 border-t border-hairline relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
@@ -361,7 +361,7 @@ export default function ReverbPage() {
                 <span className="text-[#ef4444] font-bold uppercase tracking-wider text-sm sm:text-base font-fjalla">
                   INCOMING...
                 </span>
-                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-fjalla font-bold text-white tracking-tight uppercase leading-none">
+                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-fjalla font-bold text-ink tracking-tight uppercase leading-none">
                   REVERB 5.0
                 </h2>
               </div>
@@ -369,7 +369,7 @@ export default function ReverbPage() {
               <div>
                 <button
                   onClick={() => window.scrollTo({ top: 120, behavior: "smooth" })}
-                  className="bg-gradient-to-r from-zinc-700 via-blue-900 to-blue-600 text-white font-medium px-8 py-3 rounded-lg text-sm transition-all hover:scale-105 shadow-xl hover:shadow-blue-900/50"
+                  className="bg-gradient-to-r from-zinc-700 via-blue-900 to-blue-600 text-ink font-medium px-8 py-3 rounded-lg text-sm transition-all hover:scale-105 shadow-xl hover:shadow-blue-900/50"
                 >
                   Register
                 </button>
@@ -439,7 +439,7 @@ export default function ReverbPage() {
       </section>
 
       {/* Section 4: Venue & Google Map Embed matching Screenshot 4 & 5 */}
-      <section className="relative w-full h-[450px] sm:h-[520px] bg-zinc-900 overflow-hidden border-b border-white/10">
+      <section className="relative w-full h-[450px] sm:h-[520px] bg-zinc-900 overflow-hidden border-b border-hairline">
 
         {/* Google Map Embed of EUI Centre, Port Harcourt */}
         <iframe
@@ -458,7 +458,7 @@ export default function ReverbPage() {
         <div className="absolute top-6 left-6 z-10 bg-white text-zinc-900 p-4 sm:p-5 rounded-lg shadow-2xl max-w-xs border border-zinc-200">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h4 className="font-bold text-base sm:text-lg text-black">
+              <h4 className="font-bold text-base sm:text-lg text-on-gold">
                 EUI Centre
               </h4>
               <p className="text-xs text-zinc-600 mt-1 leading-snug">
@@ -487,7 +487,7 @@ export default function ReverbPage() {
       {/* Section 5: Footer matching Screenshot 5 */}
       <footer className="bg-black py-12 text-center space-y-7">
         {/* Yellow Social Icons Row */}
-        <div className="flex items-center justify-center gap-6 sm:gap-7 text-[#F88E14]">
+        <div className="flex items-center justify-center gap-6 sm:gap-7 text-gold">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             return (
@@ -497,7 +497,7 @@ export default function ReverbPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="hover:text-white transition-colors hover:scale-125 duration-200"
+                className="hover:text-ink transition-colors hover:scale-125 duration-200"
               >
                 <Icon className="w-5 h-5" />
               </a>
@@ -510,7 +510,7 @@ export default function ReverbPage() {
 
         {/* Yellow Copyright Banner matching Screenshot 5 */}
         <div className="pt-1 flex justify-center">
-          <div className="bg-[#F88E14] text-black font-bold text-xs sm:text-sm px-6 py-2 rounded-none shadow-md">
+          <div className="bg-[#F88E14] text-on-gold font-bold text-xs sm:text-sm px-6 py-2 rounded-none shadow-md">
             Copyright © {new Date().getFullYear()} Minister Lilian Nneji | Designed by Engee Titus
           </div>
         </div>

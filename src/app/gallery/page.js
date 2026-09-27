@@ -123,7 +123,7 @@ export default function GalleryPage() {
   const currentItem = lightboxIndex !== null ? filteredItems[lightboxIndex] : null;
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white flex flex-col selection:bg-[#F88E14] selection:text-black">
+    <div className="min-h-screen bg-black text-ink flex flex-col selection:bg-[#F88E14] selection:text-on-gold">
       <Navbar />
 
       <main className="flex-grow pt-28 pb-20">
@@ -134,7 +134,7 @@ export default function GalleryPage() {
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto text-center space-y-5 overflow-hidden">
           <div className="animate-breathe absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
-          <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-white font-bold tracking-tight">
+          <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
             MOMENTS OF <span className="text-gold-gradient">GLORY &amp; PRAISE</span>
           </Reveal>
 
@@ -155,8 +155,8 @@ export default function GalleryPage() {
                   }}
                   className={`px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "bg-[#F88E14] text-black shadow-lg scale-105 font-bold"
-                      : "bg-zinc-900/90 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800 hover:-translate-y-0.5"
+                      ? "bg-[#F88E14] text-on-gold shadow-lg scale-105 font-bold"
+                      : "bg-zinc-900/90 text-zinc-400 hover:text-ink hover:bg-zinc-800 border border-zinc-800 hover:-translate-y-0.5"
                   }`}
                 >
                   {cat}
@@ -200,6 +200,7 @@ export default function GalleryPage() {
                   variant="up"
                   delay={(idx % 3) * 90}
                   onClick={() => setLightboxIndex(idx)}
+                  data-theme="dark"
                   className="group relative block w-full mb-5 sm:mb-6 break-inside-avoid overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#F88E14]/60 transition-colors duration-500 cursor-pointer shadow-xl"
                 >
                   <div className={`relative w-full ${SPAN_RATIO[item.span] || SPAN_RATIO.normal}`}>
@@ -214,17 +215,17 @@ export default function GalleryPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent opacity-85 group-hover:opacity-96 transition-opacity duration-500" />
 
                     <div className="absolute top-3 left-3 z-10">
-                      <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
+                      <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-hairline text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
                         {item.category}
                       </span>
                     </div>
 
                     <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
-                      <Maximize2 className="w-4 h-4 text-[#F88E14]" />
+                      <Maximize2 className="w-4 h-4 text-gold" />
                     </div>
 
                     <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 space-y-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="font-fjalla text-lg sm:text-xl font-bold text-white uppercase tracking-wide line-clamp-1 group-hover:text-[#F88E14] transition-colors duration-300">
+                      <h3 className="font-fjalla text-lg sm:text-xl font-bold text-ink uppercase tracking-wide line-clamp-1 group-hover:text-gold transition-colors duration-300">
                         {item.title}
                       </h3>
                       {item.caption && (
@@ -246,6 +247,7 @@ export default function GalleryPage() {
       {/* ============================================================ */}
       {lightboxIndex !== null && currentItem && (
         <div
+          data-theme="dark"
           className="fixed inset-0 z-50 bg-black/96 backdrop-blur-2xl flex flex-col p-4 sm:p-6"
           onClick={closeLightbox}
         >
@@ -258,7 +260,7 @@ export default function GalleryPage() {
               <span className="text-xs sm:text-sm font-mono font-bold text-zinc-400 bg-zinc-900 px-3 py-1">
                 {String(lightboxIndex + 1).padStart(2, "0")} / {String(filteredItems.length).padStart(2, "0")}
               </span>
-              <span className="px-2.5 py-1 bg-[#F88E14]/15 border border-[#F88E14]/30 text-[#F88E14] text-[11px] uppercase font-bold tracking-wider">
+              <span className="px-2.5 py-1 bg-[#F88E14]/15 border border-[#F88E14]/30 text-gold text-[11px] uppercase font-bold tracking-wider">
                 {currentItem.category}
               </span>
             </div>
@@ -266,14 +268,14 @@ export default function GalleryPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setPlaying((p) => !p)}
-                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-black hover:bg-[#F88E14] transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-on-gold hover:bg-[#F88E14] transition-colors cursor-pointer"
                 aria-label={playing ? "Pause slideshow" : "Play slideshow"}
               >
                 {playing ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
               </button>
               <button
                 onClick={closeLightbox}
-                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-zinc-900 text-zinc-300 hover:text-ink hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X className="w-6 h-6" />
@@ -299,7 +301,7 @@ export default function GalleryPage() {
           >
             <button
               onClick={() => step(-1)}
-              className="absolute left-0 sm:left-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              className="absolute left-0 sm:left-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -318,7 +320,7 @@ export default function GalleryPage() {
 
             <button
               onClick={() => step(1)}
-              className="absolute right-0 sm:right-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-black text-white backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              className="absolute right-0 sm:right-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
               aria-label="Next image"
             >
               <ChevronRight className="w-6 h-6" />
@@ -330,7 +332,7 @@ export default function GalleryPage() {
             className="max-w-4xl w-full mx-auto text-center pt-4 z-20 space-y-1"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-fjalla text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+            <h2 className="font-fjalla text-xl sm:text-2xl font-bold text-ink uppercase tracking-wide">
               {currentItem.title}
             </h2>
             {currentItem.caption && (

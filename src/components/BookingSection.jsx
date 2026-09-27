@@ -35,7 +35,7 @@ export default function BookingSection() {
   );
 
   return (
-    <section id="booking" className="relative py-24 bg-[#070709] overflow-hidden">
+    <section id="booking" className="relative py-24 bg-black overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[#F88E14]/12 blur-[170px] pointer-events-none rounded-full" />
 
@@ -49,7 +49,7 @@ export default function BookingSection() {
               Official Ministration Bookings
             </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-cinzel font-black uppercase text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-cinzel font-black uppercase text-ink tracking-tight">
             Invite Minister <span className="text-gold-gradient">Lilian Nneji</span>
           </h2>
           <p className="text-zinc-400 text-sm sm:text-base">
@@ -68,7 +68,7 @@ export default function BookingSection() {
                 <span className="text-xs uppercase font-bold tracking-wider text-[#FABA1E]">
                   Management & Coordination Office
                 </span>
-                <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-white">
+                <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-ink">
                   Direct Contact Desk
                 </h3>
                 <p className="text-xs text-zinc-400 leading-relaxed">
@@ -88,7 +88,7 @@ export default function BookingSection() {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Official Line / Call</span>
-                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#FABA1E] transition-colors">
+                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-[#FABA1E] transition-colors">
                       0802 313 1871 / +234 802 313 1871
                     </h4>
                   </div>
@@ -106,7 +106,7 @@ export default function BookingSection() {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Instant Chat</span>
-                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-emerald-300 transition-colors">
                       Chat on WhatsApp Management
                     </h4>
                   </div>
@@ -122,7 +122,7 @@ export default function BookingSection() {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Official Bookings Email</span>
-                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#FABA1E] transition-colors">
+                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-[#FABA1E] transition-colors">
                       bookings@liliannneji.com
                     </h4>
                   </div>
@@ -130,12 +130,12 @@ export default function BookingSection() {
 
                 {/* Base Location */}
                 <div className="flex items-center gap-4 p-4 rounded-2xl glass-panel">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FABA1E]">
+                  <div className="w-12 h-12 rounded-xl bg-hairline border border-hairline flex items-center justify-center text-[#FABA1E]">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Headquarters</span>
-                    <h4 className="text-sm sm:text-base font-bold text-white">
+                    <h4 className="text-sm sm:text-base font-bold text-ink">
                       Lagos, Nigeria (Available Globally)
                     </h4>
                   </div>
@@ -144,7 +144,7 @@ export default function BookingSection() {
               </div>
 
               {/* Protocol Note */}
-              <div className="pt-2 border-t border-white/10 text-[11px] text-zinc-400 leading-relaxed">
+              <div className="pt-2 border-t border-hairline text-[11px] text-zinc-400 leading-relaxed">
                 <strong className="text-zinc-300">Official Notice:</strong> Please submit invitations at least 3–4 weeks in advance to allow for itinerary scheduling and spiritual preparation.
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function BookingSection() {
                   <div className="w-16 h-16 mx-auto rounded-full bg-[#F88E14]/20 border border-[#F88E14] flex items-center justify-center text-[#FABA1E]">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-cinzel font-bold text-white">
+                  <h3 className="text-2xl font-cinzel font-bold text-ink">
                     Inquiry Received in Glory!
                   </h3>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
@@ -190,7 +190,7 @@ export default function BookingSection() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   
                   <div className="space-y-1">
-                    <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-white uppercase tracking-wide">
+                    <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-ink uppercase tracking-wide">
                       Booking Inquiry Form
                     </h3>
                     <p className="text-xs text-zinc-400">
@@ -210,7 +210,7 @@ export default function BookingSection() {
                         placeholder="e.g. Pastor David Adeleke"
                         value={formData.hostName}
                         onChange={(e) => setFormData({ ...formData, hostName: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
 
@@ -225,7 +225,7 @@ export default function BookingSection() {
                         placeholder="e.g. RCCG Living Faith Parish"
                         value={formData.organization}
                         onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export default function BookingSection() {
                         placeholder="contact@church.org"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
 
@@ -257,7 +257,7 @@ export default function BookingSection() {
                         placeholder="+234 800 000 0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
                   </div>
@@ -271,7 +271,7 @@ export default function BookingSection() {
                       <select
                         value={formData.eventType}
                         onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       >
                         <option value="Church Conference / Convention">Church Conference / Convention</option>
                         <option value="Annual Praise & Worship Night">Annual Praise & Worship Night</option>
@@ -293,7 +293,7 @@ export default function BookingSection() {
                         required
                         value={formData.eventDate}
                         onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
                   </div>
@@ -310,7 +310,7 @@ export default function BookingSection() {
                         placeholder="e.g. Ikeja, Lagos, Nigeria"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       />
                     </div>
 
@@ -322,7 +322,7 @@ export default function BookingSection() {
                       <select
                         value={formData.attendance}
                         onChange={(e) => setFormData({ ...formData, attendance: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
                       >
                         <option value="Under 500 Attendees">Under 500 Attendees</option>
                         <option value="500 - 2,000 People">500 - 2,000 People</option>
@@ -342,7 +342,7 @@ export default function BookingSection() {
                       placeholder="Share the theme of the program, expectations, or schedule details..."
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors resize-none"
                     />
                   </div>
 
@@ -356,7 +356,7 @@ export default function BookingSection() {
                       <span>Transmitting Request...</span>
                     ) : (
                       <>
-                        <Send className="w-4 h-4 text-black" />
+                        <Send className="w-4 h-4 text-on-gold" />
                         <span>Send Ministration Request</span>
                       </>
                     )}

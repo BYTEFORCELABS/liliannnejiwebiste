@@ -29,7 +29,7 @@ export default function MinistryStats() {
   ];
 
   return (
-    <section className="relative py-12 border-y border-[rgba(248,142,20,0.18)] bg-gradient-to-b from-[#09090d] via-[#0b0b10] to-[#070709]">
+    <section className="relative py-12 border-y border-[rgba(248,142,20,0.18)] bg-gradient-to-b from-black via-[#0b0b10] to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {stats.map((stat, idx) => {

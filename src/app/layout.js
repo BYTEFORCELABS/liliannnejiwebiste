@@ -44,10 +44,17 @@ export const metadata = {
   },
 };
 
+// Applies the saved theme before first paint so the page never flashes the
+// wrong palette. Dark is the brand default; light is opt-in.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}})()`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className="bg-[#070709] text-white min-h-screen flex flex-col font-sans selection:bg-[#F88E14] selection:text-black antialiased">
+    <html lang="en" className="scroll-smooth" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="bg-black text-ink min-h-screen flex flex-col font-sans selection:bg-[#F88E14] selection:text-on-gold antialiased">
         {children}
       </body>
     </html>

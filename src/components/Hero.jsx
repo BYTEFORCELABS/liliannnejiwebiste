@@ -9,30 +9,41 @@ import { FacebookIcon, InstagramIcon, YouTubeIcon, SpotifyIcon } from "@/compone
 
 const SLIDE_DURATION = 6500;
 
+// `shift` nudges the subject to the right of the frame so the headline never
+// lands on her face. On wide screens the full image width is already visible,
+// so a zoom is needed to create room to pan into.
 const SLIDES = [
   {
     src: "/images/live_praise_fire.jpg",
     alt: "Minister Lilian Nneji leading high praise under stage lights",
     caption: "High Praise Encounter",
-    position: "object-[50%_32%]",
+    position: "object-[50%_30%]",
+    zoom: 1.22,
+    shift: "9%",
   },
   {
     src: "/images/hero_bg_live.jpg",
     alt: "Minister Lilian Nneji ministering to a standing congregation",
     caption: "Live Altar Ministration",
     position: "object-[78%_38%]",
+    zoom: 1.06,
+    shift: "0%",
   },
   {
     src: "/images/reverb_joy_denim.jpg",
     alt: "Minister Lilian Nneji in joyful praise with her band",
     caption: "The Reverb",
-    position: "object-[52%_34%]",
+    position: "object-[52%_32%]",
+    zoom: 1.2,
+    shift: "8%",
   },
   {
     src: "/images/live_crowd_bw.jpg",
     alt: "Minister Lilian Nneji lifting a congregation in worship",
     caption: "Unstoppable Praise",
     position: "object-[70%_42%]",
+    zoom: 1.1,
+    shift: "3%",
   },
 ];
 
@@ -72,7 +83,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="home" className="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden">
+    <section id="home" data-theme="dark" className="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden bg-black">
 
       {/* Crossfading photo slideshow */}
       <div className="absolute inset-0 z-0">
@@ -84,23 +95,28 @@ export default function Hero() {
             aria-hidden={idx !== active}
           >
             <div className="hero-slide-img absolute inset-0">
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                sizes="100vw"
-                preload={idx === 0 || undefined}
-                quality={82}
-                className={`object-cover ${slide.position}`}
-              />
+              <div
+                className="absolute inset-0"
+                style={{ transform: `scale(${slide.zoom}) translateX(${slide.shift})` }}
+              >
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  sizes="100vw"
+                  preload={idx === 0 || undefined}
+                  quality={82}
+                  className={`object-cover ${slide.position}`}
+                />
+              </div>
             </div>
           </div>
         ))}
 
         {/* Legibility overlays */}
         <div className="absolute inset-0 bg-black/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070709] via-[#070709]/85 to-transparent sm:w-3/4 md:w-3/5" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070709] via-transparent to-[#070709]/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent sm:w-3/4 md:w-3/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70" />
       </div>
 
       {/* Hero content */}
@@ -108,11 +124,11 @@ export default function Hero() {
         <div className="max-w-3xl space-y-6 sm:space-y-8">
 
           <div className="space-y-2">
-            <Reveal as="h6" variant="right" delay={80} className="font-fjalla text-[#F88E14] uppercase tracking-wider text-base sm:text-xl font-bold">
+            <Reveal as="h6" variant="right" delay={80} className="font-fjalla text-gold uppercase tracking-wider text-base sm:text-xl font-bold">
               Recording Artist &amp; Worship Minister
             </Reveal>
 
-            <Reveal as="h1" variant="up" delay={200} className="font-fjalla text-5xl sm:text-7xl lg:text-9xl font-bold uppercase text-white tracking-tight leading-[1.02]">
+            <Reveal as="h1" variant="up" delay={200} className="font-fjalla text-5xl sm:text-7xl lg:text-9xl font-bold uppercase text-ink tracking-tight leading-[1.02]">
               Minister <br className="hidden sm:inline" />
               Lilian Nneji
             </Reveal>
@@ -121,7 +137,7 @@ export default function Hero() {
           <Reveal variant="up" delay={380} className="pt-2">
             <Link
               href="#music"
-              className="shimmer-sweep relative inline-block overflow-hidden border-2 border-[#F88E14] text-[#F88E14] hover:bg-[#F88E14] hover:text-black font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-300"
+              className="shimmer-sweep relative inline-block overflow-hidden border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-300"
             >
               Eze Mu O (King of Praise) Album
             </Link>
@@ -138,7 +154,7 @@ export default function Hero() {
                   rel="noopener noreferrer"
                   aria-label={social.name}
                   style={{ transitionDelay: `${idx * 40}ms` }}
-                  className="w-10 h-10 rounded-full bg-[#F88E14] text-black flex items-center justify-center hover:scale-125 hover:-translate-y-1 hover:bg-[#FABA1E] transition-all duration-300 shadow-md"
+                  className="w-10 h-10 rounded-full bg-[#F88E14] text-on-gold flex items-center justify-center hover:scale-125 hover:-translate-y-1 hover:bg-[#FABA1E] transition-all duration-300 shadow-md"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -180,7 +196,7 @@ export default function Hero() {
           <Link
             href="#about"
             aria-label="Scroll to about section"
-            className="animate-scroll-cue hidden sm:block text-zinc-400 hover:text-[#F88E14] transition-colors"
+            className="animate-scroll-cue hidden sm:block text-zinc-400 hover:text-gold transition-colors"
           >
             <ChevronDown className="w-6 h-6" />
           </Link>

@@ -35,6 +35,7 @@ import {
   ArrowUpRight,
   PanelLeftClose
 } from "lucide-react";
+import BrandLogo from "@/components/BrandLogo";
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
@@ -506,20 +507,13 @@ export default function AdminDashboardPage() {
   // ============================================================
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 selection:bg-[#F88E14] selection:text-black">
+      <div className="min-h-screen bg-black text-ink flex items-center justify-center p-4 selection:bg-[#F88E14] selection:text-on-gold">
         <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl p-8 space-y-6 shadow-2xl">
           <div className="text-center space-y-3">
             <div className="relative w-44 h-12 mx-auto flex items-center justify-center">
-              <Image
-                src="/images/logo_white_text.png"
-                alt="Minister Lilian Nneji"
-                width={190}
-                height={50}
-                priority
-                className="object-contain"
-              />
+              <BrandLogo className="w-44 h-12" sizes="190px" priority />
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F88E14]/10 border border-[#F88E14]/30 text-[#F88E14] text-xs uppercase font-bold tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F88E14]/10 border border-[#F88E14]/30 text-gold text-xs uppercase font-bold tracking-wider">
               <Lock className="w-3.5 h-3.5" />
               <span>Admin Portal Access</span>
             </div>
@@ -539,7 +533,7 @@ export default function AdminDashboardPage() {
                 placeholder="Enter master passcode"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#F88E14]"
+                className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-ink placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#F88E14]"
               />
             </div>
 
@@ -552,14 +546,14 @@ export default function AdminDashboardPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-lg active:scale-95 cursor-pointer"
+              className="w-full py-3 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-on-gold font-bold uppercase tracking-wider text-xs transition-colors shadow-lg active:scale-95 cursor-pointer"
             >
               {loading ? "Verifying..." : "Unlock Dashboard"}
             </button>
           </form>
 
           <div className="text-center pt-2">
-            <Link href="/" className="text-xs text-zinc-500 hover:text-white transition-colors">
+            <Link href="/" className="text-xs text-zinc-500 hover:text-ink transition-colors">
               ← Return to public website
             </Link>
           </div>
@@ -594,7 +588,7 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#F88E14] selection:text-black">
+    <div className="min-h-screen bg-black text-ink selection:bg-[#F88E14] selection:text-on-gold">
 
       {/* Mobile drawer backdrop */}
       {sidebarOpen && (
@@ -615,18 +609,16 @@ export default function AdminDashboardPage() {
         {/* Brand */}
         <div className={`h-16 flex items-center border-b border-zinc-800/60 ${rail ? "lg:justify-center lg:px-0" : ""} px-4 justify-between gap-2`}>
           <Link href="/" className={`relative h-8 block ${rail ? "lg:w-8" : "w-32"} w-32`}>
-            <Image
-              src={rail ? "/icon.png" : "/images/logo_white_text.png"}
-              alt="Minister Lilian Nneji"
-              fill
-              sizes="128px"
-              className="object-contain object-left"
-            />
+            {rail ? (
+              <Image src="/icon.png" alt="Minister Lilian Nneji" fill sizes="32px" className="object-contain" />
+            ) : (
+              <BrandLogo className="w-32 h-8" sizes="128px" />
+            )}
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
-            className="lg:hidden p-1.5 text-zinc-500 hover:text-white cursor-pointer"
+            className="lg:hidden p-1.5 text-zinc-500 hover:text-ink cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -648,14 +640,14 @@ export default function AdminDashboardPage() {
                   rail ? "lg:justify-center lg:px-0 px-3" : "px-3"
                 } ${
                   isActive
-                    ? "bg-zinc-900 text-white font-medium"
+                    ? "bg-zinc-900 text-ink font-medium"
                     : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
                 }`}
               >
                 {isActive && (
                   <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-[#F88E14]" />
                 )}
-                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-[#F88E14]" : ""}`} />
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-gold" : ""}`} />
                 <span className={`flex-grow truncate ${rail ? "lg:hidden" : ""}`}>{item.label}</span>
                 {count !== null && (
                   <span className={`text-xs tabular-nums text-zinc-500 ${rail ? "lg:hidden" : ""}`}>
@@ -704,7 +696,7 @@ export default function AdminDashboardPage() {
             <button
               onClick={() => setSidebarOpen(true)}
               aria-label="Open menu"
-              className="lg:hidden p-2 -ml-2 rounded-md text-zinc-400 hover:text-white cursor-pointer"
+              className="lg:hidden p-2 -ml-2 rounded-md text-zinc-400 hover:text-ink cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -747,7 +739,7 @@ export default function AdminDashboardPage() {
                       <span className="text-3xl font-medium text-zinc-100 tabular-nums leading-none">
                         {card.value}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-[#F88E14] transition-colors" />
+                      <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-gold transition-colors" />
                     </div>
                   </button>
                 );
@@ -762,7 +754,7 @@ export default function AdminDashboardPage() {
                   onClick={() => { setActiveTab("gallery"); handleOpenAddPhoto(); }}
                   className="flex items-center gap-3 p-4 rounded-lg border border-zinc-800/60 bg-zinc-950 hover:bg-zinc-900/40 hover:border-zinc-700 transition-colors cursor-pointer text-left"
                 >
-                  <Plus className="w-4 h-4 text-[#F88E14] flex-shrink-0" />
+                  <Plus className="w-4 h-4 text-gold flex-shrink-0" />
                   <div>
                     <p className="text-sm text-zinc-200">Add a gallery photo</p>
                     <p className="text-xs text-zinc-500 mt-0.5">Publish to the public gallery</p>
@@ -773,7 +765,7 @@ export default function AdminDashboardPage() {
                   onClick={() => { setActiveTab("lyrics"); handleOpenAddLyrics(); }}
                   className="flex items-center gap-3 p-4 rounded-lg border border-zinc-800/60 bg-zinc-950 hover:bg-zinc-900/40 hover:border-zinc-700 transition-colors cursor-pointer text-left"
                 >
-                  <Plus className="w-4 h-4 text-[#F88E14] flex-shrink-0" />
+                  <Plus className="w-4 h-4 text-gold flex-shrink-0" />
                   <div>
                     <p className="text-sm text-zinc-200">Add a song</p>
                     <p className="text-xs text-zinc-500 mt-0.5">Add lyrics or a new release</p>
@@ -791,13 +783,13 @@ export default function AdminDashboardPage() {
                     key={link.href}
                     href={link.href}
                     target="_blank"
-                    className="flex items-center justify-between px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-900/40 hover:text-white transition-colors group first:rounded-t-lg last:rounded-b-lg"
+                    className="flex items-center justify-between px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-900/40 hover:text-ink transition-colors group first:rounded-t-lg last:rounded-b-lg"
                   >
                     <span className="flex items-center gap-3">
                       <span>{link.label}</span>
                       <span className="text-xs text-zinc-600">{link.href}</span>
                     </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-zinc-600 group-hover:text-[#F88E14] transition-colors" />
+                    <ExternalLink className="w-3.5 h-3.5 text-zinc-600 group-hover:text-gold transition-colors" />
                   </Link>
                 ))}
               </div>
@@ -822,7 +814,7 @@ export default function AdminDashboardPage() {
                   placeholder="Search attendee by name, email, phone, ticket ref..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14]"
+                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs sm:text-sm text-ink placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14]"
                 />
               </div>
 
@@ -841,7 +833,7 @@ export default function AdminDashboardPage() {
                 {/* Export CSV Button */}
                 <button
                   onClick={exportAttendeesCSV}
-                  className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-900 text-sm rounded-md transition-colors flex-shrink-0 cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-ink hover:bg-zinc-900 text-sm rounded-md transition-colors flex-shrink-0 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Export CSV</span>
@@ -883,10 +875,10 @@ export default function AdminDashboardPage() {
 
                         return (
                           <tr key={attendee.id} className="hover:bg-zinc-900/50 transition-colors">
-                            <td className="py-3.5 px-4 font-mono font-bold text-[#F88E14]">
+                            <td className="py-3.5 px-4 font-mono font-bold text-gold">
                               {attendee.ticketCode}
                             </td>
-                            <td className="py-3.5 px-4 font-medium text-white">
+                            <td className="py-3.5 px-4 font-medium text-ink">
                               {attendee.fullName}
                             </td>
                             <td className="py-3.5 px-4">
@@ -903,7 +895,7 @@ export default function AdminDashboardPage() {
                             <td className="py-3.5 px-4">
                               <a
                                 href={`mailto:${attendee.email}`}
-                                className="text-zinc-300 hover:text-white underline decoration-zinc-700"
+                                className="text-zinc-300 hover:text-ink underline decoration-zinc-700"
                               >
                                 {attendee.email}
                               </a>
@@ -986,7 +978,7 @@ export default function AdminDashboardPage() {
               </p>
               <button
                 onClick={exportSubscribersCSV}
-                className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-900 text-sm rounded-md transition-colors cursor-pointer"
+                className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 hover:text-ink hover:bg-zinc-900 text-sm rounded-md transition-colors cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Export Subscribers CSV</span>
@@ -1014,7 +1006,7 @@ export default function AdminDashboardPage() {
                     subscribers.map((sub, index) => (
                       <tr key={sub.id} className="hover:bg-zinc-900/50">
                         <td className="py-3 px-4 text-zinc-600">{index + 1}</td>
-                        <td className="py-3 px-4 font-medium text-white">{sub.email}</td>
+                        <td className="py-3 px-4 font-medium text-ink">{sub.email}</td>
                         <td className="py-3 px-4 text-zinc-500 text-xs">
                           {new Date(sub.subscribedAt).toLocaleString()}
                         </td>
@@ -1046,7 +1038,7 @@ export default function AdminDashboardPage() {
                   Photo Gallery Catalog ({gallery.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Manage photos displayed on the public <Link href="/gallery" target="_blank" className="text-[#F88E14] hover:underline">/gallery</Link> showcase.
+                  Manage photos displayed on the public <Link href="/gallery" target="_blank" className="text-gold hover:underline">/gallery</Link> showcase.
                 </p>
               </div>
 
@@ -1066,7 +1058,7 @@ export default function AdminDashboardPage() {
                 {/* Add Photo Button */}
                 <button
                   onClick={handleOpenAddPhoto}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-sm font-medium rounded-md transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-sm font-medium rounded-md transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Photo</span>
@@ -1115,7 +1107,7 @@ export default function AdminDashboardPage() {
                   <div className="p-4 pt-2 border-t border-zinc-900 flex items-center justify-between text-xs">
                     <button
                       onClick={() => handleOpenEditPhoto(photo)}
-                      className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
+                      className="text-zinc-400 hover:text-ink flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       <Edit className="w-3.5 h-3.5" />
                       <span>Edit</span>
@@ -1146,7 +1138,7 @@ export default function AdminDashboardPage() {
                   Song Lyrics Catalog ({lyrics.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Manage song lyrics and catalog published on the public <Link href="/lyrics" target="_blank" className="text-[#F88E14] hover:underline">/lyrics</Link> repository.
+                  Manage song lyrics and catalog published on the public <Link href="/lyrics" target="_blank" className="text-gold hover:underline">/lyrics</Link> repository.
                 </p>
               </div>
 
@@ -1166,7 +1158,7 @@ export default function AdminDashboardPage() {
                 {/* Add Song Button */}
                 <button
                   onClick={handleOpenAddLyrics}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black text-sm font-medium rounded-md transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-sm font-medium rounded-md transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Song Lyrics</span>
@@ -1210,7 +1202,7 @@ export default function AdminDashboardPage() {
                             href={song.youtubeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+                            className="text-zinc-400 hover:text-ink flex items-center gap-1 transition-colors"
                           >
                             <span>Watch</span>
                             <ExternalLink className="w-3 h-3" />
@@ -1223,7 +1215,7 @@ export default function AdminDashboardPage() {
                         <div className="flex items-center justify-end gap-3">
                           <button
                             onClick={() => setPreviewingLyrics(song)}
-                            className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer"
+                            className="text-zinc-400 hover:text-ink flex items-center gap-1 cursor-pointer"
                             title="Preview lyrics"
                           >
                             <Eye className="w-3.5 h-3.5" />
@@ -1232,7 +1224,7 @@ export default function AdminDashboardPage() {
 
                           <button
                             onClick={() => handleOpenEditLyrics(song)}
-                            className="text-zinc-400 hover:text-white flex items-center gap-1 cursor-pointer"
+                            className="text-zinc-400 hover:text-ink flex items-center gap-1 cursor-pointer"
                             title="Edit lyrics"
                           >
                             <Edit className="w-3.5 h-3.5" />
@@ -1271,7 +1263,7 @@ export default function AdminDashboardPage() {
               </h3>
               <button
                 onClick={() => setPhotoModalOpen(false)}
-                className="text-zinc-500 hover:text-white cursor-pointer"
+                className="text-zinc-500 hover:text-ink cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1288,7 +1280,7 @@ export default function AdminDashboardPage() {
                   placeholder="e.g. Atmosphere of Miracles Praise Night"
                   value={photoForm.title}
                   onChange={(e) => setPhotoForm({ ...photoForm, title: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                 />
               </div>
 
@@ -1300,7 +1292,7 @@ export default function AdminDashboardPage() {
                   <select
                     value={photoForm.category}
                     onChange={(e) => setPhotoForm({ ...photoForm, category: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14] cursor-pointer"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14] cursor-pointer"
                   >
                     {GALLERY_CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -1316,7 +1308,7 @@ export default function AdminDashboardPage() {
                     type="date"
                     value={photoForm.date}
                     onChange={(e) => setPhotoForm({ ...photoForm, date: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                   />
                 </div>
               </div>
@@ -1331,7 +1323,7 @@ export default function AdminDashboardPage() {
                   placeholder="/images/photo.jpg or https://..."
                   value={photoForm.imageUrl}
                   onChange={(e) => setPhotoForm({ ...photoForm, imageUrl: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                 />
                 
                 {/* Quick Presets Picker */}
@@ -1345,8 +1337,8 @@ export default function AdminDashboardPage() {
                         onClick={() => setPhotoForm({ ...photoForm, imageUrl: preset.path })}
                         className={`text-[10px] px-2 py-0.5 rounded cursor-pointer transition-colors ${
                           photoForm.imageUrl === preset.path
-                            ? "bg-[#F88E14] text-black font-bold"
-                            : "bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800"
+                            ? "bg-[#F88E14] text-on-gold font-bold"
+                            : "bg-zinc-900 text-zinc-400 hover:text-ink border border-zinc-800"
                         }`}
                       >
                         {preset.label}
@@ -1365,7 +1357,7 @@ export default function AdminDashboardPage() {
                   placeholder="Optional brief description of this ministry moment..."
                   value={photoForm.caption}
                   onChange={(e) => setPhotoForm({ ...photoForm, caption: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14] resize-none"
+                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14] resize-none"
                 />
               </div>
 
@@ -1373,13 +1365,13 @@ export default function AdminDashboardPage() {
                 <button
                   type="button"
                   onClick={() => setPhotoModalOpen(false)}
-                  className="px-4 py-2 bg-zinc-900 text-zinc-400 hover:text-white rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-2 bg-zinc-900 text-zinc-400 hover:text-ink rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-md text-sm font-medium cursor-pointer"
+                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold rounded-md text-sm font-medium cursor-pointer"
                 >
                   {editingPhoto ? "Save Changes" : "Add to Gallery"}
                 </button>
@@ -1401,7 +1393,7 @@ export default function AdminDashboardPage() {
               </h3>
               <button
                 onClick={() => setLyricsModalOpen(false)}
-                className="text-zinc-500 hover:text-white cursor-pointer"
+                className="text-zinc-500 hover:text-ink cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1419,7 +1411,7 @@ export default function AdminDashboardPage() {
                     placeholder="e.g. Eze Mu O"
                     value={lyricsForm.title}
                     onChange={(e) => setLyricsForm({ ...lyricsForm, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                   />
                 </div>
 
@@ -1430,7 +1422,7 @@ export default function AdminDashboardPage() {
                   <select
                     value={lyricsForm.category}
                     onChange={(e) => setLyricsForm({ ...lyricsForm, category: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14] cursor-pointer"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14] cursor-pointer"
                   >
                     {LYRICS_CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -1449,7 +1441,7 @@ export default function AdminDashboardPage() {
                     placeholder="e.g. Praise Vibes EP"
                     value={lyricsForm.album}
                     onChange={(e) => setLyricsForm({ ...lyricsForm, album: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                   />
                 </div>
 
@@ -1462,7 +1454,7 @@ export default function AdminDashboardPage() {
                     placeholder="2026"
                     value={lyricsForm.releaseYear}
                     onChange={(e) => setLyricsForm({ ...lyricsForm, releaseYear: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                    className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                   />
                 </div>
               </div>
@@ -1476,7 +1468,7 @@ export default function AdminDashboardPage() {
                   placeholder="https://www.youtube.com/watch?v=..."
                   value={lyricsForm.youtubeUrl}
                   onChange={(e) => setLyricsForm({ ...lyricsForm, youtubeUrl: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-[#F88E14]"
+                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                 />
               </div>
 
@@ -1490,7 +1482,7 @@ export default function AdminDashboardPage() {
                   placeholder="[Verse 1]&#10;Words of verse 1...&#10;&#10;[Chorus]&#10;Words of chorus..."
                   value={lyricsForm.lyrics}
                   onChange={(e) => setLyricsForm({ ...lyricsForm, lyrics: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white font-mono focus:outline-none focus:border-[#F88E14] leading-relaxed"
+                  className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink font-mono focus:outline-none focus:border-[#F88E14] leading-relaxed"
                 />
               </div>
 
@@ -1498,13 +1490,13 @@ export default function AdminDashboardPage() {
                 <button
                   type="button"
                   onClick={() => setLyricsModalOpen(false)}
-                  className="px-4 py-2 bg-zinc-900 text-zinc-400 hover:text-white rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-2 bg-zinc-900 text-zinc-400 hover:text-ink rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-black rounded-md text-sm font-medium cursor-pointer"
+                  className="px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold rounded-md text-sm font-medium cursor-pointer"
                 >
                   {editingLyrics ? "Save Changes" : "Publish Song Lyrics"}
                 </button>
@@ -1522,7 +1514,7 @@ export default function AdminDashboardPage() {
           <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-4 shadow-2xl animate-in fade-in my-8 max-h-[85vh] flex flex-col justify-between">
             <div className="flex items-center justify-between border-b border-zinc-800 pb-3 flex-shrink-0">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#F88E14]">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
                   {previewingLyrics.category} • {previewingLyrics.releaseYear}
                 </span>
                 <h3 className="text-lg font-medium text-zinc-100">
@@ -1531,7 +1523,7 @@ export default function AdminDashboardPage() {
               </div>
               <button
                 onClick={() => setPreviewingLyrics(null)}
-                className="text-zinc-500 hover:text-white cursor-pointer"
+                className="text-zinc-500 hover:text-ink cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1544,7 +1536,7 @@ export default function AdminDashboardPage() {
             <div className="pt-3 border-t border-zinc-800 flex justify-end flex-shrink-0">
               <button
                 onClick={() => setPreviewingLyrics(null)}
-                className="px-5 py-2 bg-zinc-900 text-zinc-300 hover:text-white rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-2 bg-zinc-900 text-zinc-300 hover:text-ink rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer"
               >
                 Close Preview
               </button>
