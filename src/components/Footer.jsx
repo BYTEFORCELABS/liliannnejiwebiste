@@ -121,7 +121,8 @@ export default function Footer() {
           <Link href="/#music" className="hover:text-gold transition-colors">Music</Link>
           <Link href="/lyrics" className="hover:text-gold transition-colors">Lyrics</Link>
           <Link href="/gallery" className="hover:text-gold transition-colors">Gallery</Link>
-          <Link href="/reverb" className="hover:text-gold transition-colors text-ink font-bold">The Reverb</Link>
+          {/* Reverb is parked for now — see src/app/reverb/page.js */}
+          {/* <Link href="/reverb" className="hover:text-gold transition-colors text-ink font-bold">The Reverb</Link> */}
         </div>
 
         {/* Thin Divider Line matching Screenshot 3 */}

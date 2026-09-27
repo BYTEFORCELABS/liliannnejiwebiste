@@ -36,11 +36,29 @@ import {
   PanelLeftClose
 } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
+import { YouTubeIcon } from "@/components/SocialIcons";
+
+// YouTube shows rounded counts (12.4K, 1.2M), so the tile matches that
+// rather than printing a long exact number the channel page never shows.
+function formatCount(n) {
+  if (typeof n !== "number" || !Number.isFinite(n)) return "—";
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1)}M`.replace(".0", "");
+  if (n >= 1_000) return `${(n / 1_000).toFixed(n >= 10_000 ? 0 : 1)}K`.replace(".0", "");
+  return String(n);
+}
+
+// Reverb Attendees and Subscribers are parked at the client's request.
+// Their panels below are left fully intact and gated behind this one flag
+// instead of being deleted — flip it back to true, and un-comment the two
+// NAV_ITEMS rows, to restore both screens exactly as they were.
+const SHOW_PARKED_PANELS = false;
 
 const NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "attendees", label: "Reverb Attendees", icon: Users },
-  { id: "subscribers", label: "Subscribers", icon: Mail },
+  // Parked at the client's request. The panels, handlers, APIs and stored
+  // data are all still here — un-comment these two rows to bring them back.
+  // { id: "attendees", label: "Reverb Attendees", icon: Users },
+  // { id: "subscribers", label: "Subscribers", icon: Mail },
   { id: "gallery", label: "Gallery Manager", icon: Camera },
   { id: "lyrics", label: "Lyrics Manager", icon: Music },
 ];
@@ -49,7 +67,8 @@ const PUBLIC_LINKS = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/lyrics", label: "Lyrics" },
-  { href: "/reverb", label: "Reverb" },
+  // Reverb is parked for now — see src/app/reverb/page.js
+  // { href: "/reverb", label: "Reverb" },
 ];
 
 const GALLERY_CATEGORIES = [
@@ -108,6 +127,10 @@ export default function AdminDashboardPage() {
   const [subscribers, setSubscribers] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [lyrics, setLyrics] = useState([]);
+
+  // Live YouTube subscriber count for the Overview tile. Stays null until
+  // the API answers, so the tile can fall back rather than flash a wrong 0.
+  const [youtube, setYoutube] = useState(null);
 
   const [metrics, setMetrics] = useState({
     totalAttendees: 0,
@@ -189,6 +212,9 @@ export default function AdminDashboardPage() {
         const dataLyr = await resLyrics.json();
         setLyrics(dataLyr.items || []);
       }
+
+      const resYt = await fetch("/api/admin/youtube");
+      if (resYt.ok) setYoutube(await resYt.json());
     } catch (err) {
       console.error("Dashboard fetch error:", err);
     } finally {
@@ -573,9 +599,28 @@ export default function AdminDashboardPage() {
     lyrics: lyrics.length,
   };
 
+  // The subscriber tile reads the live YouTube channel. Until the API key
+  // is configured (or if YouTube is unreachable) it shows a dash and says
+  // why on hover, rather than passing off the mailing-list number as the
+  // channel's subscriber count.
+  const ytOk = youtube?.ok === true;
+  const ytNote = ytOk
+    ? `${youtube.channelTitle || "YouTube"} — ${youtube.subscribers.toLocaleString()} subscribers`
+    : youtube
+      ? youtube.reason || "YouTube count unavailable"
+      : "Loading…";
+
   const STAT_CARDS = [
-    { tab: "attendees", label: "Attendees", value: counts.attendees, icon: Users },
-    { tab: "subscribers", label: "Subscribers", value: counts.subscribers, icon: Mail },
+    // Reverb attendees parked at the client's request — un-comment to restore.
+    // { tab: "attendees", label: "Attendees", value: counts.attendees, icon: Users },
+    {
+      tab: null,
+      label: "Subscribers",
+      sublabel: "YouTube",
+      value: ytOk ? formatCount(youtube.subscribers) : "\u2014",
+      note: ytNote,
+      icon: YouTubeIcon,
+    },
     { tab: "gallery", label: "Photos", value: counts.gallery, icon: Camera },
     { tab: "lyrics", label: "Songs", value: counts.lyrics, icon: Music },
   ];
@@ -722,26 +767,43 @@ export default function AdminDashboardPage() {
           <div className="space-y-10">
 
             {/* Stat cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
               {STAT_CARDS.map((card) => {
                 const Icon = card.icon;
+                // A card without a tab is a read-out, not a link, so it
+                // renders as a plain div with no hover or arrow affordance.
+                const Tag = card.tab ? "button" : "div";
                 return (
-                  <button
-                    key={card.tab}
-                    onClick={() => goToTab(card.tab)}
-                    className="group text-left bg-zinc-950 p-4 rounded-lg border border-zinc-800/60 hover:border-zinc-700 hover:bg-zinc-900/40 transition-colors cursor-pointer"
+                  <Tag
+                    key={card.label}
+                    {...(card.tab
+                      ? { onClick: () => goToTab(card.tab), type: "button" }
+                      : {})}
+                    title={card.note || undefined}
+                    className={`group text-left bg-zinc-950 p-4 rounded-lg border border-zinc-800/60 transition-colors ${
+                      card.tab
+                        ? "hover:border-zinc-700 hover:bg-zinc-900/40 cursor-pointer"
+                        : ""
+                    }`}
                   >
                     <div className="flex items-center gap-2 text-zinc-500">
                       <Icon className="w-3.5 h-3.5" />
                       <span className="text-xs">{card.label}</span>
+                      {card.sublabel && (
+                        <span className="text-[10px] uppercase tracking-wider text-zinc-600 border border-zinc-800 rounded px-1.5 py-0.5">
+                          {card.sublabel}
+                        </span>
+                      )}
                     </div>
                     <div className="mt-2 flex items-end justify-between">
                       <span className="text-3xl font-medium text-zinc-100 tabular-nums leading-none">
                         {card.value}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-gold transition-colors" />
+                      {card.tab && (
+                        <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-gold transition-colors" />
+                      )}
                     </div>
-                  </button>
+                  </Tag>
                 );
               })}
             </div>
@@ -800,7 +862,7 @@ export default function AdminDashboardPage() {
         {/* ============================================================ */}
         {/* TAB 1: REVERB ATTENDEES TABLE                                */}
         {/* ============================================================ */}
-        {activeTab === "attendees" && (
+        {SHOW_PARKED_PANELS && activeTab === "attendees" && (
           <div className="space-y-4">
             
             {/* Search & Export Action Bar */}
@@ -970,7 +1032,7 @@ export default function AdminDashboardPage() {
         {/* ============================================================ */}
         {/* TAB 2: NEWSLETTER SUBSCRIBERS                                */}
         {/* ============================================================ */}
-        {activeTab === "subscribers" && (
+        {SHOW_PARKED_PANELS && activeTab === "subscribers" && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm text-zinc-400">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import {
   FacebookIcon,
@@ -87,7 +88,19 @@ function CMCLogo() {
   );
 }
 
+// ============================================================
+// REVERB IS PARKED
+// The client does not want this live yet. The whole page below is
+// left intact; this single guard is what takes it off the site.
+// To bring Reverb back: delete the notFound() line below, then
+// un-comment the Reverb links in Navbar.jsx, Footer.jsx and
+// admin/page.js (PUBLIC_LINKS), and the <EventsSection /> in
+// app/page.js. Nothing else was removed.
+// ============================================================
 export default function ReverbPage() {
+  notFound();
+
+  /* eslint-disable no-unreachable */
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "Male",

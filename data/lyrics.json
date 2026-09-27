@@ -1,5 +1,16 @@
 [
   {
+    "id": "lyr_omeriwo_omeriwo_reprise",
+    "title": "Omeriwo Omeriwo (Reprise)",
+    "category": "Prophetic Worship",
+    "album": "Single (Live)",
+    "releaseYear": "2025",
+    "youtubeUrl": "https://www.youtube.com/watch?v=A68T0Az-LUA",
+    "featured": true,
+    "createdAt": "2026-09-01T06:00:00.000Z",
+    "lyrics": ""
+  },
+  {
     "id": "lyr_eze_mu_o",
     "title": "Eze Mu O",
     "category": "Prophetic Worship",
@@ -63,17 +74,6 @@
     "youtubeUrl": "https://www.youtube.com/watch?v=nLITWXwcUNQ",
     "featured": false,
     "createdAt": "2026-09-01T07:00:00.000Z",
-    "lyrics": ""
-  },
-  {
-    "id": "lyr_omeriwo_omeriwo_reprise",
-    "title": "Omeriwo Omeriwo (Reprise)",
-    "category": "Prophetic Worship",
-    "album": "Single (Live)",
-    "releaseYear": "2025",
-    "youtubeUrl": "https://www.youtube.com/watch?v=A68T0Az-LUA",
-    "featured": false,
-    "createdAt": "2026-09-01T06:00:00.000Z",
     "lyrics": ""
   },
   {

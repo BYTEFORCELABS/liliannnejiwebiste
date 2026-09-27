@@ -243,6 +243,20 @@ const DEFAULT_GALLERY = [
 
 // Default initial lyrics seed items
 const DEFAULT_LYRICS = [
+  // Omeriwo leads the list — it is the viral hit. getLyrics() sorts
+  // featured-first with a stable sort, so this entry needs BOTH position 0
+  // and featured:true to actually come out on top.
+  {
+    "id": "lyr_omeriwo_omeriwo_reprise",
+    "title": "Omeriwo Omeriwo (Reprise)",
+    "category": "Prophetic Worship",
+    "album": "Single (Live)",
+    "releaseYear": "2025",
+    "youtubeUrl": "https://www.youtube.com/watch?v=A68T0Az-LUA",
+    "featured": true,
+    "createdAt": "2026-09-01T06:00:00.000Z",
+    "lyrics": ""
+  },
   {
     "id": "lyr_eze_mu_o",
     "title": "Eze Mu O",
@@ -307,17 +321,6 @@ const DEFAULT_LYRICS = [
     "youtubeUrl": "https://www.youtube.com/watch?v=nLITWXwcUNQ",
     "featured": false,
     "createdAt": "2026-09-01T07:00:00.000Z",
-    "lyrics": ""
-  },
-  {
-    "id": "lyr_omeriwo_omeriwo_reprise",
-    "title": "Omeriwo Omeriwo (Reprise)",
-    "category": "Prophetic Worship",
-    "album": "Single (Live)",
-    "releaseYear": "2025",
-    "youtubeUrl": "https://www.youtube.com/watch?v=A68T0Az-LUA",
-    "featured": false,
-    "createdAt": "2026-09-01T06:00:00.000Z",
     "lyrics": ""
   },
   {

@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import { Award } from "lucide-react";
 
 const HIT_SINGLES = [
+  // Omeriwo leads: it is the viral hit, so it opens the marquee.
+  "Omeriwo",
   "Onwere Ihe Omere Mu",
   "E Get Why",
   "Mercy",

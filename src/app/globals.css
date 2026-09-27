@@ -375,20 +375,122 @@ code, kbd, samp, pre, .font-mono {
   animation: pulseGoldGlow 4s ease-in-out infinite;
 }
 
-/* Mobile Navigation Drawer Animation */
-@keyframes mobileDrawerOpen {
+/* ============================================================ */
+/* FULL-SCREEN MOBILE MENU                                      */
+/* The panel curtains down over the whole viewport, then each   */
+/* row lifts in behind it on a stagger. Closing plays the same  */
+/* motion in reverse, which is why the panel stays mounted for  */
+/* the length of MENU_EXIT_MS after the close is requested.     */
+/* ============================================================ */
+@keyframes menuPanelIn {
   0% {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.99);
+    clip-path: inset(0 0 100% 0);
   }
   100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
   }
 }
 
-.animate-mobile-drawer {
-  animation: mobileDrawerOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes menuPanelOut {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes menuRowIn {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuRowOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* A hairline that draws itself across under each row as it lands. */
+@keyframes menuRuleIn {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.mobile-menu-panel {
+  animation: menuPanelIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobile-menu-panel[data-closing="true"] {
+  animation: menuPanelOut 0.34s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.mobile-menu-row {
+  opacity: 0;
+  animation: menuRowIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* On the way out the rows leave together and fast, so the closing
+   panel is never chasing a row that is still animating in. */
+.mobile-menu-panel[data-closing="true"] .mobile-menu-row {
+  animation: menuRowOut 0.18s ease-in forwards;
+  animation-delay: 0ms !important;
+}
+
+.mobile-menu-rule {
+  transform-origin: left center;
+  animation: menuRuleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobile-menu-panel[data-closing="true"] .mobile-menu-rule {
+  animation: none;
+}
+
+/* The gold index number slides with its row but settles a touch later. */
+.mobile-menu-index {
+  transition: color 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu-link:hover .mobile-menu-index,
+.mobile-menu-link:focus-visible .mobile-menu-index {
+  transform: translateX(4px);
+}
+
+.mobile-menu-link .mobile-menu-label {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.mobile-menu-link:hover .mobile-menu-label,
+.mobile-menu-link:focus-visible .mobile-menu-label {
+  transform: translateX(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-panel,
+  .mobile-menu-panel[data-closing="true"],
+  .mobile-menu-row,
+  .mobile-menu-rule {
+    animation: none !important;
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+  }
 }
 
 /* ============================================================ */
