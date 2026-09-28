@@ -4,6 +4,7 @@ import AboutSection from "@/components/AboutSection";
 import MusicSection from "@/components/MusicSection";
 import GallerySlideshow from "@/components/GallerySlideshow";
 // import EventsSection from "@/components/EventsSection";
+import BookingSection from "@/components/BookingSection";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { getGalleryItems } from "@/lib/db";
@@ -24,6 +25,7 @@ export default function Home() {
         <MusicSection />
         <GallerySlideshow items={featured} />
         {/* <EventsSection /> */}
+        <BookingSection />
         <Newsletter />
       </main>
       <Footer />

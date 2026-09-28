@@ -67,6 +67,7 @@ const PUBLIC_LINKS = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/lyrics", label: "Lyrics" },
+  { href: "/awards", label: "Awards" },
   // Reverb is parked for now — see src/app/reverb/page.js
   // { href: "/reverb", label: "Reverb" },
 ];

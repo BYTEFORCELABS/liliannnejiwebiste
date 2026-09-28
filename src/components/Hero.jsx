@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { FacebookIcon, InstagramIcon, YouTubeIcon, SpotifyIcon } from "@/components/SocialIcons";
+import { FacebookIcon, InstagramIcon, YouTubeIcon, SpotifyIcon, TikTokIcon } from "@/components/SocialIcons";
 
 const SLIDE_DURATION = 6500;
 
@@ -68,6 +68,7 @@ export default function Hero() {
     { name: "X-Twitter", icon: XTwitterIcon, url: "https://x.com/liliannneji" },
     { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/liliannneji/" },
     { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
+    { name: "TikTok", icon: TikTokIcon, url: "https://www.tiktok.com/@liliannneji1" },
     { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
   ];
 
@@ -109,7 +110,7 @@ export default function Hero() {
 
           <div className="space-y-2">
             <Reveal as="h6" variant="right" delay={80} className="font-fjalla text-gold uppercase tracking-wider text-base sm:text-xl font-bold">
-              Recording Artist &amp; Worship Minister
+              Recording Artist, Priase & Worship Minister
             </Reveal>
 
             <Reveal as="h1" variant="up" delay={200} className="font-fjalla text-5xl sm:text-7xl lg:text-9xl font-bold uppercase text-ink tracking-tight leading-[1.02]">
@@ -123,7 +124,7 @@ export default function Hero() {
               href="#music"
               className="shimmer-sweep relative inline-block overflow-hidden border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-300"
             >
-              Eze Mu O (King of Praise) Album
+              Eze Mu O (My King) 
             </Link>
           </Reveal>
 

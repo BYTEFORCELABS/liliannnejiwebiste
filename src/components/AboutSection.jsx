@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import AwardsStrip from "@/components/AwardsStrip";
 import { Award } from "lucide-react";
 
 const HIT_SINGLES = [
@@ -179,6 +180,11 @@ export default function AboutSection() {
             </div>
           </Reveal>
         </div>
+
+        {/* ============================================================ */}
+        {/* AWARDS STRIP                                                 */}
+        {/* ============================================================ */}
+        <AwardsStrip />
 
         {/* ============================================================ */}
         {/* AWARD CALLOUT                                                */}

@@ -10,6 +10,7 @@ import {
   InstagramIcon,
   YouTubeIcon,
   SpotifyIcon,
+  TikTokIcon,
 } from "@/components/SocialIcons";
 
 // Must match the menuPanelOut duration in globals.css — the panel stays
@@ -22,6 +23,7 @@ const NAV_LINKS = [
   { name: "Music", href: "/#music" },
   { name: "Lyrics", href: "/lyrics" },
   { name: "Gallery", href: "/gallery" },
+  { name: "Awards", href: "/awards" },
   // { name: "Events", href: "/#events" },
   { name: "Booking", href: "/#booking" },
   // Reverb is parked for now — see src/app/reverb/page.js
@@ -32,6 +34,7 @@ const SOCIALS = [
   { name: "Facebook", icon: FacebookIcon, url: "https://www.facebook.com/liliannnejiofficial" },
   { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/liliannneji/" },
   { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
+  { name: "TikTok", icon: TikTokIcon, url: "https://www.tiktok.com/@liliannneji1" },
   { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
 ];
 

@@ -1,378 +1,179 @@
-"use client";
+import Reveal from "@/components/Reveal";
+import { Phone, Mail, MapPin, Globe } from "lucide-react";
+import { WhatsAppIcon } from "@/components/SocialIcons";
 
-import { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, MessageSquare, Calendar, Sparkles, Clock } from "lucide-react";
+// Direct contact only — no form. An organiser taps once and is speaking to
+// the management team, which is the booking route agreed in the proposal.
+const WHATSAPP_NUMBER = "2348023131871";
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  "Hello Minister Lilian Nneji Management, I would like to enquire about booking Minister Lilian for an upcoming ministration."
+);
+
+const ROUTES = [
+  {
+    icon: Phone,
+    title: "Call Us",
+    blurb: "Speak with the management team directly about bookings, ministrations and logistics.",
+    actions: [
+      { label: "+234 803 497 8751", href: "tel:+2348034978751" },
+      { label: "+234 802 313 1871", href: "tel:+2348023131871" },
+    ],
+  },
+  {
+    icon: WhatsAppIcon,
+    title: "WhatsApp",
+    blurb: "Opens a chat with your enquiry already written, so you only add the details.",
+    actions: [
+      {
+        label: "Start a WhatsApp chat",
+        href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`,
+        external: true,
+      },
+    ],
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    blurb: "Send your event details and the team will come back to you on availability.",
+    actions: [
+      { label: "Lilianamadi@yahoo.com", href: "mailto:Lilianamadi@yahoo.com" },
+      { label: "Liliannneji@yahoo.com", href: "mailto:Liliannneji@yahoo.com" },
+    ],
+  },
+];
+
+// Lifted from the organiser guidance in the proposal: it gets the useful
+// detail into the first message rather than the fifth.
+const FIRST_MESSAGE = [
+  "Organisation or event name",
+  "Type of event",
+  "Proposed date",
+  "Location",
+  "Expected audience size",
+  "Type of engagement",
+];
 
 export default function BookingSection() {
-  const [formData, setFormData] = useState({
-    hostName: "",
-    organization: "",
-    email: "",
-    phone: "",
-    eventType: "Church Conference / Convention",
-    eventDate: "",
-    location: "",
-    attendance: "500 - 2,000 People",
-    notes: "",
-  });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Simulate clean dispatch
-    setTimeout(() => {
-      setLoading(false);
-      setIsSubmitted(true);
-    }, 1200);
-  };
-
-  const whatsappMessage = encodeURIComponent(
-    "Hello Minister Lilian Nneji Management, I would like to inquire about booking Minister Lilian for an upcoming gospel ministration/event."
-  );
-
   return (
-    <section id="booking" className="relative py-24 bg-black overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[#F88E14]/12 blur-[170px] pointer-events-none rounded-full" />
+    <section
+      id="booking"
+      className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-hidden text-ink"
+    >
+      {/* Ambient gold lighting */}
+      <div className="animate-breathe absolute top-1/4 -right-20 w-[520px] h-[520px] bg-[#F88E14]/[0.10] blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,var(--color-zinc-900)_0%,transparent_55%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-gold">
-            <Calendar className="w-3.5 h-3.5 text-[#FABA1E]" />
-            <span className="text-xs uppercase font-bold tracking-widest text-[#FABA1E]">
-              Official Ministration Bookings
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-cinzel font-black uppercase text-ink tracking-tight">
-            Invite Minister <span className="text-gold-gradient">Lilian Nneji</span>
-          </h2>
-          <p className="text-zinc-400 text-sm sm:text-base">
-            For church conferences, praise nights, conventions, crusades, and global concerts. Complete the booking request below or contact our management team directly.
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
+
+        {/* ============================================================ */}
+        {/* HEADER                                                       */}
+        {/* ============================================================ */}
+        <div className="max-w-3xl space-y-5">
+          <Reveal as="p" variant="right" className="text-[11px] uppercase tracking-[0.35em] text-gold font-bold">
+            Get in touch
+          </Reveal>
+
+          <Reveal as="h2" variant="up" delay={120} className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight leading-[0.96]">
+            Let&rsquo;s bring the praise
+            <span className="block text-gold-gradient">to your gathering.</span>
+          </Reveal>
+
+          <Reveal as="p" variant="up" delay={220} className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-2xl">
+            Reach Minister Lilian Nneji&rsquo;s management directly by phone, WhatsApp or email.
+            No forms and no waiting  you will be speaking to a person, usually within one
+            working day.
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left Column: Direct Management Contact Cards */}
-          <div className="lg:col-span-5 space-y-6">
-            
-            {/* Quick Contact Card */}
-            <div className="glass-panel-gold rounded-3xl p-8 space-y-6 shadow-2xl">
-              <div className="space-y-2">
-                <span className="text-xs uppercase font-bold tracking-wider text-[#FABA1E]">
-                  Management & Coordination Office
-                </span>
-                <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-ink">
-                  Direct Contact Desk
-                </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  For urgent scheduling, ministration confirmations, and logistics coordination.
-                </p>
-              </div>
+        {/* ============================================================ */}
+        {/* CONTACT ROUTES                                               */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+          {ROUTES.map((route, idx) => {
+            const Icon = route.icon;
+            return (
+              <Reveal key={route.title} variant="up" delay={idx * 130} className="h-full">
+                <div className="group relative h-full flex flex-col gap-6 p-7 sm:p-8 border border-zinc-800/70 bg-zinc-950/60 hover:border-[#F88E14]/50 transition-colors duration-500 overflow-hidden">
 
-              <div className="space-y-4 pt-2">
-                
-                {/* Official Phone Number */}
-                <a
-                  href="tel:+2348023131871"
-                  className="flex items-center gap-4 p-4 rounded-2xl glass-panel hover:border-[#F88E14] transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-[#F88E14]/20 border border-[#F88E14]/40 flex items-center justify-center text-[#FABA1E] group-hover:scale-110 transition-transform">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Official Line / Call</span>
-                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-[#FABA1E] transition-colors">
-                      0802 313 1871 / +234 802 313 1871
-                    </h4>
-                  </div>
-                </a>
+                  {/* Corner glow on hover */}
+                  <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#F88E14]/0 group-hover:bg-[#F88E14]/[0.09] blur-3xl transition-colors duration-700" />
 
-                {/* WhatsApp Instant Booking */}
-                <a
-                  href={`https://wa.me/2348023131871?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-400 transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
-                    <MessageSquare className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Instant Chat</span>
-                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-emerald-300 transition-colors">
-                      Chat on WhatsApp Management
-                    </h4>
-                  </div>
-                </a>
+                  <div className="relative space-y-4 flex-grow">
+                    <span className="flex w-14 h-14 rounded-full border border-[#F88E14]/45 items-center justify-center text-gold group-hover:scale-110 group-hover:border-[#F88E14] transition-all duration-500">
+                      <Icon className="w-6 h-6" />
+                    </span>
 
-                {/* Email Address */}
-                <a
-                  href="mailto:bookings@liliannneji.com"
-                  className="flex items-center gap-4 p-4 rounded-2xl glass-panel hover:border-[#F88E14] transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-[#F88E14]/20 border border-[#F88E14]/40 flex items-center justify-center text-[#FABA1E] group-hover:scale-110 transition-transform">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Official Bookings Email</span>
-                    <h4 className="text-sm sm:text-base font-bold text-ink group-hover:text-[#FABA1E] transition-colors">
-                      bookings@liliannneji.com
-                    </h4>
-                  </div>
-                </a>
-
-                {/* Base Location */}
-                <div className="flex items-center gap-4 p-4 rounded-2xl glass-panel">
-                  <div className="w-12 h-12 rounded-xl bg-hairline border border-hairline flex items-center justify-center text-[#FABA1E]">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-400">Headquarters</span>
-                    <h4 className="text-sm sm:text-base font-bold text-ink">
-                      Lagos, Nigeria (Available Globally)
-                    </h4>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Protocol Note */}
-              <div className="pt-2 border-t border-hairline text-[11px] text-zinc-400 leading-relaxed">
-                <strong className="text-zinc-300">Official Notice:</strong> Please submit invitations at least 3–4 weeks in advance to allow for itinerary scheduling and spiritual preparation.
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right Column: Formal Booking Inquiry Form */}
-          <div className="lg:col-span-7">
-            <div className="glass-panel-gold rounded-3xl p-8 sm:p-10 shadow-2xl relative">
-              
-              {isSubmitted ? (
-                <div className="py-16 text-center space-y-5 animate-in fade-in duration-500">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#F88E14]/20 border border-[#F88E14] flex items-center justify-center text-[#FABA1E]">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-cinzel font-bold text-ink">
-                    Inquiry Received in Glory!
-                  </h3>
-                  <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-[#FABA1E]">{formData.hostName || "Dear Minister"}</strong>. Your booking inquiry has been forwarded directly to Minister Lilian Nneji&apos;s management desk. We will contact you within 24 to 48 hours.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormData({
-                        hostName: "",
-                        organization: "",
-                        email: "",
-                        phone: "",
-                        eventType: "Church Conference / Convention",
-                        eventDate: "",
-                        location: "",
-                        attendance: "500 - 2,000 People",
-                        notes: "",
-                      });
-                    }}
-                    className="gold-button px-7 py-3 rounded-full text-xs uppercase tracking-wider font-bold"
-                  >
-                    Submit Another Request
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  
-                  <div className="space-y-1">
-                    <h3 className="text-xl sm:text-2xl font-cinzel font-bold text-ink uppercase tracking-wide">
-                      Booking Inquiry Form
+                    <h3 className="font-fjalla text-2xl sm:text-3xl uppercase font-bold tracking-tight text-ink">
+                      {route.title}
                     </h3>
-                    <p className="text-xs text-zinc-400">
-                      Fill out the details below to request Minister Lilian Nneji for your event.
+
+                    <p className="text-sm text-zinc-400 leading-relaxed">
+                      {route.blurb}
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Host Name */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Your Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Pastor David Adeleke"
-                        value={formData.hostName}
-                        onChange={(e) => setFormData({ ...formData, hostName: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
-
-                    {/* Church / Organization */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Church / Organization *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. RCCG Living Faith Parish"
-                        value={formData.organization}
-                        onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Email */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="contact@church.org"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
-
-                    {/* Phone Number */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Phone / WhatsApp *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="+234 800 000 0000"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Event Type */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Event Category
-                      </label>
-                      <select
-                        value={formData.eventType}
-                        onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
+                  <div className="relative flex flex-col gap-3">
+                    {route.actions.map((action) => (
+                      <a
+                        key={action.href}
+                        href={action.href}
+                        {...(action.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="gold-button shimmer-sweep relative block overflow-hidden text-center px-5 py-3.5 text-sm tracking-wide"
                       >
-                        <option value="Church Conference / Convention">Church Conference / Convention</option>
-                        <option value="Annual Praise & Worship Night">Annual Praise & Worship Night</option>
-                        <option value="Sunday Celebration Service">Sunday Celebration Service</option>
-                        <option value="Revival Crusade / Rally">Revival Crusade / Rally</option>
-                        <option value="Wedding / Thanksgiving Ceremony">Wedding / Thanksgiving Ceremony</option>
-                        <option value="International Tour Ministration">International Tour Ministration</option>
-                        <option value="Other Kingdom Gathering">Other Kingdom Gathering</option>
-                      </select>
-                    </div>
-
-                    {/* Proposed Date */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Proposed Date *
-                      </label>
-                      <input
-                        type="date"
-                        required
-                        value={formData.eventDate}
-                        onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
+                        {action.label}
+                      </a>
+                    ))}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* City & Country */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Event City & Country *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Ikeja, Lagos, Nigeria"
-                        value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      />
-                    </div>
+                  {/* Gold underline sweep, matching the awards cards */}
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
 
-                    {/* Estimated Attendance */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                        Expected Attendance
-                      </label>
-                      <select
-                        value={formData.attendance}
-                        onChange={(e) => setFormData({ ...formData, attendance: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-hairline text-ink focus:outline-none focus:border-[#F88E14] text-sm transition-colors"
-                      >
-                        <option value="Under 500 Attendees">Under 500 Attendees</option>
-                        <option value="500 - 2,000 People">500 - 2,000 People</option>
-                        <option value="2,000 - 10,000 People">2,000 - 10,000 People</option>
-                        <option value="10,000+ Stadium / Arena">10,000+ Stadium / Arena</option>
-                      </select>
-                    </div>
-                  </div>
+        {/* ============================================================ */}
+        {/* FIRST MESSAGE GUIDANCE + BASE                                */}
+        {/* ============================================================ */}
+        <Reveal variant="up" delay={120}>
+          <div className="glass-panel-gold p-7 sm:p-8 space-y-6 transition-all duration-500">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="space-y-1.5">
+                <h3 className="font-fjalla text-xl sm:text-2xl uppercase font-bold tracking-tight text-ink">
+                  Helpful in your first message
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-400">
+                  Include these and the team can confirm availability straight away.
+                </p>
+              </div>
 
-                  {/* Notes / Theme */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                      Event Theme & Additional Notes
-                    </label>
-                    <textarea
-                      rows={3}
-                      placeholder="Share the theme of the program, expectations, or schedule details..."
-                      value={formData.notes}
-                      onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-hairline border border-hairline text-ink placeholder:text-zinc-600 focus:outline-none focus:border-[#F88E14] text-sm transition-colors resize-none"
-                    />
-                  </div>
+              <div className="flex items-center gap-5 text-xs text-zinc-400 flex-shrink-0">
+                {/* <span className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-gold" />
+                  Port Harcourt, Nigeria
+                </span> */}
+                <span className="flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-gold" />
+                  Available worldwide
+                </span>
+              </div>
+            </div>
 
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="gold-button w-full py-4 rounded-xl text-sm uppercase tracking-wider font-extrabold flex items-center justify-center gap-2 shadow-xl"
-                  >
-                    {loading ? (
-                      <span>Transmitting Request...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-on-gold" />
-                        <span>Send Ministration Request</span>
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-center text-[11px] text-zinc-500">
-                    🔒 All booking inquiries are strictly confidential and handled by the executive ministry management.
-                  </p>
-
-                </form>
-              )}
-
+            <div className="flex flex-wrap gap-2.5">
+              {FIRST_MESSAGE.map((item) => (
+                <span
+                  key={item}
+                  className="text-xs sm:text-sm text-zinc-300 border border-zinc-800 bg-black/40 px-3.5 py-2 hover:border-[#F88E14]/40 hover:text-ink transition-colors duration-300"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
-
-        </div>
+        </Reveal>
 
       </div>
     </section>

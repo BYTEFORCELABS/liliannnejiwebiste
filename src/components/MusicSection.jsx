@@ -139,7 +139,7 @@ export default function MusicSection() {
     },
   ];
 
-  // Live Performances Grid (4 Cards) matching Screenshot 3
+  // Live Ministrations Grid (4 Cards) matching Screenshot 3
   const livePerformances = [
     {
       id: "otD1sbxmPy0",
@@ -283,12 +283,12 @@ export default function MusicSection() {
         </div>
 
         {/* ============================================================ */}
-        {/* 3. LIVE PERFORMANCES (Screenshot 3)                          */}
+        {/* 3. LIVE MINISTRATIONS (Screenshot 3)                         */}
         {/* ============================================================ */}
         <div>
           <div className="text-center mb-10">
             <Reveal as="h3" variant="up" className="font-fjalla text-4xl sm:text-6xl text-gold uppercase tracking-wide font-bold">
-              LIVE PERFORMANCES
+              LIVE MINISTRATIONS
             </Reveal>
           </div>
 

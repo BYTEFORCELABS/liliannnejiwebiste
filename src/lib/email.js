@@ -85,7 +85,7 @@ export function generateTicketEmailHtml(attendee) {
       </div>
 
       <div class="footer">
-        Enquiries & Sponsorship: <strong>+234 802 313 1871</strong> | <strong>bookings@liliannneji.com</strong><br>
+        Enquiries & Sponsorship: <strong>+234 803 497 8751</strong> | <strong>+234 802 313 1871</strong> | <strong>Lilianamadi@yahoo.com</strong><br>
         &copy; 2026 Minister Lilian Nneji. All rights reserved.
       </div>
     </div>

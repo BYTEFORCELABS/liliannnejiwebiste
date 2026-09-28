@@ -359,7 +359,7 @@ export default function LyricsPage() {
 
                     {/* Ministry Copyright Banner */}
                     <div className="pt-8 border-t border-zinc-900 text-xs text-zinc-500 text-center">
-                      &copy; {selectedSong.releaseYear} Minister Lilian Nneji Ministries. All rights reserved. For live performance licenses and sheet music enquiries, contact <a href="mailto:bookings@liliannneji.com" className="text-gold hover:underline">bookings@liliannneji.com</a>.
+                      &copy; {selectedSong.releaseYear} Minister Lilian Nneji Ministries. All rights reserved. For live performance licenses and sheet music enquiries, contact <a href="mailto:Lilianamadi@yahoo.com" className="text-gold hover:underline">Lilianamadi@yahoo.com</a>.
                     </div>
 
                   </div>

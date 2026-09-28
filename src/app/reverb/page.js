@@ -195,7 +195,7 @@ export default function ReverbPage() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-[10px] text-zinc-400 mt-1 pt-1 border-t border-blue-400/15">
-                  <span>bookings@liliannneji.com</span>
+                  <span>Lilianamadi@yahoo.com</span>
                   <span>www.liliannneji.com/reverb</span>
                 </div>
               </div>

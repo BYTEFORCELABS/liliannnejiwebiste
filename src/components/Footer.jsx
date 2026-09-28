@@ -7,6 +7,7 @@ import {
   InstagramIcon,
   YouTubeIcon,
   SpotifyIcon,
+  TikTokIcon,
 } from "@/components/SocialIcons";
 import { Phone, Mail } from "lucide-react";
 
@@ -48,6 +49,7 @@ export default function Footer() {
     { name: "X", icon: XTwitterIcon, url: "https://x.com/liliannneji" },
     { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/liliannneji/" },
     { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
+    { name: "TikTok", icon: TikTokIcon, url: "https://www.tiktok.com/@liliannneji1" },
     { name: "Threads", icon: ThreadsIcon, url: "https://threads.net/@liliannneji" },
     { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
     { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/artist/lilian-nneji" },
@@ -55,7 +57,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer id="booking" className="bg-black text-ink pt-14 pb-12 border-t border-hairline">
+    <footer className="bg-black text-ink pt-14 pb-12 border-t border-hairline">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
 
         {/* For Bookings Row matching Screenshot 3 */}
@@ -66,6 +68,15 @@ export default function Footer() {
 
           {/* Phone */}
           <a
+            href="tel:+2348034978751"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5 text-zinc-300" />
+            <span>08034978751</span>
+          </a>
+
+          {/* Phone 2 */}
+          <a
             href="tel:+2348023131871"
             className="flex items-center gap-2 hover:text-gold transition-colors"
           >
@@ -75,20 +86,20 @@ export default function Footer() {
 
           {/* Email 1 */}
           <a
-            href="mailto:bookings@liliannneji.com"
+            href="mailto:Lilianamadi@yahoo.com"
             className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
-            <span>bookings@liliannneji.com</span>
+            <span>Lilianamadi@yahoo.com</span>
           </a>
 
           {/* Email 2 */}
           <a
-            href="mailto:liliannnejiministries@gmail.com"
+            href="mailto:Liliannneji@yahoo.com"
             className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-zinc-300" />
-            <span>liliannnejiministries@gmail.com</span>
+            <span>Liliannneji@yahoo.com</span>
           </a>
         </div>
 
@@ -121,6 +132,7 @@ export default function Footer() {
           <Link href="/#music" className="hover:text-gold transition-colors">Music</Link>
           <Link href="/lyrics" className="hover:text-gold transition-colors">Lyrics</Link>
           <Link href="/gallery" className="hover:text-gold transition-colors">Gallery</Link>
+          <Link href="/awards" className="hover:text-gold transition-colors">Awards</Link>
           {/* Reverb is parked for now — see src/app/reverb/page.js */}
           {/* <Link href="/reverb" className="hover:text-gold transition-colors text-ink font-bold">The Reverb</Link> */}
         </div>

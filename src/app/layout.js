@@ -48,6 +48,8 @@ export const metadata = {
 // wrong palette. Dark is the brand default; light is opt-in.
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}})()`;
 
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" data-theme="dark" suppressHydrationWarning>
@@ -56,6 +58,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-black text-ink min-h-screen flex flex-col font-sans selection:bg-[#F88E14] selection:text-on-gold antialiased">
         {children}
+        <FloatingWhatsApp />
       </body>
     </html>
   );
