@@ -110,7 +110,7 @@ export default function Hero() {
 
           <div className="space-y-2">
             <Reveal as="h6" variant="right" delay={80} className="font-fjalla text-gold uppercase tracking-wider text-base sm:text-xl font-bold">
-              Recording Artist, Priase & Worship Minister
+              Recording Artist, Praise & Worship Minister
             </Reveal>
 
             <Reveal as="h1" variant="up" delay={200} className="font-fjalla text-5xl sm:text-7xl lg:text-9xl font-bold uppercase text-ink tracking-tight leading-[1.02]">
