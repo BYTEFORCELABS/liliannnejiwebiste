@@ -9,9 +9,12 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { getGalleryItems } from "@/lib/db";
 
-// The gallery is edited live from /admin, so this page must not be frozen
-// into the build output.
-export const dynamic = "force-dynamic";
+// The gallery is edited from /admin, so the page must not be frozen into the
+// build output forever — but force-dynamic meant a server render on every
+// single visit, with no CDN caching, which costs TTFB and LCP. Core Web
+// Vitals are a ranking signal, so this is served statically and refreshed
+// in the background instead.
+export const revalidate = 3600;
 
 export default function Home() {
   const featured = getGalleryItems().filter((item) => item.featured).slice(0, 8);
