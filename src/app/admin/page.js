@@ -36,16 +36,6 @@ import {
   PanelLeftClose
 } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
-import { YouTubeIcon } from "@/components/SocialIcons";
-
-// YouTube shows rounded counts (12.4K, 1.2M), so the tile matches that
-// rather than printing a long exact number the channel page never shows.
-function formatCount(n) {
-  if (typeof n !== "number" || !Number.isFinite(n)) return "—";
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1)}M`.replace(".0", "");
-  if (n >= 1_000) return `${(n / 1_000).toFixed(n >= 10_000 ? 0 : 1)}K`.replace(".0", "");
-  return String(n);
-}
 
 // Reverb Attendees and Subscribers are parked at the client's request.
 // Their panels below are left fully intact and gated behind this one flag
@@ -129,10 +119,6 @@ export default function AdminDashboardPage() {
   const [gallery, setGallery] = useState([]);
   const [lyrics, setLyrics] = useState([]);
 
-  // Live YouTube subscriber count for the Overview tile. Stays null until
-  // the API answers, so the tile can fall back rather than flash a wrong 0.
-  const [youtube, setYoutube] = useState(null);
-
   const [metrics, setMetrics] = useState({
     totalAttendees: 0,
     maleCount: 0,
@@ -213,9 +199,6 @@ export default function AdminDashboardPage() {
         const dataLyr = await resLyrics.json();
         setLyrics(dataLyr.items || []);
       }
-
-      const resYt = await fetch("/api/admin/youtube");
-      if (resYt.ok) setYoutube(await resYt.json());
     } catch (err) {
       console.error("Dashboard fetch error:", err);
     } finally {
@@ -600,27 +583,15 @@ export default function AdminDashboardPage() {
     lyrics: lyrics.length,
   };
 
-  // The subscriber tile reads the live YouTube channel. Until the API key
-  // is configured (or if YouTube is unreachable) it shows a dash and says
-  // why on hover, rather than passing off the mailing-list number as the
-  // channel's subscriber count.
-  const ytOk = youtube?.ok === true;
-  const ytNote = ytOk
-    ? `${youtube.channelTitle || "YouTube"} — ${youtube.subscribers.toLocaleString()} subscribers`
-    : youtube
-      ? youtube.reason || "YouTube count unavailable"
-      : "Loading…";
-
   const STAT_CARDS = [
     // Reverb attendees parked at the client's request — un-comment to restore.
     // { tab: "attendees", label: "Attendees", value: counts.attendees, icon: Users },
     {
       tab: null,
       label: "Subscribers",
-      sublabel: "YouTube",
-      value: ytOk ? formatCount(youtube.subscribers) : "\u2014",
-      note: ytNote,
-      icon: YouTubeIcon,
+      value: counts.subscribers,
+      note: "Newsletter sign-ups collected from the website",
+      icon: Mail,
     },
     { tab: "gallery", label: "Photos", value: counts.gallery, icon: Camera },
     { tab: "lyrics", label: "Songs", value: counts.lyrics, icon: Music },

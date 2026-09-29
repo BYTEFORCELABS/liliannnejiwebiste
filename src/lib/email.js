@@ -1,5 +1,4 @@
 import nodemailer from "nodemailer";
-import { Resend } from "resend";
 
 // Generate luxury dark/gold/blue HTML Admission Pass for attendee
 export function generateTicketEmailHtml(attendee) {
@@ -95,41 +94,14 @@ export function generateTicketEmailHtml(attendee) {
   `;
 }
 
-// Send Email via Resend, Nodemailer, or Dev Mock Fallback
+// Send the ticket by SMTP if it is configured, otherwise log it.
+// Resend was removed while no provider is set up — see getEmailProviderStatus.
 export async function sendReverbTicketEmail(attendee) {
   const subject = `Your Admission Pass for REVERB 5.0 (${attendee.ticketCode}) - Minister Lilian Nneji`;
   const htmlContent = generateTicketEmailHtml(attendee);
   const textContent = `Hello ${attendee.fullName},\n\nYour seat is reserved for REVERB 5.0 with Minister Lilian Nneji!\nTicket Code: ${attendee.ticketCode}\nDate: Sunday, 1st Nov 2026 at 4:00 PM\nVenue: EUI Event Center, Plot F11 Sani Abacha Road, GRA Phase 3, Port Harcourt.\n\nSee you there!`;
 
-  // 1. Check for Resend API Key
-  let resendError = null;
-  if (process.env.RESEND_API_KEY) {
-    try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const fromEmail = process.env.RESEND_FROM_EMAIL || "Minister Lilian Nneji <onboarding@resend.dev>";
-      
-      const response = await resend.emails.send({
-        from: fromEmail,
-        to: attendee.email,
-        subject,
-        html: htmlContent,
-        text: textContent,
-      });
-
-      if (response.error) {
-        throw new Error(response.error.message || JSON.stringify(response.error));
-      }
-
-      console.log("[Resend] Email sent successfully:", response.data?.id || response.id);
-      return { success: true, provider: "resend", id: response.data?.id || response.id };
-    } catch (err) {
-      console.error("[Resend] Failed to send email:", err.message);
-      resendError = err.message;
-      // Fall through to other providers or mock fallback
-    }
-  }
-
-  // 2. Check for SMTP / Nodemailer
+  // 1. Check for SMTP / Nodemailer
   if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     try {
       const transporter = nodemailer.createTransport({
@@ -160,9 +132,9 @@ export async function sendReverbTicketEmail(attendee) {
     }
   }
 
-  // 3. Fallback: Mock Email (Logs to console in development)
+  // 2. Fallback: Mock Email (Logs to console in development)
   console.log("----------------------------------------------------------------");
-  console.log("📨 [MOCK EMAIL DISPATCHED] (Configure RESEND_API_KEY or SMTP in .env.local)");
+  console.log("📨 [MOCK EMAIL DISPATCHED] (Configure SMTP in .env.local to send for real)");
   console.log(`To: ${attendee.email}`);
   console.log(`Subject: ${subject}`);
   console.log(`Attendee: ${attendee.fullName} | Ticket: ${attendee.ticketCode}`);
@@ -171,22 +143,13 @@ export async function sendReverbTicketEmail(attendee) {
   return {
     success: true,
     provider: "mock",
-    note: resendError
-      ? `Resend attempted but failed (${resendError}). Fallback simulation used.`
-      : "Email simulated in dev mode. Set RESEND_API_KEY or SMTP credentials in .env.local to send live emails.",
-    error: resendError || null,
+    note: "Email simulated. Set SMTP credentials in .env.local to send live emails.",
+    error: null,
   };
 }
 
 // Check which email provider is currently configured
 export function getEmailProviderStatus() {
-  if (process.env.RESEND_API_KEY) {
-    return {
-      configured: true,
-      provider: "Resend",
-      from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
-    };
-  }
   if (process.env.SMTP_HOST && process.env.SMTP_USER) {
     return {
       configured: true,
@@ -198,6 +161,6 @@ export function getEmailProviderStatus() {
   return {
     configured: false,
     provider: "Dev Mock Mode (Console Log)",
-    note: "Add RESEND_API_KEY or SMTP_HOST/USER/PASS in .env.local for live sending.",
+    note: "Add SMTP_HOST / SMTP_USER / SMTP_PASS in .env.local for live sending.",
   };
 }
