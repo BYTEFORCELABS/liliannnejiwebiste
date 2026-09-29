@@ -186,33 +186,6 @@ export default function AboutSection() {
         {/* ============================================================ */}
         <AwardsStrip />
 
-        {/* ============================================================ */}
-        {/* AWARD CALLOUT                                                */}
-        {/* ============================================================ */}
-        <Reveal variant="scale">
-          <div className="relative border border-[#F88E14]/25 bg-gradient-to-br from-zinc-900 to-black px-6 sm:px-12 py-12 sm:py-14 text-center overflow-hidden group">
-            <div className="animate-breathe absolute -top-20 left-1/2 -translate-x-1/2 w-[420px] h-[220px] bg-[#F88E14]/10 blur-[110px] pointer-events-none" />
-
-            <div className="relative space-y-4">
-              <Award className="w-10 h-10 text-gold mx-auto group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" />
-
-              <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 font-bold">
-                Clima Africa Awards &middot; 2024
-              </p>
-
-              <h3 className="font-fjalla text-3xl sm:text-5xl lg:text-6xl text-ink font-bold uppercase tracking-tight">
-                Africa Praise Artiste
-                <span className="block text-gold-gradient">Of the Year</span>
-              </h3>
-
-              <p className="text-sm sm:text-base text-zinc-400 max-w-xl mx-auto pt-1">
-                Awarded for a body of work and a decade of ministry spent lifting congregations across Africa
-                in energetic, unashamed praise.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
       </div>
     </section>
   );

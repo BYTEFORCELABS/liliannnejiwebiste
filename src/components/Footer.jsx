@@ -66,22 +66,22 @@ export default function Footer() {
             For Bookings |
           </span>
 
-          {/* Phone */}
-          <a
-            href="tel:+2348034978751"
-            className="flex items-center gap-2 hover:text-gold transition-colors"
-          >
-            <Phone className="w-3.5 h-3.5 text-zinc-300" />
-            <span>08034978751</span>
-          </a>
-
-          {/* Phone 2 */}
+          {/* Phone — primary line, always listed first */}
           <a
             href="tel:+2348023131871"
             className="flex items-center gap-2 hover:text-gold transition-colors"
           >
             <Phone className="w-3.5 h-3.5 text-zinc-300" />
             <span>08023131871</span>
+          </a>
+
+          {/* Phone 2 */}
+          <a
+            href="tel:+2348034978751"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5 text-zinc-300" />
+            <span>08034978751</span>
           </a>
 
           {/* Email 1 */}

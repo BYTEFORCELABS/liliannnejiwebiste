@@ -15,8 +15,9 @@ const ROUTES = [
     title: "Call Us",
     blurb: "Speak with the management team directly about bookings, ministrations and logistics.",
     actions: [
-      { label: "+234 803 497 8751", href: "tel:+2348034978751" },
       { label: "+234 802 313 1871", href: "tel:+2348023131871" },
+      { label: "+234 803 497 8751", href: "tel:+2348034978751" },
+     
     ],
   },
   {

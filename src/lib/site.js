@@ -36,7 +36,9 @@ export const SOCIAL_PROFILES = [
 
 export const CONTACT = {
   emails: ["Lilianamadi@yahoo.com", "Liliannneji@yahoo.com"],
-  phones: ["+234 803 497 8751", "+234 802 313 1871"],
+  // Primary line first — this order is what the JSON-LD contactPoint,
+  // the footer and the booking section all follow.
+  phones: ["+234 802 313 1871", "+234 803 497 8751"],
   locality: "Port Harcourt",
   region: "Rivers State",
   country: "NG",
@@ -44,7 +46,7 @@ export const CONTACT = {
 
 // Paste the token from Google Search Console -> HTML tag verification.
 // Leaving it empty simply omits the tag.
-export const GOOGLE_SITE_VERIFICATION = "google-site-verification=eJAJJ1kbabAj_NcNl38uR_XKY5EXOQziXeF65APOj7s";
+export const GOOGLE_SITE_VERIFICATION = "eJAJJ1kbabAj_NcNl38uR_XKY5EXOQziXeF65APOj7s";
 
 /**
  * Builds a page's metadata with the canonical URL, Open Graph and
