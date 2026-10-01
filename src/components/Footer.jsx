@@ -52,8 +52,8 @@ export default function Footer() {
     { name: "TikTok", icon: TikTokIcon, url: "https://www.tiktok.com/@liliannneji1" },
     { name: "Threads", icon: ThreadsIcon, url: "https://threads.net/@liliannneji" },
     { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
-    { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/artist/lilian-nneji" },
-    { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/lilian-nneji" },
+    { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/us/artist/lilian-nneji/1474517860" },
+    { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/liliannneji" },
   ];
 
   return (
@@ -142,7 +142,7 @@ export default function Footer() {
 
         {/* Copyright Line matching Screenshot 3 */}
         <div className="text-xs sm:text-sm text-zinc-400 font-normal">
-          Copyright © {new Date().getFullYear()} Minister Lilian Nneji | Designed by Engee Titus
+          Copyright © {new Date().getFullYear()} Minister Lilian Nneji
         </div>
 
       </div>

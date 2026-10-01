@@ -30,8 +30,8 @@ export const SOCIAL_PROFILES = [
   "https://x.com/liliannneji",
   "https://threads.net/@liliannneji",
   "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa",
-  "https://music.apple.com/artist/lilian-nneji",
-  "https://soundcloud.com/lilian-nneji",
+  "https://music.apple.com/us/artist/lilian-nneji/1474517860",
+  "https://soundcloud.com/liliannneji",
 ];
 
 export const CONTACT = {

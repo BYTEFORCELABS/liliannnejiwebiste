@@ -86,22 +86,22 @@ export default function MusicSection() {
     {
       name: "YouTube Music",
       icon: YouTubeMusicIcon,
-      url: "https://music.youtube.com/channel/UC-liliannneji",
+      url: "https://music.youtube.com/channel/UCeohNzClfdJcfDs38SGIghQ",
     },
     {
       name: "Deezer",
       icon: DeezerIcon,
-      url: "https://www.deezer.com/artist/liliannneji",
+      url: "https://www.deezer.com/artist/51528232",
     },
     {
       name: "Apple Music",
       icon: AppleMusicIcon,
-      url: "https://music.apple.com/artist/lilian-nneji",
+      url: "https://music.apple.com/us/artist/lilian-nneji/1474517860",
     },
     {
       name: "Soundcloud",
       icon: SoundcloudIcon,
-      url: "https://soundcloud.com/lilian-nneji",
+      url: "https://soundcloud.com/liliannneji",
     },
     {
       name: "Boomplay",
@@ -111,7 +111,7 @@ export default function MusicSection() {
     {
       name: "Audiomack",
       icon: AudiomackIcon,
-      url: "https://audiomack.com/lilian-nneji",
+      url: "https://audiomack.com/liliannneji",
     },
   ];
 

@@ -147,8 +147,8 @@ export default function ReverbPage() {
     { name: "YouTube", icon: YouTubeIcon, url: "https://www.youtube.com/@LilianNneji" },
     { name: "Threads", icon: ThreadsIcon, url: "https://threads.net/@liliannneji" },
     { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/2Ay5bXW6SZOV8sOkqkfNpa" },
-    { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/artist/lilian-nneji" },
-    { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/lilian-nneji" },
+    { name: "Apple Music", icon: AppleMusicIcon, url: "https://music.apple.com/us/artist/lilian-nneji/1474517860" },
+    { name: "SoundCloud", icon: SoundcloudIcon, url: "https://soundcloud.com/liliannneji" },
   ];
 
   return (

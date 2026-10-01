@@ -81,8 +81,7 @@ export default function BookingSection() {
 
           <Reveal as="p" variant="up" delay={220} className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-2xl">
             Reach Minister Lilian Nneji&rsquo;s management directly by phone, WhatsApp or email.
-            No forms and no waiting  you will be speaking to a person, usually within one
-            working day.
+            No forms to fill in and nothing to wait on &mdash; you go straight to a person.
           </Reveal>
         </div>
 
