@@ -524,7 +524,7 @@ export default function ReverbPage() {
         {/* Yellow Copyright Banner matching Screenshot 5 */}
         <div className="pt-1 flex justify-center">
           <div className="bg-[#F88E14] text-on-gold font-bold text-xs sm:text-sm px-6 py-2 rounded-none shadow-md">
-            Copyright © {new Date().getFullYear()} Minister Lilian Nneji | Designed by Engee Titus
+            Copyright © {new Date().getFullYear()} Minister Lilian Nneji
           </div>
         </div>
       </footer>
