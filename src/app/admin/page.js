@@ -33,9 +33,12 @@ import {
   LayoutDashboard,
   Menu,
   ArrowUpRight,
-  PanelLeftClose
+  PanelLeftClose,
+  AudioLines
 } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
+import LyricsSyncModal from "@/components/LyricsSyncModal";
+import { hasValidTimings } from "@/lib/lyricsSync";
 
 // Reverb Attendees and Subscribers are parked at the client's request.
 // Their panels below are left fully intact and gated behind this one flag
@@ -163,6 +166,9 @@ export default function AdminDashboardPage() {
 
   // Lyrics Preview Modal State
   const [previewingLyrics, setPreviewingLyrics] = useState(null);
+
+  // Lyrics Sync (live highlight timing) Modal State
+  const [syncingLyrics, setSyncingLyrics] = useState(null);
 
   // Check existing session on load
   useEffect(() => {
@@ -1256,6 +1262,23 @@ export default function AdminDashboardPage() {
                             <span>Preview</span>
                           </button>
 
+                          {song.youtubeUrl && song.lyrics?.trim() && (
+                            <button
+                              onClick={() => setSyncingLyrics(song)}
+                              className={`flex items-center gap-1 cursor-pointer ${
+                                hasValidTimings(song) ? "text-gold hover:text-ink" : "text-zinc-400 hover:text-ink"
+                              }`}
+                              title={
+                                hasValidTimings(song)
+                                  ? "Live highlighting is on for this song. Click to adjust the timing."
+                                  : "Time the lyrics to the video so they highlight as she sings"
+                              }
+                            >
+                              <AudioLines className="w-3.5 h-3.5" />
+                              <span>{hasValidTimings(song) ? "Synced" : "Sync"}</span>
+                            </button>
+                          )}
+
                           <button
                             onClick={() => handleOpenEditLyrics(song)}
                             className="text-zinc-400 hover:text-ink flex items-center gap-1 cursor-pointer"
@@ -1538,6 +1561,20 @@ export default function AdminDashboardPage() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* MODAL: SYNC LYRICS TO VIDEO                                  */}
+      {/* ============================================================ */}
+      {syncingLyrics && (
+        <LyricsSyncModal
+          song={syncingLyrics}
+          onClose={() => setSyncingLyrics(null)}
+          onSaved={(item) => {
+            setLyrics(lyrics.map((l) => (l.id === item.id ? item : l)));
+            setSyncingLyrics(null);
+          }}
+        />
       )}
 
       {/* ============================================================ */}

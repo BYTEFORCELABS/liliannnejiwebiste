@@ -45,9 +45,14 @@ create table if not exists lyrics (
   "youtubeUrl"  text,
   "lyrics"      text,
   "featured"    boolean not null default false,
+  -- Live highlight timings, set from the admin Sync tool. See src/lib/lyricsSync.js
+  "lyricTimings" jsonb,
   "createdAt"   timestamptz not null default now(),
   "updatedAt"   timestamptz
 );
+
+-- For databases created before lyric sync existed
+alter table lyrics add column if not exists "lyricTimings" jsonb;
 
 alter table reverb_attendees enable row level security;
 alter table subscribers      enable row level security;

@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Toast from "@/components/Toast";
-import { Music, Search, Copy, Play, X, ExternalLink } from "lucide-react";
+import YouTubePlayer, { usePlayerTime, youTubeId } from "@/components/YouTubePlayer";
+import { lyricLines, hasValidTimings, activeLineAt, sortCues } from "@/lib/lyricsSync";
+import { Music, Search, Copy, Play, X, ExternalLink, Highlighter } from "lucide-react";
 
 const CATEGORIES = [
   "All",
@@ -14,11 +16,7 @@ const CATEGORIES = [
   "Thanksgiving"
 ];
 
-function youTubeId(url) {
-  if (!url) return null;
-  const match = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
-  return match ? match[1] : null;
-}
+const FOLLOW_ALONG_KEY = "lyrics_follow_along";
 
 export default function LyricsPage() {
   const [songs, setSongs] = useState([]);
@@ -28,12 +26,37 @@ export default function LyricsPage() {
   const [selectedSongId, setSelectedSongId] = useState(null);
   const [toast, setToast] = useState(null);
   const [nowPlayingId, setNowPlayingId] = useState(null);
+  // Remembers whether this visitor turned live highlighting off. The switch
+  // only renders once songs load on the client, so this can't mismatch SSR.
+  const [followAlong, setFollowAlong] = useState(() => {
+    try {
+      return localStorage.getItem(FOLLOW_ALONG_KEY) !== "off";
+    } catch {
+      return true;
+    }
+  });
+
+  const playerRef = useRef(null);
+  const lyricsPaneRef = useRef(null);
+  const stickyPlayerRef = useRef(null);
+  const lineRefs = useRef([]);
+  const readerScrolling = useRef(false);
+  const readerScrollTimer = useRef(null);
 
   const closeToast = useCallback(() => setToast(null), []);
 
   const selectSong = (id) => {
     setSelectedSongId(id);
     setNowPlayingId(null);
+    lyricsPaneRef.current?.scrollTo({ top: 0 });
+  };
+
+  const toggleFollowAlong = () => {
+    const next = !followAlong;
+    setFollowAlong(next);
+    try {
+      localStorage.setItem(FOLLOW_ALONG_KEY, next ? "on" : "off");
+    } catch {}
   };
 
   useEffect(() => {
@@ -77,6 +100,52 @@ export default function LyricsPage() {
   const videoId = youTubeId(selectedSong?.youtubeUrl);
   const isPlaying = Boolean(selectedSong) && nowPlayingId === selectedSong.id;
   const hasLyrics = Boolean(selectedSong?.lyrics?.trim());
+
+  // Live highlighting: only for songs whose timings were synced in the admin
+  const lines = lyricLines(selectedSong?.lyrics);
+  const cues = hasValidTimings(selectedSong) ? sortCues(selectedSong.lyricTimings.cues) : null;
+  const cuedLines = new Set(cues?.map((c) => c.line));
+  const highlighting = Boolean(cues) && followAlong && isPlaying;
+  const playbackTime = usePlayerTime(playerRef, highlighting);
+  const activeLine = highlighting ? activeLineAt(cues, playbackTime) : -1;
+
+  // Keep the line being sung in view, below the sticky player
+  useEffect(() => {
+    const line = lineRefs.current[activeLine];
+    const pane = lyricsPaneRef.current;
+    if (!line || !pane) return;
+    if (readerScrolling.current) return;
+
+    // On desktop the lyrics pane scrolls on its own; on mobile the page does
+    const paneScrolls = getComputedStyle(pane).overflowY !== "visible" && pane.scrollHeight > pane.clientHeight;
+    const paneRect = pane.getBoundingClientRect();
+    const viewTop = stickyPlayerRef.current?.getBoundingClientRect().bottom ?? paneRect.top;
+    const viewBottom = paneScrolls ? paneRect.bottom : window.innerHeight;
+    const delta = line.getBoundingClientRect().top - (viewTop + (viewBottom - viewTop) * 0.3);
+    (paneScrolls ? pane : window).scrollBy({ top: delta, behavior: "smooth" });
+  }, [activeLine]);
+
+  // Leave readers alone for a few seconds after they scroll themselves
+  const markUserScroll = () => {
+    readerScrolling.current = true;
+    clearTimeout(readerScrollTimer.current);
+    readerScrollTimer.current = setTimeout(() => (readerScrolling.current = false), 4000);
+  };
+
+  useEffect(() => () => clearTimeout(readerScrollTimer.current), []);
+
+  // Seek to the timing of a line closest to where the song is now
+  const jumpToLine = (index) => {
+    const player = playerRef.current;
+    if (!player?.isReady()) return;
+    const now = player.getCurrentTime();
+    const nearest = cues
+      .filter((c) => c.line === index)
+      .reduce((a, b) => (Math.abs(b.time - now) < Math.abs(a.time - now) ? b : a));
+    clearTimeout(readerScrollTimer.current);
+    readerScrolling.current = false;
+    player.seekTo(nearest.time);
+  };
 
   // Copy lyrics to clipboard
   const handleCopyLyrics = async () => {
@@ -183,10 +252,11 @@ export default function LyricsPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              
+            // On desktop the viewer fills the screen and each column scrolls on its own
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[minmax(0,1fr)] gap-8 items-start lg:items-stretch lg:h-[calc(100svh-7rem)] lg:min-h-[560px]">
+
               {/* Left Column: Song List (Desktop / Mobile) */}
-              <div className="lg:col-span-4 space-y-2.5">
+              <div className="lg:col-span-4 flex flex-col gap-2.5 lg:min-h-0">
                 <div className="flex items-center justify-between px-1 pb-1">
                   <span className="text-xs uppercase font-bold tracking-wider text-zinc-400">
                     Songs Catalog ({filteredSongs.length})
@@ -194,7 +264,7 @@ export default function LyricsPage() {
                   <span className="text-[11px] text-zinc-500">Select to view</span>
                 </div>
 
-                <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+                <div className="space-y-2 max-h-[420px] lg:max-h-none lg:flex-1 lg:min-h-0 overflow-y-auto overscroll-contain pr-1">
                   {filteredSongs.map((song) => {
                     const isSelected = selectedSong?.id === song.id;
                     return (
@@ -240,12 +310,17 @@ export default function LyricsPage() {
               </div>
 
               {/* Right Column: Interactive Lyrics Display */}
-              <div className="lg:col-span-8 bg-zinc-950 border border-zinc-800/90 rounded-none p-6 sm:p-10 shadow-2xl relative">
+              <div
+                ref={lyricsPaneRef}
+                onWheel={markUserScroll}
+                onTouchMove={markUserScroll}
+                className="lg:col-span-8 bg-zinc-950 border border-zinc-800/90 rounded-none shadow-2xl relative lg:h-full lg:overflow-y-auto lg:overflow-x-hidden overscroll-contain"
+              >
                 {selectedSong ? (
-                  <div className="space-y-8 relative z-10">
+                  <div className="space-y-8 relative z-10 p-6 sm:p-10">
                     
                     {/* Header Details */}
-                    <div className="border-b border-zinc-800/80 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="border-b border-zinc-800/80 pb-6 flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="px-2.5 py-0.5 bg-[#F88E14]/15 border border-[#F88E14]/30 text-gold text-xs font-bold uppercase tracking-wider">
@@ -264,7 +339,24 @@ export default function LyricsPage() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex items-center gap-3 flex-shrink-0">
+                      <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
+                        {/* Live highlight switch, for songs that have been synced */}
+                        {cues && (
+                          <button
+                            onClick={toggleFollowAlong}
+                            aria-pressed={followAlong}
+                            title={followAlong ? "Turn off live lyric highlighting" : "Highlight each line as it is sung"}
+                            className={`flex items-center gap-2 px-4 py-2.5 border text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer ${
+                              followAlong
+                                ? "bg-[#F88E14]/15 border-[#F88E14]/50 text-gold"
+                                : "bg-zinc-900 border-zinc-700 text-zinc-400 hover:text-ink"
+                            }`}
+                          >
+                            <Highlighter className="w-4 h-4" />
+                            <span>Highlight {followAlong ? "On" : "Off"}</span>
+                          </button>
+                        )}
+
                         {/* Copy Lyrics Button */}
                         {hasLyrics && (
                           <button
@@ -301,19 +393,25 @@ export default function LyricsPage() {
                     {/* Inline player: sticks to the top so the song keeps
                         playing while the lyrics are scrolled. */}
                     {isPlaying && videoId && (
-                      <div className="sticky top-24 z-20 -mx-6 sm:-mx-10 px-6 sm:px-10 pb-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80">
-                        <div className="relative w-full aspect-video bg-black border border-zinc-800 shadow-2xl">
-                          <iframe
-                            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+                      <div
+                        ref={stickyPlayerRef}
+                        className="sticky top-24 lg:top-0 z-20 -mx-6 sm:-mx-10 px-6 sm:px-10 pt-3 pb-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80"
+                      >
+                        <div className="relative w-full lg:max-w-[62vh] lg:mx-auto aspect-video bg-black border border-zinc-800 shadow-2xl">
+                          <YouTubePlayer
+                            ref={playerRef}
+                            videoId={videoId}
                             title={`${selectedSong.title} by Minister Lilian Nneji`}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            className="absolute inset-0 w-full h-full"
                           />
                         </div>
                         <div className="flex items-center justify-between gap-3 pt-2.5">
                           <p className="text-[11px] uppercase tracking-widest font-bold text-gold">
                             Now Playing
+                            {highlighting && (
+                              <span className="ml-2 normal-case tracking-normal font-medium text-zinc-500">
+                                · Lyrics follow along. Tap a line to jump to it.
+                              </span>
+                            )}
                           </p>
                           <a
                             href={selectedSong.youtubeUrl}
@@ -330,8 +428,26 @@ export default function LyricsPage() {
 
                     {/* Formatted Lyrics Body */}
                     {hasLyrics ? (
-                      <div className="space-y-6 text-zinc-200 font-normal leading-relaxed text-sm sm:text-base whitespace-pre-line select-text">
-                        {selectedSong.lyrics}
+                      <div className="font-normal leading-relaxed text-sm sm:text-base select-text">
+                        {lines.map((line, i) => {
+                          const canJump = highlighting && cuedLines.has(i);
+                          return (
+                            <p
+                              key={i}
+                              ref={(el) => (lineRefs.current[i] = el)}
+                              onClick={canJump ? () => jumpToLine(i) : undefined}
+                              className={`whitespace-pre-line -mx-3 px-3 py-0.5 transition-colors duration-300 ${
+                                i === activeLine
+                                  ? "bg-[#F88E14]/15 text-gold"
+                                  : highlighting
+                                    ? "text-zinc-500"
+                                    : "text-zinc-200"
+                              } ${canJump ? "cursor-pointer hover:text-ink" : ""}`}
+                            >
+                              {line || "\u00A0"}
+                            </p>
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="py-12 px-6 text-center space-y-4 border border-dashed border-zinc-800 bg-zinc-900/30">
