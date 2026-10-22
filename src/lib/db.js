@@ -158,7 +158,7 @@ export async function deleteGalleryItem(id) {
 
 // --- LYRICS FUNCTIONS ---
 
-const LYRICS_FIELDS = ["title", "category", "album", "releaseYear", "youtubeUrl", "lyrics", "featured"];
+const LYRICS_FIELDS = ["title", "category", "album", "releaseYear", "youtubeUrl", "lyrics", "featured", "lyricTimings"];
 
 export async function getLyrics() {
   return unwrap(
