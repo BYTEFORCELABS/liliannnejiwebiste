@@ -16,7 +16,7 @@ export async function GET(request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const items = getLyrics();
+  const items = await getLyrics();
   return NextResponse.json({ success: true, items });
 }
 
@@ -33,7 +33,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Song Title and Lyrics are required" }, { status: 400 });
     }
 
-    const newItem = addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured });
+    const newItem = await addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured });
     return NextResponse.json({ success: true, item: newItem });
   } catch (error) {
     console.error("Error creating lyrics item:", error);
@@ -54,7 +54,7 @@ export async function PUT(request) {
       return NextResponse.json({ error: "Song ID is required" }, { status: 400 });
     }
 
-    const updated = updateLyrics(id, updates);
+    const updated = await updateLyrics(id, updates);
     if (!updated) {
       return NextResponse.json({ error: "Song not found" }, { status: 404 });
     }
@@ -78,6 +78,6 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "Song ID is required" }, { status: 400 });
   }
 
-  deleteLyrics(id);
+  await deleteLyrics(id);
   return NextResponse.json({ success: true, message: "Song lyrics deleted" });
 }

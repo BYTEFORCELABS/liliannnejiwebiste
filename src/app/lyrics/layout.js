@@ -9,11 +9,11 @@ export const metadata = pageMetadata({
   path: "/lyrics",
 });
 
-export default function LyricsLayout({ children }) {
+export default async function LyricsLayout({ children }) {
   return (
     <>
       <BreadcrumbSchema items={[{ name: "Lyrics", path: "/lyrics" }]} />
-      <MusicCatalogueSchema songs={getLyrics()} />
+      <MusicCatalogueSchema songs={await getLyrics().catch(() => [])} />
       {children}
     </>
   );

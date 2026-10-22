@@ -16,7 +16,7 @@ export async function GET(request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const subscribers = getSubscribers();
+  const subscribers = await getSubscribers();
   return NextResponse.json({
     success: true,
     subscribers,
@@ -35,6 +35,6 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "Subscriber ID/Email is required" }, { status: 400 });
   }
 
-  deleteSubscriber(id);
+  await deleteSubscriber(id);
   return NextResponse.json({ success: true, message: "Subscriber removed." });
 }

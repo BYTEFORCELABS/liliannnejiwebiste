@@ -16,7 +16,7 @@ export async function GET(request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const items = getGalleryItems();
+  const items = await getGalleryItems();
   return NextResponse.json({ success: true, items });
 }
 
@@ -33,7 +33,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Title and Image URL are required" }, { status: 400 });
     }
 
-    const newItem = addGalleryItem({ title, category, imageUrl, caption, date, featured });
+    const newItem = await addGalleryItem({ title, category, imageUrl, caption, date, featured });
     return NextResponse.json({ success: true, item: newItem });
   } catch (error) {
     console.error("Error creating gallery item:", error);
@@ -54,7 +54,7 @@ export async function PUT(request) {
       return NextResponse.json({ error: "Item ID is required" }, { status: 400 });
     }
 
-    const updated = updateGalleryItem(id, updates);
+    const updated = await updateGalleryItem(id, updates);
     if (!updated) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
@@ -78,6 +78,6 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "Item ID is required" }, { status: 400 });
   }
 
-  deleteGalleryItem(id);
+  await deleteGalleryItem(id);
   return NextResponse.json({ success: true, message: "Gallery item deleted" });
 }
