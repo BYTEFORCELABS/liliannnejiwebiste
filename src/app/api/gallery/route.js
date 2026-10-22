@@ -6,7 +6,7 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
 
-    let items = getGalleryItems();
+    let items = await getGalleryItems();
     if (category && category.toLowerCase() !== "all") {
       items = items.filter((item) => item.category?.toLowerCase() === category.toLowerCase());
     }

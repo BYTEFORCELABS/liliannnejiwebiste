@@ -9,14 +9,14 @@ export async function GET(request) {
     const category = searchParams.get("category");
 
     if (id) {
-      const song = getLyricsById(id);
+      const song = await getLyricsById(id);
       if (!song) {
         return NextResponse.json({ error: "Song not found" }, { status: 404 });
       }
       return NextResponse.json({ success: true, song });
     }
 
-    let items = getLyrics();
+    let items = await getLyrics();
 
     if (category && category.toLowerCase() !== "all") {
       items = items.filter((item) => item.category?.toLowerCase() === category.toLowerCase());

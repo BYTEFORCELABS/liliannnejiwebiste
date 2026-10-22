@@ -16,8 +16,8 @@ export async function GET(request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const attendees = getAttendees();
-  const metrics = getDashboardMetrics();
+  const attendees = await getAttendees();
+  const metrics = await getDashboardMetrics();
 
   return NextResponse.json({
     success: true,
@@ -38,7 +38,7 @@ export async function DELETE(request) {
     return NextResponse.json({ error: "Attendee ID is required" }, { status: 400 });
   }
 
-  deleteAttendee(id);
+  await deleteAttendee(id);
   return NextResponse.json({ success: true, message: "Attendee removed." });
 }
 
@@ -54,6 +54,6 @@ export async function PATCH(request) {
     return NextResponse.json({ error: "Attendee ID is required" }, { status: 400 });
   }
 
-  const updated = toggleCheckIn(id);
+  const updated = await toggleCheckIn(id);
   return NextResponse.json({ success: true, attendee: updated });
 }

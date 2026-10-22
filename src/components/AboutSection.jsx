@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import AwardsStrip from "@/components/AwardsStrip";
-import { Award } from "lucide-react";
 
 const HIT_SINGLES = [
   // Omeriwo leads: it is the viral hit, so it opens the marquee.
@@ -59,21 +58,6 @@ export default function AboutSection() {
                   className="object-cover object-[52%_22%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating award badge */}
-              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-zinc-950 border border-[#F88E14]/40 px-5 py-4 shadow-2xl max-w-[230px] animate-float">
-                <div className="flex items-start gap-3">
-                  <Award className="w-6 h-6 text-gold flex-shrink-0 mt-0.5" />
-                  <div className="leading-tight">
-                    <p className="font-fjalla text-sm font-bold text-ink uppercase tracking-wide">
-                      Africa Praise Artiste
-                    </p>
-                    <p className="text-[11px] text-gold font-semibold uppercase tracking-wider">
-                      Of the Year &middot; 2024
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </Reveal>

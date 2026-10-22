@@ -1,7 +1,22 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+// Attendee fields come straight from the public form
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 // Generate luxury dark/gold/blue HTML Admission Pass for attendee
 export function generateTicketEmailHtml(attendee) {
+  const ticketCode = escapeHtml(attendee.ticketCode);
+  const fullName = escapeHtml(attendee.fullName);
+  const gender = escapeHtml(attendee.gender);
+  const city = escapeHtml(attendee.city || "Port Harcourt");
+
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +56,7 @@ export function generateTicketEmailHtml(attendee) {
 
       <div class="ticket-badge">
         <div class="ticket-label">Official Admission Pass</div>
-        <div class="ticket-code">${attendee.ticketCode}</div>
+        <div class="ticket-code">${ticketCode}</div>
         <div style="color: #34d399; font-size: 11px; font-weight: 700; margin-top: 4px;">● RESERVATION CONFIRMED</div>
       </div>
 
@@ -49,11 +64,11 @@ export function generateTicketEmailHtml(attendee) {
         <table width="100%" cellpadding="6" cellspacing="0" style="font-size: 14px;">
           <tr>
             <td style="color: #a1a1aa;">Attendee:</td>
-            <td style="color: #ffffff; font-weight: bold; text-align: right;">${attendee.fullName}</td>
+            <td style="color: #ffffff; font-weight: bold; text-align: right;">${fullName}</td>
           </tr>
           <tr>
             <td style="color: #a1a1aa;">Gender:</td>
-            <td style="color: #ffffff; text-align: right;">${attendee.gender}</td>
+            <td style="color: #ffffff; text-align: right;">${gender}</td>
           </tr>
           <tr>
             <td style="color: #a1a1aa;">Date:</td>
@@ -73,7 +88,7 @@ export function generateTicketEmailHtml(attendee) {
           </tr>
           <tr>
             <td style="color: #a1a1aa;">City of Residence:</td>
-            <td style="color: #ffffff; text-align: right;">${attendee.city || "Port Harcourt"}</td>
+            <td style="color: #ffffff; text-align: right;">${city}</td>
           </tr>
         </table>
       </div>
@@ -94,47 +109,37 @@ export function generateTicketEmailHtml(attendee) {
   `;
 }
 
-// Send the ticket by SMTP if it is configured, otherwise log it.
-// Resend was removed while no provider is set up — see getEmailProviderStatus.
+// Send the ticket through Resend if it is configured, otherwise log it.
 export async function sendReverbTicketEmail(attendee) {
   const subject = `Your Admission Pass for REVERB 5.0 (${attendee.ticketCode}) - Minister Lilian Nneji`;
   const htmlContent = generateTicketEmailHtml(attendee);
   const textContent = `Hello ${attendee.fullName},\n\nYour seat is reserved for REVERB 5.0 with Minister Lilian Nneji!\nTicket Code: ${attendee.ticketCode}\nDate: Sunday, 1st Nov 2026 at 4:00 PM\nVenue: EUI Event Center, Plot F11 Sani Abacha Road, GRA Phase 3, Port Harcourt.\n\nSee you there!`;
 
-  // 1. Check for SMTP / Nodemailer
-  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-    try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || "465", 10),
-        secure: process.env.SMTP_SECURE === "true" || process.env.SMTP_PORT === "465",
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
+  // 1. Resend
+  if (process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { data, error } = await resend.emails.send({
+      from: process.env.RESEND_FROM || "Minister Lilian Nneji <onboarding@resend.dev>",
+      to: attendee.email,
+      replyTo: process.env.RESEND_REPLY_TO || undefined,
+      subject,
+      html: htmlContent,
+      text: textContent,
+    });
 
-      const fromAddress = process.env.SMTP_FROM || `"Minister Lilian Nneji" <${process.env.SMTP_USER}>`;
-
-      const info = await transporter.sendMail({
-        from: fromAddress,
-        to: attendee.email,
-        subject,
-        html: htmlContent,
-        text: textContent,
-      });
-
-      console.log("[Nodemailer] Email sent successfully:", info.messageId);
-      return { success: true, provider: "nodemailer", messageId: info.messageId };
-    } catch (err) {
-      console.error("[Nodemailer] Failed to send email:", err);
-      // Fall through to fallback
+    if (!error) {
+      console.log("[Resend] Email sent successfully:", data.id);
+      return { success: true, provider: "resend", messageId: data.id };
     }
+
+    // The registration is already saved, so report the failure instead of throwing
+    console.error("[Resend] Failed to send email:", error);
+    return { success: false, provider: "resend", error: error.message };
   }
 
   // 2. Fallback: Mock Email (Logs to console in development)
   console.log("----------------------------------------------------------------");
-  console.log("📨 [MOCK EMAIL DISPATCHED] (Configure SMTP in .env.local to send for real)");
+  console.log("📨 [MOCK EMAIL DISPATCHED] (Set RESEND_API_KEY in .env.local to send for real)");
   console.log(`To: ${attendee.email}`);
   console.log(`Subject: ${subject}`);
   console.log(`Attendee: ${attendee.fullName} | Ticket: ${attendee.ticketCode}`);
@@ -143,24 +148,23 @@ export async function sendReverbTicketEmail(attendee) {
   return {
     success: true,
     provider: "mock",
-    note: "Email simulated. Set SMTP credentials in .env.local to send live emails.",
+    note: "Email simulated. Set RESEND_API_KEY in .env.local to send live emails.",
     error: null,
   };
 }
 
 // Check which email provider is currently configured
 export function getEmailProviderStatus() {
-  if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+  if (process.env.RESEND_API_KEY) {
     return {
       configured: true,
-      provider: "Nodemailer (SMTP)",
-      host: process.env.SMTP_HOST,
-      user: process.env.SMTP_USER,
+      provider: "Resend",
+      from: process.env.RESEND_FROM || "onboarding@resend.dev (test sender)",
     };
   }
   return {
     configured: false,
     provider: "Dev Mock Mode (Console Log)",
-    note: "Add SMTP_HOST / SMTP_USER / SMTP_PASS in .env.local for live sending.",
+    note: "Add RESEND_API_KEY in .env.local for live sending.",
   };
 }

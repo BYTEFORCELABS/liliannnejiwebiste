@@ -16,7 +16,7 @@ export async function POST(request) {
     }
 
     // Save attendee to persistent database
-    const attendee = addAttendee({
+    const attendee = await addAttendee({
       fullName,
       gender: gender || "Male",
       email,

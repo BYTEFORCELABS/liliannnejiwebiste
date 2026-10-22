@@ -16,8 +16,13 @@ import { getGalleryItems } from "@/lib/db";
 // in the background instead.
 export const revalidate = 3600;
 
-export default function Home() {
-  const featured = getGalleryItems().filter((item) => item.featured).slice(0, 8);
+export default async function Home() {
+  // A database outage hides the slideshow rather than taking the homepage down
+  const gallery = await getGalleryItems().catch((err) => {
+    console.error("Home gallery unavailable:", err);
+    return [];
+  });
+  const featured = gallery.filter((item) => item.featured).slice(0, 8);
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-ink">

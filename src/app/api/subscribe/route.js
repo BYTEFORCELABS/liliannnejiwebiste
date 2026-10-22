@@ -13,7 +13,7 @@ export async function POST(request) {
       );
     }
 
-    const result = addSubscriber(email);
+    const result = await addSubscriber(email);
 
     return NextResponse.json({
       success: true,
