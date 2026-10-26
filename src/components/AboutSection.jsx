@@ -15,9 +15,92 @@ const HIT_SINGLES = [
   "Ntughari",
 ];
 
+const Name = ({ children }) => <strong className="text-ink font-semibold">{children}</strong>;
+
+const BIOGRAPHY = [
+  <>
+    Anointed and award-winning music minister <Name>Lilian Nneka Nneji</Name>, popularly known as{" "}
+    <Name>Lilian Nneji</Name>, is a Nigerian female gospel singer, songwriter, worship leader and recording
+    artiste. She is popularly known for her gospel hit singles like If E Reach Your Turn, Onwere Ihe Omere Mù,
+    E Get Why, Mercy, Odogwu N&rsquo;agha, Ko Joo, Ntughari and more.
+  </>,
+  <>
+    Lilian Nneji, an ordained assistant pastor, is an energetic praise leader. Born on the 18th of July, she is
+    the 5th child in a family of six children from <Name>Imo State, Nigeria</Name>.
+  </>,
+  <>
+    She graduated from the University of Ado-Ekiti, where she studied B.Sc. Accounting, and worked
+    professionally for 10 years even while doing the work of ministry, until the Lord called her into full-time
+    ministry. Since then she has travelled around the world preaching through her music, singing and dancing
+    energetically to God.
+  </>,
+  <>
+    In October 2026, Lilian Nneji was awarded <Name>Africa Gospel Artiste of the Year</Name> by the prestigious
+    Clima Africa Awards.
+  </>,
+  <>
+    She was awarded <Name>Africa Praise Artiste of the Year 2024</Name> by the prestigious Clima Africa Awards.
+    She was also awarded <Name>Praise Minstrel of the Year 2024</Name> at the Global Merit Awards, and was
+    presented with the <Name>Outstanding Gospel Minister Award 2024</Name> by the Abundant Life Meritorious
+    Gospel Award.
+  </>,
+  <>
+    In July 2025, Lilian Nneji became an <Name>honorary citizen of the State of Georgia, USA</Name>, and was
+    presented with a certificate during her Lilian Nneji Live in Concert, a huge and successful concert in Lagos.
+  </>,
+  <>
+    In October 2025, she was presented with an <Name>honorary Doctorate of Music</Name> by the Global University
+    of Science and Technology, Delaware, USA.
+  </>,
+  <>
+    Lilian Nneji was also awarded <Name>Africa Most Outstanding Gospel Music Minister (Stage Category) of the
+    Year 2025</Name> by the prestigious Clima Awards Africa.
+  </>,
+  <>
+    She has written several songs that have brought joy to many, telling of the importance of serving God
+    consistently and diligently, and of being steadfast in the place of faith.
+  </>,
+  <>
+    She released her first praise medley, titled <Name>Anointed Praise (Praise Medley)</Name>, in 2011, and
+    since then she has consistently released several singles that are available on online stores.
+  </>,
+  <>
+    Lilian Nneji is popularly known for her energetic dance on stage and her Igbo song renditions at the RCCG
+    monthly programmes. She&rsquo;s fondly called &ldquo;Energy&rdquo;, &ldquo;Odogwu&rdquo; and &ldquo;Praise
+    Machine&rdquo;, and is one of the lead singers in The Redeemed Christian Church of God National Mass Choir.
+  </>,
+  <>
+    She has graced the stage with several gospel greats, both locally and internationally. Lilian Nneji has
+    ministered in several RCCG churches and several other denominations, and was one of the music ministers at
+    the Reinhard Bonnke Farewell Crusade.
+  </>,
+  <>
+    She is an advocate of &lsquo;God&rsquo;s Timing&rsquo; and a teacher of the word of God. She serves as the
+    Music Director/Worship Leader at RCCG Lagos Province 2 and coordinates a music band called{" "}
+    <Name>&lsquo;Anointed Praise Team&rsquo;</Name>, which performs at all gospel events.
+  </>,
+  <>
+    Lilian Nneji is also the CEO of <Name>Lilian Nneji Global Ltd</Name>, a registered entertainment and event
+    company in Nigeria.
+  </>,
+  <>
+    She is happily married to her heartthrob, <Name>Pastor Joshua Nneji</Name>, an Area Pastor in the RCCG, and
+    they are blessed with 3 amazing children.
+  </>,
+  <>
+    Minister Lilian Nneji is mostly inspired by the ministry of the Word by her pastor, the General Overseer of
+    the Redeemed Christian Church of God, <Name>Pastor Enoch Adeboye</Name>.
+  </>,
+  <>
+    Lilian Nneji is greatly motivated by the desire to see her songs, writings, dance and concerts inspire the
+    church and the whole world to worship God, while they are lifted and healed. She hopes that her listeners
+    will be filled with the glory of God through her music.
+  </>,
+];
+
 export default function AboutSection() {
   return (
-    <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-hidden text-ink">
+    <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-clip text-ink">
 
       {/* Ambient backdrop */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,var(--color-zinc-900)_0%,var(--color-black)_60%)] pointer-events-none" />
@@ -41,10 +124,10 @@ export default function AboutSection() {
         {/* ============================================================ */}
         {/* ROW 1: PORTRAIT + BIOGRAPHY                                  */}
         {/* ============================================================ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-start">
 
-          {/* Portrait */}
-          <Reveal variant="left" className="lg:col-span-5">
+          {/* Portrait: stays in view beside the long biography on desktop */}
+          <Reveal variant="left" className="lg:col-span-5 lg:sticky lg:top-28">
             <div className="relative group max-w-md mx-auto lg:mx-0">
               {/* Offset gold frame */}
               <div className="absolute -inset-x-4 -inset-y-4 border border-[#F88E14]/30 translate-x-3 translate-y-3 group-hover:translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-700 ease-out pointer-events-none" />
@@ -66,29 +149,11 @@ export default function AboutSection() {
           <div className="lg:col-span-7 space-y-8">
 
             <div className="space-y-5 text-zinc-300 text-[15px] sm:text-[17px] leading-[1.75] font-normal">
-              <Reveal as="p" variant="up">
-                Minister <strong className="text-ink font-semibold">Lilian Nneka Nneji</strong>, known
-                to the world simply as <strong className="text-ink font-semibold">Lilian Nneji</strong>, is
-                a Nigerian gospel singer, songwriter, worship leader and recording artiste. An ordained assistant
-                pastor and one of Africa&rsquo;s most energetic praise leaders, she carries a sound that moves a
-                room from celebration straight into the presence of God.
-              </Reveal>
-
-              <Reveal as="p" variant="up" delay={100}>
-                Born on the 18th of July, she is the fifth child in a family of six from{" "}
-                <strong className="text-ink font-semibold">Imo State, Nigeria</strong>. She graduated from the
-                University of Ado-Ekiti with a B.Sc in Accounting and worked professionally for ten years,
-                carrying the work of ministry alongside her career, until the Lord called her into full-time
-                ministry.
-              </Reveal>
-
-              <Reveal as="p" variant="up" delay={200}>
-                Since that call she has travelled around the world preaching through her music, singing and dancing
-                energetically to God. In 2024 she was named{" "}
-                <strong className="text-ink font-semibold">Africa Praise Artiste of the Year</strong> at the
-                prestigious Clima Africa Awards, and she continues to write songs that carry congregations from
-                praise into deep worship.
-              </Reveal>
+              {BIOGRAPHY.map((paragraph, idx) => (
+                <Reveal key={idx} as="p" variant="up" delay={Math.min(idx, 3) * 100}>
+                  {paragraph}
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
