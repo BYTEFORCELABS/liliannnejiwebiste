@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { FacebookIcon, InstagramIcon, YouTubeIcon, SpotifyIcon, TikTokIcon } from "@/components/SocialIcons";
 
@@ -119,7 +119,21 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <Reveal variant="up" delay={380} className="pt-2">
+          <Reveal variant="up" delay={380} className="pt-2 flex flex-wrap items-center gap-3">
+            <a
+              href="https://onerpm.link/highlyfavouredliliannneji"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: "#16a34a", color: "#ffffff" }}
+              className="album-blink-btn shimmer-sweep relative inline-flex items-center gap-2 overflow-hidden bg-[#16a34a] hover:bg-[#15803d] text-white font-fjalla uppercase px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wider shadow-[0_0_24px_rgba(34,197,94,0.7)] transition-all duration-300"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+              </span>
+              <span className="animate-pulse">New Album</span>
+              <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+            </a>
             <Link
               href="#music"
               className="shimmer-sweep relative inline-block overflow-hidden border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-300"
