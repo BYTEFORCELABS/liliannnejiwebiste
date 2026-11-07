@@ -27,6 +27,818 @@ insert into gallery ("id", "title", "category", "imageUrl", "caption", "featured
 on conflict ("id") do nothing;
 
 insert into lyrics ("id", "title", "category", "album", "releaseYear", "youtubeUrl", "featured", "createdAt", "lyrics") values
+  ('lyr_jesus_christ_you_are_wonderful', 'Jesus Christ You Are Wonderful', 'Thanksgiving', 'Single', '2026', '', true, '2026-09-02T03:00:00.000Z', '[Instrumentals]
+
+[Verse 1]
+My eyes have seen
+My ears have heard
+My mouth will testify the wonders of God
+When I think o of all you’ve done for me
+My mouth will testify the wonders of God
+My eyes have seen
+My ears have heard o
+My mouth will testify the wonders of God o
+When I think o of all you’ve done for me
+My mouth will testify the wonders of God
+Oh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me o
+Response: My mouth will testify the wonders of God
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+
+[Chorus]
+Jesus you are
+Response: Jesus Christ you are wonderful
+Eh You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Yeye
+Response: My mouth will testify the wonders of God
+Jesus Christ you are
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh eh
+Response: My mouth will testify the wonders of God
+Eeeee
+
+[Guitar Instrumentals]
+
+[Verse 2]
+Come and see o what the Lord has done
+Come and hear what the Lord has done o
+He butter my bread o
+He sugar my tea
+My mouth will testify the wonders of God
+Come and see o what the Lord has done o
+Come and hear what the Lord has done eh
+He butter my bread o
+He sugar my tea o
+My mouth will testify the wonders of God
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+Eh
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+
+[Chorus]
+Jesus you are o
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh
+You are wonderful
+Response: Jesus Christ you are wonderful
+Wonderful
+Eh
+Eh
+Response: My mouth will testify the wonders of God
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh eh
+Response: My mouth will testify the wonders of God
+Eeeee
+
+[Sax Instrumentals]
+You
+Eeee
+
+[Bridge]
+Response: I will praise you forever
+Response: I will serve you forever
+Ye
+Response: I will love you forever and ever
+I will praise you
+Response: I will praise you forever
+Eh
+Response: I will serve you forever
+Eh
+Response: I will love you forever and ever
+I will praise you o
+Response: I will praise you forever
+Ye
+Response: I will serve you forever
+Ye
+Response: I will love you forever and ever
+Eh
+I will praise you Lord
+Response: I will praise you forever
+Praise you Lord
+Response: I will serve you forever
+I will praise you Lord
+Response: I will love you forever and ever
+
+[Chorus]
+Jesus Christ you are
+Eh
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Eh
+Response: Jesus Christ you are wonderful
+Yeye
+Eh
+Response: My mouth will testify the wonders of God
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+You are wonderful
+I testify
+Response: Jesus Christ you are wonderful
+You are wonderful
+Wonderful
+Response: Jesus Christ you are wonderful
+Eh eh
+Response: My mouth will testify the wonders of God
+Eh
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+My soul testify
+Response: Jesus Christ you are wonderful
+My mouth declare o
+Response: Jesus Christ you are wonderful
+Yeye
+Response: My mouth will testify the wonders of God
+Everybody everybody ye eh
+Response: Jesus Christ you are wonderful
+We declare you are wonderful
+Response: Jesus Christ you are wonderful
+Your name is wonderful
+Response: Jesus Christ you are wonderful
+Wonderful
+Response: My mouth will testify the wonders of God
+Heh heh
+Jesus Christ you are
+Response: Jesus Christ you are wonderful
+Your ways
+Your words
+Response: Jesus Christ you are wonderful
+Your name is wonderful
+Response: Jesus Christ you are wonderful
+Eh
+Eh
+Response: My mouth will testify the wonders of God
+
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+Eh
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+
+[Chorus]
+Jesus Christ you are
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Wonderful
+Eh eh
+Response: My mouth will testify the wonders of God
+Jesus Christ you are eh
+Response: Jesus Christ you are wonderful
+My soul
+Response: Jesus Christ you are wonderful
+My voice
+Testify o
+Response: Jesus Christ you are wonderful
+Eh
+Yeye
+Response: My mouth will testify the wonders of God
+Eh
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh
+Response: Jesus Christ you are wonderful
+You are wonderful
+Wonderful
+Wonderful
+Wonderful
+Response: My mouth will testify the wonders of God
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh
+Eh
+Eh
+Response: Jesus Christ you are wonderful
+Eh
+You are wonderful
+Response: Jesus Christ you are wonderful
+(Speaking in tongues)
+Response: My mouth will testify the wonders of God
+Lord you are wonderful
+Response: Jesus Christ you are wonderful
+My soul declares you are
+Response: Jesus Christ you are wonderful
+Eh
+Jesus you are eh
+Response: Jesus Christ you are wonderful
+You are
+You are
+Response: My mouth will testify the wonders of God
+He he
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+My soul testify
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Yeye
+Response: My mouth will testify the wonders of God
+Eh
+
+Oh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+Eh
+Oh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Ye
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+Eeee
+
+[Instrumentals]
+Eeee
+Eeee
+
+Jesus Christ you are o
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Eh eh
+Response: My mouth will testify the wonders of God
+One more time
+Say Jesus you are o
+Response: Jesus Christ you are wonderful
+We declare you are
+Response: Jesus Christ you are wonderful
+We confess you are o
+Response: Jesus Christ you are wonderful
+Yeye
+Response: My mouth will testify the wonders of God
+Everybody lift your voice and say
+Response: Jesus Christ you are wonderful
+You are wonderful
+Heh
+Response: Jesus Christ you are wonderful
+You are wonderful
+Response: Jesus Christ you are wonderful
+Heh heh
+Response: My mouth will testify the wonders of God
+
+Oh
+Response: Jesus you are wonderful to me
+Eh
+Response: Jesus you are wonderful to me
+Oh
+Response: Jesus you are wonderful to me
+Yeye
+Response: My mouth will testify the wonders of God
+
+Hallelujah'),
+  ('lyr_active', 'Active', 'Afro-Gospel', 'Single, feat. Wrhapsody', '2026', '', true, '2026-09-02T02:00:00.000Z', '[Instrumentals]
+Yeyeyeyeye
+Guy se''owa active
+Babe se''owa active
+Lilian Nneji
+Wrhapsody
+Active
+Aaah
+Kpriiii
+Eeee
+When it comes to sin
+Deactivated, deactivated, deactivated, deactivated
+
+[Verse 1]
+Praise the Lord
+Somebody praise the Lord
+Anytime I wake up in the morning I’m active for my Lord
+With the fire in me, I’m standing upon His word
+No matter what the devil say
+I know my God is active
+Response: Active
+When it’s time to praise
+I praise my God
+Response: I praise my God
+When it’s time to pray
+I pray to God
+Response: I pray to God
+When it’s time to dance
+I dance for God
+Response: I dance for God
+No matter what the devil does
+I know my God is active
+Response: Active
+
+[Chorus]
+As a child of God
+Response: I’m active
+You say
+Response: I’m active
+Ki kilowi
+Response: I’m active
+Ki ki ki kilowi
+Response: I’m active
+As a child of God
+Response: I’m active
+I’m active o
+Response: I’m active
+I’m active o
+Response: I’m active
+Yeyeyeyeye
+I’m active o
+Response: I’m active
+Praise and worship
+Response: I’m active
+Tithe and offering
+Response: I’m active
+Prayer
+Response: I’m active
+And fasting
+Response: I’m active
+Mercy
+Response: I’m active
+Favour
+Response: I’m active
+As a child of God
+Response: I’m active
+I’m active o
+Response: I’m active
+
+[Rhapsody]
+Ji ji ji ji masun
+Ma repete
+E patewo egbe shekere
+Jesu ti wo le de pelu ibukun active repete
+Ani loni selense
+Praise and worship o''n se bebe
+Always guiding la wa wa o
+Won le fiwa se Yeye
+Lai lai
+Okay
+Active in the activity
+Of the one that lives till eternity
+My praise infinity
+Ore re kabiti
+Ode mi le titititititi
+Ye
+Oya it’s time to activate
+Response: Activate
+Ore baba ko appreciate
+Response: Appreciate
+Eh
+Omi le tititititi
+Jesu yi wa active
+Response: Active
+
+[Chorus]
+As a child of God
+Response: I’m active
+You say
+Response: I’m active
+Ki kilowi
+Response: I’m active
+Ki ki ki kilowi
+Response: I’m active
+As a child of God
+Response: I’m active
+Kpriii
+I’m active o
+Response: I’m active
+I’m active o
+Response: I’m active
+Yeyeyeyeye
+I’m active o
+Response: I’m active
+Praise and worship
+Response: I’m active
+Tithe and offering
+Response: I’m active
+Prayer
+Response: I’m active
+And fasting
+Response: I’m active
+Mercy
+Response: I’m active
+Favour
+Response: I’m active
+As a child of God
+Response: I’m active
+I’m active o
+Response: I’m active
+
+[Mouth Instrument]
+Response: Active
+
+[Chorus]
+As a child of God
+Response: I’m active
+You say
+Response: I’m active
+Ki kilowi
+Response: I’m active
+Ki ki ki kilowi
+Response: I’m active
+As a child of God
+Response: I’m active
+Kpriii
+I’m active o
+Response: I’m active
+I’m active o
+Response: I’m active
+I’m active o
+Response: I’m active
+
+Ke ihe i na’ekwu
+Nwanne ke ihe i na’ekwu
+Supu
+Ke ihe i na’eme
+Nwanna ke ihe i na’eme
+Akuabata
+Response: Obata
+Chikodi
+Response: Chikodi
+Chidimma
+Response: Chidimma
+I’m active o
+Response: Active'),
+  ('lyr_favour_that_looks_like_a_lie', 'Favour That Looks Like a Lie', 'Prophetic Worship', 'Single', '2026', '', true, '2026-09-02T01:00:00.000Z', '[Instrumentals]
+I declare, I confess, I prophesy, Amen
+I declare, I confess, I prophesy, Amen
+
+[Instrumentals]
+Favour that looks like a lie o
+That’s what God did for me
+Miracles that looks like a lie o
+That’s what God did for me
+Testimony that sounds like a lie o
+That’s what God did for me
+Breakthroughs that looks like a lie o
+That’s what God did for me
+
+[Verse 1]
+When you have prayed and fasted nothing seems to change
+Just hold on
+Response: God will come through
+Response: He will answer
+Response: He will hear your cry
+And everyone who waits upon the Lord
+Shall be strong
+Response: They shall mount up wings like eagles
+Response: They shall run and not be weary
+When every morning feels like yesterday
+Response: Just hold on
+If He did it for Abraham
+If He did it for Daniel
+If He did it for Deborah
+Response: He will do it again for you
+There is a door no man can shut
+There is a Favour no man can stop
+When God decides to change your story
+Response: It becomes glory
+If He did it for Sarah
+If He did it for Joseph
+If He did it for Hannah
+Response: He will do it again and again
+
+[Chorus]
+Favour that looks like a lie o
+Response: My God will do for you
+Miracles that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+Breakthroughs that looks like a lie o
+Response: My God will do for you
+Eh Favour that looks like a lie o
+Response: My God will do for you
+Miracles that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+Breakthrough that looks like a lie o
+Response: My God will do for you
+
+[Instrumentals]
+
+[Verse 2]
+He turned water into wine
+He made the blind to see
+Jesus made the lame to walk
+Response: Jesus will do it again
+He walked upon the sea
+His power raised the dead
+He took away our pain and shame
+Response: Jesus will do it again
+If He did it for Esther
+If He did it for Joshua
+If He did it for Lilian
+Response: Jesus will do it again
+
+[Chorus]
+Favour that looks like a lie o
+Response: My God will do for you
+Miracles that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+Breakthroughs that looks like a lie o
+Response: My God will do for you
+Eh Favour that looks like a lie o
+Response: My God will do for you
+Miracles that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+Breakthrough that looks like a lie o
+Response: My God will do for you
+Eh He will do for you
+He will do for me o
+Response: My God will do for you
+He will do for you
+He will do for me o
+Response: My God will do for you
+If He did it for me
+He will do for you o
+Response: My God will do for you o
+He will do for you o
+Response: My God will do for me
+Eh if He did it for you
+He will do for me o
+Response: My God will do for you o
+He will do for me o
+Heh
+Response: My God will do for me
+Say Favour that looks like a lie o
+Response: My God will do for you
+Miracles that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+That Favour
+That glory
+That looks like a lie o
+Response: My God will do for you
+That marriage
+That baby
+That looks like a lie o
+Response: My God will do for you
+That contract
+That Favour
+That looks like a lie o
+Response: My God will do for you
+Heh if He promised it
+He will do it again
+Response: My God will do for you o
+He will do for you o
+Response: My God will do for you
+See Favour that looks like a lie o
+Response: My God will do for you
+That baby
+That baby
+That looks like a lie o
+Response: My God will do for you
+That marriage
+That marriage
+That looks like a lie o
+Response: My God will do for you
+That glory
+That Favour
+That looks like a lie o
+Response: My God will do for you
+Heh He will do for you
+He will do for me o
+Response: My God will do for me
+Heh He will do for you
+He will do for me o
+Response: My God will do for me
+See if He did it for you
+He will do for me o
+Response: My God will do for me
+I am so sure
+If He did it for you
+He will do for me o
+Response: My God will do for me
+If He did it for you
+He will do for me o
+Response: My God will do for me
+If He did it for me
+He will do for you o
+Response: My God will do for me o
+He will do for me o
+Response: My God will do for me
+Favour that looks like a lie o
+Response: My God will do for you
+Promotion o that looks like a lie o
+Response: My God will do for you
+Contract o that looks like a lie o
+Response: My God will do for you
+Open doors o that looks like a lie o
+Response: My God will do for you
+That joy o
+That Favour
+That looks like a lie o
+Response: My God will do for you
+Heh that marriage
+That baby
+That looks like a lie o
+Response: My God will do for you
+I declare
+That baby
+That baby
+That looks like a lie o
+Response: My God will do for you
+Heh that baby
+That baby
+That looks like a lie o
+Response: My God will do for you
+That glory
+That Favour
+That looks like a lie o
+Response: My God will do for you
+That healing
+That blessing
+That look like a lie o
+Response: My God will do for you
+Ah if He did it for you
+He will do for me o
+Response: My God will do for me o
+He will do for me o
+Response: My God will do for me
+Heh if He did it for you
+He will do for me o
+Response: My God will do for me o
+He will do for me o
+Response: My God will do for me
+Heh if He did it for you
+He will do for me o
+Response: My God will do for me o
+He will do for me o
+Response: My God will do for me
+Heh Favour that looks like a lie o
+Response: My God will do for you
+Testimony o that sounds like a lie o
+Response: My God will do for you
+Miracle o that sounds like a lie o
+Response: My God will do for you
+That Favour
+That Favour
+That looks like a lie o
+Response: My God will do for you
+If He did it for you
+He will do for me o
+Response: My God will do for me o
+He will do for me o
+Response: My God will do for me'),
+  ('lyr_mi_o_le_gbagbe', 'Mi o le gbagbe (I cannot forget)', 'Prophetic Worship', 'Single (Omeriwo Yoruba Version)', '2026', '', true, '2026-09-02T00:00:00.000Z', '[Sub-title: Omeriwo Yoruba Version]
+
+[Chorus]
+Mi o le gbagbe o (I cannot forget o)
+Mi o le gbagbe o (I cannot forget o)
+
+Response:
+Mi o le gbagbe o (I cannot forget o)
+Mi o le gbagbe o (I cannot forget o)
+Mi o le gbagbe o (I cannot forget o)
+Mi o le gbagbe o (I cannot forget o)
+
+[Verse 1 / Chorus]
+Mi o le gbagbe o
+(I cannot forget o)
+Response: Ohun ti e se fun mi ti mo fi ndupe ore
+(Thankful for what you did for me)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+
+[Verse 2]
+Omeriwo Omeriwo o
+(You have won, You have won)
+
+[Chorus]
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+
+[Instrumentals]
+
+[Chorus]
+Omeriwo Omeriwo nji a si ya nara ekele
+(You have won, you have won that is why I say receive my praise)
+Omeriwo Omeriwo nji a si ya nara ekele
+(You have won, you have won that is why I say receive my praise)
+
+Gbo (Hear)
+If E reach your turn o, make you no praise your God o
+
+Joshua so wipe o to ba se emi ati idile mi lokun o
+(Joshua said, As for me and my household)
+Oni oba Oluwa la o ma sin titi lai
+(We will serve God forever)
+Titi aye raye aye raye
+(Forever till eternity)
+Mo wa so wipe emi Tola ni oba Oluwa ni nwo ma sin o
+(I''m saying I Tola will serve you Lord o)
+Omeriwo Omeriwo nji a si ya nara ekele
+(You have won, you have won that is why I say receive my praise)
+Omeriwo Omeriwo nji a si ya nara ekele
+(You have won, you have won that is why I say receive my praise)
+
+[Chorus]
+Mi o le gbagbe o
+(I cannot forget o)
+
+Aahhh
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+Mi o le gbagbe o
+(I cannot forget o)
+
+Ore akai katan ni o AYERAYE
+Abi ore igba gbogbo
+Olorun mo ki o'),
   ('lyr_omeriwo_omeriwo_reprise', 'Omeriwo Omeriwo (Reprise)', 'Prophetic Worship', 'Single (Live)', '2025', 'https://www.youtube.com/watch?v=A68T0Az-LUA', true, '2026-09-01T06:00:00.000Z', ''),
   ('lyr_eze_mu_o', 'Eze Mu O', 'Prophetic Worship', 'Single', '2026', 'https://www.youtube.com/watch?v=DzjflH8peQY', true, '2026-09-01T12:00:00.000Z', ''),
   ('lyr_jesus_nke_nazareth', 'Jesus Nke Nazareth', 'Prophetic Worship', 'Single', '2026', 'https://www.youtube.com/watch?v=J_02EibFwd0', true, '2026-09-01T11:00:00.000Z', ''),
