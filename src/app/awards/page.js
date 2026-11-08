@@ -77,7 +77,7 @@ export default function AwardsPage() {
           </Reveal>
 
           <Reveal as="h1" variant="up" delay={80} className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
-            HONOURS &amp; <span className="text-gold-gradient">ACCOLADES</span>
+            HONOURS &amp; <span className="text-gold">ACCOLADES</span>
           </Reveal>
 
           <Reveal as="p" variant="up" delay={160} className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
@@ -93,7 +93,7 @@ export default function AwardsPage() {
               { value: "2", label: "Continental Titles" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="font-fjalla text-3xl sm:text-4xl text-gold-gradient font-bold tabular-nums leading-none">
+                <p className="font-fjalla text-3xl sm:text-4xl text-gold font-bold tabular-nums leading-none">
                   {stat.value}
                 </p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mt-1.5">{stat.label}</p>

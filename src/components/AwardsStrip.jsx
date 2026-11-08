@@ -28,7 +28,7 @@ export default function AwardsStrip() {
         </Reveal>
 
         <Reveal as="h2" variant="up" delay={140} className="font-fjalla text-4xl sm:text-6xl text-ink font-bold uppercase tracking-tight leading-[0.98]">
-          Recognised <span className="text-gold-gradient">Across Africa</span>
+          Recognised <span className="text-gold">Across Africa</span>
         </Reveal>
 
         <Reveal as="p" variant="up" delay={220} className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto pt-1">

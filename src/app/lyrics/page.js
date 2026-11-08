@@ -176,7 +176,7 @@ export default function LyricsPage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
           <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
-            WORSHIP & PRAISE <span className="text-gold-gradient">LYRICS</span>
+            WORSHIP & PRAISE <span className="text-gold">LYRICS</span>
           </h1>
 
           <p className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
