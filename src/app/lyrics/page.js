@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Toast from "@/components/Toast";
 import YouTubePlayer, { usePlayerTime, youTubeId } from "@/components/YouTubePlayer";
 import { lyricLines, hasValidTimings, activeLineAt, sortCues } from "@/lib/lyricsSync";
+import { streamingLinksOf, spotifyEmbedUrl } from "@/lib/streaming";
 import { Music, Search, Copy, Play, X, ExternalLink, Highlighter } from "lucide-react";
 
 const CATEGORIES = [
@@ -98,6 +99,11 @@ export default function LyricsPage() {
 
   const selectedSong = songs.find((s) => s.id === selectedSongId) || filteredSongs[0] || null;
   const videoId = youTubeId(selectedSong?.youtubeUrl);
+  const streamingLinks = streamingLinksOf(selectedSong);
+  // Songs without a YouTube upload can still play here through Spotify's player
+  const spotifyLink = streamingLinks.find((l) => l.key === "spotify")?.url;
+  const spotifyEmbed = videoId ? null : spotifyEmbedUrl(spotifyLink);
+  const canPlay = Boolean(videoId || spotifyEmbed);
   const isPlaying = Boolean(selectedSong) && nowPlayingId === selectedSong.id;
   const hasLyrics = Boolean(selectedSong?.lyrics?.trim());
 
@@ -264,7 +270,7 @@ export default function LyricsPage() {
                   <span className="text-[11px] text-zinc-500">Select to view</span>
                 </div>
 
-                <div className="space-y-2 max-h-[420px] lg:max-h-none lg:flex-1 lg:min-h-0 overflow-y-auto overscroll-contain pr-1">
+                <div className="space-y-2 max-h-[420px] lg:max-h-none lg:flex-1 lg:min-h-0 overflow-y-auto overflow-x-hidden overscroll-contain pr-1">
                   {filteredSongs.map((song) => {
                     const isSelected = selectedSong?.id === song.id;
                     return (
@@ -336,6 +342,27 @@ export default function LyricsPage() {
                         <p className="text-xs sm:text-sm text-zinc-400 font-medium">
                           Written & Performed by <strong className="text-ink">Minister Lilian Nneji</strong> • Release: <strong className="text-zinc-300">{selectedSong.album}</strong>
                         </p>
+
+                        {/* Stream the song on other platforms */}
+                        {streamingLinks.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-2 pt-2">
+                            <span className="text-[11px] uppercase tracking-wider font-bold text-zinc-500 mr-1">
+                              Stream on
+                            </span>
+                            {streamingLinks.map((link) => (
+                              <a
+                                key={link.key}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-zinc-700 hover:border-[#F88E14] text-[11px] font-semibold text-zinc-300 hover:text-gold transition-colors"
+                              >
+                                {link.label}
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {/* Action Buttons */}
@@ -369,7 +396,7 @@ export default function LyricsPage() {
                         )}
 
                         {/* Play the song right here, alongside the lyrics */}
-                        {videoId && (
+                        {canPlay && (
                           <button
                             onClick={() => setNowPlayingId(isPlaying ? null : selectedSong.id)}
                             className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer"
@@ -392,18 +419,29 @@ export default function LyricsPage() {
 
                     {/* Inline player: sticks to the top so the song keeps
                         playing while the lyrics are scrolled. */}
-                    {isPlaying && videoId && (
+                    {isPlaying && canPlay && (
                       <div
                         ref={stickyPlayerRef}
                         className="sticky top-24 lg:top-0 z-20 -mx-6 sm:-mx-10 px-6 sm:px-10 pt-3 pb-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80"
                       >
-                        <div className="relative w-full lg:max-w-[62vh] lg:mx-auto aspect-video bg-black border border-zinc-800 shadow-2xl">
-                          <YouTubePlayer
-                            ref={playerRef}
-                            videoId={videoId}
-                            title={`${selectedSong.title} by Minister Lilian Nneji`}
+                        {videoId ? (
+                          <div className="relative w-full lg:max-w-[62vh] lg:mx-auto aspect-video bg-black border border-zinc-800 shadow-2xl">
+                            <YouTubePlayer
+                              ref={playerRef}
+                              videoId={videoId}
+                              title={`${selectedSong.title} by Minister Lilian Nneji`}
+                            />
+                          </div>
+                        ) : (
+                          // Spotify plays a preview unless the listener is signed in to Spotify
+                          <iframe
+                            src={spotifyEmbed}
+                            title={`${selectedSong.title} by Minister Lilian Nneji on Spotify`}
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                            className="block w-full h-[152px] rounded-xl"
                           />
-                        </div>
+                        )}
                         <div className="flex items-center justify-between gap-3 pt-2.5">
                           <p className="text-[11px] uppercase tracking-widest font-bold text-gold">
                             Now Playing
@@ -414,12 +452,12 @@ export default function LyricsPage() {
                             )}
                           </p>
                           <a
-                            href={selectedSong.youtubeUrl}
+                            href={videoId ? selectedSong.youtubeUrl : spotifyLink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-ink transition-colors"
                           >
-                            Open on YouTube
+                            Open on {videoId ? "YouTube" : "Spotify"}
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         </div>
@@ -461,7 +499,7 @@ export default function LyricsPage() {
                             recording below and worship along in the meantime.
                           </p>
                         </div>
-                        {videoId && !isPlaying && (
+                        {canPlay && !isPlaying && (
                           <button
                             onClick={() => setNowPlayingId(selectedSong.id)}
                             className="gold-button inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase tracking-wider cursor-pointer"

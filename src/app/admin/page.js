@@ -39,6 +39,7 @@ import {
 import BrandLogo from "@/components/BrandLogo";
 import LyricsSyncModal from "@/components/LyricsSyncModal";
 import { hasValidTimings } from "@/lib/lyricsSync";
+import { STREAMING_PLATFORMS, cleanStreamingLinks } from "@/lib/streaming";
 
 // Reverb Attendees and Subscribers are parked at the client's request.
 // Their panels below are left fully intact and gated behind this one flag
@@ -162,6 +163,7 @@ export default function AdminDashboardPage() {
     youtubeUrl: "",
     lyrics: "",
     featured: false,
+    streamingLinks: {},
   });
 
   // Lyrics Preview Modal State
@@ -376,6 +378,7 @@ export default function AdminDashboardPage() {
       youtubeUrl: "",
       lyrics: "",
       featured: false,
+      streamingLinks: {},
     });
     setLyricsModalOpen(true);
   };
@@ -390,6 +393,7 @@ export default function AdminDashboardPage() {
       youtubeUrl: song.youtubeUrl || "",
       lyrics: song.lyrics || "",
       featured: Boolean(song.featured),
+      streamingLinks: song.streamingLinks || {},
     });
     setLyricsModalOpen(true);
   };
@@ -401,12 +405,19 @@ export default function AdminDashboardPage() {
       return;
     }
 
+    // Streaming links are only sent when there are some to save (or clear),
+    // so plain lyric edits keep working on databases without that column
+    const { streamingLinks, ...fields } = lyricsForm;
+    const links = cleanStreamingLinks(streamingLinks);
+    const payload =
+      Object.keys(links).length || editingLyrics?.streamingLinks ? { ...fields, streamingLinks: links } : fields;
+
     try {
       if (editingLyrics) {
         const res = await fetch("/api/admin/lyrics", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: editingLyrics.id, ...lyricsForm }),
+          body: JSON.stringify({ id: editingLyrics.id, ...payload }),
         });
         if (res.ok) {
           const data = await res.json();
@@ -417,7 +428,7 @@ export default function AdminDashboardPage() {
         const res = await fetch("/api/admin/lyrics", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(lyricsForm),
+          body: JSON.stringify(payload),
         });
         if (res.ok) {
           const data = await res.json();
@@ -1528,6 +1539,31 @@ export default function AdminDashboardPage() {
                   className="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-ink focus:outline-none focus:border-[#F88E14]"
                 />
               </div>
+
+              <details className="group border border-zinc-800 rounded-lg" open={STREAMING_PLATFORMS.some((p) => lyricsForm.streamingLinks?.[p.key])}>
+                <summary className="px-3.5 py-2.5 text-xs uppercase font-bold tracking-wider text-zinc-300 cursor-pointer select-none">
+                  Streaming Links <span className="normal-case font-normal tracking-normal text-zinc-500">(optional: shown as &ldquo;Stream on&rdquo; buttons)</span>
+                </summary>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-3.5 pb-3.5">
+                  {STREAMING_PLATFORMS.map((platform) => (
+                    <div key={platform.key} className="space-y-1">
+                      <label className="text-[11px] font-semibold text-zinc-400">{platform.label}</label>
+                      <input
+                        type="url"
+                        placeholder={platform.placeholder}
+                        value={lyricsForm.streamingLinks?.[platform.key] || ""}
+                        onChange={(e) =>
+                          setLyricsForm({
+                            ...lyricsForm,
+                            streamingLinks: { ...lyricsForm.streamingLinks, [platform.key]: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-xs text-ink focus:outline-none focus:border-[#F88E14]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </details>
 
               <div className="space-y-1.5">
                 <label className="text-xs uppercase font-bold tracking-wider text-zinc-300">
