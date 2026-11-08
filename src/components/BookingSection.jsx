@@ -76,7 +76,7 @@ export default function BookingSection() {
 
           <Reveal as="h2" variant="up" delay={120} className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight leading-[0.96]">
             Let&rsquo;s bring the praise
-            <span className="block text-gold-gradient">to your gathering.</span>
+            <span className="block text-gold">to your gathering.</span>
           </Reveal>
 
           <Reveal as="p" variant="up" delay={220} className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-2xl">

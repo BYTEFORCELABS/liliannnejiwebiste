@@ -296,13 +296,6 @@ code, kbd, samp, pre, .font-mono {
   box-shadow: 0 10px 40px -10px rgba(248, 142, 20, 0.2);
 }
 
-/* Gold Gradient Text */
-.text-gold-gradient {
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* Gold Glowing Button */
 .gold-button {
   background: var(--gold-gradient);

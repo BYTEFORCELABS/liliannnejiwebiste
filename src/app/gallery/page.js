@@ -135,7 +135,7 @@ export default function GalleryPage() {
           <div className="animate-breathe absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
 
           <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
-            MOMENTS OF <span className="text-gold-gradient">GLORY &amp; PRAISE</span>
+            MOMENTS OF <span className="text-gold">GLORY &amp; PRAISE</span>
           </Reveal>
 
           <Reveal as="p" variant="up" delay={140} className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
