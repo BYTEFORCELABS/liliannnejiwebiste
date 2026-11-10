@@ -135,7 +135,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="relative w-11 h-11 flex items-center justify-center rounded-xl border border-hairline bg-hairline text-zinc-200 hover:text-gold hover:border-[#F88E14]/30 hover:bg-[#F88E14]/5 transition-all duration-300 active:scale-90 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F88E14]"
+              className="relative w-11 h-11 flex items-center justify-center rounded-btn border border-hairline bg-hairline text-zinc-200 hover:text-gold hover:border-[#F88E14]/30 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F88E14]"
               aria-label="Open navigation menu"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
@@ -165,12 +165,6 @@ export default function Navbar() {
           data-closing={closing ? "true" : "false"}
           className="mobile-menu-panel md:hidden fixed inset-0 z-[70] bg-black/98 backdrop-blur-2xl overflow-y-auto overscroll-contain"
         >
-          {/* Gold wash so the panel reads as brand surface, not a grey sheet */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_70%_at_85%_0%,rgba(248,142,20,0.16),transparent_60%)]"
-          />
-
           <div className="relative min-h-full flex flex-col">
 
             {/* Top row: brand + toggle + close */}
@@ -185,7 +179,7 @@ export default function Navbar() {
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close navigation menu"
-                  className="relative w-11 h-11 flex items-center justify-center rounded-xl border border-[#F88E14]/40 bg-[#F88E14]/10 text-gold shadow-[0_0_18px_rgba(248,142,20,0.25)] transition-transform duration-300 hover:rotate-90 active:scale-90 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F88E14]"
+                  className="relative w-11 h-11 flex items-center justify-center rounded-btn border border-[#F88E14]/40 text-gold hover:bg-[#F88E14]/10 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F88E14]"
                 >
                   <span className="absolute h-[2px] w-5 rounded-full bg-current rotate-45" />
                   <span className="absolute h-[2px] w-5 rounded-full bg-current -rotate-45" />
@@ -237,7 +231,7 @@ export default function Navbar() {
               <Link
                 href="/#booking"
                 onClick={() => setMenuOpen(false)}
-                className="shimmer-sweep relative block overflow-hidden text-center border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 py-3.5 text-sm tracking-wider transition-colors duration-300"
+                className="gold-button block text-center font-fjalla uppercase px-6 py-3.5 text-sm tracking-wider"
               >
                 Book Minister Lilian
               </Link>
@@ -252,7 +246,7 @@ export default function Navbar() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="w-11 h-11 rounded-full border border-hairline text-zinc-400 flex items-center justify-center hover:text-on-gold hover:bg-[#F88E14] hover:border-[#F88E14] hover:-translate-y-0.5 transition-all duration-300"
+                      className="w-11 h-11 rounded-full border border-hairline text-zinc-400 flex items-center justify-center hover:text-on-gold hover:bg-[#F88E14] hover:border-[#F88E14] transition-colors duration-200"
                     >
                       <Icon className="w-4 h-4" />
                     </a>

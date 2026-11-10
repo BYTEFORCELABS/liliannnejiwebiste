@@ -47,7 +47,7 @@ export default function EventsSection() {
             <div className="flex-shrink-0">
               <Link
                 href="/reverb"
-                className="shimmer-sweep relative overflow-hidden inline-block border border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-semibold text-xs tracking-widest px-8 py-2.5 rounded-none uppercase transition-all duration-200 active:scale-95 shadow-md"
+                className="inline-block rounded-btn border border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-semibold text-xs tracking-widest px-8 py-2.5 uppercase transition-all duration-200 active:scale-95 shadow-md"
               >
                 REGISTER
               </Link>

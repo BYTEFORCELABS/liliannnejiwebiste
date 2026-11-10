@@ -53,8 +53,6 @@ export default function GallerySlideshow({ items = [] }) {
 
   return (
     <section id="gallery" className="relative bg-black py-24 sm:py-28 border-t border-hairline overflow-hidden">
-      <div className="absolute top-1/3 -right-20 w-[420px] h-[420px] rounded-full bg-[#F88E14]/[0.06] blur-[130px] pointer-events-none animate-breathe" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
@@ -87,7 +85,7 @@ export default function GallerySlideshow({ items = [] }) {
             {/* Main stage */}
             <div
               data-theme="dark"
-              className="lg:col-span-9 relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] overflow-hidden bg-zinc-950 border border-zinc-800/80 group"
+              className="lg:col-span-9 relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] overflow-hidden rounded-card bg-zinc-950 border border-zinc-800 group"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -114,7 +112,7 @@ export default function GallerySlideshow({ items = [] }) {
               {/* Caption */}
               <div key={active} className="absolute bottom-0 inset-x-0 p-5 sm:p-8 z-10">
                 <div data-reveal="up" data-revealed="true" className="space-y-2 max-w-2xl">
-                  <span className="inline-block px-2.5 py-1 bg-[#F88E14] text-on-gold text-[10px] font-bold uppercase tracking-widest">
+                  <span className="inline-block px-2.5 py-1 rounded-btn bg-[#F88E14] text-on-gold text-[10px] font-bold uppercase tracking-widest">
                     {current.category}
                   </span>
                   <h3 className="font-fjalla text-2xl sm:text-4xl font-bold text-ink uppercase tracking-wide">
@@ -131,7 +129,7 @@ export default function GallerySlideshow({ items = [] }) {
                 type="button"
                 onClick={prev}
                 aria-label="Previous photo"
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-ink hover:text-on-gold backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 -translate-x-2 group-hover:translate-x-0 cursor-pointer"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-btn bg-black/60 hover:bg-[#F88E14] text-ink hover:text-on-gold transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 -translate-x-2 group-hover:translate-x-0 cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -139,13 +137,13 @@ export default function GallerySlideshow({ items = [] }) {
                 type="button"
                 onClick={next}
                 aria-label="Next photo"
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 bg-black/50 hover:bg-[#F88E14] text-ink hover:text-on-gold backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 translate-x-2 group-hover:translate-x-0 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-btn bg-black/60 hover:bg-[#F88E14] text-ink hover:text-on-gold transition-all duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 translate-x-2 group-hover:translate-x-0 cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
 
               {/* Counter */}
-              <div className="absolute top-4 right-4 z-20 px-2.5 py-1 bg-black/60 backdrop-blur-md text-[11px] font-mono font-bold text-zinc-200">
+              <div className="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-btn bg-black/60 text-[11px] font-mono font-bold text-zinc-200">
                 {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
               </div>
             </div>
@@ -163,9 +161,9 @@ export default function GallerySlideshow({ items = [] }) {
                     onClick={() => goTo(idx)}
                     aria-label={`Show ${item.title}`}
                     aria-current={isActive}
-                    className={`relative flex-shrink-0 w-28 lg:w-full aspect-[4/3] overflow-hidden border transition-all duration-300 cursor-pointer ${
+                    className={`relative flex-shrink-0 w-28 lg:w-full aspect-[4/3] overflow-hidden rounded-btn border transition-all duration-300 cursor-pointer ${
                       isActive
-                        ? "border-[#F88E14] opacity-100 scale-[1.02]"
+                        ? "border-[#F88E14] opacity-100"
                         : "border-zinc-800 opacity-45 hover:opacity-90 hover:border-zinc-600"
                     }`}
                   >

@@ -102,10 +102,6 @@ export default function AboutSection() {
   return (
     <section id="about" className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-clip text-ink">
 
-      {/* Ambient backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,var(--color-zinc-900)_0%,var(--color-black)_60%)] pointer-events-none" />
-      <div className="animate-breathe absolute -top-24 left-1/4 w-[460px] h-[460px] rounded-full bg-[#F88E14]/[0.07] blur-[130px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
 
         {/* ============================================================ */}
@@ -130,15 +126,15 @@ export default function AboutSection() {
           <Reveal variant="left" className="lg:col-span-5 lg:sticky lg:top-28">
             <div className="relative group max-w-md mx-auto lg:mx-0">
               {/* Offset gold frame */}
-              <div className="absolute -inset-x-4 -inset-y-4 border border-[#F88E14]/30 translate-x-3 translate-y-3 group-hover:translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-700 ease-out pointer-events-none" />
+              <div className="absolute -inset-x-4 -inset-y-4 rounded-card border border-[#F88E14]/30 translate-x-3 translate-y-3 pointer-events-none" />
 
-              <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 shadow-2xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-zinc-950">
                 <Image
                   src="/images/live_worship_portrait.jpg"
                   alt="Minister Lilian Nneji leading worship"
                   fill
                   sizes="(max-width: 1024px) 90vw, 420px"
-                  className="object-cover object-[52%_22%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                  className="object-cover object-[52%_22%] group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               </div>
@@ -205,7 +201,7 @@ export default function AboutSection() {
               {["Praise Leader", "Songwriter", "Recording Artiste", "Worship Leader"].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3.5 py-1.5 border border-[#F88E14]/25 text-[11px] uppercase tracking-wider font-semibold text-zinc-300 hover:border-[#F88E14] hover:text-gold hover:-translate-y-0.5 transition-all duration-300"
+                  className="px-3.5 py-1.5 rounded-btn border border-zinc-800 text-[11px] uppercase tracking-wider font-semibold text-zinc-300"
                 >
                   {tag}
                 </span>
@@ -215,17 +211,17 @@ export default function AboutSection() {
 
           <Reveal variant="right" className="lg:col-span-6 order-1 lg:order-2">
             <div className="relative group max-w-lg mx-auto lg:ml-auto">
-              <div className="relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden bg-zinc-950 shadow-2xl">
+              <div className="relative aspect-[4/5] sm:aspect-[5/6] overflow-hidden rounded-card bg-zinc-950">
                 <Image
                   src="/images/reverb_ministering.jpg"
                   alt="Minister Lilian Nneji ministering live at The Reverb"
                   fill
                   sizes="(max-width: 1024px) 90vw, 480px"
-                  className="object-cover object-[58%_28%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                  className="object-cover object-[58%_28%] group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
-              <div className="absolute -inset-x-4 -inset-y-4 border border-[#F88E14]/25 -translate-x-3 translate-y-3 group-hover:-translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-700 ease-out pointer-events-none" />
+              <div className="absolute -inset-x-4 -inset-y-4 rounded-card border border-[#F88E14]/25 -translate-x-3 translate-y-3 pointer-events-none" />
             </div>
           </Reveal>
         </div>

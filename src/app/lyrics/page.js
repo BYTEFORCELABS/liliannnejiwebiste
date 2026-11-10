@@ -172,9 +172,6 @@ export default function LyricsPage() {
         {/* HERO SECTION                                                */}
         {/* ============================================================ */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto text-center space-y-5 overflow-hidden">
-          {/* Ambient Lighting */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
-
           <h1 className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
             WORSHIP & PRAISE <span className="text-gold">LYRICS</span>
           </h1>
@@ -193,7 +190,7 @@ export default function LyricsPage() {
                 placeholder="Search by song title, release, or words inside the lyrics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 bg-zinc-950/90 border border-zinc-800 rounded-none text-sm text-ink placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14] shadow-xl"
+                className="w-full pl-12 pr-4 py-3.5 bg-zinc-950 border border-zinc-800 rounded-btn text-sm text-ink placeholder:text-zinc-500 focus:outline-none focus:border-[#F88E14]"
               />
             </div>
 
@@ -205,10 +202,10 @@ export default function LyricsPage() {
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    className={`px-4 py-1.5 rounded-btn border text-xs font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                       isActive
-                        ? "bg-[#F88E14] text-on-gold shadow-md scale-105 font-bold"
-                        : "bg-zinc-900 text-zinc-400 hover:text-ink hover:bg-zinc-800 border border-zinc-800/80"
+                        ? "bg-[#F88E14] border-[#F88E14] text-on-gold"
+                        : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-ink hover:border-zinc-600"
                     }`}
                   >
                     {cat}
@@ -227,13 +224,13 @@ export default function LyricsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-pulse">
               <div className="lg:col-span-4 space-y-3">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-16 bg-zinc-900 rounded" />
+                  <div key={i} className="h-16 bg-zinc-900 rounded-card" />
                 ))}
               </div>
-              <div className="lg:col-span-8 h-96 bg-zinc-900 rounded" />
+              <div className="lg:col-span-8 h-96 bg-zinc-900 rounded-card" />
             </div>
           ) : filteredSongs.length === 0 ? (
-            <div className="text-center py-20 bg-zinc-950 rounded-xl border border-zinc-900 p-8 space-y-3">
+            <div className="text-center py-20 bg-zinc-950 rounded-card border border-zinc-900 p-8 space-y-3">
               <Music className="w-12 h-12 text-zinc-600 mx-auto" />
               <h3 className="text-xl font-bold font-fjalla uppercase text-zinc-300">
                 No Song Found
@@ -246,7 +243,7 @@ export default function LyricsPage() {
                   setSearchQuery("");
                   setActiveCategory("All");
                 }}
-                className="gold-button px-6 py-2.5 rounded-none text-xs uppercase tracking-wider"
+                className="gold-button px-6 py-2.5 text-xs uppercase tracking-wider"
               >
                 Reset Search
               </button>
@@ -271,9 +268,9 @@ export default function LyricsPage() {
                       <div
                         key={song.id}
                         onClick={() => selectSong(song.id)}
-                        className={`p-4 rounded-none cursor-pointer transition-all duration-200 border text-left ${
+                        className={`p-4 rounded-btn cursor-pointer transition-colors duration-200 border text-left ${
                           isSelected
-                            ? "bg-zinc-900 border-[#F88E14] shadow-lg translate-x-1"
+                            ? "bg-zinc-900 border-[#F88E14]"
                             : "bg-zinc-950/80 hover:bg-zinc-900/60 border-zinc-800/80 hover:border-zinc-700"
                         }`}
                       >
@@ -314,7 +311,7 @@ export default function LyricsPage() {
                 ref={lyricsPaneRef}
                 onWheel={markUserScroll}
                 onTouchMove={markUserScroll}
-                className="lg:col-span-8 bg-zinc-950 border border-zinc-800/90 rounded-none shadow-2xl relative lg:h-full lg:overflow-y-auto lg:overflow-x-hidden overscroll-contain"
+                className="lg:col-span-8 bg-zinc-950 border border-zinc-800 rounded-card relative lg:h-full lg:overflow-y-auto lg:overflow-x-hidden overscroll-contain"
               >
                 {selectedSong ? (
                   <div className="space-y-8 relative z-10 p-6 sm:p-10">
@@ -323,7 +320,7 @@ export default function LyricsPage() {
                     <div className="border-b border-zinc-800/80 pb-6 flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-0.5 bg-[#F88E14]/15 border border-[#F88E14]/30 text-gold text-xs font-bold uppercase tracking-wider">
+                          <span className="px-2.5 py-0.5 rounded-btn bg-[#F88E14]/15 text-gold text-xs font-bold uppercase tracking-wider">
                             {selectedSong.category}
                           </span>
                           <span className="text-xs text-zinc-400 font-medium">
@@ -346,7 +343,7 @@ export default function LyricsPage() {
                             onClick={toggleFollowAlong}
                             aria-pressed={followAlong}
                             title={followAlong ? "Turn off live lyric highlighting" : "Highlight each line as it is sung"}
-                            className={`flex items-center gap-2 px-4 py-2.5 border text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer ${
+                            className={`flex items-center gap-2 px-4 py-2.5 border text-xs uppercase font-bold tracking-wider rounded-btn transition-colors cursor-pointer ${
                               followAlong
                                 ? "bg-[#F88E14]/15 border-[#F88E14]/50 text-gold"
                                 : "bg-zinc-900 border-zinc-700 text-zinc-400 hover:text-ink"
@@ -361,7 +358,7 @@ export default function LyricsPage() {
                         {hasLyrics && (
                           <button
                             onClick={handleCopyLyrics}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs uppercase font-bold tracking-wider rounded-none text-zinc-200 transition-colors shadow cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs uppercase font-bold tracking-wider rounded-btn text-zinc-200 transition-colors cursor-pointer"
                           >
                             <Copy className="w-4 h-4 text-gold" />
                             <span>Copy Lyrics</span>
@@ -372,7 +369,7 @@ export default function LyricsPage() {
                         {videoId && (
                           <button
                             onClick={() => setNowPlayingId(isPlaying ? null : selectedSong.id)}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-xs uppercase font-bold tracking-wider rounded-none transition-colors shadow cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-xs uppercase font-bold tracking-wider rounded-btn transition-colors cursor-pointer"
                           >
                             {isPlaying ? (
                               <>
@@ -397,7 +394,7 @@ export default function LyricsPage() {
                         ref={stickyPlayerRef}
                         className="sticky top-24 lg:top-0 z-20 -mx-6 sm:-mx-10 px-6 sm:px-10 pt-3 pb-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/80"
                       >
-                        <div className="relative w-full lg:max-w-[62vh] lg:mx-auto aspect-video bg-black border border-zinc-800 shadow-2xl">
+                        <div className="relative w-full lg:max-w-[62vh] lg:mx-auto aspect-video overflow-hidden rounded-btn bg-black border border-zinc-800">
                           <YouTubePlayer
                             ref={playerRef}
                             videoId={videoId}

@@ -117,7 +117,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="hover:text-ink hover:scale-125 hover:-translate-y-1 transition-all duration-300"
+                className="hover:text-ink transition-colors duration-200"
               >
                 <Icon className="w-5 h-5" />
               </Reveal>

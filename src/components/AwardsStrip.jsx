@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { AWARDS } from "@/lib/awards";
-import { Trophy, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // A visually varied slice for the home page: the three headline honours
 // first, then the strongest-looking plaques. The full set lives on /awards.
@@ -19,11 +19,7 @@ export default function AwardsStrip() {
 
       {/* Header */}
       <div className="text-center space-y-3">
-        <Reveal variant="scale">
-          <Trophy className="w-8 h-8 text-gold mx-auto" />
-        </Reveal>
-
-        <Reveal as="p" variant="up" delay={80} className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 font-bold">
+        <Reveal as="p" variant="up" className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 font-bold">
           Honours &amp; Accolades
         </Reveal>
 
@@ -56,7 +52,7 @@ export default function AwardsStrip() {
                 href="/awards"
                 aria-label={`${award.title}, ${award.presenter}`}
                 data-theme="dark"
-                className="group relative flex-shrink-0 w-[230px] sm:w-[270px] overflow-hidden border border-zinc-800/70 bg-zinc-950 hover:border-[#F88E14]/60 transition-colors duration-500"
+                className="group relative flex-shrink-0 w-[230px] sm:w-[270px] overflow-hidden rounded-card border border-zinc-800 bg-zinc-950 hover:border-zinc-600 transition-colors duration-300"
               >
                 <div className="relative w-full aspect-[3/4] overflow-hidden">
                   <Image
@@ -64,10 +60,9 @@ export default function AwardsStrip() {
                     alt={award.images[0].alt}
                     fill
                     sizes="270px"
-                    className="object-cover object-center transition-transform duration-[1400ms] ease-out group-hover:scale-110"
+                    className="object-cover object-center transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-                  <div className="absolute inset-0 bg-[#F88E14]/0 group-hover:bg-[#F88E14]/10 transition-colors duration-500" />
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-4 space-y-1">
@@ -78,9 +73,6 @@ export default function AwardsStrip() {
                     {award.title}
                   </h3>
                 </div>
-
-                {/* Gold underline sweep, matching the awards page cards */}
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
               </Link>
             ))}
           </div>
@@ -91,7 +83,7 @@ export default function AwardsStrip() {
       <Reveal variant="up" delay={120} className="text-center">
         <Link
           href="/awards"
-          className="shimmer-sweep relative inline-flex items-center gap-2 overflow-hidden border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-7 py-3 text-xs sm:text-sm tracking-wider transition-colors duration-300 group"
+          className="group inline-flex items-center gap-2 rounded-btn border border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-7 py-3 text-xs sm:text-sm tracking-wider transition-colors duration-200"
         >
           See every award
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

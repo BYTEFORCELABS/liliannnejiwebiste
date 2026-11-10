@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { AWARDS, AWARD_CATEGORIES } from "@/lib/awards";
-import { Trophy, X, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 export default function AwardsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -70,13 +70,7 @@ export default function AwardsPage() {
         {/* HEADER                                                       */}
         {/* ============================================================ */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto text-center space-y-5 overflow-hidden">
-          <div className="animate-breathe absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
-
-          <Reveal variant="scale" className="relative">
-            <Trophy className="w-9 h-9 text-gold mx-auto" />
-          </Reveal>
-
-          <Reveal as="h1" variant="up" delay={80} className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
+          <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
             HONOURS &amp; <span className="text-gold">ACCOLADES</span>
           </Reveal>
 
@@ -121,7 +115,7 @@ export default function AwardsPage() {
                     type="button"
                     onClick={() => openLightbox(award.id)}
                     data-theme="dark"
-                    className="group relative flex w-full h-full text-left overflow-hidden border border-[#F88E14]/25 bg-gradient-to-br from-zinc-900 to-black hover:border-[#F88E14]/60 transition-colors duration-500 cursor-pointer"
+                    className="group relative flex w-full h-full text-left overflow-hidden rounded-card border border-zinc-800 bg-zinc-950 hover:border-zinc-600 transition-colors duration-300 cursor-pointer"
                   >
                     <div className={`relative w-full overflow-hidden ${idx === 0 ? "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[520px]" : "aspect-[16/10]"}`}>
                       <Image
@@ -130,10 +124,9 @@ export default function AwardsPage() {
                         fill
                         sizes={idx === 0 ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 1024px) 100vw, 33vw"}
                         priority={idx === 0}
-                        className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                        className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                      <div className="absolute inset-0 bg-[#F88E14]/0 group-hover:bg-[#F88E14]/10 transition-colors duration-500" />
                     </div>
 
                     <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 space-y-1.5">
@@ -144,9 +137,6 @@ export default function AwardsPage() {
                         {award.title}
                       </h2>
                     </div>
-
-                    {/* Gold sweep on hover */}
-                    <span className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
                   </button>
                 </Reveal>
               ))}
@@ -165,10 +155,10 @@ export default function AwardsPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 rounded-btn border text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                     isActive
-                      ? "bg-[#F88E14] text-on-gold shadow-lg scale-105 font-bold"
-                      : "bg-zinc-900/90 text-zinc-400 hover:text-ink hover:bg-zinc-800 border border-zinc-800 hover:-translate-y-0.5"
+                      ? "bg-[#F88E14] border-[#F88E14] text-on-gold"
+                      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-ink hover:border-zinc-600"
                   }`}
                 >
                   {cat}
@@ -188,7 +178,7 @@ export default function AwardsPage() {
                 <button
                   type="button"
                   onClick={() => openLightbox(award.id)}
-                  className="group flex flex-col w-full h-full text-left bg-zinc-950 border border-zinc-800/70 hover:border-[#F88E14]/50 transition-all duration-500 hover:-translate-y-1 cursor-pointer overflow-hidden"
+                  className="group flex flex-col w-full h-full text-left rounded-card bg-zinc-950 border border-zinc-800 hover:border-zinc-600 transition-colors duration-300 cursor-pointer overflow-hidden"
                 >
                   <div data-theme="dark" className="relative w-full aspect-[4/5] overflow-hidden bg-black">
                     <Image
@@ -196,12 +186,12 @@ export default function AwardsPage() {
                       alt={award.images[0].alt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
+                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
 
                     {award.images.length > 1 && (
-                      <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-gold bg-black/70 border border-[#F88E14]/40 px-2 py-1">
+                      <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wider font-bold text-gold bg-black/70 rounded-btn px-2 py-1">
                         {award.images.length} photos
                       </span>
                     )}
@@ -222,8 +212,6 @@ export default function AwardsPage() {
                       {award.citation}
                     </p>
                   </div>
-
-                  <span className="block h-0.5 w-full bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
                 </button>
               </Reveal>
             ))}
@@ -247,13 +235,13 @@ export default function AwardsPage() {
           aria-modal="true"
           aria-label={activeAward.title}
           onClick={closeLightbox}
-          className="award-lightbox fixed inset-0 z-[80] bg-black/96 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8 overflow-y-auto"
+          className="award-lightbox fixed inset-0 z-[80] bg-black/96 flex items-center justify-center p-4 sm:p-8 overflow-y-auto"
         >
           <button
             type="button"
             onClick={closeLightbox}
             aria-label="Close"
-            className="fixed top-5 right-5 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-zinc-700 text-zinc-300 hover:text-gold hover:border-[#F88E14]/60 hover:rotate-90 transition-all duration-300 cursor-pointer"
+            className="fixed top-5 right-5 z-10 w-11 h-11 flex items-center justify-center rounded-full border border-zinc-700 text-zinc-300 hover:text-gold hover:border-[#F88E14]/60 transition-colors duration-200 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -263,7 +251,7 @@ export default function AwardsPage() {
             className="award-lightbox-inner grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-5xl w-full my-auto"
           >
             {/* Photograph */}
-            <div className="relative aspect-[4/5] w-full max-h-[70vh] bg-zinc-950 border border-zinc-800">
+            <div className="relative aspect-[4/5] w-full max-h-[70vh] overflow-hidden rounded-card bg-zinc-950 border border-zinc-800">
               <Image
                 key={activeAward.images[lightbox.imageIndex].src}
                 src={activeAward.images[lightbox.imageIndex].src}
@@ -306,7 +294,7 @@ export default function AwardsPage() {
               <h2 className="font-fjalla text-3xl sm:text-4xl lg:text-5xl uppercase font-bold tracking-tight text-ink leading-[1.05]">
                 {activeAward.title}
               </h2>
-              <div className="h-0.5 w-20 bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E]" />
+              <div className="h-px w-16 bg-[#F88E14]" />
               <div className="flex gap-3 pt-1">
                 <Quote className="w-5 h-5 text-gold/60 flex-shrink-0 mt-0.5" />
                 <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
