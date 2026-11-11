@@ -127,10 +127,6 @@ export default function Hero() {
               style={{ backgroundColor: "#16a34a", color: "#ffffff" }}
               className="album-blink-btn shimmer-sweep relative inline-flex items-center gap-2 overflow-hidden bg-[#16a34a] hover:bg-[#15803d] text-white font-fjalla uppercase px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wider shadow-[0_0_24px_rgba(34,197,94,0.7)] transition-all duration-300"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
-              </span>
               <span className="animate-pulse">New Album</span>
               <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </a>
