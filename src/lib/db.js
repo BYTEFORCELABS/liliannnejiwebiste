@@ -158,7 +158,7 @@ export async function deleteGalleryItem(id) {
 
 // --- LYRICS FUNCTIONS ---
 
-const LYRICS_FIELDS = ["title", "category", "album", "releaseYear", "youtubeUrl", "lyrics", "featured", "lyricTimings"];
+const LYRICS_FIELDS = ["title", "category", "album", "releaseYear", "youtubeUrl", "lyrics", "featured", "lyricTimings", "streamingLinks"];
 
 export async function getLyrics() {
   return unwrap(
@@ -174,7 +174,7 @@ export async function getLyricsById(id) {
   return unwrap(await supabase().from("lyrics").select("*").eq("id", id).maybeSingle());
 }
 
-export async function addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured }) {
+export async function addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured, streamingLinks }) {
   const newItem = {
     id: `lyr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
     title: title ? title.trim() : "Untitled Song",
@@ -185,6 +185,8 @@ export async function addLyrics({ title, category, album, releaseYear, youtubeUr
     lyrics: lyrics ? lyrics.trim() : "",
     featured: Boolean(featured),
     createdAt: new Date().toISOString(),
+    // Only sent when set, so adding songs still works before the column exists
+    ...(streamingLinks && Object.keys(streamingLinks).length ? { streamingLinks } : {}),
   };
 
   return unwrap(await supabase().from("lyrics").insert(newItem).select().single());

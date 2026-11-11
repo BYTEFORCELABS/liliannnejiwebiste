@@ -47,12 +47,15 @@ create table if not exists lyrics (
   "featured"    boolean not null default false,
   -- Live highlight timings, set from the admin Sync tool. See src/lib/lyricsSync.js
   "lyricTimings" jsonb,
+  -- Links out to Spotify, Boomplay, etc. See src/lib/streaming.js
+  "streamingLinks" jsonb,
   "createdAt"   timestamptz not null default now(),
   "updatedAt"   timestamptz
 );
 
--- For databases created before lyric sync existed
+-- For databases created before these columns existed
 alter table lyrics add column if not exists "lyricTimings" jsonb;
+alter table lyrics add column if not exists "streamingLinks" jsonb;
 
 alter table reverb_attendees enable row level security;
 alter table subscribers      enable row level security;

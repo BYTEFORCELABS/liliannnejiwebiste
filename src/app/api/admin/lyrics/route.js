@@ -27,13 +27,13 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
-    const { title, category, album, releaseYear, youtubeUrl, lyrics, featured } = body;
+    const { title, category, album, releaseYear, youtubeUrl, lyrics, featured, streamingLinks } = body;
 
     if (!title || !lyrics) {
       return NextResponse.json({ error: "Song Title and Lyrics are required" }, { status: 400 });
     }
 
-    const newItem = await addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured });
+    const newItem = await addLyrics({ title, category, album, releaseYear, youtubeUrl, lyrics, featured, streamingLinks });
     return NextResponse.json({ success: true, item: newItem });
   } catch (error) {
     console.error("Error creating lyrics item:", error);
