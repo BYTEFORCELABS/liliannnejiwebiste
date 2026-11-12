@@ -1,5 +1,5 @@
 import Reveal from "@/components/Reveal";
-import { Phone, Mail, MapPin, Globe } from "lucide-react";
+import { Phone, Mail, Globe, ArrowUpRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/SocialIcons";
 
 // Direct contact only — no form. An organiser taps once and is speaking to
@@ -29,6 +29,7 @@ const ROUTES = [
         label: "Start a WhatsApp chat",
         href: `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`,
         external: true,
+        primary: true,
       },
     ],
   },
@@ -60,10 +61,6 @@ export default function BookingSection() {
       id="booking"
       className="relative bg-black py-24 sm:py-32 border-t border-hairline overflow-hidden text-ink"
     >
-      {/* Ambient gold lighting */}
-      <div className="animate-breathe absolute top-1/4 -right-20 w-[520px] h-[520px] bg-[#F88E14]/[0.10] blur-[160px] pointer-events-none rounded-full" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,var(--color-zinc-900)_0%,transparent_55%)] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
 
         {/* ============================================================ */}
@@ -93,14 +90,11 @@ export default function BookingSection() {
             const Icon = route.icon;
             return (
               <Reveal key={route.title} variant="up" delay={idx * 130} className="h-full">
-                <div className="group relative h-full flex flex-col gap-6 p-7 sm:p-8 border border-zinc-800/70 bg-zinc-950/60 hover:border-[#F88E14]/50 transition-colors duration-500 overflow-hidden">
+                <div className="h-full flex flex-col gap-7 p-7 sm:p-8 rounded-card border border-zinc-800 bg-zinc-950 transition-colors duration-300 hover:border-zinc-700">
 
-                  {/* Corner glow on hover */}
-                  <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#F88E14]/0 group-hover:bg-[#F88E14]/[0.09] blur-3xl transition-colors duration-700" />
-
-                  <div className="relative space-y-4 flex-grow">
-                    <span className="flex w-14 h-14 rounded-full border border-[#F88E14]/45 items-center justify-center text-gold group-hover:scale-110 group-hover:border-[#F88E14] transition-all duration-500">
-                      <Icon className="w-6 h-6" />
+                  <div className="space-y-4 flex-grow">
+                    <span className="flex w-11 h-11 rounded-btn bg-[#F88E14]/10 items-center justify-center text-gold">
+                      <Icon className="w-5 h-5" />
                     </span>
 
                     <h3 className="font-fjalla text-2xl sm:text-3xl uppercase font-bold tracking-tight text-ink">
@@ -112,7 +106,7 @@ export default function BookingSection() {
                     </p>
                   </div>
 
-                  <div className="relative flex flex-col gap-3">
+                  <div className="flex flex-col gap-2.5">
                     {route.actions.map((action) => (
                       <a
                         key={action.href}
@@ -120,15 +114,17 @@ export default function BookingSection() {
                         {...(action.external
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
-                        className="gold-button shimmer-sweep relative block overflow-hidden text-center px-5 py-3.5 text-sm tracking-wide"
+                        className={`group flex items-center justify-between gap-3 px-4 py-3.5 text-sm ${
+                          action.primary
+                            ? "gold-button"
+                            : "rounded-btn border border-zinc-800 text-ink font-medium hover:border-[#F88E14] hover:text-gold transition-colors duration-200"
+                        }`}
                       >
-                        {action.label}
+                        <span className="truncate">{action.label}</span>
+                        <ArrowUpRight className="w-4 h-4 flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />
                       </a>
                     ))}
                   </div>
-
-                  {/* Gold underline sweep, matching the awards cards */}
-                  <span className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#F9650B] via-[#F88E14] to-[#FABA1E] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
                 </div>
               </Reveal>
             );
@@ -139,7 +135,7 @@ export default function BookingSection() {
         {/* FIRST MESSAGE GUIDANCE + BASE                                */}
         {/* ============================================================ */}
         <Reveal variant="up" delay={120}>
-          <div className="glass-panel-gold p-7 sm:p-8 space-y-6 transition-all duration-500">
+          <div className="rounded-card border border-zinc-800 bg-zinc-950 p-7 sm:p-8 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="space-y-1.5">
                 <h3 className="font-fjalla text-xl sm:text-2xl uppercase font-bold tracking-tight text-ink">
@@ -166,7 +162,7 @@ export default function BookingSection() {
               {FIRST_MESSAGE.map((item) => (
                 <span
                   key={item}
-                  className="text-xs sm:text-sm text-zinc-300 border border-zinc-800 bg-black/40 px-3.5 py-2 hover:border-[#F88E14]/40 hover:text-ink transition-colors duration-300"
+                  className="text-xs sm:text-sm text-zinc-300 rounded-btn bg-zinc-900 px-3.5 py-2"
                 >
                   {item}
                 </span>

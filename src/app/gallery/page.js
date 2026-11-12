@@ -132,8 +132,6 @@ export default function GalleryPage() {
         {/* HEADER                                                       */}
         {/* ============================================================ */}
         <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto text-center space-y-5 overflow-hidden">
-          <div className="animate-breathe absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#F88E14]/10 blur-[140px] pointer-events-none rounded-full" />
-
           <Reveal as="h1" variant="up" className="font-fjalla text-4xl sm:text-6xl lg:text-7xl uppercase text-ink font-bold tracking-tight">
             MOMENTS OF <span className="text-gold">GLORY &amp; PRAISE</span>
           </Reveal>
@@ -153,10 +151,10 @@ export default function GalleryPage() {
                     setActiveCategory(cat);
                     closeLightbox();
                   }}
-                  className={`px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-none transition-all duration-300 cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 rounded-btn border text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
                     isActive
-                      ? "bg-[#F88E14] text-on-gold shadow-lg scale-105 font-bold"
-                      : "bg-zinc-900/90 text-zinc-400 hover:text-ink hover:bg-zinc-800 border border-zinc-800 hover:-translate-y-0.5"
+                      ? "bg-[#F88E14] border-[#F88E14] text-on-gold"
+                      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-ink hover:border-zinc-600"
                   }`}
                 >
                   {cat}
@@ -173,11 +171,11 @@ export default function GalleryPage() {
           {loading ? (
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
               {["aspect-[3/2]", "aspect-[4/3]", "aspect-[3/4]", "aspect-[4/3]", "aspect-[3/2]", "aspect-[3/4]"].map((ratio, i) => (
-                <div key={i} className={`${ratio} bg-zinc-900 animate-pulse mb-6 break-inside-avoid`} />
+                <div key={i} className={`${ratio} rounded-card bg-zinc-900 animate-pulse mb-6 break-inside-avoid`} />
               ))}
             </div>
           ) : filteredItems.length === 0 ? (
-            <div className="text-center py-20 bg-zinc-950 border border-zinc-900 p-8 space-y-4">
+            <div className="text-center py-20 rounded-card bg-zinc-950 border border-zinc-900 p-8 space-y-4">
               <Camera className="w-12 h-12 text-zinc-600 mx-auto" />
               <h3 className="text-xl font-bold font-fjalla uppercase text-zinc-300">
                 No Photos Found in this Category
@@ -187,7 +185,7 @@ export default function GalleryPage() {
               </p>
               <button
                 onClick={() => setActiveCategory("All")}
-                className="gold-button px-6 py-2.5 rounded-none text-xs uppercase tracking-wider cursor-pointer"
+                className="gold-button px-6 py-2.5 text-xs uppercase tracking-wider cursor-pointer"
               >
                 View All Photos
               </button>
@@ -201,7 +199,7 @@ export default function GalleryPage() {
                   delay={(idx % 3) * 90}
                   onClick={() => setLightboxIndex(idx)}
                   data-theme="dark"
-                  className="group relative block w-full mb-5 sm:mb-6 break-inside-avoid overflow-hidden bg-zinc-950 border border-zinc-800/80 hover:border-[#F88E14]/60 transition-colors duration-500 cursor-pointer shadow-xl"
+                  className="group relative block w-full mb-5 sm:mb-6 break-inside-avoid overflow-hidden rounded-card bg-zinc-950 border border-zinc-800 hover:border-zinc-600 transition-colors duration-300 cursor-pointer"
                 >
                   <div className={`relative w-full ${SPAN_RATIO[item.span] || SPAN_RATIO.normal}`}>
                     <Image
@@ -209,18 +207,18 @@ export default function GalleryPage() {
                       alt={item.title}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-[1.07] transition-transform duration-[1100ms] ease-out"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-[1100ms] ease-out"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent opacity-85 group-hover:opacity-96 transition-opacity duration-500" />
 
                     <div className="absolute top-3 left-3 z-10">
-                      <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-hairline text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
+                      <span className="px-2.5 py-1 rounded-btn bg-black/70 text-[11px] font-bold uppercase tracking-wider text-[#FABA1E]">
                         {item.category}
                       </span>
                     </div>
 
-                    <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Maximize2 className="w-4 h-4 text-gold" />
                     </div>
 
@@ -248,7 +246,7 @@ export default function GalleryPage() {
       {lightboxIndex !== null && currentItem && (
         <div
           data-theme="dark"
-          className="fixed inset-0 z-50 bg-black/96 backdrop-blur-2xl flex flex-col p-4 sm:p-6"
+          className="fixed inset-0 z-50 bg-black/96 flex flex-col p-4 sm:p-6"
           onClick={closeLightbox}
         >
           {/* Top bar */}
@@ -257,10 +255,10 @@ export default function GalleryPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3">
-              <span className="text-xs sm:text-sm font-mono font-bold text-zinc-400 bg-zinc-900 px-3 py-1">
+              <span className="text-xs sm:text-sm font-mono font-bold text-zinc-400 bg-zinc-900 rounded-btn px-3 py-1">
                 {String(lightboxIndex + 1).padStart(2, "0")} / {String(filteredItems.length).padStart(2, "0")}
               </span>
-              <span className="px-2.5 py-1 bg-[#F88E14]/15 border border-[#F88E14]/30 text-gold text-[11px] uppercase font-bold tracking-wider">
+              <span className="px-2.5 py-1 rounded-btn bg-[#F88E14]/15 text-gold text-[11px] uppercase font-bold tracking-wider">
                 {currentItem.category}
               </span>
             </div>
@@ -301,7 +299,7 @@ export default function GalleryPage() {
           >
             <button
               onClick={() => step(-1)}
-              className="absolute left-0 sm:left-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              className="absolute left-0 sm:left-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink transition-colors cursor-pointer"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -320,7 +318,7 @@ export default function GalleryPage() {
 
             <button
               onClick={() => step(1)}
-              className="absolute right-0 sm:right-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink backdrop-blur-md transition-colors cursor-pointer shadow-2xl"
+              className="absolute right-0 sm:right-2 z-20 p-3 rounded-full bg-black/60 hover:bg-[#F88E14] hover:text-on-gold text-ink transition-colors cursor-pointer"
               aria-label="Next image"
             >
               <ChevronRight className="w-6 h-6" />

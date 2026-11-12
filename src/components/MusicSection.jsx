@@ -64,7 +64,7 @@ function AudiomackIcon({ className = "w-4 h-4" }) {
 // Iconic YouTube Red Play Button matching Screenshots 2 & 3
 function YouTubePlayBadge() {
   return (
-    <div className="w-14 h-9 sm:w-16 sm:h-11 rounded-xl bg-[#ff0000] flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#cc0000] transition-transform duration-300">
+    <div className="w-14 h-9 sm:w-16 sm:h-11 rounded-btn bg-[#ff0000] flex items-center justify-center group-hover:bg-[#cc0000] transition-colors duration-200">
       <div className="w-0 h-0 border-y-[6px] sm:border-y-[7px] border-y-transparent border-l-[11px] sm:border-l-[13px] border-l-white ml-0.5" />
     </div>
   );
@@ -191,7 +191,7 @@ export default function MusicSection() {
 
         {/* Big YouTube Video Player Container matching Screenshot 1 */}
         <Reveal id="latest-release-player" variant="scale" className="max-w-5xl mx-auto mb-8">
-          <div className="relative w-full aspect-video rounded-none sm:rounded-lg overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl">
+          <div className="relative w-full aspect-video rounded-card overflow-hidden bg-zinc-950 border border-zinc-800">
             <iframe
               src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`}
               title={activeVideoTitle}
@@ -216,7 +216,7 @@ export default function MusicSection() {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-gold hover:-translate-y-0.5 transition-all duration-300 group"
+                  className="flex items-center gap-2 hover:text-gold transition-colors duration-200 group"
                 >
                   <Icon className="w-4 h-4 text-zinc-300 group-hover:text-gold transition-colors flex-shrink-0" />
                   <span className="font-medium">{platform.name}</span>
@@ -244,7 +244,7 @@ export default function MusicSection() {
                 delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
                 data-theme="dark"
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
+                className="group relative aspect-video rounded-card overflow-hidden bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -252,7 +252,7 @@ export default function MusicSection() {
                   alt={video.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 />
 
                 {/* Dark Gradient Overlay */}
@@ -300,7 +300,7 @@ export default function MusicSection() {
                 delay={idx * 110}
                 onClick={() => handleSelectVideo(video)}
                 data-theme="dark"
-                className="group relative aspect-video rounded-sm overflow-hidden bg-zinc-900 cursor-pointer shadow-lg hover:shadow-2xl border border-zinc-800/80 hover:border-[#F88E14]/50 hover:-translate-y-1.5 transition-all duration-300"
+                className="group relative aspect-video rounded-card overflow-hidden bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
               >
                 {/* Thumbnail Image */}
                 <Image
@@ -308,7 +308,7 @@ export default function MusicSection() {
                   alt={video.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 />
 
                 {/* Dark Gradient Overlay */}

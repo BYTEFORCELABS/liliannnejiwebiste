@@ -124,26 +124,22 @@ export default function Hero() {
               href="https://onerpm.link/highlyfavouredliliannneji"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ backgroundColor: "#16a34a", color: "#ffffff" }}
-              className="album-blink-btn shimmer-sweep relative inline-flex items-center gap-2 overflow-hidden bg-[#16a34a] hover:bg-[#15803d] text-white font-fjalla uppercase px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wider shadow-[0_0_24px_rgba(34,197,94,0.7)] transition-all duration-300"
+              className="album-blink-btn inline-flex items-center gap-2 font-fjalla uppercase px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wider"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
-              </span>
-              <span className="animate-pulse">New Album</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              New Album
               <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </a>
             <Link
               href="#music"
-              className="shimmer-sweep relative inline-block overflow-hidden border-2 border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-300"
+              className="inline-block rounded-btn border border-[#F88E14] text-gold hover:bg-[#F88E14] hover:text-on-gold font-fjalla uppercase px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm tracking-wider transition-colors duration-200"
             >
-              Eze Mu O (My King) 
+              Eze Mu O (My King)
             </Link>
           </Reveal>
 
           <Reveal variant="up" delay={500} className="flex items-center gap-3 pt-4">
-            {socials.map((social, idx) => {
+            {socials.map((social) => {
               const Icon = social.icon;
               return (
                 <a
@@ -152,8 +148,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  style={{ transitionDelay: `${idx * 40}ms` }}
-                  className="w-10 h-10 rounded-full bg-[#F88E14] text-on-gold flex items-center justify-center hover:scale-125 hover:-translate-y-1 hover:bg-[#FABA1E] transition-all duration-300 shadow-md"
+                  className="w-10 h-10 rounded-full bg-[#F88E14] text-on-gold flex items-center justify-center hover:bg-white transition-colors duration-200"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -183,8 +178,8 @@ export default function Hero() {
                   <span
                     className={`block rounded-full transition-all duration-500 ${
                       isActive
-                        ? "w-2.5 h-2.5 bg-[#F88E14] shadow-[0_0_12px_rgba(248,142,20,0.8)]"
-                        : "w-2 h-2 bg-white/30 group-hover:bg-white/70 group-hover:scale-125"
+                        ? "w-6 h-1.5 bg-[#F88E14]"
+                        : "w-1.5 h-1.5 bg-white/40 group-hover:bg-white/80"
                     }`}
                   />
                 </button>

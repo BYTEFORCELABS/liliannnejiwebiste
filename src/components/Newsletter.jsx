@@ -48,13 +48,13 @@ export default function Newsletter() {
           
           {/* Left Column: Black and White Portrait matching Screenshot 2 */}
           <Reveal variant="left" className="lg:col-span-6 flex justify-center">
-            <div className="group relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden bg-zinc-950 shadow-2xl border border-zinc-800/80">
+            <div className="group relative w-full max-w-lg aspect-[4/3] rounded-card overflow-hidden bg-zinc-950 border border-zinc-800">
               <Image
                 src="/images/stay_in_touch_bw_v2.jpg"
                 alt="Minister Lilian Nneji in Worship Reflection"
                 fill
                 sizes="(max-width: 768px) 100vw, 550px"
-                className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                className="object-cover object-[center_20%] group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
               />
             </div>
           </Reveal>
@@ -71,7 +71,7 @@ export default function Newsletter() {
             </div>
 
             {subscribed ? (
-              <div className="p-4 bg-zinc-900 border border-[#F88E14]/40 rounded-none max-w-lg flex items-center gap-3 text-gold animate-in fade-in">
+              <div className="p-4 bg-zinc-900 border border-[#F88E14]/40 rounded-card max-w-lg flex items-center gap-3 text-gold animate-in fade-in">
                 <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-gold" />
                 <span className="text-sm font-semibold text-ink">
                   {feedbackMsg || "Thank you for subscribing! You'll be notified of new sounds & tour dates."}
@@ -79,7 +79,7 @@ export default function Newsletter() {
               </div>
             ) : (
               <Reveal variant="up" delay={240} className="space-y-2 max-w-lg">
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-0">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-stretch gap-2">
                   <input
                     type="email"
                     required
@@ -87,12 +87,12 @@ export default function Newsletter() {
                     placeholder="Enter email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-grow px-4 py-3.5 bg-white text-on-gold placeholder:text-zinc-500 text-sm font-normal focus:outline-none rounded-none shadow-md disabled:opacity-60"
+                    className="flex-grow px-4 py-3.5 bg-white text-on-gold placeholder:text-zinc-500 text-sm font-normal rounded-btn border border-zinc-800 focus:outline-none focus:border-[#F88E14] disabled:opacity-60"
                   />
                   <button
                     type="submit"
                     disabled={loading}
-                    className="border border-[#F88E14] bg-black hover:bg-[#F88E14] text-gold hover:text-on-gold font-semibold text-xs tracking-widest px-8 py-3.5 uppercase transition-colors rounded-none mt-2 sm:mt-0 flex-shrink-0 disabled:opacity-60 cursor-pointer"
+                    className="gold-button text-xs tracking-widest px-8 py-3.5 uppercase flex-shrink-0 disabled:opacity-60 cursor-pointer"
                   >
                     {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
                   </button>

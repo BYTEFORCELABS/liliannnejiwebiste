@@ -10,9 +10,10 @@ export default function ThemeToggle({ className = "" }) {
     const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
     root.setAttribute("data-theme", next);
     try {
-      localStorage.setItem("theme", next);
+      // Tab-scoped on purpose: a new visit always opens in dark mode.
+      sessionStorage.setItem("theme", next);
     } catch {
-      // Private browsing: the choice just won't persist.
+      // Storage blocked: the choice just won't carry across pages.
     }
   };
 

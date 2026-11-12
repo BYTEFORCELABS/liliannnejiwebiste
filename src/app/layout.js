@@ -93,9 +93,12 @@ export const metadata = {
     : {}),
 };
 
-// Applies the saved theme before first paint so the page never flashes the
-// wrong palette. Dark is the brand default; light is opt-in.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}})()`;
+// Applies the theme before first paint so the page never flashes the wrong
+// palette. Every visit opens in dark, the brand default. Light only applies
+// after the visitor clicks the toggle, and is remembered for that browser tab
+// alone (sessionStorage), so the next visit starts dark again. The old
+// localStorage key is cleared so visitors who once chose light are reset.
+const themeScript = `(function(){var d=document.documentElement;try{localStorage.removeItem("theme");var t=sessionStorage.getItem("theme");d.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){d.setAttribute("data-theme","dark")}})()`;
 
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { ArtistSchema } from "@/components/StructuredData";
