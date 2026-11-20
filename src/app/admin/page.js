@@ -36,6 +36,7 @@ import {
   PanelLeftClose,
   AudioLines,
   ShieldCheck,
+  ShieldAlert,
   UserPlus,
   ArrowLeft
 } from "lucide-react";
@@ -126,6 +127,7 @@ export default function AdminDashboardPage() {
   const [loginCode, setLoginCode] = useState("");
   const [loginInfo, setLoginInfo] = useState("");
   const [resendIn, setResendIn] = useState(0);
+  const [unauthorisedEmail, setUnauthorisedEmail] = useState("");
 
   // Admin access list
   const [adminEmail, setAdminEmail] = useState("");
@@ -196,6 +198,14 @@ export default function AdminDashboardPage() {
     fetchDashboardData();
   }, []);
 
+  // Escape closes the unauthorised-access modal
+  useEffect(() => {
+    if (!unauthorisedEmail) return;
+    const onKey = (e) => e.key === "Escape" && setUnauthorisedEmail("");
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [unauthorisedEmail]);
+
   // Counts down the wait before another code can be requested
   useEffect(() => {
     if (resendIn <= 0) return;
@@ -265,13 +275,16 @@ export default function AdminDashboardPage() {
         setLoginCode("");
         setLoginInfo(data.message);
         setResendIn(RESEND_COOLDOWN_SECONDS);
+      } else if (res.status === 403 && data.unauthorised) {
+        setUnauthorisedEmail(loginEmail.trim());
+        setLoginStep("email");
       } else if (res.status === 429 && data.retryAfter) {
         setResendIn(data.retryAfter);
         if (data.retryAfter <= RESEND_COOLDOWN_SECONDS) {
           // A code went out moments ago and is still valid: let them use it
           setLoginStep("code");
           setLoginCode("");
-          setLoginInfo("A code was sent to this email in the last minute.");
+          setLoginInfo("A code was already sent in the last minute to");
         } else {
           setLoginError(data.error);
         }
@@ -672,6 +685,43 @@ export default function AdminDashboardPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-black text-ink flex items-center justify-center p-4 selection:bg-[#F88E14] selection:text-on-gold">
+        {unauthorisedEmail && (
+          <div
+            onClick={() => setUnauthorisedEmail("")}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <div
+              role="alertdialog"
+              aria-modal="true"
+              aria-labelledby="unauthorised-title"
+              aria-describedby="unauthorised-body"
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm bg-zinc-950 border border-red-500/40 rounded-2xl px-6 py-8 sm:px-8 text-center space-y-5 shadow-2xl"
+            >
+              <span className="mx-auto flex w-14 h-14 items-center justify-center rounded-full bg-red-500/10 text-red-400">
+                <ShieldAlert className="w-7 h-7" />
+              </span>
+              <div className="space-y-2">
+                <h2 id="unauthorised-title" className="text-lg font-bold uppercase tracking-wider text-red-400">
+                  Unauthorised access
+                </h2>
+                <p id="unauthorised-body" className="text-sm text-zinc-300 leading-relaxed">
+                  <span className="font-medium text-ink break-all">{unauthorisedEmail}</span> is not
+                  authorised to access this dashboard. This attempt has been logged.
+                </p>
+              </div>
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setUnauthorisedEmail("")}
+                className="w-full py-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-ink font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl px-6 py-9 sm:px-10 sm:py-11 space-y-9 shadow-2xl">
           <div className="text-center space-y-5">
             <div className="relative w-44 h-12 mx-auto flex items-center justify-center">
@@ -686,8 +736,9 @@ export default function AdminDashboardPage() {
                 <>Sign in with your admin email. We&rsquo;ll send you a one-time code.</>
               ) : (
                 <>
-                  {loginInfo} Check <span className="text-ink font-medium break-all">{loginEmail}</span>,
-                  including spam.
+                  {loginInfo}
+                  <span className="block my-1 text-ink font-medium break-words">{loginEmail.trim()}</span>
+                  Check your inbox and spam folder.
                 </>
               )}
             </p>
@@ -778,7 +829,7 @@ export default function AdminDashboardPage() {
                   className="text-gold hover:underline disabled:text-zinc-500 disabled:no-underline cursor-pointer disabled:cursor-not-allowed"
                 >
                   {resendIn > 0
-                    ? `Resend code in ${resendIn >= 60 ? `${Math.ceil(resendIn / 60)} min` : `${resendIn}s`}`
+                    ? `Resend code in ${resendIn > 60 ? `${Math.ceil(resendIn / 60)} min` : `${resendIn}s`}`
                     : "Resend code"}
                 </button>
               </div>

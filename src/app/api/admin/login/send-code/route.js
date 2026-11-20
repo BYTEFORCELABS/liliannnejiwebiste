@@ -12,16 +12,24 @@ import { sendAdminLoginCodeEmail } from "@/lib/email";
 
 const HOUR_MS = 60 * 60 * 1000;
 
-// The same answer whether or not the email is an admin, so this form
-// cannot be used to find out who the admins are.
-const SENT = {
-  success: true,
-  message: "If that email is on the admin list, a 6-digit code is on its way.",
-};
+// Emails not on the admin list are refused outright, and the attempt is
+// logged. Knowing an email is on the list does not get anyone in: the code
+// still goes only to that inbox.
+const SENT = { success: true, message: "We sent a 6-digit code to" };
 
-// Limits are reported, not swallowed: a silent "on its way" with no email
-// looks exactly like a delivery failure. This does reveal that the email is
-// an admin, but only to someone who has just requested codes for it.
+const UNAUTHORISED_MESSAGE =
+  "This email is not authorised to access the admin dashboard.";
+
+function clientIp(request) {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+// Limits are reported, not swallowed: a silent reply with no email looks
+// exactly like a delivery failure.
 function tooSoon(error, retryAfterSeconds) {
   return NextResponse.json(
     { error, retryAfter: retryAfterSeconds },
@@ -44,7 +52,11 @@ export async function POST(request) {
 
   try {
     if (!(await isAdminEmail(email))) {
-      return NextResponse.json(SENT);
+      console.warn(`Admin sign-in: UNAUTHORISED attempt for ${email} from ${clientIp(request)}`);
+      return NextResponse.json(
+        { error: UNAUTHORISED_MESSAGE, unauthorised: true },
+        { status: 403 }
+      );
     }
 
     const now = Date.now();
