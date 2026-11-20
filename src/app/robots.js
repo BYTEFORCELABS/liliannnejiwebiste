@@ -7,9 +7,9 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        // The dashboard and its APIs have nothing to index and
-        // should never appear in results.
-        disallow: ["/admin", "/api/"],
+        // The APIs have nothing to index. The dashboard lives on
+        // admin.liliannneji.com, which serves its own robots.txt.
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
