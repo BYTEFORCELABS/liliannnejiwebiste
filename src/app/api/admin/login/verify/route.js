@@ -34,7 +34,9 @@ export async function POST(request) {
   }
 
   try {
-    if (!(await isAdminEmail(email))) return fail(EXPIRED);
+    if (!(await isAdminEmail(email))) {
+      return fail("This email is not authorised to access the admin dashboard.", 403);
+    }
 
     // Only the most recent code counts; sending a new one retires the rest.
     const record = await getLatestLoginCode(email);
