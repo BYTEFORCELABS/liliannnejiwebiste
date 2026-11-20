@@ -44,6 +44,7 @@ import BrandLogo from "@/components/BrandLogo";
 import LyricsSyncModal from "@/components/LyricsSyncModal";
 import OtpInput from "@/components/OtpInput";
 import { hasValidTimings } from "@/lib/lyricsSync";
+import { SITE_URL } from "@/lib/site";
 
 // Reverb Attendees and Subscribers are parked at the client's request.
 // Their panels below are left fully intact and gated behind this one flag
@@ -66,10 +67,10 @@ const NAV_ITEMS = [
 const RESEND_COOLDOWN_SECONDS = 60;
 
 const PUBLIC_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/lyrics", label: "Lyrics" },
-  { href: "/awards", label: "Awards" },
+  { href: `${SITE_URL}/`, label: "Home" },
+  { href: `${SITE_URL}/gallery`, label: "Gallery" },
+  { href: `${SITE_URL}/lyrics`, label: "Lyrics" },
+  { href: `${SITE_URL}/awards`, label: "Awards" },
   // Reverb is parked for now — see src/app/reverb/page.js
   // { href: "/reverb", label: "Reverb" },
 ];
@@ -837,7 +838,7 @@ export default function AdminDashboardPage() {
           )}
 
           <div className="text-center pt-2">
-            <Link href="/" className="text-xs text-zinc-500 hover:text-ink transition-colors">
+            <Link href={SITE_URL} className="text-xs text-zinc-500 hover:text-ink transition-colors">
               &larr; Return to public website
             </Link>
           </div>
@@ -900,7 +901,7 @@ export default function AdminDashboardPage() {
       >
         {/* Brand */}
         <div className={`h-16 flex items-center border-b border-zinc-800/60 ${rail ? "lg:justify-center lg:px-0" : ""} px-4 justify-between gap-2`}>
-          <Link href="/" className={`relative h-8 block ${rail ? "lg:w-8" : "w-32"} w-32`}>
+          <Link href={SITE_URL} className={`relative h-8 block ${rail ? "lg:w-8" : "w-32"} w-32`}>
             {rail ? (
               <Image src="/icon.png" alt="Minister Lilian Nneji" fill sizes="32px" className="object-contain" />
             ) : (
@@ -1437,7 +1438,7 @@ export default function AdminDashboardPage() {
                   Photo Gallery Catalog ({gallery.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Manage photos displayed on the public <Link href="/gallery" target="_blank" className="text-gold hover:underline">/gallery</Link> showcase.
+                  Manage photos displayed on the public <Link href={`${SITE_URL}/gallery`} target="_blank" className="text-gold hover:underline">/gallery</Link> showcase.
                 </p>
               </div>
 
@@ -1537,7 +1538,7 @@ export default function AdminDashboardPage() {
                   Song Lyrics Catalog ({lyrics.length})
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Manage song lyrics and catalog published on the public <Link href="/lyrics" target="_blank" className="text-gold hover:underline">/lyrics</Link> repository.
+                  Manage song lyrics and catalog published on the public <Link href={`${SITE_URL}/lyrics`} target="_blank" className="text-gold hover:underline">/lyrics</Link> repository.
                 </p>
               </div>
 
