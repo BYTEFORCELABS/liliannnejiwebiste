@@ -168,3 +168,55 @@ export function getEmailProviderStatus() {
     note: "Add RESEND_API_KEY in .env.local for live sending.",
   };
 }
+
+// Admin sign-in code. Plain and short on purpose: it should read at a
+// glance on a phone and not look like marketing to spam filters.
+export async function sendAdminLoginCodeEmail(email, code) {
+  const minutes = 10;
+  const subject = `${code} is your Lilian Nneji admin sign-in code`;
+  const text =
+    `Your sign-in code for the Minister Lilian Nneji admin dashboard is:\n\n${code}\n\n` +
+    `It expires in ${minutes} minutes and can only be used once.\n\n` +
+    `If you did not try to sign in, you can ignore this email. Nobody can get in without the code.`;
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<body style="margin:0;padding:24px;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#18181b;">
+  <div style="max-width:440px;margin:0 auto;background:#ffffff;border:1px solid #e4e4e7;border-radius:10px;padding:28px;">
+    <p style="margin:0 0 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9a4e06;font-weight:700;">Minister Lilian Nneji</p>
+    <h1 style="margin:0 0 16px;font-size:18px;">Admin sign-in code</h1>
+    <p style="margin:0 0 12px;font-size:14px;line-height:1.5;">Enter this code on the sign-in page:</p>
+    <p style="margin:0 0 16px;font-size:32px;font-weight:700;letter-spacing:8px;font-family:ui-monospace,Menlo,Consolas,monospace;">${code}</p>
+    <p style="margin:0 0 8px;font-size:13px;line-height:1.5;color:#52525b;">It expires in ${minutes} minutes and can only be used once.</p>
+    <p style="margin:0;font-size:13px;line-height:1.5;color:#52525b;">If you did not try to sign in, ignore this email. Nobody can get in without the code.</p>
+  </div>
+</body>
+</html>`;
+
+  if (process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { data, error } = await resend.emails.send({
+      from: process.env.RESEND_FROM || "Minister Lilian Nneji <onboarding@resend.dev>",
+      to: email,
+      subject,
+      html,
+      text,
+    });
+    if (error) {
+      console.error("[Resend] Failed to send admin sign-in code:", error);
+      return { success: false, error: error.message };
+    }
+    return { success: true, messageId: data.id };
+  }
+
+  // Never print a real sign-in code in production logs.
+  if (process.env.NODE_ENV === "production") {
+    console.error("Admin sign-in code not sent: RESEND_API_KEY is not set.");
+    return { success: false, error: "Email is not configured." };
+  }
+
+  console.log("----------------------------------------------------------------");
+  console.log(`🔐 [DEV ONLY] Admin sign-in code for ${email}: ${code}`);
+  console.log("   (Set RESEND_API_KEY in .env.local to email it for real)");
+  console.log("----------------------------------------------------------------");
+  return { success: true, provider: "mock" };
+}

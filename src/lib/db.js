@@ -248,3 +248,90 @@ export async function getDashboardMetrics() {
     totalSongs: lyrics.length,
   };
 }
+
+// --- ADMIN ACCESS FUNCTIONS ---
+// Who may sign in, and the one-time login codes. See src/lib/adminAuth.js.
+
+export async function getAdminUsers() {
+  return unwrap(await supabase().from("admin_users").select("*").order("createdAt", { ascending: true }));
+}
+
+export async function isAdminEmail(email) {
+  const row = unwrap(
+    await supabase().from("admin_users").select("email").eq("email", email).maybeSingle()
+  );
+  return Boolean(row);
+}
+
+export async function addAdminUser(email, addedBy) {
+  const { data, error } = await supabase()
+    .from("admin_users")
+    .insert({ email, addedBy })
+    .select()
+    .single();
+  if (error?.code === UNIQUE_VIOLATION) return { existing: true };
+  if (error) throw new Error(`Supabase: ${error.message}`);
+  return { existing: false, admin: data };
+}
+
+export async function removeAdminUser(email) {
+  unwrap(await supabase().from("admin_users").delete().eq("email", email));
+  return true;
+}
+
+// When each code since `sinceIso` was sent, oldest first
+export async function getRecentLoginCodeTimes(email, sinceIso) {
+  const rows = unwrap(
+    await supabase()
+      .from("admin_login_codes")
+      .select("createdAt")
+      .eq("email", email)
+      .gte("createdAt", sinceIso)
+      .order("createdAt", { ascending: true })
+  );
+  return rows.map((row) => new Date(row.createdAt).getTime());
+}
+
+export async function getLatestLoginCode(email) {
+  return unwrap(
+    await supabase()
+      .from("admin_login_codes")
+      .select("*")
+      .eq("email", email)
+      .order("createdAt", { ascending: false })
+      .limit(1)
+      .maybeSingle()
+  );
+}
+
+export async function createLoginCode({ email, codeHash, expiresAt }) {
+  // Requesting a fresh code retires every earlier one for this email
+  unwrap(
+    await supabase()
+      .from("admin_login_codes")
+      .update({ usedAt: new Date().toISOString() })
+      .eq("email", email)
+      .is("usedAt", null)
+  );
+  return unwrap(
+    await supabase().from("admin_login_codes").insert({ email, codeHash, expiresAt }).select().single()
+  );
+}
+
+export async function recordFailedLoginAttempt(id, attempts) {
+  unwrap(await supabase().from("admin_login_codes").update({ attempts }).eq("id", id));
+}
+
+// Claims the code atomically: only succeeds if nobody used it a moment ago,
+// so two simultaneous logins with the same code cannot both get in.
+export async function consumeLoginCode(id) {
+  const rows = unwrap(
+    await supabase()
+      .from("admin_login_codes")
+      .update({ usedAt: new Date().toISOString() })
+      .eq("id", id)
+      .is("usedAt", null)
+      .select("id")
+  );
+  return rows.length === 1;
+}
