@@ -34,10 +34,14 @@ import {
   Menu,
   ArrowUpRight,
   PanelLeftClose,
-  AudioLines
+  AudioLines,
+  ShieldCheck,
+  UserPlus,
+  ArrowLeft
 } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
 import LyricsSyncModal from "@/components/LyricsSyncModal";
+import OtpInput from "@/components/OtpInput";
 import { hasValidTimings } from "@/lib/lyricsSync";
 
 // Reverb Attendees and Subscribers are parked at the client's request.
@@ -54,7 +58,11 @@ const NAV_ITEMS = [
   // { id: "subscribers", label: "Subscribers", icon: Mail },
   { id: "gallery", label: "Gallery Manager", icon: Camera },
   { id: "lyrics", label: "Lyrics Manager", icon: Music },
+  { id: "admins", label: "Admins", icon: ShieldCheck },
 ];
+
+// Must match RESEND_COOLDOWN_MS in src/lib/adminAuth.js
+const RESEND_COOLDOWN_SECONDS = 60;
 
 const PUBLIC_LINKS = [
   { href: "/", label: "Home" },
@@ -109,9 +117,22 @@ const PRESET_IMAGES = [
 
 export default function AdminDashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Email one-time-code sign-in
+  const [loginStep, setLoginStep] = useState("email"); // "email" | "code"
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginCode, setLoginCode] = useState("");
+  const [loginInfo, setLoginInfo] = useState("");
+  const [resendIn, setResendIn] = useState(0);
+
+  // Admin access list
+  const [adminEmail, setAdminEmail] = useState("");
+  const [admins, setAdmins] = useState([]);
+  const [newAdminEmail, setNewAdminEmail] = useState("");
+  const [adminsError, setAdminsError] = useState("");
+  const [addingAdmin, setAddingAdmin] = useState(false);
 
   // Dashboard Data State
   const [activeTab, setActiveTab] = useState("overview");
@@ -175,6 +196,13 @@ export default function AdminDashboardPage() {
     fetchDashboardData();
   }, []);
 
+  // Counts down the wait before another code can be requested
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const id = setTimeout(() => setResendIn((s) => s - 1), 1000);
+    return () => clearTimeout(id);
+  }, [resendIn]);
+
   const fetchDashboardData = async () => {
     setLoading(true);
     try {
@@ -205,6 +233,13 @@ export default function AdminDashboardPage() {
         const dataLyr = await resLyrics.json();
         setLyrics(dataLyr.items || []);
       }
+
+      const resAdmins = await fetch("/api/admin/admins");
+      if (resAdmins.ok) {
+        const dataAdmins = await resAdmins.json();
+        setAdmins(dataAdmins.admins || []);
+        setAdminEmail(dataAdmins.me || "");
+      }
     } catch (err) {
       console.error("Dashboard fetch error:", err);
     } finally {
@@ -212,30 +247,143 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const requestLoginCode = async () => {
     setLoginError("");
+    setLoginInfo("");
     setLoading(true);
 
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch("/api/admin/login/send-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email: loginEmail }),
       });
 
       const data = await res.json();
       if (res.ok && data.success) {
-        setIsAuthenticated(true);
-        setPassword("");
-        fetchDashboardData();
+        setLoginStep("code");
+        setLoginCode("");
+        setLoginInfo(data.message);
+        setResendIn(RESEND_COOLDOWN_SECONDS);
+      } else if (res.status === 429 && data.retryAfter) {
+        setResendIn(data.retryAfter);
+        if (data.retryAfter <= RESEND_COOLDOWN_SECONDS) {
+          // A code went out moments ago and is still valid: let them use it
+          setLoginStep("code");
+          setLoginCode("");
+          setLoginInfo("A code was sent to this email in the last minute.");
+        } else {
+          setLoginError(data.error);
+        }
       } else {
-        setLoginError(data.error || "Incorrect password. Try again.");
+        setLoginError(data.error || "Could not send the code. Try again.");
       }
     } catch (err) {
       setLoginError("Connection failed. Please retry.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSendCode = (e) => {
+    e.preventDefault();
+    requestLoginCode();
+  };
+
+  const verifyCode = async (code) => {
+    if (loading || code.length !== 6) return;
+    setLoginError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/admin/login/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: loginEmail, code }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsAuthenticated(true);
+        setAdminEmail(data.email);
+        setLoginStep("email");
+        setLoginCode("");
+        setLoginInfo("");
+        fetchDashboardData();
+      } else {
+        setLoginError(data.error || "That code didn't work. Try again.");
+        setLoginCode("");
+      }
+    } catch (err) {
+      setLoginError("Connection failed. Please retry.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyCode = (e) => {
+    e.preventDefault();
+    verifyCode(loginCode);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+    setIsAuthenticated(false);
+    setAdminEmail("");
+    setAdmins([]);
+    setLoginStep("email");
+    setLoginCode("");
+    setLoginInfo("");
+    setLoginError("");
+  };
+
+  // --- ADMIN ACCESS HANDLERS ---
+
+  const handleAddAdmin = async (e) => {
+    e.preventDefault();
+    setAdminsError("");
+    setAddingAdmin(true);
+
+    try {
+      const res = await fetch("/api/admin/admins", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newAdminEmail }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setAdmins((list) => [...list, data.admin]);
+        setNewAdminEmail("");
+      } else {
+        setAdminsError(data.error || "Could not add that email.");
+      }
+    } catch (err) {
+      setAdminsError("Connection failed. Please retry.");
+    } finally {
+      setAddingAdmin(false);
+    }
+  };
+
+  const handleRemoveAdmin = async (email) => {
+    if (!confirm(`Remove ${email}? They will be signed out and can no longer sign in.`)) return;
+    setAdminsError("");
+
+    try {
+      const res = await fetch(`/api/admin/admins?email=${encodeURIComponent(email)}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setAdmins((list) => list.filter((a) => a.email !== email));
+      } else {
+        setAdminsError(data.error || "Could not remove that email.");
+      }
+    } catch (err) {
+      setAdminsError("Connection failed. Please retry.");
     }
   };
 
@@ -524,8 +672,8 @@ export default function AdminDashboardPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-black text-ink flex items-center justify-center p-4 selection:bg-[#F88E14] selection:text-on-gold">
-        <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl p-8 space-y-6 shadow-2xl">
-          <div className="text-center space-y-3">
+        <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl px-6 py-9 sm:px-10 sm:py-11 space-y-9 shadow-2xl">
+          <div className="text-center space-y-5">
             <div className="relative w-44 h-12 mx-auto flex items-center justify-center">
               <BrandLogo className="w-44 h-12" sizes="190px" priority />
             </div>
@@ -533,44 +681,113 @@ export default function AdminDashboardPage() {
               <Lock className="w-3.5 h-3.5" />
               <span>Admin Portal Access</span>
             </div>
-            <p className="text-zinc-400 text-xs sm:text-sm">
-              Enter your master passcode to manage registrations, subscribers, gallery, & lyrics.
+            <p className="text-zinc-400 text-sm leading-relaxed max-w-xs mx-auto">
+              {loginStep === "email" ? (
+                <>Sign in with your admin email. We&rsquo;ll send you a one-time code.</>
+              ) : (
+                <>
+                  {loginInfo} Check <span className="text-ink font-medium break-all">{loginEmail}</span>,
+                  including spam.
+                </>
+              )}
             </p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
-                Master Passcode
-              </label>
-              <input
-                type="password"
-                required
-                placeholder="Enter master passcode"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-ink placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#F88E14]"
-              />
-            </div>
-
-            {loginError && (
-              <div className="p-3 rounded-lg bg-red-950/60 border border-red-500/40 text-red-300 text-xs font-medium text-center">
-                {loginError}
+          {loginStep === "email" ? (
+            <form onSubmit={handleSendCode} className="space-y-6">
+              <div>
+                <label htmlFor="admin-email" className="block mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                  Admin email
+                </label>
+                <input
+                  id="admin-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  autoFocus
+                  placeholder="you@example.com"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  className="w-full px-4 py-3.5 bg-zinc-900 border border-zinc-700 rounded-lg text-ink placeholder:text-zinc-500 text-sm focus:outline-none focus:border-[#F88E14] focus:ring-2 focus:ring-[#F88E14]/30"
+                />
               </div>
-            )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-on-gold font-bold uppercase tracking-wider text-xs transition-colors shadow-lg active:scale-95 cursor-pointer"
-            >
-              {loading ? "Verifying..." : "Unlock Dashboard"}
-            </button>
-          </form>
+              {loginError && (
+                <div className="p-3 rounded-lg bg-red-950/60 border border-red-500/40 text-red-300 text-xs font-medium text-center">
+                  {loginError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3.5 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-on-gold font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer disabled:opacity-60"
+              >
+                {loading ? "Sending..." : "Email me a code"}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyCode} className="space-y-6">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-zinc-300 text-center">
+                  Enter the 6-digit code
+                </p>
+                <OtpInput
+                  value={loginCode}
+                  onChange={(code) => {
+                    setLoginCode(code);
+                    if (loginError) setLoginError("");
+                  }}
+                  onComplete={verifyCode}
+                  disabled={loading}
+                  autoFocus
+                />
+              </div>
+
+              {loginError && (
+                <div className="p-3 rounded-lg bg-red-950/60 border border-red-500/40 text-red-300 text-xs font-medium text-center">
+                  {loginError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading || loginCode.length !== 6}
+                className="w-full py-3.5 rounded-lg bg-[#F88E14] hover:bg-[#F9650B] text-on-gold font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? "Verifying..." : "Sign in"}
+              </button>
+
+              <div className="flex items-center justify-between gap-4 text-xs pt-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLoginStep("email");
+                    setLoginError("");
+                    setLoginCode("");
+                  }}
+                  className="inline-flex items-center gap-1 text-zinc-400 hover:text-ink transition-colors cursor-pointer"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  Use a different email
+                </button>
+                <button
+                  type="button"
+                  onClick={requestLoginCode}
+                  disabled={loading || resendIn > 0}
+                  className="text-gold hover:underline disabled:text-zinc-500 disabled:no-underline cursor-pointer disabled:cursor-not-allowed"
+                >
+                  {resendIn > 0
+                    ? `Resend code in ${resendIn >= 60 ? `${Math.ceil(resendIn / 60)} min` : `${resendIn}s`}`
+                    : "Resend code"}
+                </button>
+              </div>
+            </form>
+          )}
 
           <div className="text-center pt-2">
             <Link href="/" className="text-xs text-zinc-500 hover:text-ink transition-colors">
-              ← Return to public website
+              &larr; Return to public website
             </Link>
           </div>
         </div>
@@ -587,6 +804,7 @@ export default function AdminDashboardPage() {
     subscribers: metrics.totalSubscribers || subscribers.length,
     gallery: gallery.length,
     lyrics: lyrics.length,
+    admins: admins.length,
   };
 
   const STAT_CARDS = [
@@ -695,15 +913,23 @@ export default function AdminDashboardPage() {
             <span className={rail ? "hidden" : "flex-grow text-left"}>Collapse</span>
           </button>
 
+          {adminEmail && (
+            <p
+              title={adminEmail}
+              className={`px-3 pt-1 pb-1.5 text-[11px] text-zinc-500 truncate ${rail ? "lg:hidden" : ""}`}
+            >
+              Signed in as <span className="text-zinc-300">{adminEmail}</span>
+            </p>
+          )}
           <button
-            onClick={() => setIsAuthenticated(false)}
-            title={rail ? "Lock dashboard" : undefined}
+            onClick={handleLogout}
+            title={rail ? "Sign out" : undefined}
             className={`w-full flex items-center gap-3 rounded-md py-2 text-sm text-zinc-500 hover:text-zinc-100 hover:bg-zinc-900/60 transition-colors cursor-pointer ${
               rail ? "lg:justify-center lg:px-0 px-3" : "px-3"
             }`}
           >
             <LogOut className="w-4 h-4 flex-shrink-0" />
-            <span className={rail ? "lg:hidden" : ""}>Lock</span>
+            <span className={rail ? "lg:hidden" : ""}>Sign out</span>
           </button>
         </div>
       </aside>
@@ -1061,6 +1287,88 @@ export default function AdminDashboardPage() {
                       </tr>
                     ))
                   )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* ADMINS: who can sign in                                      */}
+        {/* ============================================================ */}
+        {activeTab === "admins" && (
+          <div className="space-y-6 max-w-3xl">
+            <div>
+              <h3 className="text-lg font-medium text-zinc-100">Admin access ({admins.length})</h3>
+              <p className="text-xs text-zinc-400">
+                Only these emails can sign in. Each sign-in sends a one-time code to the email. Removing
+                someone signs them out straight away.
+              </p>
+            </div>
+
+            <form onSubmit={handleAddAdmin} className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                required
+                placeholder="name@example.com"
+                value={newAdminEmail}
+                onChange={(e) => setNewAdminEmail(e.target.value)}
+                className="flex-grow px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-md text-sm text-ink placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#F88E14]"
+              />
+              <button
+                type="submit"
+                disabled={addingAdmin}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-[#F88E14] hover:bg-[#F9650B] text-on-gold text-sm font-semibold rounded-md transition-colors cursor-pointer disabled:opacity-60"
+              >
+                <UserPlus className="w-4 h-4" />
+                {addingAdmin ? "Adding..." : "Add admin"}
+              </button>
+            </form>
+
+            {adminsError && (
+              <div className="p-3 rounded-md bg-red-950/60 border border-red-500/40 text-red-300 text-xs font-medium">
+                {adminsError}
+              </div>
+            )}
+
+            <div className="bg-zinc-950 border border-zinc-800/90 rounded-xl overflow-hidden">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-zinc-900/80 text-zinc-400 uppercase text-[11px] font-bold tracking-wider border-b border-zinc-800">
+                  <tr>
+                    <th className="py-3.5 px-4">Email</th>
+                    <th className="py-3.5 px-4 hidden sm:table-cell">Added</th>
+                    <th className="py-3.5 px-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-900 text-zinc-300">
+                  {admins.map((admin) => {
+                    const isMe = admin.email === adminEmail;
+                    return (
+                      <tr key={admin.email} className="hover:bg-zinc-900/50">
+                        <td className="py-3 px-4 font-medium text-ink break-all">
+                          {admin.email}
+                          {isMe && <span className="ml-2 text-[11px] text-gold font-semibold">(you)</span>}
+                        </td>
+                        <td className="py-3 px-4 text-zinc-500 text-xs hidden sm:table-cell">
+                          {new Date(admin.createdAt).toLocaleDateString()}
+                          {admin.addedBy ? ` · by ${admin.addedBy}` : ""}
+                        </td>
+                        <td className="py-3 px-4 text-right">
+                          {isMe ? (
+                            <span className="text-[11px] text-zinc-600">&mdash;</span>
+                          ) : (
+                            <button
+                              onClick={() => handleRemoveAdmin(admin.email)}
+                              title={`Remove ${admin.email}`}
+                              className="text-zinc-500 hover:text-red-400 transition-colors p-1 cursor-pointer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

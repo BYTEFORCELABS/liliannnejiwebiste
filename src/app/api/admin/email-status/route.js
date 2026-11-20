@@ -1,18 +1,9 @@
 import { NextResponse } from "next/server";
+import { getAdminEmail } from "@/lib/adminAuth";
 import { getEmailProviderStatus, sendReverbTicketEmail } from "@/lib/email";
 
-function isAuthorized(request) {
-  const cookie = request.cookies.get("lilian_admin_auth");
-  const authHeader = request.headers.get("authorization");
-  const adminPass = process.env.ADMIN_PASSWORD || "lilian2026";
-
-  if (cookie?.value === "authenticated_admin_session") return true;
-  if (authHeader === `Bearer ${adminPass}`) return true;
-  return false;
-}
-
 export async function GET(request) {
-  if (!isAuthorized(request)) {
+  if (!(await getAdminEmail(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -21,7 +12,7 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  if (!isAuthorized(request)) {
+  if (!(await getAdminEmail(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
