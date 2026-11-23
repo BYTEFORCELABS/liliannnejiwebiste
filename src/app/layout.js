@@ -102,6 +102,7 @@ const themeScript = `(function(){var d=document.documentElement;try{localStorage
 
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { ArtistSchema } from "@/components/StructuredData";
+import Analytics from "@/components/Analytics";
 
 export default function RootLayout({ children }) {
   return (
@@ -113,6 +114,7 @@ export default function RootLayout({ children }) {
         <ArtistSchema />
         {children}
         <FloatingWhatsApp />
+        <Analytics />
       </body>
     </html>
   );

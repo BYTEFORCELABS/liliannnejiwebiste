@@ -48,6 +48,11 @@ export const CONTACT = {
 // Leaving it empty simply omits the tag.
 export const GOOGLE_SITE_VERIFICATION = "eJAJJ1kbabAj_NcNl38uR_XKY5EXOQziXeF65APOj7s";
 
+// Google Analytics 4 measurement ID ("G-XXXXXXXXXX"), from
+// analytics.google.com -> Admin -> Data streams -> the web stream.
+// Leaving it empty simply omits the tag.
+export const GA_MEASUREMENT_ID = "";
+
 /**
  * Builds a page's metadata with the canonical URL, Open Graph and
  * Twitter card filled in consistently.
